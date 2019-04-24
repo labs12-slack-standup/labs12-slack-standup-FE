@@ -5,7 +5,7 @@ const Login = () => {
 	return (
 		<div>
 			<Link to="/dashboard/reports">
-				<button>Sign Up</button>
+				<button>Login</button>
 			</Link>
 		</div>
 	);
