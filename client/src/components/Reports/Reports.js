@@ -8,39 +8,50 @@ const Reports = () => {
 			Reports:
 			<div>
 				List of all reports here...will map over the report list for teamId
-				Within each Report there will be a
+				<br />
+				CONDITIONAL: If the user is a manager, they will see the analytics. If
+				user is a team member, they will see 1 of 2 buttons <br />
 				<Link to="/dashboard/singlereport">
-					<div>
-						<button>Single Report</button>
-						CONDITONAL: Submit Response if not yet responsed, otherwise view
-						responses
-						<Link to="/dashboard/submitresponse">
-							<button>Submit Response</button>
-						</Link>
-					</div>
+					<button>Single Report</button>
 				</Link>
+				<div>
+					CONDITONAL: Submit Response if not yet responsed, otherwise view
+					responses
+					<Link to="/dashboard/responseform">
+						<button>Submit Response</button>
+					</Link>
+					or
+					<Link to="/dashboard/reportresults">
+						<button>View Report Results</button>
+					</Link>
+				</div>
 				<br />
 				<Link to="/dashboard/singlereport">
-					<div>
-						<button>Single Report</button>
-						CONDITONAL: Submit Response if not yet responsed, otherwise view
-						responses
-						<Link to="/dashboard/submitresponse">
-							<button>Submit Response</button>
-						</Link>
-					</div>
+					<button>Single Report</button>
 				</Link>
-				<br />
+				<div>
+					CONDITONAL: Submit Response if not yet responsed, otherwise view
+					responses
+					<Link to="/dashboard/responseform">
+						<button>Submit Response</button>
+					</Link>
+					<Link to="/dashboard/reportresults">
+						<button>View Report Results</button>
+					</Link>
+				</div>
 				<Link to="/dashboard/singlereport">
-					<div>
-						<button>Single Report</button>
-						CONDITONAL: Submit Response if not yet responsed, otherwise view
-						responses
-						<Link to="/dashboard/submitresponse">
-							<button>Submit Response</button>
-						</Link>
-					</div>
+					<button>Single Report</button>
 				</Link>
+				<div>
+					CONDITONAL: Submit Response if not yet responsed, otherwise view
+					responses
+					<Link to="/dashboard/responseform">
+						<button>Submit Response</button>
+					</Link>
+					<Link to="/dashboard/reportresults">
+						<button>View Report Results</button>
+					</Link>
+				</div>
 				<br />
 			</div>
 			<h2>This component needs access to:</h2>
