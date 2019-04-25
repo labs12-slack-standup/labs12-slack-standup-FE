@@ -9,7 +9,7 @@ class Reports extends Component {
 	}
 
 	componentDidMount() {
-		// call to get reports
+		// call to get reports and stick thm in state
 	}
 	
 	
