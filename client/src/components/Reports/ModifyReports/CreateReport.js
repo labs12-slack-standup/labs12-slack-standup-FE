@@ -10,14 +10,23 @@ const CreateReport = () => {
 			</ul>
 			<h3>What this component NEEDS</h3>
 			<ul>
-				<li>reportName Str</li>
+				{/* NAME */}
+				<li>reportName Str</li> 
+				{/* TYPE OF REPORT */}
 				<li>reportTypeId Str</li>
+				{/* TEAM ID */}
 				<li>teamId Str</li>
+				{/* WHAT DAYS ARE THE REPORTS GOING TO BE SENT OUT */}
 				<li>schedule stringified arr</li>
+				{/* WHAT TIME ARE THE REPORTS GOING TO BE SENT OUT */}
 				<li>scheduleTime num</li>
-				<li>***reocurring ???***</li>
+				{/* HOW OFTEN WILL THIS BE REPEATED */}
+				<li>reocurring str</li>
+				{/* MESSAGE TO BE SENT WITH EACH REPORT */}
 				<li>message Str</li>
+				{/* WILL THE TEAM MEMBER BE REMINDED THAT THE REPORT IS SENT? */}
 				<li>reminder boolean</li>
+				{/* HOW LONG WILL THE USER HAVE TO RESPOND? */}
 				<li>responseTimeLimit num</li>
 			</ul>
 			Inputs for Title Questions Schedule Response Broadcast

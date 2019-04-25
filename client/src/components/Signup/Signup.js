@@ -10,6 +10,7 @@ const SIGNUP_USER = gql`
 		}
 	}
 `;
+// ALSO NEED USER'S ROLE HERE
 
 const Signup = () => {
 	let username;
