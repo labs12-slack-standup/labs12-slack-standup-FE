@@ -19,7 +19,7 @@ const SingleReportMember = () => {
 				}}
 			>
 				{/* INDIVIDUAL FORM SUBMISSIONS */}
-
+				{/* For each question, there should be a new ReportInput */}
 				<ReportInput />
 			</form>
 		</div>
