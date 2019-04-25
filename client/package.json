@@ -8,11 +8,14 @@
     "apollo-link-context": "^1.0.17",
     "apollo-link-http": "^1.5.14",
     "axios": "^0.18.0",
+    "firebase": "^5.10.1",
+    "firebaseui": "^3.6.0",
     "graphql": "^14.2.1",
     "graphql-tag": "^2.10.1",
     "react": "^16.8.6",
     "react-apollo": "^2.5.5",
     "react-dom": "^16.8.6",
+    "react-firebaseui": "^3.1.2",
     "react-scripts": "3.0.0"
   },
   "scripts": {
