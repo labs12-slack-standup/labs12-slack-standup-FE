@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReportInput from './ReportInput';
 
-import React, { Component } from 'react';
+
 
 class MemberResponseForm extends Component {
 	state = {

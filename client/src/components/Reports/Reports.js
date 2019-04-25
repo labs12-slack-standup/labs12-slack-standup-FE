@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 // SAME AS SURVEY LIST ON WIREFRAME
-import React, { Component } from 'react';
+
 
 class Reports extends Component {
 	state = {
