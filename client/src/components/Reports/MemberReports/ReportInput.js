@@ -1,11 +1,14 @@
 import React from "react";
 const ReportInput = () => {
 	return (
-		<input
-			name="answer"
-			// ref={node => (answer = node)}
-			placeholder="Type your answer here..."
-		/>
+		<>
+			<h4>Question Title</h4>
+			<input
+				name="answer"
+				// ref={node => (answer = node)}
+				placeholder="Type your answer here..."
+			/>
+		</>
 	);
 };
 

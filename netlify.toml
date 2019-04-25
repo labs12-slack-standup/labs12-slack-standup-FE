@@ -1,0 +1,8 @@
+[Settings]
+ID = "Stand-Em-Ups"
+
+[build]
+
+base = "./client"
+publish = "./client/build"
+command = "yarn build" 
