@@ -10,6 +10,7 @@ import SingleReportManager from "./components/Reports/MangerReports/SingleReport
 import EditReport from "./components/Reports/ModifyReports/EditReport";
 import MemberResponseForm from "./components/Reports/MemberReports/MemberResponseForm";
 import ReportResults from "./components/Reports/MemberReports/ReportResults";
+import Account from "./components/Account/Account";
 
 import "./App.css";
 
@@ -36,6 +37,7 @@ function App() {
 			/>
 			<Route path="/dashboard/responseform" component={MemberResponseForm} />
 			<Route path="/dashboard/reportresults" component={ReportResults} />
+			<Route path="/dashboard/account" component={Account} />
 		</div>
 	);
 }
