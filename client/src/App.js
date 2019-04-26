@@ -10,6 +10,9 @@ import SingleReportManager from "./components/Reports/MangerReports/SingleReport
 import EditReport from "./components/Reports/ModifyReports/EditReport";
 import MemberResponseForm from "./components/Reports/MemberReports/MemberResponseForm";
 import ReportResults from "./components/Reports/MemberReports/ReportResults";
+import Account from "./components/Account/Account";
+import Onboarding from "./components/Onboarding/Onboarding";
+
 import "./App.css";
 
 function App() {
@@ -18,6 +21,9 @@ function App() {
 			{/* AUTHENTICATION ROUTES */}
 			<Route path="/signup" component={Signup} />
 			<Route path="/login" component={Login} />
+
+			{/* ONBOARDING */}
+			<Route path="/onboarding" component={Onboarding} />
 
 			<Route path="/dashboard/reports" component={Reports} />
 			{/* SINGLE REPORT NOT NEEDED - ABSTRACT AWAY WITH A REROUTE */}
@@ -35,6 +41,9 @@ function App() {
 			/>
 			<Route path="/dashboard/responseform" component={MemberResponseForm} />
 			<Route path="/dashboard/reportresults" component={ReportResults} />
+
+			{/* VIEW FOR SINGLE ACCOUNT */}
+			<Route path="/dashboard/account" component={Account} />
 		</div>
 	);
 }
