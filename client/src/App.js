@@ -12,11 +12,6 @@ import MemberResponseForm from "./components/Reports/MemberReports/MemberRespons
 import ReportResults from "./components/Reports/MemberReports/ReportResults";
 import "./App.css";
 
-
-const ClientSecret = 'j7a8WSEGUM7SU_EWSK2obMEg';
-
-
-
 function App() {
 	return (
 		<div>

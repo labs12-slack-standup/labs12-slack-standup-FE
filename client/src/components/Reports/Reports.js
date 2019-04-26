@@ -1,11 +1,22 @@
-import React from "react";
+import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 // SAME AS SURVEY LIST ON WIREFRAME
 
-const Reports = () => {
-	return (
-		<div>
-			Reports:
+
+class Reports extends Component {
+	state = {
+		reports: []
+	}
+
+	componentDidMount() {
+		// call to get reports and stick thm in state
+	}
+	
+	
+	render() {
+		return (
+			<div>
+				Reports:
 			<div>
 				List of all reports here...will map over the report list for teamId
 				<br />
@@ -59,8 +70,11 @@ const Reports = () => {
 				<li>QUERY: all reports by teamId</li>
 				<li>Report Name, schedule, team member list,</li>
 			</ul>
-		</div>
-	);
-};
+			</div>
+		);
+	}
+}
+
+
 
 export default Reports;
