@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react';
 import firebase from 'firebase';
 
@@ -16,8 +17,10 @@ class Firebase extends React.Component{
   }
   submit = async () => {
     try {
-      const result = await firebase.auth().signInWithPopup(provider);
-      console.log(result);
+      const payload = await firebase.auth().signInWithPopup(provider);
+      console.log(payload);
+      const response = await axios.post('http://localhost:5000/api/auth/firebase', payload);
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
