@@ -20,7 +20,7 @@ class Firebase extends React.Component {
 				"https://master-slack-standup.herokuapp.com/api/auth/firebase",
 				user
 			);
-			this.props.history.push("/");
+			this.props.history.push("/onboarding");
 		} catch (err) {
 			console.log(err);
 		}

@@ -10,6 +10,7 @@ class Account extends Component {
 	}
 	componentDidMount() {
 		// call to get account by id
+		// Currently not dynamic - must come back when Auth is finalized
 		this.getAccount(1);
 	}
 	getAccount = id => {

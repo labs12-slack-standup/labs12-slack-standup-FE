@@ -11,6 +11,7 @@ import EditReport from "./components/Reports/ModifyReports/EditReport";
 import MemberResponseForm from "./components/Reports/MemberReports/MemberResponseForm";
 import ReportResults from "./components/Reports/MemberReports/ReportResults";
 import Account from "./components/Account/Account";
+import Onboarding from "./components/Onboarding/Onboarding";
 
 import "./App.css";
 
@@ -20,6 +21,9 @@ function App() {
 			{/* AUTHENTICATION ROUTES */}
 			<Route path="/signup" component={Signup} />
 			<Route path="/login" component={Login} />
+
+			{/* ONBOARDING */}
+			<Route path="/onboarding" component={Onboarding} />
 
 			<Route path="/dashboard/reports" component={Reports} />
 			{/* SINGLE REPORT NOT NEEDED - ABSTRACT AWAY WITH A REROUTE */}
