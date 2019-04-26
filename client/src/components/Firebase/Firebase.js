@@ -19,7 +19,8 @@ class Firebase extends React.Component{
     try {
       const { user } = await firebase.auth().signInWithPopup(provider);
       console.log(user);
-      const response = await axios.post('http://localhost:5000/api/auth/firebase', user);
+      // const response = await axios.post('http://localhost:5000/api/auth/firebase', user);
+      const response = await axios.post('https://master-slack-standup.herokuapp.com/api/auth/firebase', user);
       console.log(response);
     } catch (err) {
       console.log(err);
