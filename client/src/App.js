@@ -37,6 +37,8 @@ function App() {
 			/>
 			<Route path="/dashboard/responseform" component={MemberResponseForm} />
 			<Route path="/dashboard/reportresults" component={ReportResults} />
+
+			{/* VIEW FOR SINGLE ACCOUNT */}
 			<Route path="/dashboard/account" component={Account} />
 		</div>
 	);

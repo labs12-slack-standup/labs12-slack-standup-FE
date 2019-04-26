@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Account extends Component {
 	constructor(props) {
@@ -7,9 +8,33 @@ class Account extends Component {
 			accountInfo: []
 		};
 	}
+	componentDidMount() {
+		// call to get account by id
+		this.getAccount(1);
+	}
+	getAccount = id => {
+		const endpoint = `https://master-slack-standup.herokuapp.com/api/users/${id}`;
+		axios
+			.get(endpoint)
+			.then(res =>
+				this.setState({
+					accountInfo: res.data.user
+				})
+			)
+			.catch(err => console.log(err));
+	};
 
 	render() {
-		return <div>Account Info:</div>;
+		console.log(this.state.accountInfo);
+		return (
+			<div>
+				Account Info:
+				<div>
+					<div>Email: {this.state.accountInfo.email}</div>
+					<div>TeamId: {this.state.accountInfo.teamId}</div>
+				</div>
+			</div>
+		);
 	}
 }
 
