@@ -1,14 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import Firebase from '../Firebase/Firebase';
 
-const Login = () => {
-	return (
-		<div>
-			<Link to="/dashboard/reports">
-				<button>Login</button>
-			</Link>
-		</div>
-	);
-};
+const Login = props => <Firebase {...props} />
 
 export default Login;
