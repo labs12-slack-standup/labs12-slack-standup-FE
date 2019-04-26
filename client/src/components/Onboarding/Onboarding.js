@@ -12,12 +12,18 @@ class Onboarding extends Component {
 			emails: []
 		};
 	}
+
+	// toggles
 	joinToggle = e => {
 		this.setState({ joinToggle: !this.state.joinToggle });
+		this.setState({ createToggle: false });
 	};
 	createToggle = () => {
 		this.setState({ createToggle: !this.state.createToggle });
+		this.setState({ joinToggle: false });
 	};
+	bothToggleOff = e => {};
+	// change handlers
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
@@ -25,10 +31,7 @@ class Onboarding extends Component {
 		e.preventDefault();
 		this.state.emails.push(e.target.value);
 	};
-	bothToggle = e => {
-		this.joinToggle();
-		this.createToggle();
-	};
+
 	render() {
 		return this.state.createToggle ? (
 			<div>
@@ -43,7 +46,7 @@ class Onboarding extends Component {
 					/>
 				</form>
 				<div>Have a join code?</div>
-				<button onClick={this.bothToggle}>Input Join Code</button>
+				<button onClick={this.joinToggle}>Input Join Code</button>
 				<Link to="dashboard/reports">
 					<button>Let's go!</button>
 				</Link>
