@@ -25,8 +25,9 @@ class Account extends Component {
 	};
 
 	render() {
-		console.log(this.state.accountInfo);
-		return (
+		return this.state.accountInfo.roles === "manager" ? (
+			<div>MANAGER VIEW</div>
+		) : (
 			<div>
 				Account Info:
 				<div>
