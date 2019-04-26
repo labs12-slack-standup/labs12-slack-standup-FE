@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Onboarding extends Component {
 	constructor(props) {
@@ -43,6 +44,9 @@ class Onboarding extends Component {
 				</form>
 				<div>Have a join code?</div>
 				<button onClick={this.bothToggle}>Input Join Code</button>
+				<Link to="dashboard/reports">
+					<button>Let's go!</button>
+				</Link>
 			</div>
 		) : this.state.joinToggle ? (
 			<div>
@@ -60,6 +64,9 @@ class Onboarding extends Component {
 					Actually don't have a join code? That's okay, let's create a team:
 					<button onClick={this.createToggle}>Create Team</button>
 				</div>
+				<Link to="dashboard/reports">
+					<button>Let's go!</button>
+				</Link>
 			</div>
 		) : (
 			<div>
