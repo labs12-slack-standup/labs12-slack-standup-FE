@@ -11,6 +11,9 @@ class Reports extends Component {
 
 	componentDidMount() {
 		// call to get reports and stick them in state
+		//with new enponit I imagine it'll be something like
+		//const userID = user.userID <= not sure where we are storing that
+		//const endpoint = `url/${userID}`
 		const endpoint =
 			'https://master-slack-standup.herokuapp.com/api/reports';
 		axios.get(endpoint)
