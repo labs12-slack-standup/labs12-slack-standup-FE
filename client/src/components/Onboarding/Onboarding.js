@@ -35,9 +35,10 @@ class Onboarding extends Component {
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
+
 	// push emails to state when submited
 	// allows the emails to be displayed above the Add Team Member button\
-	// *****Currently does not clear field***** LEVEL 2 BUG
+	// *****Currently does not clear input field***** LEVEL 2 BUG
 
 	emailHandler = e => {
 		e.preventDefault();
@@ -47,20 +48,25 @@ class Onboarding extends Component {
 		this.setState({ emails: updatedEmails });
 		this.setState({ singleEmail: "" });
 	};
+	// function for removing emails from array before submitting them to create a team
 	removeEmail = emailIdx => {
-		console.log(emailIdx);
-
-		const updateEmails = [...this.state.emails].filter((item, idx) => {
-			console.log(idx);
-			return idx !== emailIdx;
-		});
+		const updateEmails = [...this.state.emails].filter(
+			(item, idx) => idx !== emailIdx
+		);
 		this.setState({
 			emails: updateEmails
 		});
 	};
 
 	render() {
-		return this.state.createToggle ? (
+		// Landing Page - all booleans false
+		return !this.state.joinToggle && !this.state.createToggle ? (
+			<LandingPage
+				joinToggle={this.joinToggle}
+				createToggle={this.createToggle}
+			/>
+		) : this.state.createToggle ? (
+			// Create a Team page - createToggle true
 			<CreateTeam
 				emails={this.state.emails}
 				emailHandler={this.emailHandler}
@@ -69,16 +75,12 @@ class Onboarding extends Component {
 				changeHandler={this.changeHandler}
 				removeEmail={this.removeEmail}
 			/>
-		) : this.state.joinToggle ? (
+		) : (
+			// Join a Team page - joinToggle true
 			<JoinTeam
 				createToggle={this.createToggle}
 				toggleAllOff={this.toggleAllOff}
 				changeHandler={this.changeHandler}
-			/>
-		) : (
-			<LandingPage
-				joinToggle={this.joinToggle}
-				createToggle={this.createToggle}
 			/>
 		);
 	}
