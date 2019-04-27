@@ -7,7 +7,9 @@ const CreateTeam = props => {
 			<h3>Create a team:</h3>
 			<h4>Members Added:</h4>
 			{props.emails.map((email, idx) => (
-				<div key={idx}>{email}</div>
+				<div key={idx}>
+					{email} <button onClick={() => props.removeEmail(idx)}>X</button>
+				</div>
 			))}
 			<div>Add your team members here by email:</div>
 			<form onSubmit={props.emailHandler}>

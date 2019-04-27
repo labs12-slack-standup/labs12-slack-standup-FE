@@ -47,6 +47,17 @@ class Onboarding extends Component {
 		this.setState({ emails: updatedEmails });
 		this.setState({ singleEmail: "" });
 	};
+	removeEmail = emailIdx => {
+		console.log(emailIdx);
+
+		const updateEmails = [...this.state.emails].filter((item, idx) => {
+			console.log(idx);
+			return idx !== emailIdx;
+		});
+		this.setState({
+			emails: updateEmails
+		});
+	};
 
 	render() {
 		return this.state.createToggle ? (
@@ -56,6 +67,7 @@ class Onboarding extends Component {
 				joinToggle={this.joinToggle}
 				toggleAllOff={this.toggleAllOff}
 				changeHandler={this.changeHandler}
+				removeEmail={this.removeEmail}
 			/>
 		) : this.state.joinToggle ? (
 			<JoinTeam
