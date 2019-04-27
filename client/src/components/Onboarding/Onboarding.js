@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./onboarding.css";
 
+import CreateTeam from "./CreateTeam";
+import LandingPage from "./LandingPage";
+import JoinTeam from "./JoinTeam";
+
 class Onboarding extends Component {
 	constructor(props) {
 		super(props);
@@ -23,6 +27,10 @@ class Onboarding extends Component {
 		this.setState({ createToggle: !this.state.createToggle });
 		this.setState({ joinToggle: false });
 	};
+	toggleAllOff = () => {
+		this.setState({ createToggle: false });
+		this.setState({ joinToggle: false });
+	};
 	// change handlers
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
@@ -42,56 +50,24 @@ class Onboarding extends Component {
 
 	render() {
 		return this.state.createToggle ? (
-			<div className="onboarding">
-				<h3>Create a team:</h3>
-				<h4>Members Added:</h4>
-				{this.state.emails.map((email, idx) => (
-					<div key={idx}>{email}</div>
-				))}
-				<div>Add your team members here by email:</div>
-				<form onSubmit={this.emailHandler}>
-					<input
-						type="email"
-						// onSubmit={this.emailHandler}
-						name="singleEmail"
-						onChange={this.changeHandler}
-					/>
-					<button onClick={this.emailHandler}>Add Team Member</button>
-				</form>
-				<Link to="dashboard/reports">
-					<button>Create Team</button>
-				</Link>
-				<div>Have a join code?</div>
-				<button onClick={this.joinToggle}>Input Join Code</button>
-			</div>
+			<CreateTeam
+				emails={this.state.emails}
+				emailHandler={this.emailHandler}
+				joinToggle={this.joinToggle}
+				toggleAllOff={this.toggleAllOff}
+				changeHandler={this.changeHandler}
+			/>
 		) : this.state.joinToggle ? (
-			<div className="onboarding">
-				Enter Join Code (provided by your manger):
-				<form>
-					<input
-						type="text"
-						placeholder="join code"
-						onChange={this.changeHandler}
-						name="joincode"
-						// onSubmit={this.submitHandler}
-					/>
-				</form>
-				<div>
-					Actually don't have a join code? That's okay, let's create a team:
-					<button onClick={this.createToggle}>Create Team</button>
-				</div>
-				<Link to="dashboard/reports">
-					<button>Let's go!</button>
-				</Link>
-			</div>
+			<JoinTeam
+				createToggle={this.createToggle}
+				toggleAllOff={this.toggleAllOff}
+				changeHandler={this.changeHandler}
+			/>
 		) : (
-			<div className="onboarding">
-				<h3>Hi! Thanks for signing up.</h3>
-				<h4>Do you have a join code?</h4>
-				<h4>If not, no worries, you can create a team here too</h4>
-				<button onClick={this.joinToggle}>I have a join code</button>
-				<button onClick={this.createToggle}>Create a Team</button>
-			</div>
+			<LandingPage
+				joinToggle={this.joinToggle}
+				createToggle={this.createToggle}
+			/>
 		);
 	}
 }
