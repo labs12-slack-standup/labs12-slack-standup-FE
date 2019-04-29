@@ -4,8 +4,8 @@ import firebase from "firebase";
 
 const provider = new firebase.auth.GithubAuthProvider();
 const config = {
-	apiKey: "AIzaSyCrucsAZVktDATv4zg3QT_FJ20zmg3T39U",
-	authDomain: "slack-standup-1556221821574.firebaseapp.com"
+	apiKey: process.env.REACT_APP_API_KEY,
+	authDomain: process.env.REACT_APP_AUTH_DOMAIN
 };
 firebase.initializeApp(config);
 
