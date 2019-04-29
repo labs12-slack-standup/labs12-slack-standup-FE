@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import "./onboarding.css";
+
+import CreateTeam from "./CreateTeam";
+import LandingPage from "./LandingPage";
+import JoinTeam from "./JoinTeam";
 
 class Onboarding extends Component {
 	constructor(props) {
@@ -12,70 +17,72 @@ class Onboarding extends Component {
 			emails: []
 		};
 	}
+
+	// toggles
 	joinToggle = e => {
 		this.setState({ joinToggle: !this.state.joinToggle });
+		this.setState({ createToggle: false });
 	};
 	createToggle = () => {
 		this.setState({ createToggle: !this.state.createToggle });
+		this.setState({ joinToggle: false });
 	};
+	toggleAllOff = () => {
+		this.setState({ createToggle: false });
+		this.setState({ joinToggle: false });
+	};
+	// change handlers
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
+
+	// push emails to state when submited
+	// allows the emails to be displayed above the Add Team Member button\
+	// *****Currently does not clear input field***** LEVEL 2 BUG
+
 	emailHandler = e => {
 		e.preventDefault();
-		this.state.emails.push(e.target.value);
+		const updatedEmails = [...this.state.emails];
+		updatedEmails.push(this.state.singleEmail);
+		console.log(updatedEmails);
+		this.setState({ emails: updatedEmails });
+		this.setState({ singleEmail: "" });
+		document.createTeamForm.reset();
 	};
-	bothToggle = e => {
-		this.joinToggle();
-		this.createToggle();
+	// function for removing emails from array before submitting them to create a team
+	removeEmail = emailIdx => {
+		const updateEmails = [...this.state.emails].filter(
+			(item, idx) => idx !== emailIdx
+		);
+		this.setState({
+			emails: updateEmails
+		});
 	};
+
 	render() {
-		return this.state.createToggle ? (
-			<div>
-				<h3>Create a team:</h3>
-				<div>Add your team members here by email:</div>
-				<form onSubmit={this.emailHandler}>
-					<input
-						type="text"
-						// onSubmit={this.emailHandler}
-						name="singleEmail"
-						onChange={this.changeHandler}
-					/>
-				</form>
-				<div>Have a join code?</div>
-				<button onClick={this.bothToggle}>Input Join Code</button>
-				<Link to="dashboard/reports">
-					<button>Let's go!</button>
-				</Link>
-			</div>
-		) : this.state.joinToggle ? (
-			<div>
-				Enter Join Code (provided by your manger):
-				<form>
-					<input
-						type="text"
-						placeholder="join code"
-						onChange={this.changeHandler}
-						name="joincode"
-						// onSubmit={this.submitHandler}
-					/>
-				</form>
-				<div>
-					Actually don't have a join code? That's okay, let's create a team:
-					<button onClick={this.createToggle}>Create Team</button>
-				</div>
-				<Link to="dashboard/reports">
-					<button>Let's go!</button>
-				</Link>
-			</div>
+		// Landing Page - all booleans false
+		return !this.state.joinToggle && !this.state.createToggle ? (
+			<LandingPage
+				joinToggle={this.joinToggle}
+				createToggle={this.createToggle}
+			/>
+		) : this.state.createToggle ? (
+			// Create a Team page - createToggle true
+			<CreateTeam
+				emails={this.state.emails}
+				emailHandler={this.emailHandler}
+				joinToggle={this.joinToggle}
+				toggleAllOff={this.toggleAllOff}
+				changeHandler={this.changeHandler}
+				removeEmail={this.removeEmail}
+			/>
 		) : (
-			<div>
-				<h3>Hi! Thanks for signing up.</h3>
-				<h4>Do you have a join code?</h4>
-				<h4>If not, no worries, you can create a team here too</h4>
-				<button onClick={this.joinToggle}>I have a join code</button>
-				<button onClick={this.createToggle}>Create a Team</button>
-			</div>
+			// Join a Team page - joinToggle true
+			<JoinTeam
+				createToggle={this.createToggle}
+				toggleAllOff={this.toggleAllOff}
+				changeHandler={this.changeHandler}
+			/>
 		);
 	}
 }

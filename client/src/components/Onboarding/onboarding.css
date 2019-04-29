@@ -1,0 +1,13 @@
+.onboarding {
+	border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	height: 800px;
+}
+.onboarding button {
+	width: 150px;
+	margin: 10px;
+}
