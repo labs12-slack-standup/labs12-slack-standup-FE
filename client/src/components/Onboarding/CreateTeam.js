@@ -12,7 +12,7 @@ const CreateTeam = props => {
 				</div>
 			))}
 			<div>Add your team members here by email:</div>
-			<form onSubmit={props.emailHandler}>
+			<form name="createTeamForm" onSubmit={props.emailHandler}>
 				<input
 					type="email"
 					// onSubmit={props.emailHandler}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "./onboarding.css";
 
 import CreateTeam from "./CreateTeam";
@@ -47,6 +47,7 @@ class Onboarding extends Component {
 		console.log(updatedEmails);
 		this.setState({ emails: updatedEmails });
 		this.setState({ singleEmail: "" });
+		document.createTeamForm.reset();
 	};
 	// function for removing emails from array before submitting them to create a team
 	removeEmail = emailIdx => {
