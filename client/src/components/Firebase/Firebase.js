@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
+
 const config = {
 	apiKey: process.env.REACT_APP_API_KEY,
 	authDomain: process.env.REACT_APP_AUTH_DOMAIN
@@ -45,6 +46,7 @@ class Firebase extends Component {
 			/>
 		)
 	}
+
 }
 
 export default Firebase;

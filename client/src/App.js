@@ -12,12 +12,15 @@ import MemberResponseForm from "./components/Reports/MemberReports/MemberRespons
 import ReportResults from "./components/Reports/MemberReports/ReportResults";
 import Account from "./components/Account/Account";
 import Onboarding from "./components/Onboarding/Onboarding";
+import Navigation from "./components/Navigation/Navigations";
 
 import "./App.css";
 
 function App() {
 	return (
 		<div>
+			{/* NAVIGATION ROUTES */}
+			<Route path="/" component={Navigation} />
 			{/* AUTHENTICATION ROUTES */}
 			<Route path="/signup" component={Signup} />
 			<Route path="/login" component={Login} />
