@@ -31,15 +31,10 @@ const uiConfig = {
 					}
 				);
 				console.log(response);
-				localStorage.setItem('token', response.data);
-				console.log(window.location.pathname);
-				// if (window.location.pathname === '/signup') {
-				// 	console.log(window.location.pathname);
-				// 	this.props.history.push('/onboarding');
-				// } else {
-				// 	console.log(window.location.pathname);
-				// 	this.props.history.push('/dashboard');
-				// }
+				await localStorage.setItem(
+					'token',
+					response.data
+				);
 			} catch (err) {
 				console.log(err);
 			}
