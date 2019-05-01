@@ -21,7 +21,7 @@ const uiConfig = {
 		signInSuccessWithAuthResult: async ({ user }) => {
 			try {
 				const response = await axios.post(
-					// "https://master-slack-standup.herokuapp.com/api/auth/firebase",
+					//'https://master-slack-standup.herokuapp.com/api/auth/firebase',
 					'http://localhost:5000/api/auth/firebase',
 					{
 						user,
