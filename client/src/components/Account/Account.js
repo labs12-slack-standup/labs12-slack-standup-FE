@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import axiosWithAuth from '../../config/axiosWithAuth'
 
 class Account extends Component {
 	constructor(props) {
@@ -8,14 +8,14 @@ class Account extends Component {
 			accountInfo: []
 		};
 	}
+
 	componentDidMount() {
-		// call to get account by id
-		// Currently not dynamic - must come back when Auth is finalized
-		this.getAccount(1);
+		this.getAccount();
 	}
-	getAccount = id => {
-		const endpoint = `https://master-slack-standup.herokuapp.com/api/users/${id}`;
-		axios
+
+	getAccount = () => {
+		const endpoint = `https://master-slack-standup.herokuapp.com/api/users/`;
+		axiosWithAuth()
 			.get(endpoint)
 			.then(res =>
 				this.setState({
@@ -26,7 +26,7 @@ class Account extends Component {
 	};
 
 	render() {
-		return this.state.accountInfo.roles === "manager" ? (
+		return this.state.accountInfo.roles === "admin" ? (
 			<div>MANAGER VIEW</div>
 		) : (
 			<div>
@@ -34,6 +34,7 @@ class Account extends Component {
 				<div>
 					<div>Email: {this.state.accountInfo.email}</div>
 					<div>TeamId: {this.state.accountInfo.teamId}</div>
+
 				</div>
 			</div>
 		);
