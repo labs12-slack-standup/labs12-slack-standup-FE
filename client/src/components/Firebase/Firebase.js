@@ -21,7 +21,7 @@ const uiConfig = {
 		signInSuccessWithAuthResult: async ({ user }) => {
 			try {
 				const response = await axios.post(
-					// "https://master-slack-standup.herokuapp.com/api/auth/firebase",
+					//'https://master-slack-standup.herokuapp.com/api/auth/firebase',
 					'http://localhost:5000/api/auth/firebase',
 					{
 						user,
@@ -31,15 +31,10 @@ const uiConfig = {
 					}
 				);
 				console.log(response);
-				localStorage.setItem('token', response.data);
-				console.log(window.location.pathname);
-				// if (window.location.pathname === '/signup') {
-				// 	console.log(window.location.pathname);
-				// 	this.props.history.push('/onboarding');
-				// } else {
-				// 	console.log(window.location.pathname);
-				// 	this.props.history.push('/dashboard');
-				// }
+				await localStorage.setItem(
+					'token',
+					response.data
+				);
 			} catch (err) {
 				console.log(err);
 			}
