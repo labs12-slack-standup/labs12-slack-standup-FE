@@ -29,12 +29,10 @@ function App() {
 			{/* ONBOARDING */}
 			<Route path="/onboarding" component={Onboarding} />
 
+			{/* REPORT ROUTES */}
 			<Route exact path="/dashboard/reports" component={Reports} />
 			<Route path="/dashboard/reports/:reportId" component={MemberResponseForm} />
-
-			{/* SINGLE REPORT NOT NEEDED - ABSTRACT AWAY WITH A REROUTE */}
-			{/* REPORT ROUTES */}
-			<Route path="/dashboard/singlereport" component={SingleReport} />
+	
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
 			<Route path="/dashboard/report/manager" component={SingleReportManager} />
 			<Route path="/dashboard/createreport" component={CreateReport} />
@@ -50,9 +48,7 @@ function App() {
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<Route path="/dashboard/account" component={Account} />
-
-			{/* - Shaun */}
-			<Route path="/dashboard/responses/:reportId" component={ReportInput} />
+			
 		</div>
 	);
 }
