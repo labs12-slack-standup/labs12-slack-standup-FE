@@ -19,7 +19,7 @@ const uiConfig = {
 	],
 	callbacks: {
 		signInSuccessWithAuthResult: ({ user }) => {
-			axios.post('http://localhost:4444/api/auth/firebase', {
+			axios.post('https://master-slack-standup.herokuapp.com/api/auth/firebase', {
 				user,
 				timezone: jstz.determine().name()
 			})

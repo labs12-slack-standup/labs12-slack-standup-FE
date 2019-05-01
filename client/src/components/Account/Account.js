@@ -6,24 +6,33 @@ class Account extends Component {
 		super(props);
 		this.state = {
 			accountInfo: []
+
 		};
 	}
 
 	componentDidMount() {
-		this.getAccount();
-	}
-
-	getAccount = () => {
-		const endpoint = `https://master-slack-standup.herokuapp.com/api/users/`;
+		const endpoint = `https://master-slack-standup.herokuapp.com/api/users/byuser`;
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res =>
+	
 				this.setState({
 					accountInfo: res.data.user
 				})
 			)
 			.catch(err => console.log(err));
-	};
+		
+	}
+
+	updateUser = () => {
+		const endpoint = `https://master-slack-standup.herokuapp.com/api/users/`
+		axiosWithAuth().put(endpoint, ...this.state.accountInfo).then().catch()
+	}
+
+	changeHandler = e => {
+		this.setState({ [e.target.name]: e.target.value });
+	}
+
 
 	render() {
 		return this.state.accountInfo.roles === "admin" ? (
@@ -36,6 +45,11 @@ class Account extends Component {
 					<div>TeamId: {this.state.accountInfo.teamId}</div>
 
 				</div>
+				<form>
+					<input type='text' value={this.state.accountInfo.fullName} onChange={this.changeHandler} name='accountInfo.fullName'  />
+					<input />
+
+				</form>
 			</div>
 		);
 	}
