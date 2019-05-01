@@ -14,6 +14,7 @@ import Account from './components/Account/Account';
 import Onboarding from './components/Onboarding/Onboarding';
 import Navigation from './components/Navigation/Navigations';
 import Dashboard from './components/Dashboard/Dashboard.js';
+import ReportInput from "./components/Reports/MemberReports/ReportInput";
 
 import './App.css';
 
@@ -29,17 +30,10 @@ function App() {
 			{/* ONBOARDING */}
 			<Route path="/onboarding" component={Onboarding} />
 			<Route exact path="/dashboard" component={Dashboard} />
-			<Route
-				exact
-				path="/dashboard/reports"
-				component={Reports}
-			/>
-			{/* SINGLE REPORT NOT NEEDED - ABSTRACT AWAY WITH A REROUTE */}
 			{/* REPORT ROUTES */}
-			<Route
-				path="/dashboard/singlereport"
-				component={SingleReport}
-			/>
+			<Route exact path="/dashboard/reports" component={Reports} />
+			<Route path="/dashboard/reports/:reportId" component={MemberResponseForm} />
+	
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
 			<Route
 				exact
@@ -66,13 +60,11 @@ function App() {
 				path="/dashboard/responseform"
 				component={MemberResponseForm}
 			/>
-			<Route
-				path="/dashboard/reportresults"
-				component={ReportResults}
-			/>
+			<Route path="/dashboard/reportresults" component={ReportResults} />
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<Route path="/dashboard/account" component={Account} />
+			
 		</div>
 	);
 }
