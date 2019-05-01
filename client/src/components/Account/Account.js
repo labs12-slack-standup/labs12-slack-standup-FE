@@ -54,11 +54,11 @@ class Account extends Component {
 					<div>Email: {this.state.accountInfo.email}</div>
 					<div>TeamId: {this.state.accountInfo.teamId}</div>
 					<div>Full Name: {this.state.accountInfo.fullName}</div>
-					<div>Profile Pic: {this.state.accountInfo.profilePic}</div>
+					<img src={this.state.accountInfo.profilePic}/>
 				</div>
 				<form onSubmit={this.updateUser}>
-					<input type='text' value={this.state.newName} name="newName" onChange={this.changeHandler} />
-					<input type='text' value = {this.state.newPic} name="newPic" onChange = {this.changeHandler} />
+					<input type='text' value={this.state.newName} name="newName" onChange={this.changeHandler} placeholder="What's your name"/>
+					<input type='text' value = {this.state.newPic} name="newPic" placeholder="gimme a picture link" onChange = {this.changeHandler} />
 					<button type="submit">Submit Changes</button>
 				</form>
 			</div>
