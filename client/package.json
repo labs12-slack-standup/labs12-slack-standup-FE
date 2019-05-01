@@ -3,6 +3,8 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@firebase/app": "^0.3.17",
+		"@firebase/auth": "^0.10.2",
 		"axios": "^0.18.0",
 		"firebase": "^5.10.1",
 		"jstz": "^2.1.1",
