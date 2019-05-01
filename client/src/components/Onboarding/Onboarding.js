@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
-import "./onboarding.css";
+import './onboarding.css';
 
-import CreateTeam from "./CreateTeam";
-import LandingPage from "./LandingPage";
-import JoinTeam from "./JoinTeam";
+import CreateTeam from './CreateTeam';
+import LandingPage from './LandingPage';
+import JoinTeam from './JoinTeam';
+import axiosWithAuth from '../../config/axiosWithAuth.js';
 
 class Onboarding extends Component {
 	constructor(props) {
@@ -12,9 +13,10 @@ class Onboarding extends Component {
 		this.state = {
 			joinToggle: false,
 			createToggle: false,
-			joincode: "",
-			singleEmail: "",
-			emails: []
+			joincode: '',
+			singleEmail: '',
+			emails: [],
+			teamId: null
 		};
 	}
 
@@ -36,6 +38,44 @@ class Onboarding extends Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
+	createTeam = async () => {
+		const teamId = length => {
+			return Math.round(
+				Math.pow(9, length + 1) -
+					Math.random() * Math.pow(9, length)
+			);
+		};
+
+		const joinId = length => {
+			return Math.round(
+				Math.pow(36, length + 1) -
+					Math.random() * Math.pow(36, length)
+			)
+				.toString(36)
+				.slice(1);
+		};
+
+		const randId = await teamId(8);
+		const joinCode = await joinId(6);
+
+		try {
+			const updated = await axiosWithAuth().put(
+				'http://localhost:5000/api/users/',
+				{
+					teamId: randId,
+					roles: 'admin',
+					joinCode
+				}
+			);
+
+			localStorage.setItem('token', updated.data.token);
+		} catch (error) {
+			console.log(error);
+		}
+
+		this.setState({ teamId: randId });
+	};
+
 	// push emails to state when submited
 	// allows the emails to be displayed above the Add Team Member button\
 	// *****Currently does not clear input field***** LEVEL 2 BUG
@@ -46,7 +86,7 @@ class Onboarding extends Component {
 		updatedEmails.push(this.state.singleEmail);
 		console.log(updatedEmails);
 		this.setState({ emails: updatedEmails });
-		this.setState({ singleEmail: "" });
+		this.setState({ singleEmail: '' });
 		document.createTeamForm.reset();
 	};
 	// function for removing emails from array before submitting them to create a team
@@ -69,6 +109,8 @@ class Onboarding extends Component {
 		) : this.state.createToggle ? (
 			// Create a Team page - createToggle true
 			<CreateTeam
+				createTeam={this.createTeam}
+				teamId={this.state.teamId}
 				emails={this.state.emails}
 				emailHandler={this.emailHandler}
 				joinToggle={this.joinToggle}
