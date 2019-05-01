@@ -63,6 +63,7 @@ class Reports extends Component {
 						<button>Single Report</button>
 					</Link>
 					<div>
+						
 						CONDITONAL: Submit Response if
 						not yet responsed, otherwise
 						view responses
