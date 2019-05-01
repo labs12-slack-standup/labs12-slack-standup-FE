@@ -18,6 +18,7 @@ const uiConfig = {
 		firebase.auth.GithubAuthProvider.PROVIDER_ID
 	],
 	callbacks: {
+
 		signInSuccessWithAuthResult: ({ user }) => {
 			axios.post(
 				'https://master-slack-standup.herokuapp.com/api/auth/firebase',
@@ -60,6 +61,7 @@ const uiConfig = {
 			// } catch (err) {
 			//     console.log(err);
 			// }
+
 		}
 	}
 };

@@ -13,6 +13,8 @@ import ReportResults from './components/Reports/MemberReports/ReportResults';
 import Account from './components/Account/Account';
 import Onboarding from './components/Onboarding/Onboarding';
 import Navigation from './components/Navigation/Navigations';
+import Dashboard from './components/Dashboard/Dashboard.js';
+import ReportInput from "./components/Reports/MemberReports/ReportInput";
 
 import './App.css';
 
@@ -27,7 +29,7 @@ function App() {
 
 			{/* ONBOARDING */}
 			<Route path="/onboarding" component={Onboarding} />
-
+			<Route exact path="/dashboard" component={Dashboard} />
 			{/* REPORT ROUTES */}
 			<Route
 				path="/dashboard/singlereport"
@@ -35,14 +37,17 @@ function App() {
 			/>
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
 			<Route
+				exact
 				path="/dashboard/report/manager"
 				component={SingleReportManager}
 			/>
 			<Route
+				exact
 				path="/dashboard/createreport"
 				component={CreateReport}
 			/>
 			<Route
+				exact
 				path="/dashboard/editreport"
 				component={EditReport}
 			/>
@@ -60,8 +65,9 @@ function App() {
 				path="/dashboard/reportresults"
 				component={ReportResults}
 			/>
+			<Route path="/dashboard/reportresults" component={ReportResults} />
 
-			{/* V IEW FOR SINGLE ACCOUNT */}
+			{/* VIEW FOR SINGLE ACCOUNT */}
 			<Route path="/dashboard/account" component={Account} />
 		</div>
 	);

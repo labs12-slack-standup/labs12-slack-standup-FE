@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import SingleReport from './SingleReport';
+import axiosWithAuth from '../../config/axiosWithAuth';
 // SAME AS SURVEY LIST ON WIREFRAME
 
 class Reports extends Component {
@@ -10,10 +11,9 @@ class Reports extends Component {
 
 	componentDidMount() {
 		// call to get reports and stick them in state
-		const endpoint =
-			// 'https://master-slack-standup.herokuapp.com/api/reports';
-			'http://localhost:5000/api/reports/';
-		axios.get(endpoint)
+		const endpoint = 'http://localhost:5000/api/reports/team';
+		axiosWithAuth()
+			.get(endpoint)
 			.then(res =>
 				this.setState({
 					reports: res.data.reports
@@ -28,8 +28,11 @@ class Reports extends Component {
 				Reports:
 				<div>
 					{/* passing reports from state to individual components */}
-					{this.state.reports.map((report,i) => (
-						<SingleReport report={report} key={i} />
+					{this.state.reports.map(report => (
+						<SingleReport
+							key={report.id}
+							report={report}
+						/>
 					))}
 					{/* List of all reports here...will map over
 					the report list for teamId
