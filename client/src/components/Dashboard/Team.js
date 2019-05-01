@@ -5,7 +5,7 @@ const Team = props => {
 		<div>
 			{props.users.map(user => {
 				return (
-					<div>
+					<div key={user.id}>
 						<img src={user.profilePic} />
 					</div>
 				);

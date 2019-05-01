@@ -28,7 +28,7 @@ function App() {
 
 			{/* ONBOARDING */}
 			<Route path="/onboarding" component={Onboarding} />
-			<Route path="/dashboard" component={Dashboard} />
+			<Route exact path="/dashboard" component={Dashboard} />
 			<Route
 				exact
 				path="/dashboard/reports"
