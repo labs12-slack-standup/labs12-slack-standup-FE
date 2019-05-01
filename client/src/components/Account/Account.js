@@ -5,7 +5,9 @@ class Account extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			accountInfo: []
+			accountInfo: [],
+			newName:'',
+			newPic:''
 
 		};
 	}
@@ -15,7 +17,6 @@ class Account extends Component {
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res =>
-	
 				this.setState({
 					accountInfo: res.data.user
 				})
@@ -24,9 +25,18 @@ class Account extends Component {
 		
 	}
 
-	updateUser = () => {
+	updateUser = e => {
+		e.preventDefault();
 		const endpoint = `https://master-slack-standup.herokuapp.com/api/users/`
-		axiosWithAuth().put(endpoint, ...this.state.accountInfo).then().catch()
+		const editedUser = {};
+		if (this.state.newName){
+			editedUser.fullName=this.state.newName
+		}
+		if (this.state.newPic){
+			editedUser.profilePic=this.state.newPic
+		}
+		console.log(editedUser)
+		axiosWithAuth().put(endpoint, editedUser).then(res=>{console.log(res)}).catch(err=>{console.log(err)})
 	}
 
 	changeHandler = e => {
@@ -43,12 +53,13 @@ class Account extends Component {
 				<div>
 					<div>Email: {this.state.accountInfo.email}</div>
 					<div>TeamId: {this.state.accountInfo.teamId}</div>
-
+					<div>Full Name: {this.state.accountInfo.fullName}</div>
+					<div>Profile Pic: {this.state.accountInfo.profilePic}</div>
 				</div>
-				<form>
-					<input type='text' value={this.state.accountInfo.fullName} onChange={this.changeHandler} name='accountInfo.fullName'  />
-					<input />
-
+				<form onSubmit={this.updateUser}>
+					<input type='text' value={this.state.newName} name="newName" onChange={this.changeHandler} />
+					<input type='text' value = {this.state.newPic} name="newPic" onChange = {this.changeHandler} />
+					<button type="submit">Submit Changes</button>
 				</form>
 			</div>
 		);
