@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
 import './onboarding.css';
-import axios from 'axios';
-import axiosWithAuth from '../../config/axiosWithAuth.js';
 
 import CreateTeam from './CreateTeam';
 import LandingPage from './LandingPage';
 import JoinTeam from './JoinTeam';
+import axiosWithAuth from '../../config/axiosWithAuth.js';
 
 class Onboarding extends Component {
 	constructor(props) {
@@ -16,7 +15,8 @@ class Onboarding extends Component {
 			createToggle: false,
 			joincode: '',
 			singleEmail: '',
-			emails: []
+			emails: [],
+			teamId: null
 		};
 	}
 
@@ -38,7 +38,6 @@ class Onboarding extends Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
-
 	createTeam = async () => {
 		const teamId = length => {
 			return Math.round(
@@ -47,7 +46,7 @@ class Onboarding extends Component {
 			);
 		};
 
-		const joinCode = length => {
+		const joinId = length => {
 			return Math.round(
 				Math.pow(36, length + 1) -
 					Math.random() * Math.pow(36, length)
@@ -55,25 +54,27 @@ class Onboarding extends Component {
 				.toString(36)
 				.slice(1);
 		};
-		//storing joinCode in state to send in emails to users when that gets built
-		const uniqueJoinCode = joinCode(6)
-		this.setState({ joinCode: uniqueJoinCode });
 
-		const endpoint = `https://localhost:4444/api/users/`;
-		//inserting a random ten-digit number for teamId and 6 digit alphanumeric for joinCode
+		const randId = await teamId(8);
+		const joinCode = await joinId(6);
+
 		try {
-			await axiosWithAuth().put(endpoint, {
-				teamId: teamId(8),
-			joinCode: uniqueJoinCode,
-			roles: 'admin'
-			})
+			const updated = await axiosWithAuth().put(
+				'http://localhost:5000/api/users/',
+				{
+					teamId: randId,
+					roles: 'admin',
+					joinCode
+				}
+			);
+
+			localStorage.setItem('token', updated.data.token);
 		} catch (error) {
-			console.log(error);	
+			console.log(error);
 		}
-		
-		
-		};
-	
+
+		this.setState({ teamId: randId });
+	};
 
 	// push emails to state when submited
 	// allows the emails to be displayed above the Add Team Member button\
@@ -109,7 +110,7 @@ class Onboarding extends Component {
 			// Create a Team page - createToggle true
 			<CreateTeam
 				createTeam={this.createTeam}
-				joinCode={this.state.joinCode}
+				teamId={this.state.teamId}
 				emails={this.state.emails}
 				emailHandler={this.emailHandler}
 				joinToggle={this.joinToggle}
