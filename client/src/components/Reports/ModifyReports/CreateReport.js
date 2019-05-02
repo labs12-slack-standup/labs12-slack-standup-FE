@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import axiosWithAuth from '../../../config/axiosWithAuth';
+
+import {axiosWithAuth, baseURL} from '../../../config/axiosWithAuth';
+import moment from 'moment'
+
 
 class CreateReport extends Component {
 	state = {
@@ -11,6 +14,7 @@ class CreateReport extends Component {
 		responseTimeLimit: null,
 		questions: [],
 		singleQuestion: ''
+
 	};
 	// schedule and questions are arrays in state but need to be stringified when posting
 	changeHandler = e => {
@@ -20,7 +24,7 @@ class CreateReport extends Component {
 		e.preventDefault();
 		const updateQuestion = [...this.state.questions];
 		updateQuestion.push(this.state.singleQuestion);
-		console.log(updateQuestion);
+		// console.log(updateQuestion);
 		this.setState({ questions: updateQuestion });
 		this.setState({ singleQuestion: '' });
 		document.addQuestionForm.reset();
@@ -41,24 +45,29 @@ class CreateReport extends Component {
 	};
 	//create report - axios post request
 	addReport = () => {
+
 		const stringifiedSched = JSON.stringify(this.state.schedule);
 		const stringifiedQs = JSON.stringify(this.state.questions);
 		const report = {
 			reportName: this.state.reportName,
 			schedule: stringifiedSched,
 			questions: stringifiedQs,
-			sceduleTime: this.state.scheduleTime,
+			scheduleTime: this.state.scheduleTime,
 			recurring: this.state.recurring,
 			message: this.state.message,
-			responseTimeLimit: this.state.responseTimeLimit
+			responseTimeLimit: this.state.responseTimeLimit,
+			created_at: moment().format()
+
 		};
+		console.log(report)
 		const endpoint =
-			'https://master-slack-standup.herokuapp.com/api/report';
+			`${baseURL}/reports`;
 		axiosWithAuth()
 			.post(endpoint, report)
 			.then(res => console.log(res))
 			.catch(err => console.log(err));
 	};
+
 
 	render() {
 		const days = [

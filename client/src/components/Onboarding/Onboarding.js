@@ -5,7 +5,7 @@ import './onboarding.css';
 import CreateTeam from './CreateTeam';
 import LandingPage from './LandingPage';
 import JoinTeam from './JoinTeam';
-import axiosWithAuth from '../../config/axiosWithAuth.js';
+import {axiosWithAuth, baseURL} from '../../config/axiosWithAuth.js';
 
 class Onboarding extends Component {
 	constructor(props) {
@@ -60,7 +60,7 @@ class Onboarding extends Component {
 
 		try {
 			const updated = await axiosWithAuth().put(
-				'http://localhost:5000/api/users/',
+				`${baseURL}/users/`,
 				{
 					teamId: randId,
 					roles: 'admin',

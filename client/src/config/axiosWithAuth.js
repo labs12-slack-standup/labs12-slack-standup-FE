@@ -1,12 +1,16 @@
 import axios from 'axios';
 
-export default function() {
-	const token = localStorage.getItem('token');
+export const baseURL = 'http://localhost:5000/api';
+//https://master-slack-standup.herokuapp.com/api
 
-	return axios.create({
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `${token}`
-		}
-	});
+export function axiosWithAuth() {
+    const token = localStorage.getItem('token');
+
+    return axios.create({
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${token}`
+        }
+    });
 }
+

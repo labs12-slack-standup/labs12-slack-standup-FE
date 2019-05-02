@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
 import SingleReport from './SingleReport';
-import axiosWithAuth from '../../config/axiosWithAuth';
+
+import {axiosWithAuth, baseURL} from '../../config/axiosWithAuth';
+
 import { Link } from 'react-router-dom';
 // SAME AS SURVEY LIST ON WIREFRAME
 
@@ -12,7 +14,7 @@ class Reports extends Component {
 
 	componentDidMount() {
 		// call to get reports and stick them in state
-		const endpoint = 'http://localhost:5000/api/reports/team';
+		const endpoint = `${baseURL}/reports`
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res =>
