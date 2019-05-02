@@ -5,7 +5,7 @@ import './onboarding.css';
 import CreateTeam from './CreateTeam';
 import LandingPage from './LandingPage';
 import JoinTeam from './JoinTeam';
-import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
 class Onboarding extends Component {
 	constructor(props) {

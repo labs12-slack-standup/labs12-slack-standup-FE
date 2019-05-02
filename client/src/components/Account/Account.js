@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
 class Account extends Component {
 	constructor(props) {
@@ -13,7 +13,7 @@ class Account extends Component {
 
 	componentDidMount() {
 		const endpoint = `${baseURL}/users/byuser`;
-		axiosWithAuth
+		axiosWithAuth()
 			.get(endpoint)
 			.then(res =>
 				this.setState({
@@ -25,7 +25,7 @@ class Account extends Component {
 
 	updateUser = e => {
 		e.preventDefault();
-		const endpoint = `https://master-slack-standup.herokuapp.com/api/users/`;
+		const endpoint = `${baseURL}/users/`;
 		const editedUser = {};
 		if (this.state.newName) {
 			editedUser.fullName = this.state.newName;

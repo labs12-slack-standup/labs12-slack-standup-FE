@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+
 import SingleReport from './SingleReport';
+
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
 
+import { Link } from 'react-router-dom';
 // SAME AS SURVEY LIST ON WIREFRAME
 
 class Reports extends Component {
@@ -13,7 +15,7 @@ class Reports extends Component {
 
 	componentDidMount() {
 		// call to get reports and stick them in state
-		const endpoint = `${baseURL}/reports/`;
+		const endpoint = `${baseURL}/reports`;
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res =>
@@ -56,6 +58,11 @@ class Reports extends Component {
 							/>
 						</Link>
 					))}
+					<Link to="/dashboard/createreport">
+						<button>
+							Create New Report
+						</button>
+					</Link>
 					{/* List of all reports here...will map over
 					the report list for teamId
 					<br />
