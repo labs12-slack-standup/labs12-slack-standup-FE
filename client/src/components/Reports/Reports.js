@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SingleReport from './SingleReport';
 import axiosWithAuth from '../../config/axiosWithAuth';
+import { Link } from 'react-router-dom';
 // SAME AS SURVEY LIST ON WIREFRAME
 
 class Reports extends Component {
@@ -34,6 +35,11 @@ class Reports extends Component {
 							report={report}
 						/>
 					))}
+					<Link to="/dashboard/createreport">
+						<button>
+							Create New Report
+						</button>
+					</Link>
 					{/* List of all reports here...will map over
 					the report list for teamId
 					<br />
@@ -104,11 +110,14 @@ class Reports extends Component {
 				</div> */}
 					<h2>This component needs access to:</h2>
 					<ul>
-						<li>QUERY: all reports by teamId</li>
 						<li>
-							Report Name, schedule, team
-							member list,
-					</li>
+							QUERY: all reports by
+							teamId
+						</li>
+						<li>
+							Report Name, schedule,
+							team member list,
+						</li>
 					</ul>
 				</div>
 			</div>

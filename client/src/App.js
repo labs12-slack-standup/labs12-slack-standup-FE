@@ -67,6 +67,10 @@ function App() {
 			/>
 			<Route path="/dashboard/reportresults" component={ReportResults} />
 
+			<Route
+				path="/dashboard/reports"
+				component={Reports}
+			/>
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<Route path="/dashboard/account" component={Account} />
 		</div>
