@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import SingleReport from './SingleReport';
 
-import {axiosWithAuth, baseURL} from '../../config/axiosWithAuth';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
 
 import { Link } from 'react-router-dom';
 // SAME AS SURVEY LIST ON WIREFRAME
@@ -14,7 +14,7 @@ class Reports extends Component {
 
 	componentDidMount() {
 		// call to get reports and stick them in state
-		const endpoint = `${baseURL}/reports`
+		const endpoint = `${baseURL}/reports`;
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res =>
@@ -24,6 +24,14 @@ class Reports extends Component {
 			)
 			.catch(err => console.log(err));
 	}
+	deleteReport = id => {
+		const endpoint = `${baseURL}/reports/${id}`;
+		console.log(endpoint);
+		axiosWithAuth()
+			.delete(endpoint)
+			.then(res => console.log(res))
+			.catch(err => console.log(err));
+	};
 
 	render() {
 		return (
@@ -35,6 +43,10 @@ class Reports extends Component {
 						<SingleReport
 							key={report.id}
 							report={report}
+							deleteReport={
+								this
+									.deleteReport
+							}
 						/>
 					))}
 					<Link to="/dashboard/createreport">
