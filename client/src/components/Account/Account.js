@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {axiosWithAuth, baseURL} from '../../config/axiosWithAuth.js';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
 class Account extends Component {
 	constructor(props) {
@@ -49,9 +49,10 @@ class Account extends Component {
 	};
 
 	render() {
-		return this.state.accountInfo.roles === 'admin' ? (
-			<div>MANAGER VIEW</div>
-		) : (
+		// return this.state.accountInfo.roles === 'admin' ? (
+		// 	<div>MANAGER VIEW</div>
+		// ) : (
+		return (
 			<div>
 				Account Info:
 				<div>
