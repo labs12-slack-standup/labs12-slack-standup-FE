@@ -35,6 +35,7 @@ function App() {
 				path="/dashboard/singlereport"
 				component={SingleReport}
 			/>
+			<Route path="/dashboard/reports" component={Reports}/>
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
 			<Route
 				exact
