@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+
 import {axiosWithAuth, baseURL} from '../../../config/axiosWithAuth';
 import moment from 'moment'
+
 
 class CreateReport extends Component {
 	state = {
@@ -12,6 +14,7 @@ class CreateReport extends Component {
 		responseTimeLimit: null,
 		questions: [],
 		singleQuestion: ''
+
 	};
 	// schedule and questions are arrays in state but need to be stringified when posting
 	changeHandler = e => {
@@ -64,6 +67,7 @@ class CreateReport extends Component {
 			.then(res => console.log(res))
 			.catch(err => console.log(err));
 	};
+
 
 	render() {
 		const days = [
