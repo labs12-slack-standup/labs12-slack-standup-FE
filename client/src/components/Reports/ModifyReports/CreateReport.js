@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import axiosWithAuth from '../../../config/axiosWithAuth';
 
 class CreateReport extends Component {
 	state = {
 		reportName: '',
-		selectedDay: '',
 		schedule: [],
 		scheduleTime: null,
 		recurring: '',
@@ -38,6 +38,26 @@ class CreateReport extends Component {
 		const updatedSchedule = [...this.state.schedule];
 		updatedSchedule.push(e.target.name);
 		this.setState({ schedule: updatedSchedule });
+	};
+	//create report - axios post request
+	addReport = () => {
+		const stringifiedSched = JSON.stringify(this.state.schedule);
+		const stringifiedQs = JSON.stringify(this.state.questions);
+		const report = {
+			reportName: this.state.reportName,
+			schedule: stringifiedSched,
+			questions: stringifiedQs,
+			sceduleTime: this.state.scheduleTime,
+			recurring: this.state.recurring,
+			message: this.state.message,
+			responseTimeLimit: this.state.responseTimeLimit
+		};
+		const endpoint =
+			'https://master-slack-standup.herokuapp.com/api/report';
+		axiosWithAuth()
+			.post(endpoint, report)
+			.then(res => console.log(res))
+			.catch(err => console.log(err));
 	};
 
 	render() {
@@ -122,6 +142,9 @@ class CreateReport extends Component {
 						name="scheduleTime"
 					/>
 				</form>
+				<button onClick={this.addReport}>
+					Create Report
+				</button>
 				<h3>MANAGER PAGE ONLY</h3>
 				<ul>
 					<li>
