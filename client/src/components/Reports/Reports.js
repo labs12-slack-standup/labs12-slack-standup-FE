@@ -43,95 +43,16 @@ class Reports extends Component {
 						<SingleReport
 							key={report.id}
 							report={report}
-							deleteReport={
-								this
-									.deleteReport
-							}
+							deleteReport={this.deleteReport}
 						/>
 					))}
 					<Link to="/dashboard/createreport">
-						<button>
-							Create New Report
-						</button>
+						<button>Create New Report</button>
 					</Link>
-					{/* List of all reports here...will map over
-					the report list for teamId
-					<br />
-					CONDITIONAL: If the user is a manager,
-					they will see the analytics. If user is
-					a team member, they will see 1 of 2
-					buttons <br />
-					<Link to="/dashboard/singlereport">
-						<button>Single Report</button>
-					</Link>
-					<div>
-						CONDITONAL: Submit Response if
-						not yet responsed, otherwise
-						view responses
-						<Link to="/dashboard/responseform">
-							<button>
-								Submit Response
-							</button>
-						</Link>
-						or
-						<Link to="/dashboard/reportresults">
-							<button>
-								View Report
-								Results
-							</button>
-						</Link>
-					</div>
-					<br />
-					<Link to="/dashboard/singlereport">
-						<button>Single Report</button>
-					</Link>
-					<div>
-						CONDITONAL: Submit Response if
-						not yet responsed, otherwise
-						view responses
-						<Link to="/dashboard/responseform">
-							<button>
-								Submit Response
-							</button>
-						</Link>
-						<Link to="/dashboard/reportresults">
-							<button>
-								View Report
-								Results
-							</button>
-						</Link>
-					</div>
-					<Link to="/dashboard/singlereport">
-						<button>Single Report</button>
-					</Link>
-					<div>
-						CONDITONAL: Submit Response if
-						not yet responsed, otherwise
-						view responses
-						<Link to="/dashboard/responseform">
-							<button>
-								Submit Response
-							</button>
-						</Link>
-						<Link to="/dashboard/reportresults">
-							<button>
-								View Report
-								Results
-							</button>
-						</Link>
-					</div>
-					<br />
-				</div> */}
 					<h2>This component needs access to:</h2>
 					<ul>
-						<li>
-							QUERY: all reports by
-							teamId
-						</li>
-						<li>
-							Report Name, schedule,
-							team member list,
-						</li>
+						<li>QUERY: all reports by teamId</li>
+						<li>Report Name, schedule, team member list,</li>
 					</ul>
 				</div>
 			</div>
