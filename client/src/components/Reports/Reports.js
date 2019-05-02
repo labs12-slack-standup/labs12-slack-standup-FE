@@ -11,7 +11,7 @@ class Reports extends Component {
 
 	componentDidMount() {
 		// call to get reports and stick them in state
-		const endpoint = 'http://localhost:5000/api/reports/team';
+		const endpoint = 'http://localhost:5000/api/reports/';
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res =>
