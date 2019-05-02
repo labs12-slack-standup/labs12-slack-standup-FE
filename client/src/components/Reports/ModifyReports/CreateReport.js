@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-import {axiosWithAuth, baseURL} from '../../../config/axiosWithAuth';
-import moment from 'moment'
-
+import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
+import moment from 'moment';
 
 class CreateReport extends Component {
 	state = {
@@ -14,7 +13,6 @@ class CreateReport extends Component {
 		responseTimeLimit: null,
 		questions: [],
 		singleQuestion: ''
-
 	};
 	// schedule and questions are arrays in state but need to be stringified when posting
 	changeHandler = e => {
@@ -45,7 +43,6 @@ class CreateReport extends Component {
 	};
 	//create report - axios post request
 	addReport = () => {
-
 		const stringifiedSched = JSON.stringify(this.state.schedule);
 		const stringifiedQs = JSON.stringify(this.state.questions);
 		const report = {
@@ -57,7 +54,6 @@ class CreateReport extends Component {
 			message: this.state.message,
 			responseTimeLimit: this.state.responseTimeLimit,
 			created_at: moment().format()
-
 		};
 		console.log(report)
 		const endpoint =
@@ -67,7 +63,6 @@ class CreateReport extends Component {
 			.then(res => console.log(res))
 			.catch(err => console.log(err));
 	};
-
 
 	render() {
 		const days = [
@@ -101,47 +96,27 @@ class CreateReport extends Component {
 						<div key={idx}>
 							<input
 								type="checkbox"
-								onChange={
-									this
-										.updateSchedule
-								}
+								onChange={this.updateSchedule}
 								name={day}
 								id={day}
 							/>
-							<label htmlFor="day">
-								{day}
-							</label>
+							<label htmlFor="day">{day}</label>
 						</div>
 					))}
 					{this.state.questions.map((question, idx) => (
 						<div key={idx}>
 							{question}
-							<button
-								onClick={
-									this
-										.removeQuestions
-								}
-							>
-								X
-							</button>
+							<button onClick={this.removeQuestions}>X</button>
 						</div>
 					))}
 					<form name="addQuestionForm">
 						<input
 							type="text"
-							onChange={
-								this
-									.changeHandler
-							}
+							onChange={this.changeHandler}
 							name="singleQuestion"
 							placeholder="insert new question"
 						/>
-						<button
-							onClick={
-								this
-									.questionsHandler
-							}
-						>
+						<button onClick={this.questionsHandler}>
 							Add Question to Report
 						</button>
 					</form>
@@ -151,9 +126,7 @@ class CreateReport extends Component {
 						name="scheduleTime"
 					/>
 				</form>
-				<button onClick={this.addReport}>
-					Create Report
-				</button>
+				<button onClick={this.addReport}>Create Report</button>
 			</div>
 		);
 	}
