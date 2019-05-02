@@ -3,20 +3,26 @@ import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 
 class EditReport extends Component {
 	state = {
-		//haven't thought this out much but needs somehwere to store edits to questions
-		question1: '',
-		question2: '',
-		question3: '',
-		reportName: ''
+		reportName: '',
+		schedule: [],
+		scheduleTime: '',
+		recurring: '',
+		message: '',
+		responseTimeLimit: null,
+		questions: [],
+		singleQuestion: ''
 	};
 
 	componentDidMount() {
-		const {id} = this.props.match.params;
+		const { id } = this.props.match.params;
 
 		axiosWithAuth()
 			.get(`${baseURL}/reports/${id}`)
 			.then(res => {
-				console.log(res.data);
+				console.log('report', res.data.report);
+				this.setState({
+					...res.data.report
+				});
 			})
 			.catch(err => {
 				console.log(err);
@@ -28,12 +34,8 @@ class EditReport extends Component {
 	render() {
 		return (
 			<div>
-				<ul>
-					Component Needs:
-					<li>Report name</li>
-					<li>Questions</li>
-					<li>Parameterics for report</li>
-				</ul>
+				<h2>{this.state.reportName}</h2>
+				<h3>{this.state.message}</h3>
 			</div>
 		);
 	}
