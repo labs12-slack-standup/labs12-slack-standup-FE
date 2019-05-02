@@ -55,9 +55,8 @@ class CreateReport extends Component {
 			responseTimeLimit: this.state.responseTimeLimit,
 			created_at: moment().format()
 		};
-		console.log(report)
-		const endpoint =
-			`${baseURL}/reports`;
+		console.log(report);
+		const endpoint = `${baseURL}/reports`;
 		axiosWithAuth()
 			.post(endpoint, report)
 			.then(res => console.log(res))

@@ -31,10 +31,7 @@ function App() {
 			<Route path="/onboarding" component={Onboarding} />
 			<Route exact path="/dashboard" component={Dashboard} />
 			{/* REPORT ROUTES */}
-			<Route
-				path="/dashboard/singlereport"
-				component={SingleReport}
-			/>
+			<Route path="/dashboard/singlereport" component={SingleReport} />
 			<Route path="/dashboard/reports" component={Reports} />
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
 			<Route
@@ -42,34 +39,17 @@ function App() {
 				path="/dashboard/report/manager"
 				component={SingleReportManager}
 			/>
-			<Route
-				exact
-				path="/dashboard/createreport"
-				component={CreateReport}
-			/>
-			<Route
-				exact
-				path="/dashboard/editreport"
-				component={EditReport}
-			/>
+			<Route exact path="/dashboard/createreport" component={CreateReport} />
+			<Route exact path="/dashboard/editreport" component={EditReport} />
 
 			{/* TEAM MEMBER VIEWS AND UPDATING */}
 			<Route
 				path="/dashboard/report/teammember"
 				component={SingleReportMember}
 			/>
-			<Route
-				path="/dashboard/responseform"
-				component={MemberResponseForm}
-			/>
-			<Route
-				path="/dashboard/reportresults"
-				component={ReportResults}
-			/>
-			<Route
-				path="/dashboard/reportresults"
-				component={ReportResults}
-			/>
+			<Route path="/dashboard/responseform" component={MemberResponseForm} />
+			<Route path="/dashboard/reportresults" component={ReportResults} />
+			<Route path="/dashboard/reportresults" component={ReportResults} />
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<Route path="/dashboard/account" component={Account} />

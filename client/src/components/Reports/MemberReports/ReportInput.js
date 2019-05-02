@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const ReportInput = props => (
@@ -10,7 +9,7 @@ const ReportInput = props => (
 			placeholder="Type your answer here..."
 			value={props.response}
 		/>
-	</div >
-)
+	</div>
+);
 
 export default ReportInput;

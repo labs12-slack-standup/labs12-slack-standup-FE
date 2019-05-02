@@ -56,27 +56,10 @@ class Account extends Component {
 			<div>
 				Account Info:
 				<div>
-					<div>
-						Email:{' '}
-						{this.state.accountInfo.email}
-					</div>
-					<div>
-						TeamId:{' '}
-						{this.state.accountInfo.teamId}
-					</div>
-					<div>
-						Full Name:{' '}
-						{
-							this.state.accountInfo
-								.fullName
-						}
-					</div>
-					<img
-						src={
-							this.state.accountInfo
-								.profilePic
-						}
-					/>
+					<div>Email: {this.state.accountInfo.email}</div>
+					<div>TeamId: {this.state.accountInfo.teamId}</div>
+					<div>Full Name: {this.state.accountInfo.fullName}</div>
+					<img src={this.state.accountInfo.profilePic} />
 				</div>
 				<form onSubmit={this.updateUser}>
 					<input
@@ -93,9 +76,7 @@ class Account extends Component {
 						placeholder="gimme a picture link"
 						onChange={this.changeHandler}
 					/>
-					<button type="submit">
-						Submit Changes
-					</button>
+					<button type="submit">Submit Changes</button>
 				</form>
 			</div>
 		);
