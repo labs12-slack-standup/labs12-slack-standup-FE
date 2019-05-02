@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SingleReport from './SingleReport';
+import axiosWithAuth from '../../config/axiosWithAuth';
 // SAME AS SURVEY LIST ON WIREFRAME
 
 class Reports extends Component {
@@ -11,9 +11,9 @@ class Reports extends Component {
 
 	componentDidMount() {
 		// call to get reports and stick them in state
-		const endpoint =
-			'https://master-slack-standup.herokuapp.com/api/reports';
-		axios.get(endpoint)
+		const endpoint = 'http://localhost:5000/api/reports/team';
+		axiosWithAuth()
+			.get(endpoint)
 			.then(res =>
 				this.setState({
 					reports: res.data.reports
@@ -29,9 +29,12 @@ class Reports extends Component {
 				<div>
 					{/* passing reports from state to individual components */}
 					{this.state.reports.map(report => (
-						<SingleReport report={report} />
+						<SingleReport
+							key={report.id}
+							report={report}
+						/>
 					))}
-					List of all reports here...will map over
+					{/* List of all reports here...will map over
 					the report list for teamId
 					<br />
 					CONDITIONAL: If the user is a manager,
@@ -99,15 +102,16 @@ class Reports extends Component {
 						</Link>
 					</div>
 					<br />
-				</div>
-				<h2>This component needs access to:</h2>
-				<ul>
-					<li>QUERY: all reports by teamId</li>
-					<li>
-						Report Name, schedule, team
-						member list,
+				</div> */}
+					<h2>This component needs access to:</h2>
+					<ul>
+						<li>QUERY: all reports by teamId</li>
+						<li>
+							Report Name, schedule, team
+							member list,
 					</li>
-				</ul>
+					</ul>
+				</div>
 			</div>
 		);
 	}

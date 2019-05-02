@@ -18,45 +18,50 @@ const uiConfig = {
 		firebase.auth.GithubAuthProvider.PROVIDER_ID
 	],
 	callbacks: {
+
 		signInSuccessWithAuthResult: ({ user }) => {
-			axios.post('https://master-slack-standup.herokuapp.com/api/auth/firebase', {
-				user,
-				timezone: jstz.determine().name()
-			})
+			axios.post(
+				'https://master-slack-standup.herokuapp.com/api/auth/firebase',
+				{
+					user,
+					timezone: jstz.determine().name()
+				}
+			)
 				.then(res =>
 					localStorage.setItem('token', res.data)
 				)
 				.catch(err => {
 					console.log(err);
 				});
-				
-			// try {
-			// 	console.log('before')
-			// 	const response = await axios.post(
-			// 		// "https://master-slack-standup.herokuapp.com/api/auth/firebase",
-			// 		"http://localhost:4444/api/auth/firebase",
-			// 		{
-			// 			user,
-			// 			timezone: jstz
-			// 				.determine()
-			// 				.name()
-			// 		}
-			// 	);
-			// 	console.log('after')
-			// 	console.log(response.data);
-			// 	localStorage.setItem('token', response.data);
 
-			// 	// console.log(window.location.pathname);
-			// 	// if (window.location.pathname === '/signup') {
-			// 	// 	console.log(window.location.pathname);
-			// 	// 	this.props.history.push('/onboarding');
-			// 	// } else {
-			// 	// 	console.log(window.location.pathname);
-			// 	// 	this.props.history.push('/dashboard');
-			// 	// }
+			// try {
+			//     console.log('before')
+			//     const response = await axios.post(
+			//         // "https://master-slack-standup.herokuapp.com/api/auth/firebase",
+			//         "http://localhost:4444/api/auth/firebase",
+			//         {
+			//             user,
+			//             timezone: jstz
+			//                 .determine()
+			//                 .name()
+			//         }
+			//     );
+			//     console.log('after')
+			//     console.log(response.data);
+			//     localStorage.setItem('token', response.data);
+
+			//     // console.log(window.location.pathname);
+			//     // if (window.location.pathname === '/signup') {
+			//     //     console.log(window.location.pathname);
+			//     //     this.props.history.push('/onboarding');
+			//     // } else {
+			//     //     console.log(window.location.pathname);
+			//     //     this.props.history.push('/dashboard');
+			//     // }
 			// } catch (err) {
-			// 	console.log(err);
+			//     console.log(err);
 			// }
+
 		}
 	}
 };

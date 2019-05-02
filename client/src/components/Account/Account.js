@@ -1,14 +1,13 @@
-import React, { Component } from "react";
-import axiosWithAuth from '../../config/axiosWithAuth'
+import React, { Component } from 'react';
+import axiosWithAuth from '../../config/axiosWithAuth';
 
 class Account extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			accountInfo: [],
-			newName:'',
-			newPic:''
-
+			newName: '',
+			newPic: ''
 		};
 	}
 
@@ -22,44 +21,80 @@ class Account extends Component {
 				})
 			)
 			.catch(err => console.log(err));
-		
 	}
 
 	updateUser = e => {
 		e.preventDefault();
-		const endpoint = `https://master-slack-standup.herokuapp.com/api/users/`
+		const endpoint = `https://master-slack-standup.herokuapp.com/api/users/`;
 		const editedUser = {};
-		if (this.state.newName){
-			editedUser.fullName=this.state.newName
+		if (this.state.newName) {
+			editedUser.fullName = this.state.newName;
 		}
-		if (this.state.newPic){
-			editedUser.profilePic=this.state.newPic
+		if (this.state.newPic) {
+			editedUser.profilePic = this.state.newPic;
 		}
-		console.log(editedUser)
-		axiosWithAuth().put(endpoint, editedUser).then(res=>{console.log(res)}).catch(err=>{console.log(err)})
-	}
+		console.log(editedUser);
+		axiosWithAuth()
+			.put(endpoint, editedUser)
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	};
 
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
-	}
-
+	};
 
 	render() {
-		return this.state.accountInfo.roles === "admin" ? (
+		return this.state.accountInfo.roles === 'admin' ? (
 			<div>MANAGER VIEW</div>
 		) : (
 			<div>
 				Account Info:
 				<div>
-					<div>Email: {this.state.accountInfo.email}</div>
-					<div>TeamId: {this.state.accountInfo.teamId}</div>
-					<div>Full Name: {this.state.accountInfo.fullName}</div>
-					<img src={this.state.accountInfo.profilePic}/>
+					<div>
+						Email:{' '}
+						{this.state.accountInfo.email}
+					</div>
+					<div>
+						TeamId:{' '}
+						{this.state.accountInfo.teamId}
+					</div>
+					<div>
+						Full Name:{' '}
+						{
+							this.state.accountInfo
+								.fullName
+						}
+					</div>
+					<img
+						src={
+							this.state.accountInfo
+								.profilePic
+						}
+					/>
 				</div>
 				<form onSubmit={this.updateUser}>
-					<input type='text' value={this.state.newName} name="newName" onChange={this.changeHandler} placeholder="What's your name"/>
-					<input type='text' value = {this.state.newPic} name="newPic" placeholder="gimme a picture link" onChange = {this.changeHandler} />
-					<button type="submit">Submit Changes</button>
+					<input
+						type="text"
+						value={this.state.newName}
+						name="newName"
+						onChange={this.changeHandler}
+						placeholder="What's your name"
+					/>
+					<input
+						type="text"
+						value={this.state.newPic}
+						name="newPic"
+						placeholder="gimme a picture link"
+						onChange={this.changeHandler}
+					/>
+					<button type="submit">
+						Submit Changes
+					</button>
 				</form>
 			</div>
 		);
