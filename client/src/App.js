@@ -31,9 +31,10 @@ function App() {
 			<Route path="/onboarding" component={Onboarding} />
 			<Route exact path="/dashboard" component={Dashboard} />
 			{/* REPORT ROUTES */}
-			<Route exact path="/dashboard/reports" component={Reports} />
-			<Route path="/dashboard/reports/:reportId" component={MemberResponseForm} />
-	
+			<Route
+				path="/dashboard/singlereport"
+				component={SingleReport}
+			/>
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
 			<Route
 				exact
@@ -60,11 +61,14 @@ function App() {
 				path="/dashboard/responseform"
 				component={MemberResponseForm}
 			/>
+			<Route
+				path="/dashboard/reportresults"
+				component={ReportResults}
+			/>
 			<Route path="/dashboard/reportresults" component={ReportResults} />
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<Route path="/dashboard/account" component={Account} />
-			
 		</div>
 	);
 }
