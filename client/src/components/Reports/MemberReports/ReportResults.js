@@ -11,10 +11,16 @@ class ReportResults extends Component {
 			<div>
 				{
 					this.state.responses.map(response => (
-						<div>
-							<p>{response.name || 'placeholderName'}</p>
-							<p>{response.question}</p>
-							<p>{response.answer}</p>
+						<div key={response.userId}>
+							<h3>{response.fullName}</h3>
+							{
+								response.questions.map(({question, answer}) => (
+									<div>
+										<p>{question}</p>
+										<p>{answer}</p>
+									</div>
+								))
+							}
 						</div>
 					))
 				}
@@ -26,7 +32,7 @@ class ReportResults extends Component {
 		axiosWithAuth()
 			.get(`http://localhost:5000/api/responses/${this.props.match.params.reportId}`)
 			.then(res =>
-				this.setState({ responses: res.data.responses })
+				this.setState({ responses: res.data.membersArray })
 			)
 			.catch(err => console.log(err));
 	}
