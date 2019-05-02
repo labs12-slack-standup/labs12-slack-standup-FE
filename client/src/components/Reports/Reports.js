@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import SingleReport from './SingleReport';
-import axiosWithAuth from '../../config/axiosWithAuth';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
+
 // SAME AS SURVEY LIST ON WIREFRAME
 
 class Reports extends Component {
 	state = {
+		message: '',
 		reports: []
 	};
 
 	componentDidMount() {
 		// call to get reports and stick them in state
-		const endpoint = 'http://localhost:5000/api/reports/team';
+		const endpoint = `${baseURL}/reports/`;
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res =>
 				this.setState({
+					message: res.data.message,
 					reports: res.data.reports
 				})
 			)
@@ -23,16 +26,35 @@ class Reports extends Component {
 	}
 
 	render() {
+		if (this.state.reports.length < 1) {
+			return (
+				<div>
+					<h2>
+						You have not created any reports
+					</h2>
+					<Link to="/dashboard/createreport">
+						<button>Create Report</button>
+					</Link>
+				</div>
+			);
+		}
 		return (
 			<div>
 				Reports:
 				<div>
 					{/* passing reports from state to individual components */}
 					{this.state.reports.map(report => (
-						<SingleReport
+						<Link
 							key={report.id}
-							report={report}
-						/>
+							to={`/reports/${
+								report.id
+							}`}
+						>
+							<SingleReport
+								key={report.id}
+								report={report}
+							/>
+						</Link>
 					))}
 					{/* List of all reports here...will map over
 					the report list for teamId
@@ -104,11 +126,14 @@ class Reports extends Component {
 				</div> */}
 					<h2>This component needs access to:</h2>
 					<ul>
-						<li>QUERY: all reports by teamId</li>
 						<li>
-							Report Name, schedule, team
-							member list,
-					</li>
+							QUERY: all reports by
+							teamId
+						</li>
+						<li>
+							Report Name, schedule,
+							team member list,
+						</li>
 					</ul>
 				</div>
 			</div>

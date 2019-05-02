@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Team from './Team';
-import axiosWithAuth from '../../config/axiosWithAuth';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
 
 export class Dashboard extends Component {
 	state = {
@@ -9,7 +9,7 @@ export class Dashboard extends Component {
 
 	componentDidMount() {
 		axiosWithAuth()
-			.get('http://localhost:5000/api/users/team')
+			.get(`${baseURL}/users/team`)
 			.then(res => this.setState({ users: res.data.users }))
 			.catch(err => console.log(err));
 	}

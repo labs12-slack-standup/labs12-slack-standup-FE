@@ -14,7 +14,7 @@ import Account from './components/Account/Account';
 import Onboarding from './components/Onboarding/Onboarding';
 import Navigation from './components/Navigation/Navigations';
 import Dashboard from './components/Dashboard/Dashboard.js';
-import ReportInput from "./components/Reports/MemberReports/ReportInput";
+import ReportInput from './components/Reports/MemberReports/ReportInput';
 
 import './App.css';
 
@@ -31,6 +31,7 @@ function App() {
 			<Route path="/onboarding" component={Onboarding} />
 			<Route exact path="/dashboard" component={Dashboard} />
 			{/* REPORT ROUTES */}
+			<Route path="/dashboard/reports" component={Reports} />
 			<Route
 				path="/dashboard/singlereport"
 				component={SingleReport}
@@ -65,7 +66,10 @@ function App() {
 				path="/dashboard/reportresults"
 				component={ReportResults}
 			/>
-			<Route path="/dashboard/reportresults" component={ReportResults} />
+			<Route
+				path="/dashboard/reportresults"
+				component={ReportResults}
+			/>
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<Route path="/dashboard/account" component={Account} />

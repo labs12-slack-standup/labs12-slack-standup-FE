@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axiosWithAuth from '../../config/axiosWithAuth';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
 
 class Account extends Component {
 	constructor(props) {
@@ -12,8 +12,8 @@ class Account extends Component {
 	}
 
 	componentDidMount() {
-		const endpoint = `https://master-slack-standup.herokuapp.com/api/users/byuser`;
-		axiosWithAuth()
+		const endpoint = `${baseURL}/users/byuser`;
+		axiosWithAuth
 			.get(endpoint)
 			.then(res =>
 				this.setState({
