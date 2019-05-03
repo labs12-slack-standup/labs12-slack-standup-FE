@@ -34,6 +34,7 @@ function App() {
 				path="/dashboard/singlereport"
 				component={SingleReport}
 			/>
+			<Route path="/dashboard/reports" component={Reports}/>
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
 			<Route
 				exact
@@ -55,16 +56,8 @@ function App() {
 
 			{/* REPORT ROUTES */}
 
-			{/* Don't delete this group of Routes below they need to be discussed */}
-
 			<Route exact path="/dashboard/reports" component={Reports} />
 			<Route path="/dashboard/reports/:reportId" component={SingleReportMember} />
-			{/* <Route path="/dashboard/responseform" component={MemberResponseForm} />
-			<Route path="/dashboard/reportresults" component={ReportResults} />
-			<Route path="/dashboard/report/teammember" component={SingleReportMember} />
-			<Route path="/dashboard/reportresults" component={ReportResults} /> */}
-			
-			{/* Don't delete this group of Routes above they need to be discussed */}
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<Route path="/dashboard/account" component={Account} />
