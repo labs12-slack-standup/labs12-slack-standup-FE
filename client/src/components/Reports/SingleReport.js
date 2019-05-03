@@ -12,6 +12,9 @@ const SingleReport = props => {
 			<Link to={`/dashboard/reports/${props.report.id}`}>Respond</Link>
 			<br/>
 			<Link to={`/dashboard/editreport/${props.report.id}`}>Edit</Link> 
+      <br />
+      <button onClick={props.deleteReport}>Delete</button> 
+
 		</div>
 	);
 };

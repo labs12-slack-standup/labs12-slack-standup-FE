@@ -49,16 +49,19 @@ class Account extends Component {
 	};
 
 	render() {
-		return this.state.accountInfo.roles === 'admin' ? (
-			<div>MANAGER VIEW</div>
-		) : (
+		// return this.state.accountInfo.roles === 'admin' ? (
+		// 	<div>MANAGER VIEW</div>
+		// ) : (
+		return (
 			<div>
 				Account Info:
 				<div>
 					<div>Email: {this.state.accountInfo.email}</div>
 					<div>TeamId: {this.state.accountInfo.teamId}</div>
 					<div>Full Name: {this.state.accountInfo.fullName}</div>
+
 					<img src={this.state.accountInfo.profilePic} alt="a headshot, preferably" />
+
 				</div>
 				<form onSubmit={this.updateUser}>
 					<input

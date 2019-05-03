@@ -11,14 +11,12 @@ class MemberResponseForm extends Component {
 	};
 
 	render() {
+
 		return (
 			this.state.clientInfo.length > 0 ?
 			(
 				<>
 					<div>{this.state.clientInfo}</div>
-					{
-						setTimeout(() => { this.props.history.push('/dashboard/reports') }, 3000)
-					}
 				</>
 			): (
 				<div>
@@ -37,14 +35,15 @@ class MemberResponseForm extends Component {
 					<button onClick={this.submitReport}>Submit</button>
 				</div>
 			)
-		);
+		)
 	}
 
 	componentDidMount() {
 		const endpoint =
 			// 'https://master-slack-standup.herokuapp.com/api/reports';
 			`http://localhost:5000/api/reports/${this.props.match.params.reportId}`;
-		axios.get(endpoint)
+		axios
+			.get(endpoint)
 			.then(res => {
 				const { reportName, message, questions } = res.data.report;
 				this.setState({
@@ -54,33 +53,39 @@ class MemberResponseForm extends Component {
 						question: q.question,
 						response: ''
 					}))
-				})
+				});
 			})
 			.catch(err => console.log(err));
 	}
 
 	handleChange = (e, question) => {
-		const qObj = { question, response: e.target.value }
+		const qObj = { question, response: e.target.value };
 		this.setState(prevState => ({
 			...prevState,
-			questions: prevState.questions.map(q => q.question !== question ? q : qObj)
-		}))
-	}
+			questions: prevState.questions.map(q =>
+				q.question !== question ? q : qObj
+			)
+		}));
+	};
 
 	submitReport = () => {
 		const endpoint =
 			// 'https://master-slack-standup.herokuapp.com/api/reports';
 			`http://localhost:5000/api/responses/${this.props.match.params.reportId}`;
-		axios.post(endpoint, this.state.questions)
+		axios
+			.post(endpoint, this.state.questions)
 			.then(res => {
 				this.setState(prevState => ({
 					...prevState,
-					questions: prevState.questions.map(q => ({ question: q.question, response: ''})),
+					questions: prevState.questions.map(q => ({
+						question: q.question,
+						response: ''
+					})),
 					clientInfo: res.data.message
-				}))
+				}));
 			})
 			.catch(err => console.log(err));
-	}
+	};
 }
 
 export default MemberResponseForm;

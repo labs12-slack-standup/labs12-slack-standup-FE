@@ -214,6 +214,7 @@ class EditReport extends Component {
 					<br />
 					PRESS THIS BUTTON TO UPDATE THE DATABASE
 				</h1>
+
 			</div>
 		);
 	}

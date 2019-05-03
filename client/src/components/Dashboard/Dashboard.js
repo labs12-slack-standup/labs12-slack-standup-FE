@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Team from './Team';
-import {axiosWithAuth, baseURL} from '../../config/axiosWithAuth.js';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
 export class Dashboard extends Component {
 	state = {

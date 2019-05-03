@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import {axiosWithAuth, baseURL} from '../../../config/axiosWithAuth';
-import moment from 'moment'
-
+import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
+import moment from 'moment';
+import { format, endOfDay, addDays, addHours, addMinutes } from 'date-fns';
 
 class CreateReport extends Component {
 	state = {
@@ -12,9 +12,11 @@ class CreateReport extends Component {
 		recurring: '',
 		message: '',
 		responseTimeLimit: null,
+		singleDay: false,
+		responseNum: '',
+		responseDistance: 'minute',
 		questions: [],
 		singleQuestion: ''
-
 	};
 	// schedule and questions are arrays in state but need to be stringified when posting
 	changeHandler = e => {
@@ -48,6 +50,19 @@ class CreateReport extends Component {
 	addReport = () => {
 		const stringifiedSched = JSON.stringify(this.state.schedule);
 		const stringifiedQs = JSON.stringify(this.state.questions);
+		// Time limit is a data that restricts how long a member can respond to a report
+		// If the manager has set the time limit to the end of the day, use endOfDay from date-fns to format the end of day
+		// Otherwise,
+		const formatedTimeLimit = this.state.singleDay
+			? JSON.stringify(endOfDay(new Date(moment().format())))
+			: this.state.responseDistance == 'minute'
+			? JSON.stringify(addMinutes(new Date(moment().format())))
+			: this.state.responseDistance == 'hour'
+			? JSON.stringify(addHours(new Date(moment().format())))
+			: this.state.responseDistance == 'day'
+			? JSON.stringify(addDays(new Date(moment().format())))
+			: null;
+
 		const report = {
 			reportName: this.state.reportName,
 			schedule: stringifiedSched,
@@ -55,7 +70,7 @@ class CreateReport extends Component {
 			scheduleTime: this.state.scheduleTime,
 			recurring: this.state.recurring,
 			message: this.state.message,
-			responseTimeLimit: this.state.responseTimeLimit,
+			responseTimeLimit: formatedTimeLimit,
 			created_at: moment().format()
 		};
 		console.log(report);
@@ -66,8 +81,8 @@ class CreateReport extends Component {
 			.catch(err => console.log(err));
 	};
 
-
 	render() {
+		console.log(this.state.responseDistance);
 		const days = [
 			'Monday',
 			'Tuesday',
@@ -106,6 +121,34 @@ class CreateReport extends Component {
 							<label htmlFor="day">{day}</label>
 						</div>
 					))}
+					<br />
+					<div>Allow Responses For:</div>
+					<div>
+						Until the end of the day
+						<input
+							type="checkbox"
+							onChange={() =>
+								this.setState({ singleDay: !this.state.singleDay })
+							}
+						/>
+						<div>
+							Change Manually:
+							<input
+								type="number"
+								name="responseNum"
+								onChange={this.changeHandler}
+								max="100"
+								min="1"
+							/>
+							<form>
+								<select name="responseDistance" onChange={this.changeHandler}>
+									<option value="minute">minute(s)</option>
+									<option value="hour">hour(s)</option>
+									<option value="day">day(s)</option>
+								</select>
+							</form>
+						</div>
+					</div>
 					{this.state.questions.map((question, idx) => (
 						<div key={idx}>
 							{question}
