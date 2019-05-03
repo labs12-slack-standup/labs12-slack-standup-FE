@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
+import MemberResponseForm from './MemberReports/MemberResponseForm';
+import ReportResults from './MemberReports/ReportResults';
 
-class SingleReportMember extends Component {
-	state = {
-
-	}
-	
-	render() {
-		return (
-			<div>
-				
-			</div>
-		);
-	}
+const SingleReportMember = props => {
+	return (
+		<div>
+			<MemberResponseForm {...props} />
+			<ReportResults {...props} />
+		</div>
+	)
 }
 
 export default SingleReportMember;
