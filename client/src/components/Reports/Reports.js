@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import SingleReport from './SingleReport';
 import axiosWithAuth from '../../config/axiosWithAuth';
 // SAME AS SURVEY LIST ON WIREFRAME
