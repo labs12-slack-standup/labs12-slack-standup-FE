@@ -35,6 +35,7 @@ class MemberResponseForm extends Component {
 					<button onClick={this.submitReport}>Submit</button>
 				</div>
 			)
+		)
 	}
 
 	componentDidMount() {

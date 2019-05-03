@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import axiosWithAuth from '../../../config/axiosWithAuth';
+import { axiosWithAuth } from '../../../config/axiosWithAuth';
 
 class ReportResults extends Component {
 	state = {
