@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReportInput from './ReportInput';
-import axios from 'axios';
+import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 
 class MemberResponseForm extends Component {
 	state = {
@@ -11,46 +11,41 @@ class MemberResponseForm extends Component {
 	};
 
 	render() {
-
-		return (
-			this.state.clientInfo.length > 0 ?
-			(
-				<>
-					<div>{this.state.clientInfo}</div>
-				</>
-			): (
-				<div>
-					<h1>{this.state.reportName}</h1>
-					<p>{this.state.reportMessage}</p>
-					{
-						this.state.questions.map((q, i) => (
-							<ReportInput
-								question={q.question}
-								response={q.response}
-								handleChange={this.handleChange}
-								key={i}
-							/>
-						))
-					}
-					<button onClick={this.submitReport}>Submit</button>
-				</div>
-			)
-		)
+		console.log(this.state.questions);
+		return this.state.clientInfo.length > 0 ? (
+			<>
+				<div>{this.state.clientInfo}</div>
+			</>
+		) : (
+			<div>
+				<h1>{this.state.reportName}</h1>
+				<p>{this.state.reportMessage}</p>
+				{this.state.questions.map((q, i) => (
+					<ReportInput
+						ind={i}
+						question={q}
+						response={q.response}
+						handleChange={this.handleChange}
+						key={i}
+					/>
+				))}
+				<button onClick={this.submitReport}>Submit</button>
+			</div>
+		);
 	}
 
 	componentDidMount() {
-		const endpoint =
-			// 'https://master-slack-standup.herokuapp.com/api/reports';
-			`http://localhost:5000/api/reports/${this.props.match.params.reportId}`;
-		axios
+		const endpoint = `${baseURL}/reports/${this.props.match.params.reportId}`;
+		axiosWithAuth()
 			.get(endpoint)
 			.then(res => {
+				console.log(res);
 				const { reportName, message, questions } = res.data.report;
 				this.setState({
 					reportName,
 					reportMessage: message,
 					questions: questions.map(q => ({
-						question: q.question,
+						question: q,
 						response: ''
 					}))
 				});
@@ -59,7 +54,7 @@ class MemberResponseForm extends Component {
 	}
 
 	handleChange = (e, question) => {
-		const qObj = { question, response: e.target.value };
+		const qObj = { question, [e.target.name]: e.target.value };
 		this.setState(prevState => ({
 			...prevState,
 			questions: prevState.questions.map(q =>
@@ -69,10 +64,8 @@ class MemberResponseForm extends Component {
 	};
 
 	submitReport = () => {
-		const endpoint =
-			// 'https://master-slack-standup.herokuapp.com/api/reports';
-			`http://localhost:5000/api/responses/${this.props.match.params.reportId}`;
-		axios
+		const endpoint = `${baseURL}/responses/${this.props.match.params.reportId}`;
+		axiosWithAuth()
 			.post(endpoint, this.state.questions)
 			.then(res => {
 				this.setState(prevState => ({

@@ -40,7 +40,7 @@ class CreateReport extends Component {
 			questions: updateQuestion
 		});
 	};
-	
+
 	updateSchedule = e => {
 		const updatedSchedule = [...this.state.schedule];
 		updatedSchedule.push(e.target.name);
@@ -54,13 +54,13 @@ class CreateReport extends Component {
 		// If the manager has set the time limit to the end of the day, use endOfDay from date-fns to format the end of day
 		// Otherwise,
 		const formatedTimeLimit = this.state.singleDay
-			? JSON.stringify(endOfDay(new Date(moment().format())))
+			? endOfDay(new Date(moment().format()))
 			: this.state.responseDistance == 'minute'
-			? JSON.stringify(addMinutes(new Date(moment().format())))
+			? addMinutes(new Date(moment().format()), this.state.responseNum)
 			: this.state.responseDistance == 'hour'
-			? JSON.stringify(addHours(new Date(moment().format())))
+			? addHours(new Date(moment().format()))
 			: this.state.responseDistance == 'day'
-			? JSON.stringify(addDays(new Date(moment().format())))
+			? addDays(new Date(moment().format()))
 			: null;
 
 		const report = {
