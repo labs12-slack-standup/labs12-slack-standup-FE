@@ -14,12 +14,18 @@ const AdminRoute = ({ component: Component, ...rest }) => {
 				const decoded = jwt_decode(token);
 
 				if (token && !decoded.teamId) {
-					return <Redirect to="/onboarding" />;
-				} else if (decoded.roles === 'member') {
-					return <Redirect to="/dashboard" />;
-				} else if (decoded.roles === 'admin') {
+					return <Redirect to="/login" />;
+				}
+
+				if (decoded.teamId && decoded.roles === 'member') {
+					return <Redirect to="/login" />;
+				}
+
+				if (decoded.teamId && decoded.roles === 'admin') {
 					return <Component {...props} />;
 				}
+
+				return <Component {...props} />;
 			}}
 		/>
 	);

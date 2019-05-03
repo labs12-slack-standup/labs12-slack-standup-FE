@@ -30,7 +30,7 @@ function App() {
 			<Route path="/login" component={Login} />
 
 			{/* ONBOARDING */}
-			<PrivateRoute exact path="/onboarding" component={Onboarding} />
+			<Route exact path="/onboarding" component={Onboarding} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
 			{/* <Route path="/onboarding" component={Onboarding} /> */}
 			{/* <Route exact path="/dashboard" component={Dashboard} /> */}
