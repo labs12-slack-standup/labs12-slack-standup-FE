@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect, Link } from 'react-router-dom';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import Reports from './components/Reports/Reports';
@@ -15,6 +15,8 @@ import Onboarding from './components/Onboarding/Onboarding';
 import Navigation from './components/Navigation/Navigations';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import ReportInput from './components/Reports/MemberReports/ReportInput';
+import PrivateRoute from './auth/PrivateRoute';
+import AdminRoute from './auth/AdminRoute';
 
 import './App.css';
 
@@ -28,56 +30,40 @@ function App() {
 			<Route path="/login" component={Login} />
 
 			{/* ONBOARDING */}
-			<Route path="/onboarding" component={Onboarding} />
-			<Route exact path="/dashboard" component={Dashboard} />
+			<PrivateRoute exact path="/onboarding" component={Onboarding} />
+			<PrivateRoute exact path="/dashboard" component={Dashboard} />
+			{/* <Route path="/onboarding" component={Onboarding} /> */}
+			{/* <Route exact path="/dashboard" component={Dashboard} /> */}
+
 			{/* REPORT ROUTES */}
-			<Route path="/dashboard/reports" component={Reports} />
-			<Route
+			<PrivateRoute exact path="/dashboard/reports" component={Reports} />
+			<PrivateRoute
+				exact
 				path="/dashboard/singlereport"
 				component={SingleReport}
 			/>
-			<Route path="/dashboard/reports" component={Reports}/>
+
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
-			<Route
+			<AdminRoute
 				exact
 				path="/dashboard/report/manager"
 				component={SingleReportManager}
 			/>
-			<Route
+			<AdminRoute
 				exact
 				path="/dashboard/createreport"
 				component={CreateReport}
 			/>
-			<Route
-				exact
-				path="/dashboard/editreport"
-				component={EditReport}
-			/>
+			<AdminRoute exact path="/dashboard/editreport" component={EditReport} />
 
 			{/* TEAM MEMBER VIEWS AND UPDATING */}
-			<Route
-				path="/dashboard/report/teammember"
+			<PrivateRoute
+				path="/dashboard/reports/:reportId"
 				component={SingleReportMember}
 			/>
-			<Route
-				path="/dashboard/responseform"
-				component={MemberResponseForm}
-			/>
-			<Route
-				path="/dashboard/reportresults"
-				component={ReportResults}
-			/>
-			<Route
-				path="/dashboard/reportresults"
-				component={ReportResults}
-			/>
 
-			<Route
-				path="/dashboard/reports"
-				component={Reports}
-			/>
 			{/* VIEW FOR SINGLE ACCOUNT */}
-			<Route path="/dashboard/account" component={Account} />
+			<PrivateRoute path="/dashboard/account" component={Account} />
 		</div>
 	);
 }
