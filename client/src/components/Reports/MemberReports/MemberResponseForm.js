@@ -16,9 +16,6 @@ class MemberResponseForm extends Component {
 			(
 				<>
 					<div>{this.state.clientInfo}</div>
-					{
-						setTimeout(() => { this.props.history.push('/dashboard/reports') }, 3000)
-					}
 				</>
 			): (
 				<div>
