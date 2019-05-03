@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 class Reports extends Component {
 	state = {
+		message: '',
 		reports: []
 	};
 
@@ -18,6 +19,7 @@ class Reports extends Component {
 			.get(endpoint)
 			.then(res =>
 				this.setState({
+					message: res.data.message,
 					reports: res.data.reports
 				})
 			)
@@ -33,17 +35,34 @@ class Reports extends Component {
 	};
 
 	render() {
+		if (this.state.reports.length < 1) {
+			return (
+				<div>
+					<h2>
+						You have not created any reports
+					</h2>
+					<Link to="/dashboard/createreport">
+						<button>Create Report</button>
+					</Link>
+				</div>
+			);
+		}
 		return (
 			<div>
 				Reports:
 				<div>
 					{/* passing reports from state to individual components */}
 					{this.state.reports.map(report => (
-						<SingleReport
+						<Link
 							key={report.id}
-							report={report}
-							deleteReport={this.deleteReport}
-						/>
+							to={`/reports/${report.id}`}
+						>
+							<SingleReport
+								key={report.id}
+								report={report}
+							  deleteReport={this.deleteReport}
+							/>
+						</Link>
 					))}
 					<Link to="/dashboard/createreport">
 						<button>Create New Report</button>
