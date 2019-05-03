@@ -34,6 +34,7 @@ function App() {
 				path="/dashboard/singlereport"
 				component={SingleReport}
 			/>
+			<Route path="/dashboard/reports" component={Reports}/>
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
 			<Route
 				exact
@@ -66,6 +67,10 @@ function App() {
 			
 			{/* Don't delete this group of Routes above they need to be discussed */}
 
+			<Route
+				path="/dashboard/reports"
+				component={Reports}
+			/>
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<Route path="/dashboard/account" component={Account} />
 		</div>

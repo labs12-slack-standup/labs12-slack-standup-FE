@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import jstz from 'jstz';
+import {baseURL} from '../../config/axiosWithAuth'
 
 const config = {
 	apiKey: process.env.REACT_APP_API_KEY,
@@ -18,10 +19,10 @@ const uiConfig = {
 		firebase.auth.GithubAuthProvider.PROVIDER_ID
 	],
 	callbacks: {
-
+		//https://master-slack-standup.herokuapp.com
 		signInSuccessWithAuthResult: ({ user }) => {
 			axios.post(
-				'https://master-slack-standup.herokuapp.com/api/auth/firebase',
+				`${baseURL}/auth/firebase`,
 				{
 					user,
 					timezone: jstz.determine().name()
