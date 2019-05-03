@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const CreateTeam = props => {
 	return (
 		<div className="onboarding">

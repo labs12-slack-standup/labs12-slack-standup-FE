@@ -40,6 +40,7 @@ class CreateReport extends Component {
 			questions: updateQuestion
 		});
 	};
+	
 	updateSchedule = e => {
 		const updatedSchedule = [...this.state.schedule];
 		updatedSchedule.push(e.target.name);
