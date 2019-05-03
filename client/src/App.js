@@ -49,6 +49,7 @@ function App() {
 				path="/dashboard/report/manager"
 				component={SingleReportManager}
 			/>
+
 			<AdminRoute
 				exact
 				path="/dashboard/createreport"
@@ -61,6 +62,10 @@ function App() {
 				path="/dashboard/reports/:reportId"
 				component={SingleReportMember}
 			/>
+
+			<Route path="/dashboard/responseform" component={MemberResponseForm} />
+			<Route path="/dashboard/reportresults" component={ReportResults} />
+			<Route path="/dashboard/reportresults" component={ReportResults} />
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<PrivateRoute path="/dashboard/account" component={Account} />
