@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-// import { Link } from "react-router-dom";
 import './onboarding.css';
 
 import CreateTeam from './CreateTeam';
 import LandingPage from './LandingPage';
 import JoinTeam from './JoinTeam';
-import {axiosWithAuth, baseURL} from '../../config/axiosWithAuth.js';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
 class Onboarding extends Component {
 	constructor(props) {
@@ -41,15 +40,13 @@ class Onboarding extends Component {
 	createTeam = async () => {
 		const teamId = length => {
 			return Math.round(
-				Math.pow(9, length + 1) -
-					Math.random() * Math.pow(9, length)
+				Math.pow(9, length + 1) - Math.random() * Math.pow(9, length)
 			);
 		};
 
 		const joinId = length => {
 			return Math.round(
-				Math.pow(36, length + 1) -
-					Math.random() * Math.pow(36, length)
+				Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)
 			)
 				.toString(36)
 				.slice(1);
@@ -59,14 +56,11 @@ class Onboarding extends Component {
 		const joinCode = await joinId(6);
 
 		try {
-			const updated = await axiosWithAuth().put(
-				`${baseURL}/users/`,
-				{
-					teamId: randId,
-					roles: 'admin',
-					joinCode
-				}
-			);
+			const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
+				teamId: randId,
+				roles: 'admin',
+				joinCode
+			});
 
 			localStorage.setItem('token', updated.data.token);
 		} catch (error) {
