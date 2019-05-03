@@ -8,7 +8,6 @@ import SingleReportMember from './components/Reports/SingleReportMember';
 import CreateReport from './components/Reports/ModifyReports/CreateReport';
 import SingleReportManager from './components/Reports/MangerReports/SingleReportManager';
 import EditReport from './components/Reports/ModifyReports/EditReport';
-import MemberResponseForm from './components/Reports/MemberReports/MemberResponseForm';
 import ReportResults from './components/Reports/MemberReports/ReportResults';
 import Account from './components/Account/Account';
 import Onboarding from './components/Onboarding/Onboarding';
@@ -43,13 +42,11 @@ function App() {
 			<Route exact path="/dashboard/editreport" component={EditReport} />
 
 			{/* TEAM MEMBER VIEWS AND UPDATING */}
-			<Route
-				path="/dashboard/report/teammember"
-				component={SingleReportMember}
-			/>
-			<Route path="/dashboard/responseform" component={MemberResponseForm} />
-			<Route path="/dashboard/reportresults" component={ReportResults} />
-			<Route path="/dashboard/reportresults" component={ReportResults} />
+
+			{/* REPORT ROUTES */}
+
+			<Route exact path="/dashboard/reports" component={Reports} />
+			<Route path="/dashboard/reports/:reportId" component={SingleReportMember} />
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<Route path="/dashboard/account" component={Account} />
