@@ -53,13 +53,13 @@ class CreateReport extends Component {
 		// If the manager has set the time limit to the end of the day, use endOfDay from date-fns to format the end of day
 		// Otherwise,
 		const formatedTimeLimit = this.state.singleDay
-			? JSON.stringify(endOfDay(new Date(moment().format())))
-			: this.state.responseDistance == 'minute'
-			? JSON.stringify(addMinutes(new Date(moment().format())))
-			: this.state.responseDistance == 'hour'
-			? JSON.stringify(addHours(new Date(moment().format())))
-			: this.state.responseDistance == 'day'
-			? JSON.stringify(addDays(new Date(moment().format())))
+			? endOfDay(new Date(moment().format()))
+			: this.state.responseDistance === 'minute'
+			? addMinutes(new Date(moment().format()), this.state.responseNum)
+			: this.state.responseDistance === 'hour'
+			? addHours(new Date(moment().format()), this.state.responseNum)
+			: this.state.responseDistance === 'day'
+			? addDays(new Date(moment().format()), this.state.responseNum)
 			: null;
 
 		const report = {
@@ -81,7 +81,7 @@ class CreateReport extends Component {
 	};
 
 	render() {
-		console.log(this.state.responseDistance);
+		console.log(this.state.responseDistance, this.state.responseNum);
 		const days = [
 			'Monday',
 			'Tuesday',
