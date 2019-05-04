@@ -16,7 +16,6 @@ import Dashboard from './components/Dashboard/Dashboard.js';
 import PrivateRoute from './auth/PrivateRoute';
 import AdminRoute from './auth/AdminRoute';
 
-
 import './App.css';
 
 function App() {
@@ -31,8 +30,6 @@ function App() {
 			{/* ONBOARDING */}
 			<Route exact path="/onboarding" component={Onboarding} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
-			{/* <Route path="/onboarding" component={Onboarding} /> */}
-			{/* <Route exact path="/dashboard" component={Dashboard} /> */}
 
 			{/* REPORT ROUTES */}
 
@@ -42,7 +39,6 @@ function App() {
 				path="/dashboard/singlereport"
 				component={SingleReport}
 			/>
-
 
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
 			<AdminRoute
@@ -56,16 +52,17 @@ function App() {
 				path="/dashboard/createreport"
 				component={CreateReport}
 			/>
-			<AdminRoute exact path="/dashboard/editreport" component={EditReport} />
-
+			<AdminRoute
+				exact
+				path="/dashboard/editreport/:reportId"
+				component={EditReport}
+			/>
 
 			{/* REPORT ROUTES */}
-   
 			<PrivateRoute
 				path="/dashboard/reports/:reportId"
 				component={SingleReportMember}
 			/>
-
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<PrivateRoute path="/dashboard/account" component={Account} />

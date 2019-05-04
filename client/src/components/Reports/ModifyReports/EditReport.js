@@ -14,12 +14,12 @@ class EditReport extends Component {
 		updatedSchedule: [],
 		updatedName: '',
 		updatedMessage: '',
-		newQuestion:''
+		newQuestion: ''
 	};
 
 	componentDidMount() {
-		const { id } = this.props.match.params;
-
+		const id = this.props.match.params.reportId;
+		console.log(id);
 		axiosWithAuth()
 			.get(`${baseURL}/reports/${id}`)
 			.then(res => {
@@ -97,7 +97,8 @@ class EditReport extends Component {
 		});
 	};
 	updateReport = () => {
-		const { id } = this.props.match.params;
+		const id = this.props.match.params.reportId;
+		console.log(id);
 		const stringifiedSched = JSON.stringify(this.state.schedule);
 		const stringifiedQs = JSON.stringify(this.state.questions);
 
@@ -105,9 +106,9 @@ class EditReport extends Component {
 			reportName: this.state.reportName,
 			schedule: stringifiedSched,
 			questions: stringifiedQs,
-			message: this.state.message,
-		}
-		
+			message: this.state.message
+		};
+
 		console.log(editedReport);
 		const endpoint = `${baseURL}/reports/${id}`;
 		axiosWithAuth()
@@ -125,7 +126,13 @@ class EditReport extends Component {
 			'Saturday',
 			'Sunday'
 		];
-
+		//const stringSchedule = JSON.parse(this.state.schedule);
+		if (!this.state.schedule || this.state.schedule.length < 1) {
+			return <div>Loading...</div>;
+		}
+		// console.log(this.state.message);
+		// console.log(this.state.questions);
+		// console.log(this.state.schedule);
 		return (
 			<div>
 				<h2>Report Name: {this.state.reportName}</h2>
@@ -214,7 +221,6 @@ class EditReport extends Component {
 					<br />
 					PRESS THIS BUTTON TO UPDATE THE DATABASE
 				</h1>
-
 			</div>
 		);
 	}
