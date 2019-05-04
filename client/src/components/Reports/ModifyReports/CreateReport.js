@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import moment from 'moment';
 import { format, endOfDay, addDays, addHours, addMinutes } from 'date-fns';
+import {Link} from 'react-router-dom'
 
 class CreateReport extends Component {
 	state = {
@@ -172,7 +173,9 @@ class CreateReport extends Component {
 						name="scheduleTime"
 					/>
 				</form>
-				<button onClick={this.addReport}>Create Report</button>
+				<Link to="/dashboard/reports">
+					<button onClick={this.addReport}>Create Report</button>
+				</Link>
 			</div>
 		);
 	}
