@@ -60,7 +60,7 @@ function App() {
 
 
 			{/* REPORT ROUTES */}
-      <PrivateRoute exact path="/dashboard/reports" component={Reports} />
+   
 			<PrivateRoute
 				path="/dashboard/reports/:reportId"
 				component={SingleReportMember}
