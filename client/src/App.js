@@ -15,6 +15,8 @@ import Navigation from './components/Navigation/Navigations';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import PrivateRoute from './auth/PrivateRoute';
 import AdminRoute from './auth/AdminRoute';
+import Slack from './components/Slack/Slack';
+import SlackRedirect from './components/Slack/SlackRedirect';
 
 import './App.css';
 
@@ -66,6 +68,11 @@ function App() {
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<PrivateRoute path="/dashboard/account" component={Account} />
+
+
+			{/* CONNECT TO SLACK */}
+			<Route exact path="/slack" component={Slack} />
+			<Route exact path="/slack/auth" component={SlackRedirect} />
 		</div>
 	);
 }
