@@ -40,7 +40,6 @@ class CreateReport extends Component {
 			questions: updateQuestion
 		});
 	};
-	
 	updateSchedule = e => {
 		const updatedSchedule = [...this.state.schedule];
 		updatedSchedule.push(e.target.name);
@@ -52,11 +51,11 @@ class CreateReport extends Component {
 		const stringifiedQs = JSON.stringify(this.state.questions);
 		// Time limit is a data that restricts how long a member can respond to a report
 		// If the manager has set the time limit to the end of the day, use endOfDay from date-fns to format the end of day
-		// Otherwise,
+		// Otherwise, check the reponseDistance from state (either minute, hour, or day) and update the formattedTimeLimit to the corresponding responseNum (user input)
 		const formatedTimeLimit = this.state.singleDay
 			? endOfDay(new Date(moment().format()))
 			: this.state.responseDistance === 'minute'
-			? addMinutes(new Date(moment().format()), this.state.responseNum)
+			? addMinutes(this.state.scheduleTime, this.state.responseNum)
 			: this.state.responseDistance === 'hour'
 			? addHours(new Date(moment().format()), this.state.responseNum)
 			: this.state.responseDistance === 'day'
@@ -82,7 +81,7 @@ class CreateReport extends Component {
 	};
 
 	render() {
-		console.log(this.state.responseDistance, this.state.responseNum);
+		console.log(this.state.scheduleTime);
 		const days = [
 			'Monday',
 			'Tuesday',

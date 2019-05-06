@@ -11,31 +11,25 @@ class MemberResponseForm extends Component {
 	};
 
 	render() {
-
-		return (
-			this.state.clientInfo.length > 0 ?
-			(
-				<>
-					<div>{this.state.clientInfo}</div>
-				</>
-			): (
-				<div>
-					<h1>{this.state.reportName}</h1>
-					<p>{this.state.reportMessage}</p>
-					{
-						this.state.questions.map((q, i) => (
-							<ReportInput
-								question={q.question}
-								response={q.response}
-								handleChange={this.handleChange}
-								key={i}
-							/>
-						))
-					}
-					<button onClick={this.submitReport}>Submit</button>
-				</div>
-			)
-		)
+		return this.state.clientInfo.length > 0 ? (
+			<>
+				<div>{this.state.clientInfo}</div>
+			</>
+		) : (
+			<div>
+				<h1>{this.state.reportName}</h1>
+				<p>{this.state.reportMessage}</p>
+				{this.state.questions.map((q, i) => (
+					<ReportInput
+						question={q.question}
+						response={q.response}
+						handleChange={this.handleChange}
+						key={i}
+					/>
+				))}
+				<button onClick={this.submitReport}>Submit</button>
+			</div>
+		);
 	}
 
 	componentDidMount() {

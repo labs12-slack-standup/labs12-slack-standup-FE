@@ -16,7 +16,6 @@ import Dashboard from './components/Dashboard/Dashboard.js';
 import PrivateRoute from './auth/PrivateRoute';
 import AdminRoute from './auth/AdminRoute';
 
-
 import './App.css';
 
 function App() {
@@ -43,7 +42,6 @@ function App() {
 				component={SingleReport}
 			/>
 
-
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
 			<AdminRoute
 				exact
@@ -58,14 +56,11 @@ function App() {
 			/>
 			<AdminRoute exact path="/dashboard/editreport" component={EditReport} />
 
-
 			{/* REPORT ROUTES */}
-      <PrivateRoute exact path="/dashboard/reports" component={Reports} />
 			<PrivateRoute
 				path="/dashboard/reports/:reportId"
 				component={SingleReportMember}
 			/>
-
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<PrivateRoute path="/dashboard/account" component={Account} />

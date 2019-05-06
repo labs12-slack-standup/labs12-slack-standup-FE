@@ -8,7 +8,7 @@ const SingleReportMember = props => {
 			<MemberResponseForm {...props} />
 			<ReportResults {...props} />
 		</div>
-	)
-}
+	);
+};
 
 export default SingleReportMember;
