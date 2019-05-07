@@ -16,6 +16,7 @@ class Account extends Component {
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res =>
+
 				this.setState({
 					accountInfo: res.data.user
 				})
@@ -23,15 +24,22 @@ class Account extends Component {
 			.catch(err => console.log(err));
 	}
 
+
 	updateUser = e => {
 		e.preventDefault();
 		const endpoint = `${baseURL}/users/`;
 		const editedUser = {};
 		if (this.state.newName) {
 			editedUser.fullName = this.state.newName;
+			this.setState({
+				accountInfo: {...this.state.accountInfo, fullName: editedUser.fullName}
+			})
 		}
 		if (this.state.newPic) {
 			editedUser.profilePic = this.state.newPic;
+			this.setState({
+				accountInfo: {...this.state.accountInfo, profilePic: editedUser.profilePic}
+			})
 		}
 		console.log(editedUser);
 		axiosWithAuth()

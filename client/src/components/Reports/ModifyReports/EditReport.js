@@ -101,6 +101,7 @@ class EditReport extends Component {
 		console.log(id);
 		const stringifiedSched = JSON.stringify(this.state.schedule);
 		const stringifiedQs = JSON.stringify(this.state.questions);
+
 		const editedReport = {
 			reportName: this.state.reportName,
 			schedule: stringifiedSched,
