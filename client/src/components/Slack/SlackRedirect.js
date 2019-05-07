@@ -12,9 +12,11 @@ class SlackRedirect extends Component {
     const endpoint = `${baseURL}/auth/slack/${this.props.location.search}`;
     axiosWithAuth()
       .get(endpoint)
-      .then(res =>
-        console.log(res)
-      )
+      .then(res => {
+        // console.log(res)
+        localStorage.setItem('token', res.data.token)
+        this.props.history.push('/dashboard/reports');
+      })
       .catch(err => console.log(err));
   }
 }
