@@ -2,15 +2,7 @@ import React from 'react';
 
 const Slack = () => (
   <div>
-    <a href=
-    {
-      `
-        https://slack.com/oauth/authorize?
-        scope=incoming-webhook,commands,bot,channels:write&
-        client_id=607645147937.621334967889&
-        redirect_uri=http://localhost:3000/slack/auth/
-      `
-    }>
+    <a href="https://slack.com/oauth/authorize?scope=incoming-webhook,commands,bot,channels:write&client_id=607645147937.621334967889&redirect_uri=http://localhost:3000/slack/auth/">
       <img
         alt="Add to Slack"
         height="40"
