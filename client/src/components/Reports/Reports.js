@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SingleReport from './SingleReport';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
+import Slack from '../Slack/Slack';
 
 import { Link } from 'react-router-dom';
 // SAME AS SURVEY LIST ON WIREFRAME
@@ -41,6 +42,7 @@ class Reports extends Component {
 					<Link to="/dashboard/createreport">
 						<button>Create Report</button>
 					</Link>
+					<Slack />
 				</div>
 			);
 		}
@@ -48,6 +50,7 @@ class Reports extends Component {
 			<div>
 				Reports:
 				<div>
+					<Slack />
 					{/* passing reports from state to individual components */}
 					{this.state.reports.map(report => (
 						<SingleReport
