@@ -10,7 +10,7 @@ const SingleReport = props => {
 			<h4>Report Message: {props.report.message}</h4>
 			<Link to={`/dashboard/reports/${props.report.id}`}>Respond</Link>
 			<br />
-			<Link to={`/dashboard/editreport/${props.report.id}`}>Edit</Link>
+			<Link to={`/dashboard/reports/${props.report.id}/edit`}>Edit</Link>
 			<br />
 			<button onClick={() => props.deleteReport(props.report.id)}>
 				Delete
