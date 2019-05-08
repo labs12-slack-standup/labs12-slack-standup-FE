@@ -1,4 +1,6 @@
+import './Style/dashboard.css';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
@@ -16,9 +18,10 @@ export class Dashboard extends Component {
 
 	render() {
 		return (
-			<div>
-				<h1>Dashboard</h1>
+			<div className="teamDashboard">
+				<h3>Dashboard</h3>
 				<Team users={this.state.users} />
+				<Link to="/dashboard/reports">View Current Reports</Link>
 			</div>
 		);
 	}

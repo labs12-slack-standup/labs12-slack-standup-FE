@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import moment from 'moment';
 // import { format, endOfDay, addDays, addHours, addMinutes } from 'date-fns';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 class CreateReport extends Component {
 	state = {
@@ -30,7 +30,7 @@ class CreateReport extends Component {
 				this.setState({
 					channels: res.data,
 					channelSelected: res.data[0].id || ''
-				})
+				});
 			})
 			.catch(err => console.log(err));
 	}
@@ -83,7 +83,7 @@ class CreateReport extends Component {
 		let selectedChannelName;
 		this.state.channels.forEach(channel => {
 			if (channel.id === this.state.channelSelected) {
-				selectedChannelName = channel.name
+				selectedChannelName = channel.name;
 			}
 		});
 
@@ -104,6 +104,8 @@ class CreateReport extends Component {
 			.post(endpoint, report)
 			.then(res => console.log(res))
 			.catch(err => console.log(err));
+		this.props.getReports();
+		this.props.history.push('/dashboard/reports');
 	};
 
 	render() {
@@ -129,15 +131,12 @@ class CreateReport extends Component {
 						name="reportName"
 						placeholder="report name"
 					/>
-					<select
-						name="channelSelected"
-						onChange={this.changeHandler}
-					>
-						{
-							this.state.channels.map(channel => (
-								<option key={channel.id} value={channel.id}>{channel.name}</option>
-							))
-						}
+					<select name="channelSelected" onChange={this.changeHandler}>
+						{this.state.channels.map(channel => (
+							<option key={channel.id} value={channel.id}>
+								{channel.name}
+							</option>
+						))}
 					</select>
 					<input
 						type="text"
@@ -206,7 +205,6 @@ class CreateReport extends Component {
 							Add Question to Report
 						</button>
 					</form>
-					
 				</form>
 				<Link to="/dashboard/reports">
 					<button onClick={this.addReport}>Create Report</button>
