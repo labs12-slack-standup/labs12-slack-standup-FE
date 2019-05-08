@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import Reports from './components/Reports/Reports';
@@ -8,7 +8,6 @@ import SingleReportMember from './components/Reports/SingleReportMember';
 import CreateReport from './components/Reports/ModifyReports/CreateReport';
 import SingleReportManager from './components/Reports/MangerReports/SingleReportManager';
 import EditReport from './components/Reports/ModifyReports/EditReport';
-import ReportResults from './components/Reports/MemberReports/ReportResults';
 import Account from './components/Account/Account';
 import Onboarding from './components/Onboarding/Onboarding';
 import Navigation from './components/Navigation/Navigations';
