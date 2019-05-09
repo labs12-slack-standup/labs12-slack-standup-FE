@@ -11,7 +11,6 @@ class MemberResponseForm extends Component {
 	};
 
 	render() {
-		console.log(this.state.questions);
 		return this.state.clientInfo.length > 0 ? (
 			<>
 				<div>{this.state.clientInfo}</div>
@@ -22,8 +21,7 @@ class MemberResponseForm extends Component {
 				<p>{this.state.reportMessage}</p>
 				{this.state.questions.map((q, i) => (
 					<ReportInput
-						ind={i}
-						question={q}
+						question={q.question}
 						response={q.response}
 						handleChange={this.handleChange}
 						key={i}
@@ -39,7 +37,6 @@ class MemberResponseForm extends Component {
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res => {
-				console.log(res);
 				const { reportName, message, questions } = res.data.report;
 				this.setState({
 					reportName,
@@ -54,7 +51,7 @@ class MemberResponseForm extends Component {
 	}
 
 	handleChange = (e, question) => {
-		const qObj = { question, [e.target.name]: e.target.value };
+		const qObj = { question, response: e.target.value };
 		this.setState(prevState => ({
 			...prevState,
 			questions: prevState.questions.map(q =>
