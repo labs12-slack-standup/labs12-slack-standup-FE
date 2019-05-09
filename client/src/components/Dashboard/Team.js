@@ -1,17 +1,48 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Team = props => {
+	const activeUsers = props.users.filter(user => user.active);
+	const inactiveUsers = props.users.filter(user => !user.active);
+
 	return (
 		<div>
 			<h3>Teamies:</h3>
-			{props.users.map(user => {
-				return (
+			<h4>Active Users on Team</h4>
+			{activeUsers.map(user => (
+				<div key={user.id}>
+					<img src={user.profilePic} alt="profile pic" />
+					<h4>{user.fullName}</h4>
+					<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
+				</div>
+			))}
+			<br />
+			<br />
+			<h4>Inactive Users</h4>
+			{inactiveUsers.map(user => (
+				<div key={user.id}>
+					<img src={user.profilePic} alt="profile pic" />
+					<h4>{user.fullName}</h4>
+					<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
+				</div>
+			))}
+			{/* {props.users.map(user => {
+				return user.active ? (
 					<div key={user.id}>
+						<h3>Active Users</h3>
+						<img src={user.profilePic} alt="profile pic" />
+						<h4>{user.fullName}</h4>
+						<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
+						<br />
+						<br />
+					</div>
+				) : (
+					<div>
+						<h3>Inactive Users</h3>
 						<img src={user.profilePic} alt="profile pic" />
 						<h4>{user.fullName}</h4>
 					</div>
-				);
-			})}
+				); */}
 		</div>
 	);
 };
