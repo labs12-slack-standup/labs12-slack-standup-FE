@@ -6,7 +6,7 @@ const ReportInput = props => {
 			<h4>{props.question}</h4>
 			<input
 				onChange={e => props.handleChange(e, props.question)}
-				name='"response'
+				name="response"
 				placeholder="Type your answer here..."
 				value={props.response}
 			/>
