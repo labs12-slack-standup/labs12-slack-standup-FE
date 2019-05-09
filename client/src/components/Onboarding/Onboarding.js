@@ -12,7 +12,7 @@ class Onboarding extends Component {
 		this.state = {
 			joinToggle: false,
 			createToggle: false,
-			joincode: '',
+			joinCode: '',
 			singleEmail: '',
 			emails: [],
 			teamId: null
@@ -55,12 +55,26 @@ class Onboarding extends Component {
 		const randId = await teamId(8);
 		const joinCode = await joinId(6);
 
+		//create an array of email objects
+		const teamEmails = this.state.emails.map(userEmail => ({
+			email: userEmail
+		}))
+
+		//create an object to send to mail api
+		const mailObject = {
+			emails: teamEmails,
+			joinCode: joinCode
+		}
+		console.log('mailObject', mailObject)
+
 		try {
 			const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
 				teamId: randId,
 				roles: 'admin',
 				joinCode
 			});
+
+			await axiosWithAuth().post(`${baseURL}/email`, mailObject)
 
 			localStorage.setItem('token', updated.data.token);
 		} catch (error) {
@@ -83,6 +97,7 @@ class Onboarding extends Component {
 		this.setState({ singleEmail: '' });
 		document.createTeamForm.reset();
 	};
+
 	// function for removing emails from array before submitting them to create a team
 	removeEmail = emailIdx => {
 		const updateEmails = [...this.state.emails].filter(
