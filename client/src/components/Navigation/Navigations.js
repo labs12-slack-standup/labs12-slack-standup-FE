@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './navigation.css';
 
 class Navigation extends React.Component {
@@ -14,7 +14,7 @@ class Navigation extends React.Component {
 		return (
 			<div className="navigation">
 				<NavLink to="/dashboard/account">Account</NavLink>
-				<NavLink to="/dashboard/reports">Reports</NavLink>
+				<NavLink to="/dashboard">Dashboard</NavLink>
 				<NavLink to="/login">Login</NavLink>
 				<NavLink to="/login" onClick={this.handleLogout}>
 					Logout
