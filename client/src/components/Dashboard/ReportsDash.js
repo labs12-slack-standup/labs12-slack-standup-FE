@@ -29,13 +29,15 @@ class ReportsDash extends Component {
 			.catch(err => console.log(err));
 	};
 
-	deleteReport = id => {
+	archiveReport = id => {
 		const endpoint = `${baseURL}/reports/${id}`;
-
+		const updatedReport = {
+			active: false
+		};
 		axiosWithAuth()
-			.delete(endpoint)
+			.put(endpoint, updatedReport)
 			.then(res => {
-				this.setResponseAsState(res.data.reports);
+				//this.setResponseAsState(res.data.reports);
 			})
 			.catch(err => console.log(err));
 	};
@@ -44,8 +46,8 @@ class ReportsDash extends Component {
 		console.log(reports);
 		this.setState({
 			reports: reports
-		})
-	}
+		});
+	};
 
 	render() {
 		return (
@@ -58,7 +60,7 @@ class ReportsDash extends Component {
 							<Reports
 								{...props}
 								reports={this.state.reports}
-								deleteReport={this.deleteReport}
+								archiveReport={this.archiveReport}
 							/>
 						)}
 					/>
@@ -66,7 +68,10 @@ class ReportsDash extends Component {
 						exact
 						path="/dashboard/reports/new"
 						render={props => (
-							<CreateReport {...props} setResponseAsState={this.setResponseAsState} />
+							<CreateReport
+								{...props}
+								setResponseAsState={this.setResponseAsState}
+							/>
 						)}
 					/>
 					<Route
