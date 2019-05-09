@@ -38,6 +38,7 @@ class ReportsDash extends Component {
 			.put(endpoint, updatedReport)
 			.then(res => {
 				//this.setResponseAsState(res.data.reports);
+				this.getReports();
 			})
 			.catch(err => console.log(err));
 	};
