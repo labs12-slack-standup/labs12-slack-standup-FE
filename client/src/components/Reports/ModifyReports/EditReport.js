@@ -44,7 +44,6 @@ class EditReport extends Component {
       .then(res => {
         this.setState({
           channels: res.data,
-          slackChannelId: res.data[0].id || ''
         });
       })
       .catch(err => console.log(err));
@@ -114,6 +113,7 @@ class EditReport extends Component {
           <select
             name="slackChannelId"
             onChange={this.changeHandler}
+            value={this.state.slackChannelId}
           >
           {
             this.state.channels.map(channel => (
