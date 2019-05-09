@@ -1,0 +1,35 @@
+.days-flex {
+  display: flex;
+  height: 30px;
+  justify-content: space-around;
+  width: 300px;
+}
+
+.day {
+  border: 1px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 30px;
+  text-align: center;
+  width: 30px;
+}
+
+.selected {
+  border: 1px solid black;
+}
+
+.question-flex {
+  display: flex;
+  margin-top: 10px;
+  width: 300px;
+}
+
+.question {
+  width: 250px;
+}
+
+.question-button {
+  cursor: pointer;
+  width: 50px;
+}
+

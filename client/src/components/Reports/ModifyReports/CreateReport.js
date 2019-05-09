@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import { getHours } from 'date-fns';
+import './Report.css';
 
 class CreateReport extends Component {
   state = {
@@ -127,19 +128,20 @@ class CreateReport extends Component {
             value={this.state.message}
           />
         </section>
-        <section>
-          {
+        <section className="days-flex">
+        {
             this.state.week.map(day => (
-              <div key={day}>
-                <input
-                  type="checkbox"
-                  onChange={e => this.updateSchedule(day)}
-                  name={day}
-                />
-                <label htmlFor={day}>{day}</label>
+              <div
+                key={day}
+                onClick={e => this.updateSchedule(day)}
+                className={`day ${this.state.schedule.includes(day) ? 'selected': ''}`}
+              >
+               {day.charAt(0)}
               </div>
             ))
           }
+        </section>
+        <section>
           <input
             type="time"
             onChange={this.changeHandler}
@@ -151,9 +153,12 @@ class CreateReport extends Component {
         <section>
           {
             this.state.questions.map(question => (
-              <article key={question}>
-                <p>{question}</p>
-                <button onClick={e => this.removeQuestion(e, question)}>X</button>
+              <article className="question-flex" key={question}>
+                <p className="question">{question}</p>
+                <button
+                  className="question-button"
+                  onClick={e => this.removeQuestion(e, question)}
+                >X</button>
               </article>
             ))
           }
