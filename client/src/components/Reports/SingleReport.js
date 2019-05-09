@@ -11,8 +11,8 @@ const SingleReport = props => {
 			<br />
 			<Link to={`/dashboard/reports/${props.report.id}/edit`}>Edit</Link>
 			<br />
-			<button onClick={() => props.deleteReport(props.report.id)}>
-				Delete
+			<button onClick={() => props.archiveReport(props.report.id)}>
+				Archive Report
 			</button>
 		</div>
 	);

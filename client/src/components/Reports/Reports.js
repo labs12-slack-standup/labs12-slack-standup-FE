@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 class Reports extends Component {
 	render() {
+		const activeReports = this.props.reports.filter(report => report.active);
 		if (this.props.reports.length < 1) {
 			return (
 				<div>
@@ -25,11 +26,11 @@ class Reports extends Component {
 					</Link>
 					<Slack />
 					{/* passing reports from state to individual components */}
-					{this.props.reports.map(report => (
+					{activeReports.map(report => (
 						<SingleReport
 							key={report.id}
 							report={report}
-							deleteReport={this.props.deleteReport}
+							archiveReport={this.props.archiveReport}
 						/>
 					))}
 				</div>
