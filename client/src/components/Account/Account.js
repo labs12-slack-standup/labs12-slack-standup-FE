@@ -16,14 +16,12 @@ class Account extends Component {
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res =>
-
 				this.setState({
 					accountInfo: res.data.user
 				})
 			)
 			.catch(err => console.log(err));
 	}
-
 
 	updateUser = e => {
 		e.preventDefault();
@@ -32,14 +30,20 @@ class Account extends Component {
 		if (this.state.newName) {
 			editedUser.fullName = this.state.newName;
 			this.setState({
-				accountInfo: {...this.state.accountInfo, fullName: editedUser.fullName}
-			})
+				accountInfo: {
+					...this.state.accountInfo,
+					fullName: editedUser.fullName
+				}
+			});
 		}
 		if (this.state.newPic) {
 			editedUser.profilePic = this.state.newPic;
 			this.setState({
-				accountInfo: {...this.state.accountInfo, profilePic: editedUser.profilePic}
-			})
+				accountInfo: {
+					...this.state.accountInfo,
+					profilePic: editedUser.profilePic
+				}
+			});
 		}
 		console.log(editedUser);
 		axiosWithAuth()
@@ -65,11 +69,13 @@ class Account extends Component {
 				Account Info:
 				<div>
 					<div>Email: {this.state.accountInfo.email}</div>
-					<div>TeamId: {this.state.accountInfo.teamId}</div>
+					<div>Join Code: {this.state.accountInfo.joinCode}</div>
 					<div>Full Name: {this.state.accountInfo.fullName}</div>
 
-					<img src={this.state.accountInfo.profilePic} alt="a headshot, preferably" />
-
+					<img
+						src={this.state.accountInfo.profilePic}
+						alt="a headshot, preferably"
+					/>
 				</div>
 				<form onSubmit={this.updateUser}>
 					<input

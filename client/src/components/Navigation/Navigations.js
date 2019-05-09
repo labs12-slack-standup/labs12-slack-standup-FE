@@ -14,7 +14,7 @@ class Navigation extends React.Component {
 		return (
 			<div className="navigation">
 				<NavLink to="/dashboard/account">Account</NavLink>
-				<NavLink to="/dashboard/reports">Reports</NavLink>
+				<NavLink to="/dashboard">Dashboard</NavLink>
 				<NavLink to="/login">Login</NavLink>
 				<NavLink to="/login" onClick={this.handleLogout}>
 					Logout
