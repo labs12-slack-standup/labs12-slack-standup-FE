@@ -41,7 +41,6 @@ class ReportsDash extends Component {
 	};
 
 	setResponseAsState = reports => {
-		console.log(reports);
 		this.setState({
 			reports: reports
 		})
@@ -73,9 +72,9 @@ class ReportsDash extends Component {
 						exact
 						path="/dashboard/reports/:reportId/edit"
 						render={props => (
-							<EditReport {...props} getReports={this.getReports} />
+							<EditReport {...props} setResponseAsState={this.setResponseAsState} />
 						)}
-					/>
+					/>		
 					<Route
 						exact
 						path="/dashboard/reports/:reportId"
