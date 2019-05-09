@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const SingleReport = props => {
-	console.log(props.report.id);
 	return (
 		<div>
 			<h2>Report Name: {props.report.reportName}</h2>

@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import SingleReport from './SingleReport';
-import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
 import Slack from '../Slack/Slack';
-
 import { Link } from 'react-router-dom';
-import CreateReport from './ModifyReports/CreateReport';
-// SAME AS SURVEY LIST ON WIREFRAME
 
 class Reports extends Component {
 	render() {

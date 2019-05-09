@@ -1,12 +1,7 @@
 import React from 'react';
-import { Route, Redirect, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
-import Reports from './components/Reports/Reports';
-import SingleReport from './components/Reports/SingleReport';
-import SingleReportMember from './components/Reports/SingleReportMember';
-import SingleReportManager from './components/Reports/MangerReports/SingleReportManager';
-import EditReport from './components/Reports/ModifyReports/EditReport';
 import Account from './components/Account/Account';
 import Onboarding from './components/Onboarding/Onboarding';
 import Navigation from './components/Navigation/Navigations';
@@ -31,11 +26,11 @@ function App() {
 			{/* ONBOARDING */}
 			<Route exact path="/onboarding" component={Onboarding} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
-			<PrivateRoute path="/dashboard/reports" component={ReportsDash} />
+		
 
 			{/* REPORT ROUTES */}
 
-			{/* <PrivateRoute exact path="/dashboard/reports" component={Reports} /> */}
+			<PrivateRoute path="/dashboard/reports" component={ReportsDash} />
 
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
 			{/* <AdminRoute
@@ -43,8 +38,6 @@ function App() {
 				path="/dashboard/report/manager"
 				component={SingleReportManager}
 			/> */}
-
-			{/* REPORT ROUTES */}
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
 			<PrivateRoute exact path="/dashboard/account" component={Account} />
