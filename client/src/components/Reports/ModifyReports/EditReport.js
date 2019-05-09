@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import './Report.css';
 
-class CreateReport extends Component {
+class EditReport extends Component {
   state = {
     // Main Report State
     reportName: '',
@@ -161,9 +161,12 @@ class CreateReport extends Component {
         <section>
           {
             this.state.questions.map(question => (
-              <article key={question}>
-                <p>{question}</p>
-                <button onClick={e => this.removeQuestion(e, question)}>X</button>
+              <article className="question-flex" key={question}>
+                <p className="question">{question}</p>
+                <button
+                  className="question-button"
+                  onClick={e => this.removeQuestion(e, question)}
+                >X</button>
               </article>
             ))
           }
@@ -191,4 +194,4 @@ class CreateReport extends Component {
   }
 }
 
-export default CreateReport;
+export default EditReport;

@@ -153,9 +153,12 @@ class CreateReport extends Component {
         <section>
           {
             this.state.questions.map(question => (
-              <article key={question}>
-                <p>{question}</p>
-                <button onClick={e => this.removeQuestion(e, question)}>X</button>
+              <article className="question-flex" key={question}>
+                <p className="question">{question}</p>
+                <button
+                  className="question-button"
+                  onClick={e => this.removeQuestion(e, question)}
+                >X</button>
               </article>
             ))
           }

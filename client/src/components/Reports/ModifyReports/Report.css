@@ -17,3 +17,19 @@
 .selected {
   border: 1px solid black;
 }
+
+.question-flex {
+  display: flex;
+  margin-top: 10px;
+  width: 300px;
+}
+
+.question {
+  width: 250px;
+}
+
+.question-button {
+  cursor: pointer;
+  width: 50px;
+}
+
