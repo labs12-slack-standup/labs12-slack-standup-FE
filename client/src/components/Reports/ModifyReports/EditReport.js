@@ -110,22 +110,28 @@ class EditReport extends Component {
             placeholder="Report Name"
             value={this.state.reportName}
           />
-          <select
-            name="slackChannelId"
-            onChange={this.changeHandler}
-            value={this.state.slackChannelId}
-          >
           {
-            this.state.channels.map(channel => (
-              <option
-                key={channel.id}
-                value={channel.id}
+            this.state.slackChannelId ?
+            (
+              <select
+                name="slackChannelId"
+                onChange={this.changeHandler}
+                value={this.state.slackChannelId}
               >
-                {channel.name}
-              </option>
-            ))
+              {
+                this.state.channels.map(channel => (
+                  <option
+                    key={channel.id}
+                    value={channel.id}
+                  >
+                    {channel.name}
+                  </option>
+                ))
+              }
+              </select>
+            ) :
+            null
           }
-          </select>
         </section>
         <section>
           <input
