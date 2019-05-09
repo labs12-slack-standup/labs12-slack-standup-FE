@@ -1,20 +1,16 @@
 import React from 'react';
-import { Route, Redirect, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
-import Reports from './components/Reports/Reports';
-import SingleReport from './components/Reports/SingleReport';
-import SingleReportMember from './components/Reports/SingleReportMember';
-import CreateReport from './components/Reports/ModifyReports/CreateReport';
-import SingleReportManager from './components/Reports/MangerReports/SingleReportManager';
-import EditReport from './components/Reports/ModifyReports/EditReport';
-import ReportResults from './components/Reports/MemberReports/ReportResults';
 import Account from './components/Account/Account';
 import Onboarding from './components/Onboarding/Onboarding';
 import Navigation from './components/Navigation/Navigations';
-import Dashboard from './components/Dashboard/Dashboard.js';
+import ReportsDash from './components/Dashboard/ReportsDash';
 import PrivateRoute from './auth/PrivateRoute';
 import AdminRoute from './auth/AdminRoute';
+import Slack from './components/Slack/Slack';
+import SlackRedirect from './components/Slack/SlackRedirect';
+import Dashboard from './components/Dashboard/Dashboard';
 
 import './App.css';
 
@@ -30,42 +26,25 @@ function App() {
 			{/* ONBOARDING */}
 			<Route exact path="/onboarding" component={Onboarding} />
 			<PrivateRoute exact path="/dashboard" component={Dashboard} />
+		
 
 			{/* REPORT ROUTES */}
 
-			<PrivateRoute exact path="/dashboard/reports" component={Reports} />
-			<PrivateRoute
-				exact
-				path="/dashboard/singlereport"
-				component={SingleReport}
-			/>
+			<PrivateRoute path="/dashboard/reports" component={ReportsDash} />
 
 			{/* MANAGER REPORT VIEWS AND UPDATING */}
-			<AdminRoute
+			{/* <AdminRoute
 				exact
 				path="/dashboard/report/manager"
 				component={SingleReportManager}
-			/>
-
-			<AdminRoute
-				exact
-				path="/dashboard/createreport"
-				component={CreateReport}
-			/>
-			<AdminRoute
-				exact
-				path="/dashboard/editreport/:reportId"
-				component={EditReport}
-			/>
-
-			{/* REPORT ROUTES */}
-			<PrivateRoute
-				path="/dashboard/reports/:reportId"
-				component={SingleReportMember}
-			/>
+			/> */}
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
-			<PrivateRoute path="/dashboard/account" component={Account} />
+			<PrivateRoute exact path="/dashboard/account" component={Account} />
+
+			{/* CONNECT TO SLACK */}
+			<Route exact path="/slack" component={Slack} />
+			<Route exact path="/slack/auth" component={SlackRedirect} />
 		</div>
 	);
 }
