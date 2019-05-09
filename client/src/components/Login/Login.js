@@ -1,6 +1,9 @@
-import React from "react";
-import Firebase from "../Firebase/Firebase";
+import React from 'react';
+import Firebase from '../Firebase/Firebase';
 
-const Login = props => <Firebase {...props} />;
+const Login = props => {
+	console.log(props);
+	return <Firebase {...props} />;
+};
 
 export default Login;
