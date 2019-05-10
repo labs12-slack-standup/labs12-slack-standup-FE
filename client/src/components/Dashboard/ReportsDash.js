@@ -4,7 +4,7 @@ import CreateReport from '../Reports/ModifyReports/CreateReport';
 import Reports from '../Reports/Reports';
 import EditReport from '../Reports/ModifyReports/EditReport';
 import { baseURL, axiosWithAuth } from '../../config/axiosWithAuth';
-import MemberResponseForm from '../Reports/MemberReports/MemberResponseForm';
+import SingleReportMember from '../Reports/SingleReportMember';
 
 class ReportsDash extends Component {
 	state = {
@@ -85,7 +85,7 @@ class ReportsDash extends Component {
 						exact
 						path="/dashboard/reports/:reportId"
 						render={props => (
-							<MemberResponseForm {...props} getReports={this.getReports} />
+							<SingleReportMember {...props} getReports={this.getReports} />
 						)}
 					/>
 				</Switch>
