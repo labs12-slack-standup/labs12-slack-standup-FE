@@ -73,7 +73,7 @@ class Onboarding extends Component {
 				roles: 'admin',
 				joinCode
 			});
-
+			//post mail object to mail endpoint
 			await axiosWithAuth().post(`${baseURL}/email`, mailObject)
 
 			localStorage.setItem('token', updated.data.token);
