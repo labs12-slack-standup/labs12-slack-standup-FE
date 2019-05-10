@@ -10,17 +10,14 @@ const JoinTeam = props => {
 					type="text"
 					placeholder="join code"
 					onChange={props.changeHandler}
-					name="joincode"
-					// onSubmit={props.submitHandler}
+					name="joinCode"
 				/>
 			</form>
 			<div>
 				Actually don't have a join code? That's okay, let's create a team:
 				<button onClick={props.createToggle}>Create Team</button>
 			</div>
-			<Link to="dashboard/reports">
-				<button>Let's go!</button>
-			</Link>
+			<button onClick={props.submitHandler}>Let's go!</button>
 			<button onClick={props.toggleAllOff}>Cancel</button>
 		</div>
 	);

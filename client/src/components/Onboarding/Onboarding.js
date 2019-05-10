@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './onboarding.css';
-
+import { Redirect } from 'react-router-dom';
 import CreateTeam from './CreateTeam';
 import LandingPage from './LandingPage';
 import JoinTeam from './JoinTeam';
@@ -83,7 +83,20 @@ class Onboarding extends Component {
 
 		this.setState({ teamId: randId });
 	};
+	
+	submitHandler = async e => {
+		e.preventDefault();
 
+		try {
+			const newToken = await axiosWithAuth().get(`${baseURL}/users/joinCode/${this.state.joinCode}`)
+			console.log('new token', newToken)
+			localStorage.setItem('token', newToken.data.updatedToken)
+			this.props.history.push('/dashboard')
+		} catch (err) {
+			console.log(err)
+		}
+
+	}
 	// push emails to state when submited
 	// allows the emails to be displayed above the Add Team Member button\
 	// *****Currently does not clear input field***** LEVEL 2 BUG
@@ -133,6 +146,7 @@ class Onboarding extends Component {
 				createToggle={this.createToggle}
 				toggleAllOff={this.toggleAllOff}
 				changeHandler={this.changeHandler}
+				submitHandler={this.submitHandler}
 			/>
 		);
 	}
