@@ -4,7 +4,7 @@ import { deployedFEURL, localFEURL } from '../../config/axiosWithAuth';
 const Slack = () => (
 	<div>
 		<a
-			href={`https://slack.com/oauth/authorize?scope=incoming-webhook,commands,bot,channels:write&client_id=607645147937.621334967889&redirect_uri=${deployedFEURL}/slack/auth`}
+			href={`https://slack.com/oauth/authorize?scope=incoming-webhook,commands,bot,channels:write&client_id=607645147937.621334967889&redirect_uri=${deployedFEURL}`}
 		>
 			<img
 				alt="Add to Slack"
