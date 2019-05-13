@@ -62,7 +62,8 @@ class Onboarding extends Component {
 
 		//create an object to send to mail api
 		const mailObject = {
-			emails: teamEmails,
+			//email singular to ensure consistency with adding an new user email on the dashboard
+			email: teamEmails,
 			joinCode: joinCode
 		}
 		console.log('mailObject', mailObject)
@@ -73,10 +74,11 @@ class Onboarding extends Component {
 				roles: 'admin',
 				joinCode
 			});
+			localStorage.setItem('token', updated.data.token);
+			
 			//post mail object to mail endpoint
 			await axiosWithAuth().post(`${baseURL}/email`, mailObject)
-
-			localStorage.setItem('token', updated.data.token);
+			
 		} catch (error) {
 			console.log(error);
 		}
