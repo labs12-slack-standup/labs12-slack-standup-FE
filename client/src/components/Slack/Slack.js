@@ -1,10 +1,10 @@
 import React from 'react';
-import { deployedFEURL, localFEURL } from '../../config/axiosWithAuth';
+import { slackURL } from '../../config/axiosWithAuth';
 
 const Slack = () => (
 	<div>
 		<a
-			href={`https://slack.com/oauth/authorize?scope=incoming-webhook,commands,bot,channels:write&client_id=607645147937.621334967889&redirect_uri=${deployedFEURL}`}
+			href={`https://slack.com/oauth/authorize?scope=incoming-webhook,commands,bot,channels:write&client_id=607645147937.621334967889&redirect_uri=${slackURL}`}
 		>
 			<img
 				alt="Add to Slack"
