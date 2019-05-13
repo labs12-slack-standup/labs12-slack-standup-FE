@@ -18,7 +18,7 @@ export class Dashboard extends Component {
 		const joinCode = jwt_decode(localStorage.getItem('token')).joinCode;
 		this.setState({
 			joinCode: joinCode
-		})
+		});
 
 		axiosWithAuth()
 			.get(`${baseURL}/users/team`)
@@ -46,19 +46,21 @@ export class Dashboard extends Component {
 		const mailObject = {
 			email: this.state.newMemberEmail,
 			joinCode: this.state.joinCode
-		}
+		};
 		//sendgrid endpoint on our back end
-		const endpoint = `${baseURL}/email`
+		const endpoint = `${baseURL}/email`;
 
 		//figure out how to display res in UI so admin knows email has been sent successfully
-		axiosWithAuth().post(endpoint, mailObject).then(res => {
-			console.log(res);
-		}).catch(err => {
-			console.log(err);
-		});
-		
+		axiosWithAuth()
+			.post(endpoint, mailObject)
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log(err);
+			});
 	};
-	
+
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
@@ -69,7 +71,7 @@ export class Dashboard extends Component {
 				<h3>Dashboard</h3>
 				<Team users={this.state.users} updateUser={this.updateUser} />
 				<InviteUser changeHandler={this.changeHandler} addUser={this.addUser} />
-				<br/>
+				<br />
 				<Link to="/dashboard/reports">View Current Reports</Link>
 			</div>
 		);

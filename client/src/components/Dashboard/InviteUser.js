@@ -6,10 +6,10 @@ const InviteUser = props => {
 			<h3>Invite a new user to your team here:</h3>
 			<form onSubmit={props.addUser}>
 				<input
-					type="email"
-					placeholder="New user's email here"
+					type='email'
+					placeholder='New user email here'
 					onChange={props.changeHandler}
-					name="newMemberEmail"
+					name='newMemberEmail'
 				/>
 				<button>Invite User</button>
 			</form>

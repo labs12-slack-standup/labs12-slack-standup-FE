@@ -58,15 +58,15 @@ class Onboarding extends Component {
 		//create an array of email objects
 		const teamEmails = this.state.emails.map(userEmail => ({
 			email: userEmail
-		}))
+		}));
 
 		//create an object to send to mail api
 		const mailObject = {
 			//email singular to ensure consistency with adding an new user email on the dashboard
 			email: teamEmails,
 			joinCode: joinCode
-		}
-		console.log('mailObject', mailObject)
+		};
+		console.log('mailObject', mailObject);
 
 		try {
 			const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
@@ -75,30 +75,30 @@ class Onboarding extends Component {
 				joinCode
 			});
 			localStorage.setItem('token', updated.data.token);
-			
+
 			//post mail object to mail endpoint
-			await axiosWithAuth().post(`${baseURL}/email`, mailObject)
-			
+			await axiosWithAuth().post(`${baseURL}/email`, mailObject);
 		} catch (error) {
 			console.log(error);
 		}
 
 		this.setState({ teamId: randId });
 	};
-	
+
 	submitHandler = async e => {
 		e.preventDefault();
 
 		try {
-			const newToken = await axiosWithAuth().get(`${baseURL}/users/joinCode/${this.state.joinCode}`)
-			console.log('new token', newToken)
-			localStorage.setItem('token', newToken.data.updatedToken)
-			this.props.history.push('/dashboard')
+			const newToken = await axiosWithAuth().get(
+				`${baseURL}/users/joinCode/${this.state.joinCode}`
+			);
+			console.log('new token', newToken);
+			localStorage.setItem('token', newToken.data.updatedToken);
+			this.props.history.push('/dashboard');
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 		}
-
-	}
+	};
 	// push emails to state when submited
 	// allows the emails to be displayed above the Add Team Member button\
 	// *****Currently does not clear input field***** LEVEL 2 BUG
