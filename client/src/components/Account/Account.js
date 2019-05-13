@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
-import { Card, Elevation, Button } from '@blueprintjs/core';
+import { Card, Elevation, Button, Collapse } from '@blueprintjs/core';
 import './account.css';
 class Account extends Component {
 	constructor(props) {
@@ -9,7 +9,8 @@ class Account extends Component {
 			accountInfo: [],
 			newName: '',
 			newPic: '',
-			achivedReports: []
+			achivedReports: [],
+			openAchivedReports: false
 		};
 	}
 
@@ -30,7 +31,8 @@ class Account extends Component {
 			.get(endpoint)
 			.then(res =>
 				this.setState({
-					achivedReports: res.data.reports
+					achivedReports: res.data.reports,
+					openAchivedReports: !this.state.openAchivedReports
 				})
 			)
 			.catch(err => console.log(err));
@@ -91,18 +93,17 @@ class Account extends Component {
 			report => !report.active
 		);
 		return this.state.accountInfo.roles === 'admin' ? (
-			<Card interactive={true} elevation={Elevation.TWO}>
-				<div>
-					<div>Email: {this.state.accountInfo.email}</div>
-					<div>Join Code: {this.state.accountInfo.joinCode}</div>
-					<div>Full Name: {this.state.accountInfo.fullName}</div>
+			<Card interactive={true} elevation={Elevation.TWO} className="userCard">
+				<h3>{this.state.accountInfo.fullName}</h3>
+				<div>Email: {this.state.accountInfo.email}</div>
+				<div>Join Code: {this.state.accountInfo.joinCode}</div>
 
-					<img
-						src={this.state.accountInfo.profilePic}
-						alt="a headshot, preferably"
-					/>
-				</div>
-				<form onSubmit={this.updateUser}>
+				<img
+					src={this.state.accountInfo.profilePic}
+					alt="a headshot, preferably"
+				/>
+
+				<form className="userForm" onSubmit={this.updateUser}>
 					<input
 						type="text"
 						value={this.state.newName}
@@ -120,50 +121,66 @@ class Account extends Component {
 					<Button type="submit">Submit Changes</Button>
 					<div />
 				</form>
-				<Button onClick={this.viewAchivedReports}>View Archived Reports</Button>
-				<div>This will be an accordian with styling</div>
+				<Button onClick={this.viewAchivedReports}>
+					{this.state.openAchivedReports === false
+						? 'View Archived Reports'
+						: 'Hide Archived Reports'}
+				</Button>
 				<div>
-					{inactiveReports.map((report, idx) => (
-						<div key={idx}>
-							<h3>{report.reportName}</h3>
-							<button onClick={() => this.reactivateReport(report.id)}>
-								Reactivate Report
-							</button>
-						</div>
-					))}
+					<Collapse isOpen={this.state.openAchivedReports}>
+						{inactiveReports.length < 1 ? (
+							<div>No archived Reports</div>
+						) : (
+							inactiveReports.map((report, idx) => (
+								<div key={idx}>
+									<h3>{report.reportName}</h3>
+									<Button onClick={() => this.reactivateReport(report.id)}>
+										Reactivate Report
+									</Button>
+								</div>
+							))
+						)}
+					</Collapse>
 				</div>
 			</Card>
 		) : (
-			<div>
-				Account Info:
+			<Card interactive={true} elevation={Elevation.TWO} className="userCard">
 				<div>
-					<div>Email: {this.state.accountInfo.email}</div>
-					<div>Join Code: {this.state.accountInfo.joinCode}</div>
-					<div>Full Name: {this.state.accountInfo.fullName}</div>
+					<h3>{this.state.accountInfo.fullName}</h3>
+					<div>
+						<div>Email: {this.state.accountInfo.email}</div>
 
-					<img
-						src={this.state.accountInfo.profilePic}
-						alt="a headshot, preferably"
-					/>
+						<img
+							src={this.state.accountInfo.profilePic}
+							alt="a headshot, preferably"
+						/>
+					</div>
+					<form className="userForm" onSubmit={this.updateUser}>
+						<div>
+							Change display name:
+							<input
+								type="text"
+								value={this.state.newName}
+								name="newName"
+								onChange={this.changeHandler}
+								placeholder="new name"
+							/>
+						</div>
+						<br />
+						<div>
+							Change profile picture:
+							<input
+								type="text"
+								value={this.state.newPic}
+								name="newPic"
+								placeholder="picture link"
+								onChange={this.changeHandler}
+							/>
+						</div>
+						<Button type="submit">Submit Changes</Button>
+					</form>
 				</div>
-				<form onSubmit={this.updateUser}>
-					<input
-						type="text"
-						value={this.state.newName}
-						name="newName"
-						onChange={this.changeHandler}
-						placeholder="What's your name"
-					/>
-					<input
-						type="text"
-						value={this.state.newPic}
-						name="newPic"
-						placeholder="gimme a picture link"
-						onChange={this.changeHandler}
-					/>
-					<button type="submit">Submit Changes</button>
-				</form>
-			</div>
+			</Card>
 		);
 	}
 }
