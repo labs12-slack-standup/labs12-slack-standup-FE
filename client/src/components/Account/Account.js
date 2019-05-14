@@ -10,7 +10,8 @@ class Account extends Component {
 			newName: '',
 			newPic: '',
 			achivedReports: [],
-			openAchivedReports: false
+			openAchivedReports: false,
+			openEditUser: false
 		};
 	}
 
@@ -87,6 +88,9 @@ class Account extends Component {
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
+	openUserEdit = () => {
+		this.setState({ openEditUser: !this.state.openEditUser });
+	};
 
 	render() {
 		const inactiveReports = this.state.achivedReports.filter(
@@ -94,53 +98,66 @@ class Account extends Component {
 		);
 		return this.state.accountInfo.roles === 'admin' ? (
 			<Card interactive={true} elevation={Elevation.TWO} className="userCard">
-				<h3>{this.state.accountInfo.fullName}</h3>
-				<div>Email: {this.state.accountInfo.email}</div>
-				<div>Join Code: {this.state.accountInfo.joinCode}</div>
-
+				<div>
+					<h3>{this.state.accountInfo.fullName}</h3>
+					<div>Email: {this.state.accountInfo.email}</div>
+					<div>Join Code: {this.state.accountInfo.joinCode}</div>
+				</div>
 				<img
 					src={this.state.accountInfo.profilePic}
 					alt="a headshot, preferably"
 				/>
-
-				<form className="userForm" onSubmit={this.updateUser}>
-					<input
-						type="text"
-						value={this.state.newName}
-						name="newName"
-						onChange={this.changeHandler}
-						placeholder="What's your name"
-					/>
-					<input
-						type="text"
-						value={this.state.newPic}
-						name="newPic"
-						placeholder="gimme a picture link"
-						onChange={this.changeHandler}
-					/>
-					<Button type="submit">Submit Changes</Button>
-					<div />
-				</form>
-				<Button onClick={this.viewAchivedReports}>
-					{this.state.openAchivedReports === false
-						? 'View Archived Reports'
-						: 'Hide Archived Reports'}
-				</Button>
-				<div>
-					<Collapse isOpen={this.state.openAchivedReports}>
-						{inactiveReports.length < 1 ? (
-							<div>No archived Reports</div>
-						) : (
-							inactiveReports.map((report, idx) => (
-								<div key={idx}>
-									<h3>{report.reportName}</h3>
-									<Button onClick={() => this.reactivateReport(report.id)}>
-										Reactivate Report
-									</Button>
-								</div>
-							))
-						)}
-					</Collapse>
+				<div className="accountForms">
+					<div className="editUser">
+						<Button onClick={this.openUserEdit}>
+							{this.state.openEditUser === false
+								? 'Edit User Profile'
+								: 'Hide Edit'}
+						</Button>
+						<Collapse isOpen={this.state.openEditUser}>
+							<form className="userForm" onSubmit={this.updateUser}>
+								<input
+									type="text"
+									value={this.state.newName}
+									name="newName"
+									onChange={this.changeHandler}
+									placeholder="What's your name"
+								/>
+								<input
+									type="text"
+									value={this.state.newPic}
+									name="newPic"
+									placeholder="gimme a picture link"
+									onChange={this.changeHandler}
+								/>
+								<Button type="submit" onClick={this.openUserEdit}>Submit Changes</Button>
+								<div />
+							</form>
+						</Collapse>
+					</div>
+					<div className="editUser">
+						<Button onClick={this.viewAchivedReports}>
+							{this.state.openAchivedReports === false
+								? 'View Archived Reports'
+								: 'Hide Archived Reports'}
+						</Button>
+						<div>
+							<Collapse isOpen={this.state.openAchivedReports}>
+								{inactiveReports.length < 1 ? (
+									<div>No archived Reports</div>
+								) : (
+									inactiveReports.map((report, idx) => (
+										<div key={idx}>
+											<h3>{report.reportName}</h3>
+											<Button onClick={() => this.reactivateReport(report.id)}>
+												Reactivate Report
+											</Button>
+										</div>
+									))
+								)}
+							</Collapse>
+						</div>
+					</div>
 				</div>
 			</Card>
 		) : (

@@ -1,12 +1,31 @@
-img {
+.userCard img {
 	width: 100px;
-	height: auto;
+	height: 100px;
+	border-radius: 30px;
 }
 .userForm {
 	/* display: flex;
 	justify-content: center;
 	flex-wrap: wrap; */
 }
+.accountForms {
+	width: 100%;
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-between;
+}
 
 .userCard {
+	background-color: #a5c058;
+	color: #81715e;
+	font-weight: bold;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	height: 50%;
+	justify-content: space-around;
 }
+
+/* .userCard img {
+	align-self: flex-end;
+} */
