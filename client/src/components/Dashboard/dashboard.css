@@ -11,10 +11,14 @@ textarea.bp3-input {
 .teamCard1 {
 	background-color: #778899;
 } */
-
+.teamDashboard {
+	/* color: #a1d6e2; */
+}
 .teamList {
 	display: flex;
 	justify-content: flex-end;
+	background-color: #f1f1f2;
+	color: #5294e2;
 }
 .teamCard {
 	display: flex;
@@ -23,7 +27,6 @@ textarea.bp3-input {
 	width: 80px;
 }
 .teamCard img {
-	background-color: #c0c0c0;
 	height: 50px;
 	width: 50px;
 	border-radius: 50px;
