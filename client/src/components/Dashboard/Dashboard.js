@@ -41,34 +41,49 @@ export class Dashboard extends Component {
 			});
 	};
 
-	activateUser = (id) => {
+	activateUser = id => {
 		const endpoint = `${baseURL}/users/${id}`;
 		const editedUser = {
 			active: true
 		}
+		//create an array with everyone but the user the function's been called on
+		const newUsers = this.state.users.filter(user => user.id !== id)
+
+		
 		axiosWithAuth()
 			.put(endpoint, editedUser)
 			.then(res => {
-				console.log(res);
+				newUsers.push(res.data.editedUser)
+				this.setState({
+					users: newUsers
+				})
 			})
 			.catch(err => {
 				console.log(err);
 			});
+			
+
 	};
 
-	deactivateUser = (id) => {
+	deactivateUser = id => {
 		const endpoint = `${baseURL}/users/${id}`;
 		const editedUser = {
 			active: false
 		}
+		const newUsers = this.state.users.filter(user => user.id !== id)
+		
 		axiosWithAuth()
 			.put(endpoint, editedUser)
 			.then(res => {
-				console.log(res);
+				newUsers.push(res.data.editedUser)
+				this.setState({
+					users: newUsers
+				})
 			})
 			.catch(err => {
 				console.log(err);
 			});
+
 	};
 
 	addUser = () => {

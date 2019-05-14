@@ -8,11 +8,11 @@ const User2 = props => {
 				<img src={props.user.profilePic} alt="profile pic" />
 				<h4>{props.user.fullName}</h4>
 				{props.user.active ? (
-					<Button onClick={props.deactivateUser(props.user.id)}>
+					<Button onClick={()=>props.deactivateUser(props.user.id)}>
 						Deactivate User
 					</Button>
 				) : (
-					<Button onClick={props.activateUser(props.user.id)}>
+					<Button onClick={()=>props.activateUser(props.user.id)}>
 						Activate User
 					</Button>
 				)}
