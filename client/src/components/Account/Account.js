@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
-
+import { Card, Elevation, Button } from '@blueprintjs/core';
+import './account.css';
 class Account extends Component {
 	constructor(props) {
 		super(props);
@@ -90,8 +91,7 @@ class Account extends Component {
 			report => !report.active
 		);
 		return this.state.accountInfo.roles === 'admin' ? (
-			<div>
-				MANAGER VIEW Account Info:
+			<Card interactive={true} elevation={Elevation.TWO}>
 				<div>
 					<div>Email: {this.state.accountInfo.email}</div>
 					<div>Join Code: {this.state.accountInfo.joinCode}</div>
@@ -117,10 +117,10 @@ class Account extends Component {
 						placeholder="gimme a picture link"
 						onChange={this.changeHandler}
 					/>
-					<button type="submit">Submit Changes</button>
+					<Button type="submit">Submit Changes</Button>
 					<div />
 				</form>
-				<button onClick={this.viewAchivedReports}>View Archived Reports</button>
+				<Button onClick={this.viewAchivedReports}>View Archived Reports</Button>
 				<div>This will be an accordian with styling</div>
 				<div>
 					{inactiveReports.map((report, idx) => (
@@ -132,7 +132,7 @@ class Account extends Component {
 						</div>
 					))}
 				</div>
-			</div>
+			</Card>
 		) : (
 			<div>
 				Account Info:

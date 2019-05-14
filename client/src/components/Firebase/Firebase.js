@@ -26,7 +26,6 @@ class Firebase extends Component {
 			],
 			callbacks: {
 				signInSuccessWithAuthResult: ({ user }) => {
-					console.log(user);
 					axios
 						.post(`${baseURL}/auth/firebase`, {
 							user,
@@ -36,7 +35,6 @@ class Firebase extends Component {
 							localStorage.setItem('token', res.data);
 							const token = jwt_decode(res.data);
 							if (token.teamId) {
-								console.log('got to conditional');
 								this.props.history.push('/dashboard');
 							} else {
 								this.props.history.push('/onboarding');

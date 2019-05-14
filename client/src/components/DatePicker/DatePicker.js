@@ -1,14 +1,15 @@
 import React from 'react';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-import { SingleDatePicker } from 'react-dates';
+import { DayPicker } from 'react-dates';
 
 
 const DayPickerComp = props => (
   <div style={defaultHeight}>
-    <SingleDatePicker
-      onFocusChange={true}
+    <DayPicker
+      onDayClick={({_d}) => props.getByDate(_d)}
       numberOfMonths={1}
+      noBorder={true}
     />
   </div>
 )
