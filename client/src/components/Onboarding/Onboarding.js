@@ -88,10 +88,7 @@ class Onboarding extends Component {
 		// took this out because it was trying to update after the push to dashboard, but not sure why it was here in the first place so I haven't deleted it -- eek
 		// this.setState({ teamId: randId });
 	};
-	
-	componentWillUnmount() {
-				
-	}
+
 
 	submitHandler = async e => {
 		e.preventDefault();

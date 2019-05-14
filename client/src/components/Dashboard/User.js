@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
 class User extends Component {
-	
+
 	updateUser = props => {
 		const endpoint = `${baseURL}/users/${this.props.match.params.userId}`;
 		const editedUser = {
