@@ -17,7 +17,7 @@
 }
 
 .userCard {
-	background-color: #a5c058;
+	background-color: #f69454;
 	color: #81715e;
 	font-weight: bold;
 	display: flex;
@@ -28,7 +28,7 @@
 	border-radius: 20px;
 }
 .userCard .bp3-button {
-	background-color: #81715e;
+	background-color: #fef9e2;
 }
 
 /* .userCard img {

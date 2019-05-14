@@ -5,12 +5,33 @@
 textarea.bp3-input {
 	height: 40px;
 }
-.teamCard0 {
-	background-color: #faae3d;
+/* .teamCard0 {
+	background-color: #d3d3d3;
 }
 .teamCard1 {
-	background-color: #a5c058;
+	background-color: #778899;
+} */
+
+.teamList {
+	display: flex;
+	justify-content: flex-end;
+}
+.teamCard {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 80px;
 }
 .teamCard img {
-	height: 100px;
+	background-color: #c0c0c0;
+	height: 50px;
+	width: 50px;
+	border-radius: 50px;
+}
+/* .teamCard h4 {
+	margin: 0 auto;
+} */
+.teamCard h4 {
+	/* padding: 5px 5%; */
+	margin: 0 auto;
 }

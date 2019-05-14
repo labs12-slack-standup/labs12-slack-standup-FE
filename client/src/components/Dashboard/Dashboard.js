@@ -69,7 +69,6 @@ export class Dashboard extends Component {
 	render() {
 		return (
 			<div className="teamDashboard">
-				<h3>Dashboard</h3>
 				<Team users={this.state.users} updateUser={this.updateUser} />
 				<InviteUser changeHandler={this.changeHandler} addUser={this.addUser} />
 				<br />

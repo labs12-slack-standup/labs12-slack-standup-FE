@@ -15,20 +15,15 @@ class Team extends Component {
 		const inactiveUsers = this.props.users.filter(user => !user.active);
 		return (
 			<div>
-				<h3>Teammates:</h3>
-				<h4>Active Users on Team</h4>
-				{activeUsers.map((user, idx) => (
-					<Card
-						interactive={true}
-						elevation={Elevation.ONE}
-						key={user.id}
-						className={`teamCard teamCard${idx % 2}`}
-					>
-						<img src={user.profilePic} alt="profile pic" />
-						<h4>{user.fullName}</h4>
-						<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
-					</Card>
-				))}
+				<div className="teamList">
+					{activeUsers.map((user, idx) => (
+						<div key={user.id} className="teamCard">
+							<img src={user.profilePic} alt="profile pic" />
+							<h4>{user.fullName}</h4>
+							{/* <Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link> */}
+						</div>
+					))}
+				</div>
 				<br />
 				<br />
 				<Button onClick={this.viewInactiveUsers}>
