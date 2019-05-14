@@ -1,51 +1,61 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Elevation, Button } from '@blueprintjs/core';
+import { Card, Elevation, Collapse, Button } from '@blueprintjs/core';
 
-const Team = props => {
-	const activeUsers = props.users.filter(user => user.active);
-	const inactiveUsers = props.users.filter(user => !user.active);
+class Team extends Component {
+	state = {
+		openInactiveUsers: false
+	};
+	viewInactiveUsers = () => {
+		this.setState({ openInactiveUsers: !this.state.openInactiveUsers });
+	};
 
-	return (
-		<div>
-			<h3>Teamies:</h3>
-			<h4>Active Users on Team</h4>
-			{activeUsers.map(user => (
-				<Card interactive={true} elevation={Elevation.TWO} key={user.id}>
-					<img src={user.profilePic} alt="profile pic" />
-					<h4>{user.fullName}</h4>
-					<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
-				</Card>
-			))}
-			<br />
-			<br />
-			<h4>Inactive Users</h4>
-			{inactiveUsers.map(user => (
-				<div key={user.id}>
-					<img src={user.profilePic} alt="profile pic" />
-					<h4>{user.fullName}</h4>
-					<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
-				</div>
-			))}
-			{/* {props.users.map(user => {
-				return user.active ? (
-					<div key={user.id}>
-						<h3>Active Users</h3>
+	render() {
+		const activeUsers = this.props.users.filter(user => user.active);
+		const inactiveUsers = this.props.users.filter(user => !user.active);
+		return (
+			<div>
+				<h3>Teammates:</h3>
+				<h4>Active Users on Team</h4>
+				{activeUsers.map(user => (
+					<Card interactive={true} elevation={Elevation.TWO} key={user.id}>
 						<img src={user.profilePic} alt="profile pic" />
 						<h4>{user.fullName}</h4>
 						<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
-						<br />
-						<br />
-					</div>
-				) : (
-					<div>
-						<h3>Inactive Users</h3>
-						<img src={user.profilePic} alt="profile pic" />
-						<h4>{user.fullName}</h4>
-					</div>
-				); */}
-		</div>
-	);
-};
+					</Card>
+				))}
+				<br />
+				<br />
+				<Button onClick={this.viewInactiveUsers}>
+					{this.state.openInactiveUsers === false
+						? 'View Inactive Users'
+						: 'Hide Inactive Users'}
+				</Button>
+				<Collapse isOpen={this.state.openInactiveUsers}>
+					{inactiveUsers.length < 1 ? (
+						<div>All Users Active</div>
+					) : (
+						inactiveUsers.map((user, idx) => (
+							<Card key={user.id}>
+								<img src={user.profilePic} alt="profile pic" />
+								<h4>{user.fullName}</h4>
+								<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
+							</Card>
+						))
+					)}
+				</Collapse>
+				{/* {this.inactiveUsers.length > 0
+				? inactiveUsers.map(user => (
+						<div key={user.id}>
+							<img src={user.profilePic} alt="profile pic" />
+							<h4>{user.fullName}</h4>
+							<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
+						</div>
+				  ))
+				: null} */}
+			</div>
+		);
+	}
+}
 
 export default Team;

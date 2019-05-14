@@ -1,5 +1,35 @@
 .navigation {
-	border: 1px solid black;
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
+	width: 100%;
 }
+/*  
+.navigation .bp3-button {
+	fill: true;
+}  */
+
+@media(max-width: 500px) {
+	.navigation {
+
+		padding:0 10%;
+		height:200px;
+		/* align-content: center; */
+	}
+	.bp3-navbar {
+		padding: 0;
+		margin: 0 auto;
+		box-shadow: none;
+	}
+	.bp3-navbar-group {
+		flex-direction: column;
+
+	}
+	.bp3-navbar-heading {
+		font-size: 32px;
+	}
+	.navigation a {
+		/* height: 0px; */
+	}
+}
+
+

@@ -1,10 +1,11 @@
-import './Style/dashboard.css';
+import './dashboard.css';
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import { Link } from 'react-router-dom';
 import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import InviteUser from './InviteUser';
+import { Button } from '@blueprintjs/core';
 
 export class Dashboard extends Component {
 	state = {
@@ -62,7 +63,7 @@ export class Dashboard extends Component {
 	};
 
 	changeHandler = e => {
-		this.setState({ [e.target.name]: e.target.value });
+		this.setState({ newMemberEmail: e.target.value });
 	};
 
 	render() {
@@ -72,7 +73,9 @@ export class Dashboard extends Component {
 				<Team users={this.state.users} updateUser={this.updateUser} />
 				<InviteUser changeHandler={this.changeHandler} addUser={this.addUser} />
 				<br />
-				<Link to="/dashboard/reports">View Current Reports</Link>
+				<Link to="/dashboard/reports">
+					<Button text="View Current Reports" />
+				</Link>
 			</div>
 		);
 	}
