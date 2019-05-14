@@ -14,7 +14,7 @@ const Team = props => {
 				<Card interactive={true} elevation={Elevation.TWO} key={user.id}>
 					<img src={user.profilePic} alt="profile pic" />
 					<h4>{user.fullName}</h4>
-					<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
+					<Link to={`/dashboard/team/${user.id}`}>Edit Team Member</Link>
 				</Card>
 			))}
 			<br />
@@ -24,7 +24,7 @@ const Team = props => {
 				<div key={user.id}>
 					<img src={user.profilePic} alt="profile pic" />
 					<h4>{user.fullName}</h4>
-					<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
+					<Link to={`/dashboard/team/${user.id}`}>Edit Team Member</Link>
 				</div>
 			))}
 			{/* {props.users.map(user => {
