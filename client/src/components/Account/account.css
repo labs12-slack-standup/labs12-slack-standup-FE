@@ -1,6 +1,6 @@
 .userCard img {
-	width: 100px;
-	height: 100px;
+	width: 200px;
+	height: 200px;
 	border-radius: 30px;
 }
 .userForm {
@@ -10,9 +10,10 @@
 }
 .accountForms {
 	width: 100%;
-	margin-top: 50px;
+	/* margin-top: 50px; */
 	display: flex;
 	justify-content: space-between;
+	margin: 50px 150px;
 }
 
 .userCard {
@@ -24,6 +25,10 @@
 	flex-wrap: wrap;
 	height: 50%;
 	justify-content: space-around;
+	border-radius: 20px;
+}
+.userCard .bp3-button {
+	background-color: #81715e;
 }
 
 /* .userCard img {

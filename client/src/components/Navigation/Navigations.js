@@ -20,16 +20,15 @@ class Navigation extends React.Component {
 	};
 	render() {
 		return (
-			<div className='navigation'>
 			<Navbar>
-				<NavbarGroup >
+				<NavbarGroup>
 					<Navbar.Heading>Stand-Em-Ups</Navbar.Heading>
 					<NavbarDivider />
 					<NavLink to="/dashboard/account">
-						<Button className={Classes.MINIMAL} text="Account"/>
+						<Button className={Classes.MINIMAL} text="Account" />
 					</NavLink>
 					<NavLink to="/dashboard">
-						<Button className={Classes.MINIMAL} icon="home" text="Dashboard" />	
+						<Button className={Classes.MINIMAL} icon="home" text="Dashboard" />
 					</NavLink>
 					<NavLink to="/login">
 						<Button className={Classes.MINIMAL} icon="log-in" text="Login" />
@@ -39,7 +38,6 @@ class Navigation extends React.Component {
 					</NavLink>
 				</NavbarGroup>
 			</Navbar>
-			</div>
 		);
 	}
 }

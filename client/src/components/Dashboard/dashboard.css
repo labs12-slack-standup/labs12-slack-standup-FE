@@ -5,3 +5,12 @@
 textarea.bp3-input {
 	height: 40px;
 }
+.teamCard0 {
+	background-color: #faae3d;
+}
+.teamCard1 {
+	background-color: #a5c058;
+}
+.teamCard img {
+	height: 100px;
+}
