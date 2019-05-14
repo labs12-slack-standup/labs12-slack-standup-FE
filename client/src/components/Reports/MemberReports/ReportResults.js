@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import DatePicker from '../../DatePicker/DatePicker';
 import styled from 'styled-components';
 import { Card, Elevation } from '@blueprintjs/core';
-// import MemberResponseForm from './MemberReports/MemberResponseForm';
 import MemberResponseForm from './MemberResponseForm';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 
