@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Elevation, Button } from '@blueprintjs/core';
-import User2 from './User2';
+import User from './User';
 
 const Team = props => {
 	const activeUsers = props.users.filter(user => user.active);
@@ -12,7 +12,7 @@ const Team = props => {
 			<h3>Teamies:</h3>
 			<h4>Active Users on Team</h4>
 			{activeUsers.map(user => (
-				<User2
+				<User
 					user={user}
 					key={user.id}
 					activateUser={props.activateUser}
@@ -23,7 +23,7 @@ const Team = props => {
 			<br />
 			<h4>Inactive Users</h4>
 			{inactiveUsers.map(user => (
-				<User2
+				<User
 					user={user}
 					key={user.id}
 					activateUser={props.activateUser}

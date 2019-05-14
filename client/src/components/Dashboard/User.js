@@ -1,34 +1,24 @@
-import React, { Component } from 'react';
-import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
+import React from 'react';
+import { Card, Button, Elevation } from '@blueprintjs/core';
 
-class User extends Component {
-
-	updateUser = props => {
-		const endpoint = `${baseURL}/users/${this.props.match.params.userId}`;
-		const editedUser = {
-			active: false
-		};
-		axiosWithAuth()
-			.put(endpoint, editedUser)
-			.then(res => {
-				console.log(res);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-	};
-
-	render() {
-		return (
-			
-			
-			
-			<div>
-				<h3>Remove User from Team</h3>
-				<button onClick={() => this.updateUser()}>Remove</button>
-			</div>
-		);
-	}
-}
+const User = props => {
+	return (
+		<div>
+			<Card interactive={true} elevation={Elevation.TWO} key={props.user.id}>
+				<img src={props.user.profilePic} alt="profile pic" />
+				<h4>{props.user.fullName}</h4>
+				{props.user.active ? (
+					<Button onClick={()=>props.deactivateUser(props.user.id)}>
+						Deactivate User
+					</Button>
+				) : (
+					<Button onClick={()=>props.activateUser(props.user.id)}>
+						Activate User
+					</Button>
+				)}
+			</Card>
+		</div>
+	);
+};
 
 export default User;
