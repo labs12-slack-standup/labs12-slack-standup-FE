@@ -55,7 +55,7 @@ class Onboarding extends Component {
 		const randId = await teamId(8);
 		const joinCode = await joinId(6);
 
-		//create an array of email objects
+		// splits email string into array by commas and removes spaces
 		const teamEmails = this.state.emails.replace(/\s+/g, '').split(',');
 
 		//create an object to send to mail api
