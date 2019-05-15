@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Elevation, Button } from '@blueprintjs/core';
+import User from './User';
 
 const Team = props => {
 	const activeUsers = props.users.filter(user => user.active);
@@ -11,39 +12,24 @@ const Team = props => {
 			<h3>Teamies:</h3>
 			<h4>Active Users on Team</h4>
 			{activeUsers.map(user => (
-				<Card interactive={true} elevation={Elevation.TWO} key={user.id}>
-					<img src={user.profilePic} alt="profile pic" />
-					<h4>{user.fullName}</h4>
-					<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
-				</Card>
+				<User
+					user={user}
+					key={user.id}
+					activateUser={props.activateUser}
+					deactivateUser={props.deactivateUser}
+				/>
 			))}
 			<br />
 			<br />
 			<h4>Inactive Users</h4>
 			{inactiveUsers.map(user => (
-				<div key={user.id}>
-					<img src={user.profilePic} alt="profile pic" />
-					<h4>{user.fullName}</h4>
-					<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
-				</div>
+				<User
+					user={user}
+					key={user.id}
+					activateUser={props.activateUser}
+					deactivateUser={props.deactivateUser}
+				/>
 			))}
-			{/* {props.users.map(user => {
-				return user.active ? (
-					<div key={user.id}>
-						<h3>Active Users</h3>
-						<img src={user.profilePic} alt="profile pic" />
-						<h4>{user.fullName}</h4>
-						<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
-						<br />
-						<br />
-					</div>
-				) : (
-					<div>
-						<h3>Inactive Users</h3>
-						<img src={user.profilePic} alt="profile pic" />
-						<h4>{user.fullName}</h4>
-					</div>
-				); */}
 		</div>
 	);
 };

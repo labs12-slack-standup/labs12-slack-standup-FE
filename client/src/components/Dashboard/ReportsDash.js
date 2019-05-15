@@ -6,6 +6,8 @@ import EditReport from '../Reports/ModifyReports/EditReport';
 import { baseURL, axiosWithAuth } from '../../config/axiosWithAuth';
 import SingleReportMember from '../Reports/SingleReportMember';
 import { Spinner, Intent } from '@blueprintjs/core';
+import SingleReportResults from '../Reports/MemberReports/ReportResults';
+
 class ReportsDash extends Component {
 	state = {
 		message: '',
@@ -98,7 +100,7 @@ class ReportsDash extends Component {
 						exact
 						path="/dashboard/reports/:reportId"
 						render={props => (
-							<SingleReportMember {...props} getReports={this.getReports} />
+							<SingleReportResults {...props} getReports={this.getReports} />
 						)}
 					/>
 				</Switch>

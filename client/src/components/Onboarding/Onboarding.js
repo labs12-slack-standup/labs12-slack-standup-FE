@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './onboarding.css';
-import { Redirect } from 'react-router-dom';
 import CreateTeam from './CreateTeam';
 import LandingPage from './LandingPage';
 import JoinTeam from './JoinTeam';
@@ -62,7 +61,7 @@ class Onboarding extends Component {
 
 		//create an object to send to mail api
 		const mailObject = {
-			//email singular to ensure consistency with adding an new user email on the dashboard
+		//email singular to ensure consistency with adding an new user email on the dashboard
 			email: teamEmails,
 			joinCode: joinCode
 		};
@@ -76,14 +75,20 @@ class Onboarding extends Component {
 			});
 			localStorage.setItem('token', updated.data.token);
 
-			//post mail object to mail endpoint
-			await axiosWithAuth().post(`${baseURL}/email`, mailObject);
+			// if the user's entered emails, make the post call to the email endpoint
+			if (mailObject.email.length > 0) {
+				await axiosWithAuth().post(`${baseURL}/email`, mailObject);
+			}
+
+			//redirect back to dashboard after team creation
+			this.props.history.push('/dashboard');
 		} catch (error) {
 			console.log(error);
 		}
-
-		this.setState({ teamId: randId });
+		// took this out because it was trying to update after the push to dashboard, but not sure why it was here in the first place so I haven't deleted it -- eek
+		// this.setState({ teamId: randId });
 	};
+
 
 	submitHandler = async e => {
 		e.preventDefault();
