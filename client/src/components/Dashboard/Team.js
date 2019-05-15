@@ -14,7 +14,7 @@ class Team extends Component {
 
 	render() {
 		const activeUsers = this.props.users.filter(user => user.active);
-		const inactiveUsers = this.props.users.filter(user => !user.active);
+		// const inactiveUsers = this.props.users.filter(user => !user.active);
 
 		return (
 			<div>
@@ -34,15 +34,7 @@ class Team extends Component {
 				</div>
 				<br />
 				<br />
-				<h4>Inactive Users</h4>
-				{inactiveUsers.map(user => (
-					<User
-						user={user}
-						key={user.id}
-						activateUser={this.props.activateUser}
-						deactivateUser={this.props.deactivateUser}
-					/>
-				))}
+				{/* took out inactive users. They still exist in the database and should be used on a more robust Account page in the future */}
 			</div>
 		);
 	}
