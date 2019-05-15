@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 export const baseURL = 'https://master-slack-standup.herokuapp.com/api';
+
 // export const baseURL = 'http://localhost:5000/api';
+
 
 //Slack login redirects to a URL, changed to local for dev
 

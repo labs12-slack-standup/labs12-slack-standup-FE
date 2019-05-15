@@ -17,7 +17,7 @@ class View extends Component {
 	render() {
 		return (
 			<div className="view">
-				<ReportsDash className="reportsDash" role={this.state.roles} />
+				<ReportsDash className="reportsDash" role={this.state.roles} {...this.props} />
 				<Dashboard className="usersDash" role={this.state.roles} />
 			</div>
 		);
