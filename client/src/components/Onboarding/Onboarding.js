@@ -56,9 +56,7 @@ class Onboarding extends Component {
 		const joinCode = await joinId(6);
 
 		//create an array of email objects
-		const teamEmails = this.state.emails.map(userEmail => ({
-			email: userEmail
-		}));
+		const teamEmails = this.state.emails.split(',');
 
 		//create an object to send to mail api
 		const mailObject = {
@@ -104,24 +102,25 @@ class Onboarding extends Component {
 	// *****Currently does not clear input field***** LEVEL 2 BUG
 
 	emailHandler = e => {
-		e.preventDefault();
-		const updatedEmails = [...this.state.emails];
-		updatedEmails.push(this.state.singleEmail);
+		const updatedEmails = this.state.emails;
+
+		//const updatedEmails = [...this.state.emails];
+		//updatedEmails.push(this.state.singleEmail);
 		console.log(updatedEmails);
-		this.setState({ emails: updatedEmails });
-		this.setState({ singleEmail: '' });
-		document.createTeamForm.reset();
+		this.setState({ singleEmail: updatedEmails });
+		//this.setState({ singleEmail: '' });
+		//document.createTeamForm.reset();
 	};
 
 	// function for removing emails from array before submitting them to create a team
-	removeEmail = emailIdx => {
-		const updateEmails = [...this.state.emails].filter(
-			(item, idx) => idx !== emailIdx
-		);
-		this.setState({
-			emails: updateEmails
-		});
-	};
+	// removeEmail = emailIdx => {
+	// 	const updateEmails = [...this.state.emails].filter(
+	// 		(item, idx) => idx !== emailIdx
+	// 	);
+	// 	this.setState({
+	// 		emails: updateEmails
+	// 	});
+	// };
 
 	render() {
 		// Landing Page - all booleans false
