@@ -2,6 +2,8 @@ import './account.css';
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import { Card, Elevation, Button, Collapse } from '@blueprintjs/core';
+import jwt_decode from 'jwt-decode';
+import Slack from '../Slack/Slack';
 class Account extends Component {
 	constructor(props) {
 		super(props);
@@ -96,12 +98,16 @@ class Account extends Component {
 		const inactiveReports = this.state.achivedReports.filter(
 			report => !report.active
 		);
+			console.log(this.state.accountInfo)
 		return this.state.accountInfo.roles === 'admin' ? (
+			<>
+			<Slack slackTest={this.state.accountInfo.slackToken}/>
 			<Card interactive={true} elevation={Elevation.TWO} className="userCard">
 				<div>
 					<h3>{this.state.accountInfo.fullName}</h3>
 					<div>Email: {this.state.accountInfo.email}</div>
 					<div>Join Code: {this.state.accountInfo.joinCode}</div>
+
 				</div>
 				<img
 					src={this.state.accountInfo.profilePic}
@@ -137,6 +143,7 @@ class Account extends Component {
 							</form>
 						</Collapse>
 					</div>
+				
 					<div className="editUser">
 						<Button onClick={this.viewAchivedReports}>
 							{this.state.openAchivedReports === false
@@ -162,7 +169,10 @@ class Account extends Component {
 					</div>
 				</div>
 			</Card>
+			</>
 		) : (
+			<>
+			<Slack slackTest={this.state.accountInfo.slackToken}/>
 			<Card interactive={true} elevation={Elevation.TWO} className="userCard">
 				<div>
 					<h3>{this.state.accountInfo.fullName}</h3>
@@ -200,6 +210,7 @@ class Account extends Component {
 					</form>
 				</div>
 			</Card>
+			</>
 		);
 	}
 }
