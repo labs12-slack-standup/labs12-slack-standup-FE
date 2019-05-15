@@ -36,11 +36,11 @@ class Team extends Component {
 						<div>All Users Active</div>
 					) : (
 						inactiveUsers.map((user, idx) => (
-							<Card key={user.id}>
+							<div key={user.id}>
 								<img src={user.profilePic} alt="profile pic" />
 								<h4>{user.fullName}</h4>
 								<Link to={`/dashboard/team/${user.id}`}>Edit Team Memeber</Link>
-							</Card>
+							</div>
 						))
 					)}
 				</Collapse>

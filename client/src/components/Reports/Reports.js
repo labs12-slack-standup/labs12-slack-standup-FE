@@ -10,7 +10,7 @@ class Reports extends Component {
 		const activeReports = this.props.reports.filter(report => report.active);
 		if (this.props.reports.length < 1) {
 			return (
-				<Card className="reportsCard">
+				<Card>
 					<h2>You have not created any reports</h2>
 					<Link to="/dashboard/reports/new">
 						<button>Create Report</button>
@@ -21,7 +21,7 @@ class Reports extends Component {
 		}
 		return (
 			<div>
-				<Card className="reportsCard">
+				<Card>
 					<Link to="/dashboard/reports/new">
 						<Button>Create Report</Button>
 					</Link>

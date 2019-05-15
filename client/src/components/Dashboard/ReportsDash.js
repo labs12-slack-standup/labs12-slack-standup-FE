@@ -51,7 +51,7 @@ class ReportsDash extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="reportsDash">
 				<Switch>
 					<Route
 						exact
