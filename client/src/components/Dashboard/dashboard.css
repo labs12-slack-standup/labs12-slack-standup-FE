@@ -57,3 +57,10 @@ textarea.bp3-input {
 	width: 50%;
 	margin: 0 auto;
 }
+.onboarding .bp3-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 50px;
+}
