@@ -17,9 +17,7 @@ class Team extends Component {
 		const inactiveUsers = this.props.users.filter(user => !user.active);
 
 		return (
-			<div>
-				<h3>Teamies:</h3>
-				<h4>Active Users on Team</h4>
+			<div className="teamMemberCard">
 				{activeUsers.map(user => (
 					<User
 						user={user}
@@ -28,7 +26,7 @@ class Team extends Component {
 						deactivateUser={this.props.deactivateUser}
 					/>
 				))}
-				<br />
+				{/* <br />
 				<br />
 				<h4>Inactive Users</h4>
 				{inactiveUsers.map(user => (
@@ -38,7 +36,7 @@ class Team extends Component {
 						activateUser={this.props.activateUser}
 						deactivateUser={this.props.deactivateUser}
 					/>
-				))}
+				))} */}
 			</div>
 		);
 	}
