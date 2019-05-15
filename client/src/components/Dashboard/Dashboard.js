@@ -5,12 +5,14 @@ import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import InviteUser from './InviteUser';
 import { Card } from '@blueprintjs/core';
+import { Spinner, Intent } from '@blueprintjs/core';
 
 export class Dashboard extends Component {
 	state = {
 		users: [],
 		newMemberEmail: '',
-		joinCode: ''
+		joinCode: '',
+		isLoading: true
 	};
 
 	componentDidMount() {
@@ -22,7 +24,13 @@ export class Dashboard extends Component {
 
 		axiosWithAuth()
 			.get(`${baseURL}/users/team`)
-			.then(res => this.setState({ users: res.data.users }))
+			.then(res => {
+				this.setState({ users: res.data.users });
+
+				if (this.state.users.length > 0) {
+					this.setState({ isLoading: false });
+				}
+			})
 			.catch(err => console.log(err));
 	}
 
@@ -111,6 +119,9 @@ export class Dashboard extends Component {
 	};
 
 	render() {
+		if (this.state.isLoading) {
+			return <Spinner intent={Intent.PRIMARY} />;
+		}
 		return (
 
 			<Card className="teamDashboard">			

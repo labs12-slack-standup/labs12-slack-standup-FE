@@ -4,12 +4,14 @@ import CreateReport from '../Reports/ModifyReports/CreateReport';
 import Reports from '../Reports/Reports';
 import EditReport from '../Reports/ModifyReports/EditReport';
 import { baseURL, axiosWithAuth } from '../../config/axiosWithAuth';
+import { Spinner, Intent } from '@blueprintjs/core';
 import SingleReportResults from '../Reports/MemberReports/ReportResults';
 
 class ReportsDash extends Component {
 	state = {
 		message: '',
-		reports: []
+		reports: [],
+		isLoading: true
 	};
 	componentDidMount() {
 		// call to get reports and stick them in state
@@ -20,12 +22,18 @@ class ReportsDash extends Component {
 		const endpoint = `${baseURL}/reports`;
 		axiosWithAuth()
 			.get(endpoint)
-			.then(res =>
+			.then(res => {
 				this.setState({
 					message: res.data.message,
 					reports: res.data.reports
-				})
-			)
+				});
+
+				if (this.state.reports) {
+					this.setState({
+						isLoading: false
+					});
+				}
+			})
 			.catch(err => console.log(err));
 	};
 
@@ -50,6 +58,9 @@ class ReportsDash extends Component {
 	};
 
 	render() {
+		if (this.state.isLoading) {
+			return <Spinner intent={Intent.PRIMARY} />;
+		}
 		return (
 			<div className="reportsDash">
 				<Switch>
@@ -90,7 +101,7 @@ class ReportsDash extends Component {
 						render={props => (
 							<SingleReportResults {...props} getReports={this.getReports} />
 						)}
-					/>	
+					/>
 				</Switch>
 			</div>
 		);
