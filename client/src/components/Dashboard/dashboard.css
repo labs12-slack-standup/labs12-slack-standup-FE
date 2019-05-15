@@ -17,7 +17,7 @@ textarea.bp3-input {
 	width: 45%;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: flex-start;
 }
 .teamList {
 	display: flex;

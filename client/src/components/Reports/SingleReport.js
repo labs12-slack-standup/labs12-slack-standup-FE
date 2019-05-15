@@ -9,9 +9,9 @@ const SingleReport = props => {
 				to={`/dashboard/reports/${props.report.id}`}
 				style={{ textDecoration: 'none' }}
 			>
-				<h2>Report Name: {props.report.reportName}</h2>
-				<h3>Report Created: {props.report.created_at}</h3>
-				<h4>Report Message: {props.report.message}</h4>
+				<h2>{props.report.reportName}</h2>
+				<h4>Message: {props.report.message}</h4>
+				<h5>{props.report.created_at}</h5>
 
 				<Button>
 					<Link to={`/dashboard/reports/${props.report.id}/edit`}>Edit</Link>
