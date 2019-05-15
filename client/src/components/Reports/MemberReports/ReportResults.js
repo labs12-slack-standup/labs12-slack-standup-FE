@@ -29,8 +29,8 @@ class ReportResults extends Component {
 											<div key={response.userId}>
 												<h3>{response.fullName}</h3>
 												{
-													response.questions.map(({ question, answer }) => (
-														<div key={`${response.userId} ${answer}`}>
+													response.questions.map(({ question, answer, id }) => (
+														<div key={id}>
 															<h6>{question}</h6>
 															<p>{answer}</p>
 														</div>
@@ -71,13 +71,14 @@ class ReportResults extends Component {
 }
 
 const Aside = styled.main`
-	@media (min-width: 500px) {
+	@media (min-width: 800px) {
 		width: 450px;
 	}
 `;
 
 const MainContainer = styled.main`
-	@media (min-width: 500px) {
+	@media (min-width: 800px) {
+		border: 5px solid red;
 		display: flex;
 		margin: auto;
 		max-width: 1000px;
@@ -85,7 +86,7 @@ const MainContainer = styled.main`
 `;
 
 const Feed = styled.div`
-	@media (min-width: 500px) {
+	@media (min-width: 800px) {
 		width: 70%;
 	}
 `;
