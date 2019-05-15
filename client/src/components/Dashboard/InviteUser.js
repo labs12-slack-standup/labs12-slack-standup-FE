@@ -7,13 +7,13 @@ const InviteUser = props => {
 			<h3>Invite a new user to your team:</h3>
 			<form onSubmit={props.addUser} className="inviteUser">
 				<TextArea placeholder="Email" onChange={props.changeHandler} />
-				{/* <input
+				<input
 					type="email"
 					placeholder="New user email here"
 					onChange={props.changeHandler}
 					name="newMemberEmail"
-				/> */}
-				<Button>Invite</Button>
+				/>
+				<Button type="submit">Invite</Button>
 			</form>
 		</div>
 	);
