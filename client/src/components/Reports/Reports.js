@@ -1,39 +1,40 @@
+import './reports.css';
 import React, { Component } from 'react';
 import SingleReport from './SingleReport';
 import Slack from '../Slack/Slack';
 import { Link } from 'react-router-dom';
+import { Card, Button } from '@blueprintjs/core';
 
 class Reports extends Component {
 	render() {
 		const activeReports = this.props.reports.filter(report => report.active);
 		if (this.props.reports.length < 1) {
 			return (
-				<div>
+				<Card className="reportsCard">
 					<h2>You have not created any reports</h2>
 					<Link to="/dashboard/reports/new">
 						<button>Create Report</button>
 					</Link>
 					<Slack />
-				</div>
+				</Card>
 			);
 		}
 		return (
 			<div>
-				Reports
-				<div>
+				<Card className="reportsCard">
 					<Link to="/dashboard/reports/new">
-						<button>Create Report</button>
+						<Button>Create Report</Button>
 					</Link>
 					<Slack />
-					{/* passing reports from state to individual components */}
-					{activeReports.map(report => (
-						<SingleReport
-							key={report.id}
-							report={report}
-							archiveReport={this.props.archiveReport}
-						/>
-					))}
-				</div>
+				</Card>
+				{/* passing reports from state to individual components */}
+				{activeReports.map(report => (
+					<SingleReport
+						key={report.id}
+						report={report}
+						archiveReport={this.props.archiveReport}
+					/>
+				))}
 			</div>
 		);
 	}

@@ -55,7 +55,7 @@ class ReportsDash extends Component {
 				<Switch>
 					<Route
 						exact
-						path="/dashboard/reports"
+						path="/dashboard"
 						render={props => (
 							<Reports
 								{...props}
@@ -78,9 +78,12 @@ class ReportsDash extends Component {
 						exact
 						path="/dashboard/reports/:reportId/edit"
 						render={props => (
-							<EditReport {...props} setResponseAsState={this.setResponseAsState} />
+							<EditReport
+								{...props}
+								setResponseAsState={this.setResponseAsState}
+							/>
 						)}
-					/>		
+					/>
 					<Route
 						exact
 						path="/dashboard/reports/:reportId"

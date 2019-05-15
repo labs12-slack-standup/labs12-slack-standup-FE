@@ -20,11 +20,11 @@
 	fill: true;
 }  */
 
-@media (max-width: 500px) {
+/* @media (max-width: 500px) {
 	.navigation {
 		padding: 0 10%;
 		height: 200px;
-		/* align-content: center; */
+		 align-content: center; 
 	}
 	.bp3-navbar {
 		padding: 0;
@@ -37,4 +37,4 @@
 	.bp3-navbar-heading {
 		font-size: 32px;
 	}
-}
+} */

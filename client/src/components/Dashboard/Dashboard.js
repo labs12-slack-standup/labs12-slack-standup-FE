@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import InviteUser from './InviteUser';
-import { Button } from '@blueprintjs/core';
+import { Button, Card } from '@blueprintjs/core';
 
 export class Dashboard extends Component {
 	state = {
@@ -68,14 +68,10 @@ export class Dashboard extends Component {
 
 	render() {
 		return (
-			<div className="teamDashboard">
+			<Card className="teamDashboard">
 				<Team users={this.state.users} updateUser={this.updateUser} />
 				<InviteUser changeHandler={this.changeHandler} addUser={this.addUser} />
-				<br />
-				<Link to="/dashboard/reports">
-					<Button text="View Current Reports" />
-				</Link>
-			</div>
+			</Card>
 		);
 	}
 }

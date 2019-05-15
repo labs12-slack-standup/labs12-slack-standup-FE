@@ -130,7 +130,9 @@ class Account extends Component {
 									placeholder="gimme a picture link"
 									onChange={this.changeHandler}
 								/>
-								<Button type="submit" onClick={this.openUserEdit}>Submit Changes</Button>
+								<Button type="submit" onClick={this.openUserEdit}>
+									Submit Changes
+								</Button>
 								<div />
 							</form>
 						</Collapse>
