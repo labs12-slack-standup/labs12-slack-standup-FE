@@ -30,19 +30,21 @@ textarea.bp3-input {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	width: 80px;
 }
-.teamCard img {
-	height: 50px;
-	width: 50px;
-	border-radius: 50px;
-}
+
 /* .teamCard h4 {
 	margin: 0 auto;
 } */
 .teamCard h4 {
 	/* padding: 5px 5%; */
 	margin: 0 auto;
+}
+
+.profilePic {
+	width: 50%;
+	border-radius: 50px;
 }
 
 .reportsDash {

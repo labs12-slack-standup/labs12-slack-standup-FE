@@ -5,7 +5,7 @@ const User = props => {
 	return (
 		<div>
 			<Card interactive={true} elevation={Elevation.TWO} key={props.user.id}>
-				<img src={props.user.profilePic} alt="profile pic" />
+				<img src={props.user.profilePic} className="profilePic" alt="profile pic" />
 				<h4>{props.user.fullName}</h4>
 				{props.user.active ? (
 					<Button onClick={()=>props.deactivateUser(props.user.id)}>
