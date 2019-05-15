@@ -44,10 +44,14 @@ class Reports extends Component {
 						initialStep={initialStep}
 						onExit={this.onExit}
 					/> */}
-					<Card className="createNewReportCard">
+					<Card className={`createNewReportCard`}>
 						<h2>You have not created any reports</h2>
 						<Link to="/dashboard/reports/new">
-							<Button>Create Report</Button>
+							<Button
+								className={this.props.role !== 'admin' ? 'bp3-disabled' : null}
+							>
+								Create Report
+							</Button>
 						</Link>
 						<Slack />
 					</Card>
@@ -58,13 +62,18 @@ class Reports extends Component {
 			<div>
 				<Card className="createReportCard">
 					<Link to="/dashboard/reports/new">
-						<Button>Create Report</Button>
+						<Button
+							className={this.props.role !== 'admin' ? 'bp3-disabled' : null}
+						>
+							Create Report
+						</Button>
 					</Link>
 					<Slack />
 				</Card>
 				{/* passing reports from state to individual components */}
 				{activeReports.map(report => (
 					<SingleReport
+						role={this.props.role}
 						key={report.id}
 						report={report}
 						archiveReport={this.props.archiveReport}

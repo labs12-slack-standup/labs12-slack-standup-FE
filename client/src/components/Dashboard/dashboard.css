@@ -1,48 +1,39 @@
-/* .teamDashboard img {
-	width: 50px;
-	border-radius: 50px;
-} */
 textarea.bp3-input {
 	height: 40px;
 	margin-bottom: 20px;
 }
-/* .teamCard0 {
-	background-color: #d3d3d3;
-}
-.teamCard1 {
-	background-color: #778899;
-} */
+
 .teamDashboard {
 	/* color: #a1d6e2; */
 	width: 45%;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
 }
-.teamList {
+
+.bp3-card .usersContainer{
+	margin: 1rem;
 	display: flex;
-	justify-content: flex-end;
-	flex-wrap: wrap;
-	/* background-color: #f1f1f2; */
-	/* color: #5294e2; */
-}
-.teamCard {
-	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
-	width: 80px;
+	
+	/* justify-content: center;  */
+	width: 25%;
 }
-.teamCard img {
-	height: 50px;
-	width: 50px;
-	border-radius: 50px;
+
+.bp3-card .singleUserContainer{
+	margin: .5rem;
 }
+
+
 /* .teamCard h4 {
 	margin: 0 auto;
 } */
 .teamCard h4 {
 	/* padding: 5px 5%; */
 	margin: 0 auto;
+}
+
+.profilePic {
+	width: 50%;
+	border-radius: 50px;
 }
 
 .reportsDash {
@@ -63,4 +54,20 @@ textarea.bp3-input {
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 50px;
+}
+.teamDashboard .teamMemberCard {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 100%;
+}
+.profileCard {
+	width: 100px;
+	text-align: center;
+}
+.profileCard img {
+	width: 50px;
+	height: 50px;
 }

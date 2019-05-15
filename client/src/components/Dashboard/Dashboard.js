@@ -125,11 +125,12 @@ export class Dashboard extends Component {
 		return (
 
 			<Card className="teamDashboard">			
-				<Team users={this.state.users} updateUser={this.updateUser} activateUser={this.activateUser} deactivateUser={this.deactivateUser} />
+				<Team className="teamContainer" users={this.state.users} updateUser={this.updateUser} activateUser={this.activateUser} deactivateUser={this.deactivateUser} />
 				<InviteUser changeHandler={this.changeHandler} addUser={this.addUser} />
 			</Card>
 		);
 	}
 }
+
 
 export default Dashboard;
