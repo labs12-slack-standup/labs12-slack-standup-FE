@@ -1,11 +1,12 @@
-import './Style/dashboard.css';
+import './dashboard.css';
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
-import { Link } from 'react-router-dom';
 import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import InviteUser from './InviteUser';
+import { Card } from '@blueprintjs/core';
 import { Spinner, Intent } from '@blueprintjs/core';
+
 export class Dashboard extends Component {
 	state = {
 		users: [],
@@ -114,7 +115,7 @@ export class Dashboard extends Component {
 	};
 
 	changeHandler = e => {
-		this.setState({ [e.target.name]: e.target.value });
+		this.setState({ newMemberEmail: e.target.value });
 	};
 
 	render() {
@@ -122,13 +123,11 @@ export class Dashboard extends Component {
 			return <Spinner intent={Intent.PRIMARY} />;
 		}
 		return (
-			<div className="teamDashboard">
-				<h3>Dashboard</h3>
-				<Team users={this.state.users} updateUser={this.updateUser} activateUser={this.activateUser} deactivateUser={this.deactivateUser}/>
+
+			<Card className="teamDashboard">			
+				<Team users={this.state.users} updateUser={this.updateUser} activateUser={this.activateUser} deactivateUser={this.deactivateUser} />
 				<InviteUser changeHandler={this.changeHandler} addUser={this.addUser} />
-				<br />
-				<Link to="/dashboard/reports">View Current Reports</Link>
-			</div>
+			</Card>
 		);
 	}
 }

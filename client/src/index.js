@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 // import ApolloClient from 'apollo-boost';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
+import 'intro.js/introjs.css';
 import App from './App';
-
 
 // const client = new ApolloClient({
 //   uri: 'http://localhost:4000/',

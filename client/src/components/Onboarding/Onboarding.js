@@ -54,10 +54,8 @@ class Onboarding extends Component {
 		const randId = await teamId(8);
 		const joinCode = await joinId(6);
 
-		//create an array of email objects
-		const teamEmails = this.state.emails.map(userEmail => ({
-			email: userEmail
-		}));
+		// splits email string into array by commas and removes spaces
+		const teamEmails = this.state.emails.replace(/\s+/g, '').split(',');
 
 		//create an object to send to mail api
 		const mailObject = {
@@ -104,29 +102,6 @@ class Onboarding extends Component {
 			console.log(err);
 		}
 	};
-	// push emails to state when submited
-	// allows the emails to be displayed above the Add Team Member button\
-	// *****Currently does not clear input field***** LEVEL 2 BUG
-
-	emailHandler = e => {
-		e.preventDefault();
-		const updatedEmails = [...this.state.emails];
-		updatedEmails.push(this.state.singleEmail);
-		console.log(updatedEmails);
-		this.setState({ emails: updatedEmails });
-		this.setState({ singleEmail: '' });
-		document.createTeamForm.reset();
-	};
-
-	// function for removing emails from array before submitting them to create a team
-	removeEmail = emailIdx => {
-		const updateEmails = [...this.state.emails].filter(
-			(item, idx) => idx !== emailIdx
-		);
-		this.setState({
-			emails: updateEmails
-		});
-	};
 
 	render() {
 		// Landing Page - all booleans false
@@ -139,13 +114,11 @@ class Onboarding extends Component {
 			// Create a Team page - createToggle true
 			<CreateTeam
 				createTeam={this.createTeam}
-				teamId={this.state.teamId}
 				emails={this.state.emails}
 				emailHandler={this.emailHandler}
 				joinToggle={this.joinToggle}
 				toggleAllOff={this.toggleAllOff}
 				changeHandler={this.changeHandler}
-				removeEmail={this.removeEmail}
 			/>
 		) : (
 			// Join a Team page - joinToggle true

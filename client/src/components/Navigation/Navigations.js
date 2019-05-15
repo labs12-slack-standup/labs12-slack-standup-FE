@@ -6,7 +6,8 @@ import {
 	Button,
 	Classes,
 	NavbarGroup,
-	NavbarDivider
+	NavbarDivider,
+	Alignment
 } from '@blueprintjs/core';
 
 class Navigation extends React.Component {
@@ -21,7 +22,9 @@ class Navigation extends React.Component {
 		return (
 			<Navbar>
 				<NavbarGroup>
-					<Navbar.Heading>Stand-Em-Ups</Navbar.Heading>
+					<NavLink to="/dashboard">
+						<Navbar.Heading>Stand-Em-Ups</Navbar.Heading>
+					</NavLink>
 					<NavbarDivider />
 					<NavLink to="/dashboard/account">
 						<Button className={Classes.MINIMAL} text="Account" />
@@ -42,22 +45,6 @@ class Navigation extends React.Component {
 					}
 				</NavbarGroup>
 			</Navbar>
-			// <nav class="bp3-navbar .modifier">
-			// 	<div class="bp3-navbar-group bp3-align-left">
-			// 		<div class="bp3-navbar-heading">Blueprint</div>
-			// 		<input class="bp3-input" placeholder="Search files..." type="text" />
-			// 	</div>
-			// 	<div class="bp3-navbar-group bp3-align-right">
-			// 		<button class="bp3-button bp3-minimal bp3-icon-home">Home</button>
-			// 		<button class="bp3-button bp3-minimal bp3-icon-document">
-			// 			Files
-			// 		</button>
-			// 		<span class="bp3-navbar-divider" />
-			// 		<button class="bp3-button bp3-minimal bp3-icon-user" />
-			// 		<button class="bp3-button bp3-minimal bp3-icon-notifications" />
-			// 		<button class="bp3-button bp3-minimal bp3-icon-cog" />
-			// 	</div>
-			//</nav>
 		);
 	}
 }

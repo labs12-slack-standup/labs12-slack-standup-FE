@@ -1,0 +1,15 @@
+.reportsCard {
+	width: 100%;
+}
+.reportsCard .bp3-button {
+	margin: 0 20px;
+	width: 40%;
+	color: #5294e2;
+}
+.createReportCard {
+	display: flex;
+	flex-direction: column;
+	height: 150px;
+	justify-content: space-around;
+	align-items: center;
+}

@@ -14,6 +14,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import User from './components/Dashboard/User';
 
 import './App.css';
+import View from './components/View/View';
 
 function App() {
 	return (
@@ -26,7 +27,7 @@ function App() {
 
 			{/* ONBOARDING */}
 			<Route exact path="/onboarding" component={Onboarding} />
-			<PrivateRoute exact path="/dashboard" component={Dashboard} />
+			<PrivateRoute exact path="/dashboard" component={View} />
 
 			{/* REPORT ROUTES */}
 

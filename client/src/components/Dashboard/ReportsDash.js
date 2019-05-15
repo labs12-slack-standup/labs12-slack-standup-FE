@@ -62,11 +62,11 @@ class ReportsDash extends Component {
 			return <Spinner intent={Intent.PRIMARY} />;
 		}
 		return (
-			<div>
+			<div className="reportsDash">
 				<Switch>
 					<Route
 						exact
-						path="/dashboard/reports"
+						path="/dashboard"
 						render={props => (
 							<Reports
 								{...props}
