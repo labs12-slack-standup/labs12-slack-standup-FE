@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import { getHours } from 'date-fns';
+import { FormGroup, Button, HTMLSelect, InputGroup } from '@blueprintjs/core';
 import './Report.css';
 
 class CreateReport extends Component {
@@ -102,32 +103,37 @@ class CreateReport extends Component {
 			.post(endpoint, report)
 			.then(res => {
 				this.props.setResponseAsState(res.data);
+
 				this.props.history.push('/dashboard');
+
 			})
 			.catch(err => console.log(err));
 	};
 
 	render() {
 		return (
-			<form>
+			<FormGroup>
 				<section>
-					<input
+					<InputGroup
 						type="text"
 						onChange={this.changeHandler}
 						name="reportName"
 						placeholder="Report Name"
 						value={this.state.reportName}
 					/>
-					<select name="slackChannelId" onChange={this.changeHandler}>
+					<HTMLSelect name="slackChannelId" onChange={this.changeHandler} label="Slack Channel for Distribution">
+          <option>Choose a Slack Channel for distribution...</option>
 						{this.state.channels.map(channel => (
 							<option key={channel.id} value={channel.id}>
 								{channel.name}
 							</option>
 						))}
-					</select>
+
+					</HTMLSelect>
 				</section>
 				<section>
-					<input
+					<InputGroup
+
 						type="text"
 						onChange={this.changeHandler}
 						name="message"
@@ -149,7 +155,7 @@ class CreateReport extends Component {
 					))}
 				</section>
 				<section>
-					<input
+					<InputGroup
 						type="time"
 						onChange={this.changeHandler}
 						name="scheduleTime"
@@ -161,17 +167,17 @@ class CreateReport extends Component {
 					{this.state.questions.map(question => (
 						<article className="question-flex" key={question}>
 							<p className="question">{question}</p>
-							<button
+							<Button
 								className="question-button"
 								onClick={e => this.removeQuestion(e, question)}
 							>
 								X
-							</button>
+							</Button>
 						</article>
 					))}
 				</section>
 				<section>
-					<input
+					<InputGroup
 						type="text"
 						onChange={e => {
 							const { value } = e.target;
@@ -183,14 +189,14 @@ class CreateReport extends Component {
 						placeholder="Ask a question..."
 						value={this.state.question}
 					/>
-					<button onClick={this.questionsHandler}>
+					<Button onClick={this.questionsHandler}>
 						Add Question to Report
-					</button>
+					</Button>
 				</section>
 				<section>
-					<button onClick={this.addReport}>Create Report</button>
+					<Button onClick={this.addReport}>Create Report</Button>
 				</section>
-			</form>
+			</FormGroup>
 		);
 	}
 }

@@ -29,15 +29,20 @@ class Navigation extends React.Component {
 					<NavLink to="/dashboard/account">
 						<Button className={Classes.MINIMAL} text="Account" />
 					</NavLink>
-					{/* <NavLink to="/dashboard">
-						<Button className={Classes.MINIMAL} icon="home" text="Dashboard" />
-					</NavLink> */}
-					<NavLink to="/login">
-						<Button className={Classes.MINIMAL} icon="log-in" text="Login" />
+					<NavLink to="/dashboard">
+						<Button className={Classes.MINIMAL} text="Dashboard" />
 					</NavLink>
-					<NavLink to="/login" onClick={this.handleLogout}>
-						<Button className={Classes.MINIMAL} icon="log-out" text="Logout" />
-					</NavLink>
+					{
+						this.props.location.pathname === '/login' ? (
+							<NavLink to="/login">
+								<Button className={Classes.MINIMAL} text="Login" />
+							</NavLink>
+						) : (
+							<NavLink to="/login" onClick={this.handleLogout}>
+								<Button className={Classes.MINIMAL} text="Logout" />
+							</NavLink>
+						)
+					}
 				</NavbarGroup>
 			</Navbar>
 		);
