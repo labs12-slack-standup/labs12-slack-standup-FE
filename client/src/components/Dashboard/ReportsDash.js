@@ -5,11 +5,12 @@ import Reports from '../Reports/Reports';
 import EditReport from '../Reports/ModifyReports/EditReport';
 import { baseURL, axiosWithAuth } from '../../config/axiosWithAuth';
 import SingleReportMember from '../Reports/SingleReportMember';
-
+import { Spinner, Intent } from '@blueprintjs/core';
 class ReportsDash extends Component {
 	state = {
 		message: '',
-		reports: []
+		reports: [],
+		isLoading: true
 	};
 	componentDidMount() {
 		// call to get reports and stick them in state
@@ -20,12 +21,18 @@ class ReportsDash extends Component {
 		const endpoint = `${baseURL}/reports`;
 		axiosWithAuth()
 			.get(endpoint)
-			.then(res =>
+			.then(res => {
 				this.setState({
 					message: res.data.message,
 					reports: res.data.reports
-				})
-			)
+				});
+
+				if (this.state.reports) {
+					this.setState({
+						isLoading: false
+					});
+				}
+			})
 			.catch(err => console.log(err));
 	};
 
@@ -50,6 +57,9 @@ class ReportsDash extends Component {
 	};
 
 	render() {
+		if (this.state.isLoading) {
+			return <Spinner intent={Intent.PRIMARY} />;
+		}
 		return (
 			<div>
 				<Switch>
@@ -78,9 +88,12 @@ class ReportsDash extends Component {
 						exact
 						path="/dashboard/reports/:reportId/edit"
 						render={props => (
-							<EditReport {...props} setResponseAsState={this.setResponseAsState} />
+							<EditReport
+								{...props}
+								setResponseAsState={this.setResponseAsState}
+							/>
 						)}
-					/>		
+					/>
 					<Route
 						exact
 						path="/dashboard/reports/:reportId"
