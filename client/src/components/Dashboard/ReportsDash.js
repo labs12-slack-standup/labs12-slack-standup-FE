@@ -61,8 +61,15 @@ class ReportsDash extends Component {
 		if (this.state.isLoading) {
 			return <Spinner intent={Intent.PRIMARY} />;
 		}
+		console.log(this.props);
 		return (
-			<div className="reportsDash">
+			<div
+				className={
+					this.props.location.pathname === '/dashboard'
+						? 'ReportsOnDash'
+						: 'ReportSingle'
+				}
+			>
 				<Switch>
 					<Route
 						exact
@@ -70,6 +77,7 @@ class ReportsDash extends Component {
 						render={props => (
 							<Reports
 								{...props}
+								role={this.props.role}
 								reports={this.state.reports}
 								archiveReport={this.archiveReport}
 							/>

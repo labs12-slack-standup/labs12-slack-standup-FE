@@ -29,17 +29,23 @@ class ReportResults extends Component {
 											.toLocaleDateString('en-US', options)
 											.replace(',', '')}
 									</h3>
-									{batch.responses.map(response => (
-										<div key={response.userId}>
-											<h3>{response.fullName}</h3>
-											{response.questions.map(({ question, answer }) => (
-												<div key={`${response.userId} ${answer}`}>
-													<h6>{question}</h6>
-													<p>{answer}</p>
-												</div>
-											))}
-										</div>
-									))}
+
+									{
+										batch.responses.map(response => (
+											<div key={response.userId}>
+												<h3>{response.fullName}</h3>
+												{
+													response.questions.map(({ question, answer, id }) => (
+														<div key={id}>
+															<h6>{question}</h6>
+															<p>{answer}</p>
+														</div>
+													))
+												}
+											</div>
+										))
+									}
+
 								</div>
 							)
 					)}
@@ -74,13 +80,13 @@ class ReportResults extends Component {
 }
 
 const Aside = styled.main`
-	@media (min-width: 500px) {
+	@media (min-width: 800px) {
 		width: 450px;
 	}
 `;
 
 const MainContainer = styled.main`
-	@media (min-width: 500px) {
+	@media (min-width: 800px) {
 		display: flex;
 		margin: auto;
 		max-width: 1000px;
@@ -88,7 +94,7 @@ const MainContainer = styled.main`
 `;
 
 const Feed = styled.div`
-	@media (min-width: 500px) {
+	@media (min-width: 800px) {
 		width: 70%;
 	}
 `;
