@@ -1,11 +1,10 @@
 import './dashboard.css';
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
-import { Link } from 'react-router-dom';
 import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import InviteUser from './InviteUser';
-import { Button, Card } from '@blueprintjs/core';
+import { Card } from '@blueprintjs/core';
 
 export class Dashboard extends Component {
 	state = {
@@ -64,9 +63,6 @@ export class Dashboard extends Component {
 
 	changeHandler = e => {
 		this.setState({ newMemberEmail: e.target.value });
-	};
-	onExit = () => {
-		console.log('exited');
 	};
 
 	render() {

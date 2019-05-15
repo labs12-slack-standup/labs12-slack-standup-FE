@@ -38,12 +38,12 @@ class Reports extends Component {
 		if (activeReports.length < 1) {
 			return (
 				<div>
-					<Steps
+					{/* <Steps
 						enabled={stepsEnabled}
 						steps={steps}
 						initialStep={initialStep}
 						onExit={this.onExit}
-					/>
+					/> */}
 					<Card className="createNewReportCard">
 						<h2>You have not created any reports</h2>
 						<Link to="/dashboard/reports/new">
