@@ -2,14 +2,23 @@ import './view.css';
 import React, { Component } from 'react';
 import Dashboard from '../Dashboard/Dashboard';
 import ReportsDash from '../Dashboard/ReportsDash';
+import jwt_decode from 'jwt-decode';
 
 class View extends Component {
-	state = {};
+	state = {
+		roles: 'member'
+	};
+	componentDidMount() {
+		const roles = jwt_decode(localStorage.getItem('token')).roles;
+		this.setState({
+			roles: roles
+		});
+	}
 	render() {
 		return (
 			<div className="view">
-				<ReportsDash className="reportsDash"/>
-				<Dashboard className="usersDash"/>
+				<ReportsDash className="reportsDash" role={this.state.roles} />
+				<Dashboard className="usersDash" role={this.state.roles} />
 			</div>
 		);
 	}

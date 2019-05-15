@@ -70,6 +70,7 @@ class ReportsDash extends Component {
 						render={props => (
 							<Reports
 								{...props}
+								role={this.props.role}
 								reports={this.state.reports}
 								archiveReport={this.archiveReport}
 							/>

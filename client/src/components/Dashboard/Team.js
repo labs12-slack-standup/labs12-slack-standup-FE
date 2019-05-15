@@ -42,7 +42,7 @@ class Team extends Component {
 						activateUser={this.props.activateUser}
 						deactivateUser={this.props.deactivateUser}
 					/>
-				))}
+				))} */}
 			</div>
 		);
 	}
