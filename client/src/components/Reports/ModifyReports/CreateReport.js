@@ -29,6 +29,7 @@ class CreateReport extends Component {
 
 	componentDidMount() {
 		this.fetchSlackChannels();
+	
 	}
 
 	changeHandler = e => {

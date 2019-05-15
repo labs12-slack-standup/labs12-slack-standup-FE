@@ -4,7 +4,8 @@ import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import { Card, Elevation, Button, Collapse } from '@blueprintjs/core';
 import jwt_decode from 'jwt-decode';
 import Slack from '../Slack/Slack';
-class Account extends Component {
+
+class Profile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -28,6 +29,7 @@ class Account extends Component {
 			)
 			.catch(err => console.log(err));
 	}
+
 	viewAchivedReports = () => {
 		const endpoint = `${baseURL}/reports`;
 		axiosWithAuth()
@@ -40,6 +42,7 @@ class Account extends Component {
 			)
 			.catch(err => console.log(err));
 	};
+
 	reactivateReport = id => {
 		const editedReport = {
 			active: true
@@ -90,6 +93,7 @@ class Account extends Component {
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
+	
 	openUserEdit = () => {
 		this.setState({ openEditUser: !this.state.openEditUser });
 	};
@@ -215,4 +219,4 @@ class Account extends Component {
 	}
 }
 
-export default Account;
+export default Profile;

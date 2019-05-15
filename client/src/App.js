@@ -41,7 +41,7 @@ function App() {
 			/> */}
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
-			<PrivateRoute exact path="/dashboard/account" component={Account} />
+			<PrivateRoute exact path="/profile" component={Account} />
 			<PrivateRoute path="/dashboard/team/:userId" component={User} />
 			{/* CONNECT TO SLACK */}
 			<Route exact path="/slack" component={Slack} />
