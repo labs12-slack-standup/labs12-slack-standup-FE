@@ -18,7 +18,9 @@ class Navigation extends React.Component {
 		localStorage.removeItem('token');
 		window.location.reload();
 	};
+
 	render() {
+
 		return (
 			<Navbar>
 				<NavbarGroup>
@@ -32,17 +34,15 @@ class Navigation extends React.Component {
 					<NavLink to="/dashboard">
 						<Button className={Classes.MINIMAL} text="Dashboard" />
 					</NavLink>
-					{
-						this.props.location.pathname === '/login' ? (
-							<NavLink to="/login">
-								<Button className={Classes.MINIMAL} text="Login" />
-							</NavLink>
-						) : (
-							<NavLink to="/login" onClick={this.handleLogout}>
-								<Button className={Classes.MINIMAL} text="Logout" />
-							</NavLink>
-						)
-					}
+					{!localStorage.getItem('token') ? (
+						<NavLink to="/login">
+							<Button className={Classes.MINIMAL} text="Login" />
+						</NavLink>
+					) : (
+						<NavLink to="/login" onClick={this.handleLogout}>
+							<Button className={Classes.MINIMAL} text="Logout" />
+						</NavLink>
+					)}
 				</NavbarGroup>
 			</Navbar>
 		);
