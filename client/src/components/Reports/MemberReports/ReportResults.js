@@ -11,26 +11,32 @@ class ReportResults extends Component {
 	};
 
 	render() {
-		const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+		const options = {
+			weekday: 'long',
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric'
+		};
 		return (
 			<MainContainer>
 				<Feed>
-					{
-						this.state.responses.map(batch => (
-							batch.responses.length > 0 &&
+					{this.state.responses.map(
+						batch =>
+							batch.responses.length > 0 && (
 								<div key={batch.date}>
 									<h3>
-										{
-											new Date(batch.date).toLocaleDateString('en-US', options).replace(',', '')
-										}
+										{new Date(batch.date)
+											.toLocaleDateString('en-US', options)
+											.replace(',', '')}
 									</h3>
+
 									{
 										batch.responses.map(response => (
 											<div key={response.userId}>
 												<h3>{response.fullName}</h3>
 												{
-													response.questions.map(({ question, answer }) => (
-														<div key={`${response.userId} ${answer}`}>
+													response.questions.map(({ question, answer, id }) => (
+														<div key={id}>
 															<h6>{question}</h6>
 															<p>{answer}</p>
 														</div>
@@ -39,9 +45,10 @@ class ReportResults extends Component {
 											</div>
 										))
 									}
+
 								</div>
-						))
-					}
+							)
+					)}
 				</Feed>
 				<Aside>
 					<Card interactive={true} elevation={Elevation.TWO}>
@@ -62,22 +69,24 @@ class ReportResults extends Component {
 
 	getByDate = date => {
 		axiosWithAuth()
-		.post(`${baseURL}/responses/${this.props.match.params.reportId}/day`, { date })
-		.then(res => this.setState({ responses: res.data }))
-		.catch(err => {
-			console.log(err);
-		})
-	}
+			.post(`${baseURL}/responses/${this.props.match.params.reportId}/day`, {
+				date
+			})
+			.then(res => this.setState({ responses: res.data }))
+			.catch(err => {
+				console.log(err);
+			});
+	};
 }
 
 const Aside = styled.main`
-	@media (min-width: 500px) {
+	@media (min-width: 800px) {
 		width: 450px;
 	}
 `;
 
 const MainContainer = styled.main`
-	@media (min-width: 500px) {
+	@media (min-width: 800px) {
 		display: flex;
 		margin: auto;
 		max-width: 1000px;
@@ -85,7 +94,7 @@ const MainContainer = styled.main`
 `;
 
 const Feed = styled.div`
-	@media (min-width: 500px) {
+	@media (min-width: 800px) {
 		width: 70%;
 	}
 `;
