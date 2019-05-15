@@ -78,7 +78,6 @@ const Aside = styled.main`
 
 const MainContainer = styled.main`
 	@media (min-width: 800px) {
-		border: 5px solid red;
 		display: flex;
 		margin: auto;
 		max-width: 1000px;
