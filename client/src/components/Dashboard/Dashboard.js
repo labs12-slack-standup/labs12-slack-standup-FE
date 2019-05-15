@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import InviteUser from './InviteUser';
+import Reports from '../Reports/Reports';
 
 export class Dashboard extends Component {
 	state = {
@@ -114,6 +115,7 @@ export class Dashboard extends Component {
 		return (
 			<div className="teamDashboard">
 				<h3>Dashboard</h3>
+			
 				<Team users={this.state.users} updateUser={this.updateUser} activateUser={this.activateUser} deactivateUser={this.deactivateUser}/>
 				<InviteUser changeHandler={this.changeHandler} addUser={this.addUser} />
 				<br />
