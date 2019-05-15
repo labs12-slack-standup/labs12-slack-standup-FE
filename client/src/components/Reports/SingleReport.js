@@ -1,20 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Card, Button } from '@blueprintjs/core';
 
 const SingleReport = props => {
 	return (
-		<div>
-			<h2>Report Name: {props.report.reportName}</h2>
-			<h3>Report Created: {props.report.created_at}</h3>
-			<h4>Report Message: {props.report.message}</h4>
-			<Link to={`/dashboard/reports/${props.report.id}`}>Respond</Link>
-			<br />
-			<Link to={`/dashboard/reports/${props.report.id}/edit`}>Edit</Link>
-			<br />
-			<button onClick={() => props.archiveReport(props.report.id)}>
-				Archive Report
-			</button>
-		</div>
+		<Card className="reportsCard">
+			<Link
+				to={`/dashboard/reports/${props.report.id}`}
+				style={{ textDecoration: 'none' }}
+			>
+				<h2>{props.report.reportName}</h2>
+				<h4>Message: {props.report.message}</h4>
+				<h5>{props.report.created_at}</h5>
+
+				<Button>
+					<Link to={`/dashboard/reports/${props.report.id}/edit`}>Edit</Link>
+				</Button>
+				<Button onClick={() => props.archiveReport(props.report.id)}>
+					Archive
+				</Button>
+			</Link>
+		</Card>
 	);
 };
 

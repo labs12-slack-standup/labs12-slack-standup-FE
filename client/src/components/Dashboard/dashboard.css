@@ -1,0 +1,66 @@
+/* .teamDashboard img {
+	width: 50px;
+	border-radius: 50px;
+} */
+textarea.bp3-input {
+	height: 40px;
+	margin-bottom: 20px;
+}
+/* .teamCard0 {
+	background-color: #d3d3d3;
+}
+.teamCard1 {
+	background-color: #778899;
+} */
+.teamDashboard {
+	/* color: #a1d6e2; */
+	width: 45%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+.teamList {
+	display: flex;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	/* background-color: #f1f1f2; */
+	/* color: #5294e2; */
+}
+.teamCard {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 80px;
+}
+.teamCard img {
+	height: 50px;
+	width: 50px;
+	border-radius: 50px;
+}
+/* .teamCard h4 {
+	margin: 0 auto;
+} */
+.teamCard h4 {
+	/* padding: 5px 5%; */
+	margin: 0 auto;
+}
+
+.reportsDash {
+	width: 75%;
+}
+.inviteUserBox h3 {
+	text-align: center;
+}
+.inviteUser {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	margin: 0 auto;
+}
+.onboarding .bp3-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 50px;
+}

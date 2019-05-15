@@ -103,7 +103,9 @@ class CreateReport extends Component {
 			.post(endpoint, report)
 			.then(res => {
 				this.props.setResponseAsState(res.data);
-				this.props.history.push('/dashboard/reports');
+
+				this.props.history.push('/dashboard');
+
 			})
 			.catch(err => console.log(err));
 	};
@@ -126,10 +128,12 @@ class CreateReport extends Component {
 								{channel.name}
 							</option>
 						))}
+
 					</HTMLSelect>
 				</section>
 				<section>
 					<InputGroup
+
 						type="text"
 						onChange={this.changeHandler}
 						name="message"

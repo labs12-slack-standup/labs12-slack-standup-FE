@@ -1,0 +1,35 @@
+.userCard img {
+	width: 200px;
+	height: 200px;
+	border-radius: 30px;
+}
+.userForm {
+	/* display: flex;
+	justify-content: center;
+	flex-wrap: wrap; */
+}
+.accountForms {
+	width: 100%;
+	/* margin-top: 50px; */
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 150px;
+}
+
+.userCard {
+	background-color: #f1f1f2;
+	color: #325d92;
+	font-weight: bold;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	height: 50%;
+	justify-content: space-around;
+}
+.userCard .bp3-button {
+	background-color: #fafafad2;
+}
+
+/* .userCard img {
+	align-self: flex-end;
+} */
