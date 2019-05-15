@@ -18,16 +18,20 @@ class Team extends Component {
 
 		return (
 			<div>
-				<h3>Teamies:</h3>
-				<h4>Active Users on Team</h4>
-				{activeUsers.map(user => (
-					<User
-						user={user}
-						key={user.id}
-						activateUser={this.props.activateUser}
-						deactivateUser={this.props.deactivateUser}
-					/>
-				))}
+				<div>
+					<h3>Teamies:</h3>
+					<h4>Active Users on Team</h4>
+				</div>
+				<div className="usersContainer">
+					{activeUsers.map(user => (
+						<User
+							user={user}
+							key={user.id}
+							activateUser={this.props.activateUser}
+							deactivateUser={this.props.deactivateUser}
+						/>
+					))}
+				</div>
 				<br />
 				<br />
 				<h4>Inactive Users</h4>

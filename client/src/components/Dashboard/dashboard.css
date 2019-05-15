@@ -26,13 +26,20 @@ textarea.bp3-input {
 	/* background-color: #f1f1f2; */
 	/* color: #5294e2; */
 }
-.teamCard {
+.bp3-card .usersContainer{
+	margin: 1rem;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
-	justify-content: center;
-	width: 80px;
+	
+	/* justify-content: center;  */
+	width: 25%;
 }
+
+.bp3-card .singleUserContainer{
+	margin: .5rem;
+}
+
 
 /* .teamCard h4 {
 	margin: 0 auto;

@@ -8,8 +8,8 @@ class View extends Component {
 	render() {
 		return (
 			<div className="view">
-				<ReportsDash />
-				<Dashboard />
+				<ReportsDash className="reportsDash"/>
+				<Dashboard className="usersDash"/>
 			</div>
 		);
 	}
