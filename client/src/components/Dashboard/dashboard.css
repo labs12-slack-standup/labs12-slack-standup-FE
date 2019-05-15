@@ -8,10 +8,34 @@ textarea.bp3-input {
 	width: 45%;
 }
 
-.teamDashboard img {
-	width: 50px;
+.bp3-card .usersContainer{
+	margin: 1rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	
+	/* justify-content: center;  */
+	width: 25%;
+}
+
+.bp3-card .singleUserContainer{
+	margin: .5rem;
+}
+
+
+/* .teamCard h4 {
+	margin: 0 auto;
+} */
+.teamCard h4 {
+	/* padding: 5px 5%; */
+	margin: 0 auto;
+}
+
+.profilePic {
+	width: 50%;
 	border-radius: 50px;
 }
+
 .reportsDash {
 	width: 75%;
 }
