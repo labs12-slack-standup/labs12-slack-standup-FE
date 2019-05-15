@@ -20,6 +20,11 @@ class Navigation extends React.Component {
 	};
 
 	render() {
+		const appToken = localStorage.getItem('token');
+		const firebaseToken = localStorage.getItem(
+			'firebaseui::rememberedAccounts'
+		);
+		const loggedIn = appToken && firebaseToken;
 
 		return (
 			<Navbar>
@@ -34,7 +39,7 @@ class Navigation extends React.Component {
 					<NavLink to="/dashboard">
 						<Button className={Classes.MINIMAL} text="Dashboard" />
 					</NavLink>
-					{!localStorage.getItem('token') ? (
+					{loggedIn ? (
 						<NavLink to="/login">
 							<Button className={Classes.MINIMAL} text="Login" />
 						</NavLink>
