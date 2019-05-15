@@ -132,14 +132,12 @@ class Onboarding extends Component {
 		) : this.state.createToggle ? (
 			// Create a Team page - createToggle true
 			<CreateTeam
-				createTeam={this.createTeam}
-				teamId={this.state.teamId}
+				create_team={this.createTeam}
 				emails={this.state.emails}
 				emailHandler={this.emailHandler}
 				joinToggle={this.joinToggle}
 				toggleAllOff={this.toggleAllOff}
 				changeHandler={this.changeHandler}
-				removeEmail={this.removeEmail}
 			/>
 		) : (
 			// Join a Team page - joinToggle true

@@ -11,3 +11,9 @@
 	width: 150px;
 	margin: 10px;
 }
+
+.createTeamEmail,
+textarea.bp3-input {
+	width: 400px;
+	height: 100px;
+}

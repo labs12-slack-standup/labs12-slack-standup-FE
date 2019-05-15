@@ -1,17 +1,19 @@
 import React from 'react';
-import { EditableText, TextArea } from '@blueprintjs/core';
+import { EditableText, TextArea, Intent } from '@blueprintjs/core';
 
 const CreateTeam = props => {
 	return (
 		<div className="onboarding">
 			<h3>Create a team:</h3>
 			<TextArea
-				placeholder="Add team members\' emails, seperated by commas"
+				style={{ width: 400 + 'px', height: 100 + 'px' }}
+				className="createTeamEmail"
+				intent={Intent.PRIMARY}
+				placeholder="Add team members' emails, seperated by commas"
 				onSubmit={props.emailHandler}
 				value={props.emails}
 				onChange={props.changeHandler}
 				name="emails"
-				{...props}
 			/>
 			<button onClick={props.createTeam}>Create Team</button>
 			{/* </Link> */}
