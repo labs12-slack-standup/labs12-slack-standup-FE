@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Elevation, Collapse, Button } from '@blueprintjs/core';
 
+import User from './User';
+
 class Team extends Component {
 	state = {
 		openInactiveUsers: false
@@ -9,6 +11,7 @@ class Team extends Component {
 	viewInactiveUsers = () => {
 		this.setState({ openInactiveUsers: !this.state.openInactiveUsers });
 	};
+
 
 	render() {
 		const activeUsers = this.props.users.filter(user => user.active);
@@ -48,5 +51,6 @@ class Team extends Component {
 		);
 	}
 }
+
 
 export default Team;
