@@ -22,14 +22,16 @@ class Navigation extends React.Component {
 		return (
 			<Navbar>
 				<NavbarGroup>
-					<Navbar.Heading>Stand-Em-Ups</Navbar.Heading>
+					<NavLink to="/dashboard">
+						<Navbar.Heading>Stand-Em-Ups</Navbar.Heading>
+					</NavLink>
 					<NavbarDivider />
 					<NavLink to="/dashboard/account">
 						<Button className={Classes.MINIMAL} text="Account" />
 					</NavLink>
-					<NavLink to="/dashboard">
+					{/* <NavLink to="/dashboard">
 						<Button className={Classes.MINIMAL} icon="home" text="Dashboard" />
-					</NavLink>
+					</NavLink> */}
 					<NavLink to="/login">
 						<Button className={Classes.MINIMAL} icon="log-in" text="Login" />
 					</NavLink>

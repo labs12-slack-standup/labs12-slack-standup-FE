@@ -65,6 +65,9 @@ export class Dashboard extends Component {
 	changeHandler = e => {
 		this.setState({ newMemberEmail: e.target.value });
 	};
+	onExit = () => {
+		console.log('exited');
+	};
 
 	render() {
 		return (

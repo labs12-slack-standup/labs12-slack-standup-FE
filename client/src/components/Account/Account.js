@@ -1,7 +1,7 @@
+import './account.css';
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import { Card, Elevation, Button, Collapse } from '@blueprintjs/core';
-import './account.css';
 class Account extends Component {
 	constructor(props) {
 		super(props);
