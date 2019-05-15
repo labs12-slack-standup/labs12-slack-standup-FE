@@ -9,8 +9,7 @@ const CreateTeam = props => {
 				style={{ width: 400 + 'px', height: 100 + 'px' }}
 				className="createTeamEmail"
 				intent={Intent.PRIMARY}
-				placeholder="Add team members' emails, seperated by commas"
-				onSubmit={props.emailHandler}
+				placeholder="Add team members' emails, separated by commas"
 				value={props.emails}
 				onChange={props.changeHandler}
 				name="emails"
@@ -25,22 +24,3 @@ const CreateTeam = props => {
 };
 
 export default CreateTeam;
-
-{
-	/* <h4>Members Added:</h4>
-{props.emails.map((email, idx) => (
-	<div key={idx}>
-		{email} <button onClick={() => props.removeEmail(idx)}>X</button>
-	</div>
-))}
-<div>Add your team members here by email:</div>
-<form name="createTeamForm" onSubmit={props.emailHandler}>
-	<input
-		type="email"
-		// onSubmit={props.emailHandler}
-		name="singleEmail"
-		onChange={props.changeHandler}
-	/>
-	<button onClick={props.emailHandler}>Add Team Member</button>
-</form> */
-}
