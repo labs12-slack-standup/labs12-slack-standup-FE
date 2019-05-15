@@ -4,7 +4,6 @@ import CreateReport from '../Reports/ModifyReports/CreateReport';
 import Reports from '../Reports/Reports';
 import EditReport from '../Reports/ModifyReports/EditReport';
 import { baseURL, axiosWithAuth } from '../../config/axiosWithAuth';
-import SingleReportMember from '../Reports/SingleReportMember';
 import { Spinner, Intent } from '@blueprintjs/core';
 import SingleReportResults from '../Reports/MemberReports/ReportResults';
 
