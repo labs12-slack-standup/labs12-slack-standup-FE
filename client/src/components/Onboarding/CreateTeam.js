@@ -68,9 +68,7 @@ const CreateTeam = props => {
 					onChange={values => props.changeEmail(values)}
 					fill={true}
 				/>
-				<Button onClick={props.createTeam} style={{ marginBottom: '100px' }}>
-					Create Team
-				</Button>
+				<Button onClick={props.createTeam}>Create Team</Button>
 			</Card>
 			{props.error.length > 0 && (
 				<div className="errorModal">

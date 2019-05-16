@@ -111,6 +111,10 @@ class Onboarding extends Component {
 		this.setState({ error: '' });
 	};
 	// splits email string into array by commas and removes spaces
+	// separateEmails = () => {
+	// 	const teamEmails = this.state.singleEmail.replace(/\s+/g, '').split(',');
+	// 	this.setState({ emails: teamEmails });
+	// };
 	changeEmail = email => {
 		console.log(email);
 		this.setState({ emails: email });
