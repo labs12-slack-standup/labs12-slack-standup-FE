@@ -14,7 +14,6 @@ class Team extends Component {
 
 	render() {
 		const activeUsers = this.props.users.filter(user => user.active);
-		//const inactiveUsers = this.props.users.filter(user => !user.active);
 
 		return (
 			<div className="usersContainer">
