@@ -14,7 +14,8 @@ class Onboarding extends Component {
 			joinCode: '',
 			singleEmail: '',
 			emails: [],
-			teamId: null
+			teamId: null,
+			error: ''
 		};
 	}
 
@@ -54,13 +55,10 @@ class Onboarding extends Component {
 		const randId = await teamId(8);
 		const joinCode = await joinId(6);
 
-		// splits email string into array by commas and removes spaces
-		const teamEmails = this.state.emails.replace(/\s+/g, '').split(',');
-
 		//create an object to send to mail api
 		const mailObject = {
-		//email singular to ensure consistency with adding an new user email on the dashboard
-			email: teamEmails,
+			//email singular to ensure consistency with adding an new user email on the dashboard
+			email: this.state.emails,
 			joinCode: joinCode
 		};
 		console.log('mailObject', mailObject);
@@ -74,7 +72,7 @@ class Onboarding extends Component {
 			localStorage.setItem('token', updated.data.token);
 
 			// if the user's entered emails, make the post call to the email endpoint
-			if (mailObject.email.length > 0) {
+			if (mailObject.email[0].length > 1) {
 				await axiosWithAuth().post(`${baseURL}/email`, mailObject);
 			}
 
@@ -82,25 +80,46 @@ class Onboarding extends Component {
 			this.props.history.push('/dashboard');
 		} catch (error) {
 			console.log(error);
+			this.setState({
+				error:
+					'There was an issue with the emails, please be sure to separate each email with a comma. Alternatively, you can pass the join code to your teammates manually.'
+			});
 		}
 		// took this out because it was trying to update after the push to dashboard, but not sure why it was here in the first place so I haven't deleted it -- eek
 		// this.setState({ teamId: randId });
 	};
 
-
+	// On submit to join a team by join code
+	// Sets the user's teamId to match the manager's
+	// Also gives user new token
 	submitHandler = async e => {
-		e.preventDefault();
-
+		console.log(this.state.joinCode);
 		try {
 			const newToken = await axiosWithAuth().get(
 				`${baseURL}/users/joinCode/${this.state.joinCode}`
 			);
-			console.log('new token', newToken);
 			localStorage.setItem('token', newToken.data.updatedToken);
 			this.props.history.push('/dashboard');
 		} catch (err) {
 			console.log(err);
+			this.setState({
+				error: 'There was an issue joining this team. Check your join code'
+			});
 		}
+	};
+	clearError = () => {
+		this.setState({ error: '' });
+	};
+	// splits email string into array by commas and removes spaces
+	// separateEmails = () => {
+	// 	const teamEmails = this.state.singleEmail.replace(/\s+/g, '').split(',');
+	// 	this.setState({ emails: teamEmails });
+	// };
+	changeEmail = email => {
+		console.log(email);
+		this.setState({ emails: email });
+		//this.separateEmails();
+		console.log(this.state.singleEmail);
 	};
 
 	render() {
@@ -118,7 +137,9 @@ class Onboarding extends Component {
 				emailHandler={this.emailHandler}
 				joinToggle={this.joinToggle}
 				toggleAllOff={this.toggleAllOff}
-				changeHandler={this.changeHandler}
+				changeEmail={this.changeEmail}
+				error={this.state.error}
+				clearError={this.clearError}
 			/>
 		) : (
 			// Join a Team page - joinToggle true
@@ -127,6 +148,8 @@ class Onboarding extends Component {
 				toggleAllOff={this.toggleAllOff}
 				changeHandler={this.changeHandler}
 				submitHandler={this.submitHandler}
+				error={this.state.error}
+				clearError={this.clearError}
 			/>
 		);
 	}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from '@blueprintjs/core';
+import { Card, Button } from '@blueprintjs/core';
 
 const LandingPage = props => {
 	return (
@@ -7,8 +7,8 @@ const LandingPage = props => {
 			<h3>Welcome to Stand-Em-Ups!</h3>
 			<h4>Do you have a join code?</h4>
 			<h4>If not, no worries, you can create a team here too</h4>
-			<button onClick={props.joinToggle}>I have a join code</button>
-			<button onClick={props.createToggle}>Create a Team</button>
+			<Button onClick={props.joinToggle}>I have a join code</Button>
+			<Button onClick={props.createToggle}>Create a Team</Button>
 		</Card>
 	);
 };

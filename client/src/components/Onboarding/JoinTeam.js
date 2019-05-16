@@ -1,34 +1,74 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card } from '@blueprintjs/core';
+import { Card, Elevation, Button } from '@blueprintjs/core';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import blue from '@material-ui/core/colors/blue';
 
 const JoinTeam = props => {
 	return (
 		<div className="onboarding">
-			<Card>
-				Enter Join Code (provided by your manger):
-				<form>
-					<input
+			<Card
+				interactive={false}
+				elevation={Elevation.TWO}
+				className="onboardingCard"
+			>
+				<h3> Enter Join Code (provided by your manger):</h3>
+				<FormControl>
+					<InputLabel
+						htmlFor="custom-css-standard-input"
+						style={{
+							color: blue[500],
+							root: {
+								'&$cssFocused': {
+									color: blue[500]
+								}
+							},
+							focused: {}
+						}}
+					>
+						Join Code
+					</InputLabel>
+					<Input
+						id="custom-css-standard-input"
+						style={{
+							width: '200px',
+							margin: '10px 0',
+							color: blue[500],
+							underline: {
+								'&:after': {
+									borderBottomColor: blue[500]
+								}
+							}
+						}}
 						type="text"
-						placeholder="join code"
-						onChange={props.changeHandler}
 						name="joinCode"
+						onChange={props.changeHandler}
 					/>
-				</form>
-				<button
-					onClick={props.submitHandler}
-					style={{ marginBottom: 100 + 'px' }}
-				>
-					Join Team
-				</button>
+				</FormControl>
+				<Button onClick={props.submitHandler}>Join Team</Button>
 			</Card>
-			<Card>
+			<Card
+				interactive={false}
+				elevation={Elevation.TWO}
+				className="onboardingCard"
+			>
 				<p>
 					Actually don't have a join code? That's okay, let's create a team:
 				</p>
-				<button onClick={props.createToggle}>Create Team</button>
-				<button onClick={props.toggleAllOff}>Cancel</button>
+				<Button onClick={props.createToggle}>Create Team</Button>
+				<Button onClick={props.toggleAllOff}>Cancel</Button>
 			</Card>
+			{props.error.length > 0 && (
+				<div className="errorModal">
+					<Card className="errorJoinCard onboardingCard">
+						<button onClick={props.clearError}>X</button>
+						<h3>Oops...</h3>
+						<div>{props.error}</div>
+					</Card>
+				</div>
+			)}
 		</div>
 	);
 };
