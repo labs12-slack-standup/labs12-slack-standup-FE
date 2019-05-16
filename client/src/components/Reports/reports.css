@@ -9,7 +9,14 @@
 .createReportCard {
 	display: flex;
 	flex-direction: column;
-	height: 150px;
+	height: 170px;
 	justify-content: space-around;
 	align-items: center;
+}
+
+.slack-icon {
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+	width: 140px;
 }
