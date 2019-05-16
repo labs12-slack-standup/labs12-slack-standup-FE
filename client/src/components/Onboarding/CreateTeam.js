@@ -62,16 +62,12 @@ const CreateTeam = props => {
 				className="onboardingCard"
 			>
 				<h3>Add team member's email</h3>
-				<TextArea
-					style={{ width: '400px', height: '100px' }}
-					className="createTeamEmail"
-					intent={Intent.PRIMARY}
-					placeholder="Emails, separated by commas"
-					value={props.singleEmail}
-					onChange={props.changeHandler}
-					name="singleEmail"
+
+				<TagInput
+					values={props.emails}
+					onChange={values => props.changeEmail(values)}
+					fill={true}
 				/>
-				{/* <TagInput /> */}
 				<Button onClick={props.createTeam} style={{ marginBottom: '100px' }}>
 					Create Team
 				</Button>

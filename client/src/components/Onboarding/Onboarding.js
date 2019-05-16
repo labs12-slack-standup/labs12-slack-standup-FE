@@ -38,7 +38,6 @@ class Onboarding extends Component {
 	};
 
 	createTeam = async () => {
-		this.separateEmails();
 		const teamId = length => {
 			return Math.round(
 				Math.pow(9, length + 1) - Math.random() * Math.pow(9, length)
@@ -112,9 +111,11 @@ class Onboarding extends Component {
 		this.setState({ error: '' });
 	};
 	// splits email string into array by commas and removes spaces
-	separateEmails = () => {
-		const teamEmails = this.state.singleEmail.replace(/\s+/g, '').split(',');
-		this.setState({ emails: teamEmails });
+	changeEmail = email => {
+		console.log(email);
+		this.setState({ emails: email });
+		//this.separateEmails();
+		console.log(this.state.singleEmail);
 	};
 
 	render() {
@@ -132,7 +133,7 @@ class Onboarding extends Component {
 				emailHandler={this.emailHandler}
 				joinToggle={this.joinToggle}
 				toggleAllOff={this.toggleAllOff}
-				changeHandler={this.changeHandler}
+				changeEmail={this.changeEmail}
 				error={this.state.error}
 				clearError={this.clearError}
 			/>

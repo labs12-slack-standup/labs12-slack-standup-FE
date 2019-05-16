@@ -49,13 +49,26 @@
 	text-align: center;
 }
 .errorCard {
-	position: fixed;
-	margin: 200px 40%;
+	position: relative;
+	left: 25%;
+	top: 200px;
 }
 .errorJoinCard {
-	margin: 200px 40%;
+	/* margin: 200px 40%; */
+	position: relative;
+	left: 25%;
+	top: 200px;
 }
 .onboarding .bp3-button-text {
-	flex: 0 1 auto;
 	text-align: center;
 }
+
+.onboarding .bp3-text-overflow-ellipsis {
+	color: #fefefe;
+}
+.onboardingCard {
+	width: 50%;
+}
+/* .onboardingCard .bp3-tag {
+	font-size: 1rem;
+}  */
