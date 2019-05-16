@@ -90,7 +90,7 @@ class Onboarding extends Component {
 
 	submitHandler = async e => {
 		e.preventDefault();
-
+		console.log(this.state.joinCode)
 		try {
 			const newToken = await axiosWithAuth().get(
 				`${baseURL}/users/joinCode/${this.state.joinCode}`
