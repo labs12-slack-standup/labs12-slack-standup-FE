@@ -1,35 +1,82 @@
 .days-flex {
-  display: flex;
-  height: 30px;
-  justify-content: space-around;
-  width: 300px;
+	display: flex;
+	height: 30px;
+	justify-content: space-around;
+	max-width: 500px;
+	margin: 30px 0;
+	font-size: 20px;
+	font-weight: bolder;
+}
+
+.schedule-title {
+	font-size: 20px;
+}
+
+.report-time {
+	margin: 20px 0;
+	margin-bottom: 40px;
 }
 
 .day {
-  border: 1px solid white;
-  border-radius: 5px;
-  cursor: pointer;
-  line-height: 30px;
-  text-align: center;
-  width: 30px;
+	border: 1px solid white;
+	border-radius: 5px;
+	cursor: pointer;
+	line-height: 30px;
+	text-align: center;
+	width: 30px;
 }
 
 .selected {
-  border: 1px solid black;
+	border: 2px solid #5294e2;
+	color: white;
+	background-color: #5294e2;
 }
 
 .question-flex {
-  display: flex;
-  margin-top: 10px;
-  width: 300px;
+	display: flex;
+	margin-top: 10px;
+	max-width: 500px;
 }
 
 .question {
-  width: 250px;
+	max-width: 500px;
+	width: 90%;
+	font-size: 20px;
+	margin: 10px 0;
 }
 
-/* .question-button {
-  cursor: pointer;
-  width: 50px;
+.question-button {
+	cursor: pointer;
+	width: 50px;
 }
- */
+
+.create-report {
+	max-width: 600px;
+	margin: 20px auto;
+}
+
+.report-name {
+	max-width: 500px;
+	width: 100%;
+	font-size: 20px;
+	margin: 30px 0;
+}
+
+.button-block {
+	margin: 10px 0;
+	display: block;
+}
+
+.input-field {
+	max-width: 500px;
+	width: 100%;
+	margin: 30px 0;
+}
+
+.schedule-card {
+	margin: 10px 0;
+}
+
+.schedule-card-content {
+	margin: 10px;
+}
