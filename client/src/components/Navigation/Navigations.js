@@ -25,7 +25,7 @@ class Navigation extends React.Component {
 			'firebaseui::rememberedAccounts'
 		);
 		const loggedIn = appToken && firebaseToken;
-
+		console.log('loggedIn', loggedIn);
 		return (
 			<Navbar>
 				<NavbarGroup>
