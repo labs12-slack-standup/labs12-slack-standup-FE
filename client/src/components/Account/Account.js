@@ -65,7 +65,7 @@ class Account extends Component {
 			.put(endpoint, editedReport)
 			.then(res => console.log(res))
 			.catch(err => console.log(err));
-		this.props.history.push('/dashboard/reports');
+		this.props.history.push('/dashboard/');
 	};
 
 	updateUser = e => {

@@ -53,48 +53,45 @@ export class Dashboard extends Component {
 		const endpoint = `${baseURL}/users/${id}`;
 		const editedUser = {
 			active: true
-		}
+		};
 		//create an array with everyone but the user the function's been called on
-		const newUsers = this.state.users.filter(user => user.id !== id)
+		const newUsers = this.state.users.filter(user => user.id !== id);
 
-		
 		axiosWithAuth()
 			.put(endpoint, editedUser)
 			.then(res => {
-				newUsers.push(res.data.editedUser)
+				newUsers.push(res.data.editedUser);
 				this.setState({
 					users: newUsers
-				})
+				});
 			})
 			.catch(err => {
 				console.log(err);
 			});
-			
-
 	};
 
 	deactivateUser = id => {
 		const endpoint = `${baseURL}/users/${id}`;
 		const editedUser = {
 			active: false
-		}
-		const newUsers = this.state.users.filter(user => user.id !== id)
-		
+		};
+		const newUsers = this.state.users.filter(user => user.id !== id);
+
 		axiosWithAuth()
 			.put(endpoint, editedUser)
 			.then(res => {
-				newUsers.push(res.data.editedUser)
+				newUsers.push(res.data.editedUser);
 				this.setState({
 					users: newUsers
-				})
+				});
 			})
 			.catch(err => {
 				console.log(err);
 			});
-
 	};
 
-	addUser = () => {
+	addUser = e => {
+		e.preventDefault();
 		//create mailObject to post to sendgrid API
 		const mailObject = {
 			email: this.state.newMemberEmail,
@@ -112,6 +109,7 @@ export class Dashboard extends Component {
 			.catch(err => {
 				console.log(err);
 			});
+		e.target.reset();
 	};
 
 	changeHandler = e => {
@@ -123,14 +121,18 @@ export class Dashboard extends Component {
 			return <Spinner intent={Intent.PRIMARY} />;
 		}
 		return (
-
-			<Card className="teamDashboard">			
-				<Team className="teamContainer" users={this.state.users} updateUser={this.updateUser} activateUser={this.activateUser} deactivateUser={this.deactivateUser} />
+			<Card className="teamDashboard">
+				<Team
+					className="teamContainer"
+					users={this.state.users}
+					updateUser={this.updateUser}
+					activateUser={this.activateUser}
+					deactivateUser={this.deactivateUser}
+				/>
 				<InviteUser changeHandler={this.changeHandler} addUser={this.addUser} />
 			</Card>
 		);
 	}
 }
-
 
 export default Dashboard;

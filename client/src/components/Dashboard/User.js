@@ -3,9 +3,9 @@ import { Card, Button, Elevation } from '@blueprintjs/core';
 
 const User = props => {
 	return (
-		<div className="singleUserContainer">
-			<Card
-				// className="userCard"
+		<Card className="singleUserContainer">
+			<div
+				// className="userdiv"
 				interactive={true}
 				elevation={Elevation.TWO}
 				key={props.user.id}
@@ -16,7 +16,7 @@ const User = props => {
 					alt="profile pic"
 				/>
 				<h4>{props.user.fullName}</h4>
-				{props.user.active ? (
+				{/* {props.user.active ? (
 					<Button onClick={() => props.deactivateUser(props.user.id)}>
 						Deactivate User
 					</Button>
@@ -24,9 +24,9 @@ const User = props => {
 					<Button onClick={() => props.activateUser(props.user.id)}>
 						Activate User
 					</Button>
-				)}
-			</Card>
-		</div>
+				)} */}
+			</div>
+		</Card>
 	);
 };
 
