@@ -25,8 +25,9 @@ class Navigation extends React.Component {
 		const firebaseToken = localStorage.getItem(
 			'firebaseui::rememberedAccounts'
 		);
+		console.log(appToken);
 		const loggedIn = appToken && firebaseToken;
-		console.log('loggedIn', loggedIn);
+
 		return (
 			<Navbar>
 				<NavbarGroup>
@@ -37,20 +38,22 @@ class Navigation extends React.Component {
 
 					<NavLink to="/dashboard/profile">
 						<Button icon="user" className={Classes.MINIMAL} text="Profile" />
-
 					</NavLink>
 					<NavLink to="/dashboard">
 						<Button icon="home" className={Classes.MINIMAL} text="Dashboard" />
 					</NavLink>
 
 					{!loggedIn ? (
-
 						<NavLink to="/login">
-							<Button className={Classes.MINIMAL} text="Login" />
+							<Button icon="log-in" className={Classes.MINIMAL} text="Login" />
 						</NavLink>
 					) : (
 						<NavLink to="/login" onClick={this.handleLogout}>
-							<Button className={Classes.MINIMAL} text="Logout" />
+							<Button
+								icon="log-out"
+								className={Classes.MINIMAL}
+								text="Logout"
+							/>
 						</NavLink>
 					)}
 				</NavbarGroup>
