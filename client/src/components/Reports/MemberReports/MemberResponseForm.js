@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReportInput from './ReportInput';
+import Button from '@material-ui/core/Button';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
+import './MemberResponseForm.css';
 
 class MemberResponseForm extends Component {
 	state = {
@@ -17,8 +19,8 @@ class MemberResponseForm extends Component {
 			</>
 		) : (
 			<div>
-				<h1>{this.state.reportName}</h1>
-				<p>{this.state.reportMessage}</p>
+				<h1 className="member-form-title">{this.state.reportName}</h1>
+				<p className="member-form-subtitle">{this.state.reportMessage}</p>
 				{this.state.questions.map((q, i) => (
 					<ReportInput
 						question={q.question}
@@ -27,7 +29,14 @@ class MemberResponseForm extends Component {
 						key={i}
 					/>
 				))}
-				<button onClick={this.submitReport}>Submit</button>
+				<Button
+					style={{ display: 'block', margin: 'auto', marginTop: '30px', marginBottom: '30px' }}
+					variant="outlined"
+					color="primary"
+					onClick={this.submitReport}
+				>
+					Submit Report
+				</Button>
 			</div>
 		);
 	}
