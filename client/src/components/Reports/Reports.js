@@ -53,6 +53,7 @@ class Reports extends Component {
 								Create Report
 							</Button>
 						</Link>
+						<Slack />
 					</Card>
 				</div>
 			);

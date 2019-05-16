@@ -28,11 +28,7 @@ class ReportsDash extends Component {
 					reports: res.data.reports
 				});
 
-				if (this.state.reports) {
-					this.setState({
-						isLoading: false
-					});
-				}
+				this.setState({ isLoading: false });
 			})
 			.catch(err => console.log(err));
 	};
