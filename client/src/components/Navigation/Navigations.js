@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './navigation.css';
 import {
+	Icon,
 	Navbar,
 	Button,
 	Classes,
@@ -26,23 +27,21 @@ class Navigation extends React.Component {
 						<Navbar.Heading>Stand-Em-Ups</Navbar.Heading>
 					</NavLink>
 					<NavbarDivider />
-					<NavLink to="/dashboard/account">
-						<Button className={Classes.MINIMAL} text="Account" />
+					<NavLink to="/dashboard/profile">
+						<Button icon="user" className={Classes.MINIMAL} text="Profile" />
 					</NavLink>
 					<NavLink to="/dashboard">
-						<Button className={Classes.MINIMAL} text="Dashboard" />
+						<Button icon="home" className={Classes.MINIMAL} text="Dashboard" />
 					</NavLink>
-					{
-						this.props.location.pathname === '/login' ? (
-							<NavLink to="/login">
-								<Button className={Classes.MINIMAL} text="Login" />
-							</NavLink>
-						) : (
-							<NavLink to="/login" onClick={this.handleLogout}>
-								<Button className={Classes.MINIMAL} text="Logout" />
-							</NavLink>
-						)
-					}
+					{this.props.location.pathname === '/login' ? (
+						<NavLink to="/login">
+							<Button className={Classes.MINIMAL} text="Login" />
+						</NavLink>
+					) : (
+						<NavLink to="/login" onClick={this.handleLogout}>
+							<Button className={Classes.MINIMAL} text="Logout" />
+						</NavLink>
+					)}
 				</NavbarGroup>
 			</Navbar>
 		);

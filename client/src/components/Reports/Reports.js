@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Card, Button } from '@blueprintjs/core';
 import { Steps } from 'intro.js-react';
 
-import 'intro.js/introjs.css';
+//import 'intro.js/introjs.css';
 
 class Reports extends Component {
 	constructor(props) {
