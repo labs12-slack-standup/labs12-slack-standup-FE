@@ -48,7 +48,9 @@ class CreateReport extends Component {
 					slackChannelId: res.data[0].id || ''
 				});
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+				console.log(err.response.data);
+			});
 	};
 
 	questionsHandler = e => {

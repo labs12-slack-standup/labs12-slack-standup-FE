@@ -1,11 +1,23 @@
 import './account.css';
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
-import { Card, Elevation, Button, Collapse } from '@blueprintjs/core';
-import jwt_decode from 'jwt-decode';
-import Slack from '../Slack/Slack';
+import {
+	FocusStyleManager,
+	Card,
+	Elevation,
+	Collapse
+} from '@blueprintjs/core';
 
-class Profile extends Component {
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import blue from '@material-ui/core/colors/blue';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+
+FocusStyleManager.onlyShowFocusOnTabs();
+class Account extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -14,7 +26,8 @@ class Profile extends Component {
 			newPic: '',
 			achivedReports: [],
 			openAchivedReports: false,
-			openEditUser: false
+			openEditUser: false,
+			showJoinCode: false
 		};
 	}
 
@@ -29,7 +42,6 @@ class Profile extends Component {
 			)
 			.catch(err => console.log(err));
 	}
-
 	viewAchivedReports = () => {
 		const endpoint = `${baseURL}/reports`;
 		axiosWithAuth()
@@ -42,7 +54,6 @@ class Profile extends Component {
 			)
 			.catch(err => console.log(err));
 	};
-
 	reactivateReport = id => {
 		const editedReport = {
 			active: true
@@ -93,63 +104,238 @@ class Profile extends Component {
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
-	
 	openUserEdit = () => {
 		this.setState({ openEditUser: !this.state.openEditUser });
+	};
+	showJoinCode = () => {
+		this.setState({ showJoinCode: !this.state.showJoinCode });
 	};
 
 	render() {
 		const inactiveReports = this.state.achivedReports.filter(
 			report => !report.active
 		);
-			console.log(this.state.accountInfo)
 		return this.state.accountInfo.roles === 'admin' ? (
-			<>
-			<Slack slackTest={this.state.accountInfo.slackToken}/>
-			<Card interactive={true} elevation={Elevation.TWO} className="userCard">
-				<div>
-					<h3>{this.state.accountInfo.fullName}</h3>
-					<div>Email: {this.state.accountInfo.email}</div>
-					<div>Join Code: {this.state.accountInfo.joinCode}</div>
+			<Card interactive={false} elevation={Elevation.TWO} className="userCard">
+				<div className="profileCard">
+					<h3 className="profilePic">{this.state.accountInfo.fullName}</h3>
+					<FormControl>
+						<InputLabel
+							htmlFor="custom-css-standard-input"
+							style={{
+								color: blue[500],
+								root: {
+									'&$cssFocused': {
+										color: blue[500]
+									}
+								},
+								focused: {}
+							}}
+						>
+							Email
+						</InputLabel>
+						<Input
+							id="custom-css-standard-input"
+							style={{
+								width: '200px',
+								margin: '10px 0',
+								color: blue[500],
+								underline: {
+									'&:after': {
+										borderBottomColor: blue[500]
+									}
+								}
+							}}
+							value={this.state.accountInfo.email}
+							type="text"
+							readOnly
+						/>
+					</FormControl>
+					<img
+						src={this.state.accountInfo.profilePic}
+						alt="a headshot, preferably"
+					/>
 
+					<Button
+						style={{ margin: '30px 0' }}
+						variant="outlined"
+						color="primary"
+						onClick={this.showJoinCode}
+					>
+						{this.state.showJoinCode ? 'Hide Join Code' : 'Show Join Code'}
+					</Button>
+					{!this.state.showJoinCode ? (
+						<FormControl>
+							<InputLabel
+								htmlFor="custom-css-standard-input"
+								style={{
+									color: blue[500],
+									root: {
+										'&$cssFocused': {
+											color: blue[500]
+										}
+									},
+									focused: {}
+								}}
+							>
+								Join Code
+							</InputLabel>
+							<Input
+								id="custom-css-standard-input"
+								style={{
+									margin: '10px 0',
+									color: blue[500],
+									underline: {
+										'&:after': {
+											borderBottomColor: blue[500]
+										}
+									}
+								}}
+								value={this.state.accountInfo.joinCode}
+								type={
+									!this.state.accountInfo.showJoinCode ? 'password' : 'text'
+								}
+								readOnly
+							/>
+						</FormControl>
+					) : (
+						<div className="join-code">
+							<FormControl>
+								<InputLabel
+									htmlFor="custom-css-standard-input"
+									style={{
+										color: blue[500],
+										root: {
+											'&$cssFocused': {
+												color: blue[500]
+											}
+										},
+										focused: {}
+									}}
+								>
+									Join Code
+								</InputLabel>
+								<Input
+									id="custom-css-standard-input"
+									style={{
+										margin: '10px 0',
+										color: blue[500],
+										underline: {
+											'&:after': {
+												borderBottomColor: blue[500]
+											}
+										}
+									}}
+									value={this.state.accountInfo.joinCode}
+									type="text"
+									readOnly
+								/>
+							</FormControl>
+						</div>
+					)}
 				</div>
-				<img
-					src={this.state.accountInfo.profilePic}
-					alt="a headshot, preferably"
-				/>
 				<div className="accountForms">
 					<div className="editUser">
-						<Button onClick={this.openUserEdit}>
-							{this.state.openEditUser === false
-								? 'Edit User Profile'
-								: 'Hide Edit'}
+						<Button
+							variant="outlined"
+							color="primary"
+							onClick={this.openUserEdit}
+						>
+							{this.state.openEditUser === false ? 'Edit' : 'Hide'}
 						</Button>
 						<Collapse isOpen={this.state.openEditUser}>
 							<form className="userForm" onSubmit={this.updateUser}>
-								<input
-									type="text"
-									value={this.state.newName}
-									name="newName"
-									onChange={this.changeHandler}
-									placeholder="What's your name"
-								/>
-								<input
-									type="text"
-									value={this.state.newPic}
-									name="newPic"
-									placeholder="gimme a picture link"
-									onChange={this.changeHandler}
-								/>
-								<Button type="submit" onClick={this.openUserEdit}>
-									Submit Changes
+								<FormControl>
+									<InputLabel
+										htmlFor="custom-css-standard-input"
+										style={{
+											color: blue[500],
+											root: {
+												'&$cssFocused': {
+													color: blue[500]
+												}
+											},
+											focused: {}
+										}}
+									>
+										Edit Name
+									</InputLabel>
+									<Input
+										id="custom-css-standard-input"
+										style={{
+											margin: '10px 0',
+											color: blue[500],
+											underline: {
+												'&:after': {
+													borderBottomColor: blue[500]
+												}
+											}
+										}}
+										type="text"
+										value={this.state.newName}
+										name="newName"
+										onChange={this.changeHandler}
+									/>
+								</FormControl>
+								<FormControl>
+									<InputLabel
+										htmlFor="custom-css-standard-input"
+										style={{
+											color: blue[500],
+											root: {
+												'&$cssFocused': {
+													color: blue[500]
+												}
+											},
+											focused: {}
+										}}
+									>
+										Edit Picture
+									</InputLabel>
+									<Input
+										id="custom-css-standard-input"
+										style={{
+											margin: '10px 0',
+											color: blue[500],
+											underline: {
+												'&:after': {
+													borderBottomColor: blue[500]
+												}
+											}
+										}}
+										type="text"
+										value={this.state.newPic}
+										name="newPic"
+										placeholder="Change Picture Link"
+										onChange={this.changeHandler}
+									/>
+								</FormControl>
+								<Button
+									variant="outlined"
+									color="primary"
+									style={{
+										input: {
+											display: 'none'
+										},
+										display: 'block',
+										margin: '10px',
+										width: '100px'
+									}}
+									type="submit"
+									onClick={this.openUserEdit}
+								>
+									Submit
 								</Button>
 								<div />
 							</form>
 						</Collapse>
 					</div>
-				
 					<div className="editUser">
-						<Button onClick={this.viewAchivedReports}>
+						<Button
+							variant="outlined"
+							color="primary"
+							onClick={this.viewAchivedReports}
+						>
 							{this.state.openAchivedReports === false
 								? 'View Archived Reports'
 								: 'Hide Archived Reports'}
@@ -162,7 +348,11 @@ class Profile extends Component {
 									inactiveReports.map((report, idx) => (
 										<div key={idx}>
 											<h3>{report.reportName}</h3>
-											<Button onClick={() => this.reactivateReport(report.id)}>
+											<Button
+												variant="outlined"
+												color="primary"
+												onClick={() => this.reactivateReport(report.id)}
+											>
 												Reactivate Report
 											</Button>
 										</div>
@@ -173,16 +363,12 @@ class Profile extends Component {
 					</div>
 				</div>
 			</Card>
-			</>
 		) : (
-			<>
-			<Slack slackTest={this.state.accountInfo.slackToken}/>
 			<Card interactive={true} elevation={Elevation.TWO} className="userCard">
 				<div>
 					<h3>{this.state.accountInfo.fullName}</h3>
+					<div>Email: {this.state.accountInfo.email}</div>
 					<div>
-						<div>Email: {this.state.accountInfo.email}</div>
-
 						<img
 							src={this.state.accountInfo.profilePic}
 							alt="a headshot, preferably"
@@ -210,13 +396,14 @@ class Profile extends Component {
 								onChange={this.changeHandler}
 							/>
 						</div>
-						<Button type="submit">Submit Changes</Button>
+						<Button variant="outlined" color="primary" type="submit">
+							Submit Changes
+						</Button>
 					</form>
 				</div>
 			</Card>
-			</>
 		);
 	}
 }
 
-export default Profile;
+export default Account;

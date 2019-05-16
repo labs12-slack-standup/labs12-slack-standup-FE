@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
-import Account from './components/Account/Account';
+import Profile from './components/Account/Account';
 import Onboarding from './components/Onboarding/Onboarding';
 import Navigation from './components/Navigation/Navigations';
 import ReportsDash from './components/Dashboard/ReportsDash';
@@ -41,7 +41,7 @@ function App() {
 			/> */}
 
 			{/* VIEW FOR SINGLE ACCOUNT */}
-			<PrivateRoute exact path="/profile" component={Account} />
+			<PrivateRoute exact path="/dashboard/profile" component={Profile} />
 			<PrivateRoute path="/dashboard/team/:userId" component={User} />
 			{/* CONNECT TO SLACK */}
 			<Route exact path="/slack" component={Slack} />
