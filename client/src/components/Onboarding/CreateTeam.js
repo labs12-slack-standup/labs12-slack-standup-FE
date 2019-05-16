@@ -67,7 +67,7 @@ const CreateTeam = props => {
 					className="createTeamEmail"
 					intent={Intent.PRIMARY}
 					placeholder="Emails, separated by commas"
-					value={props.singleEmails}
+					value={props.singleEmail}
 					onChange={props.changeHandler}
 					name="singleEmail"
 				/>
@@ -79,7 +79,7 @@ const CreateTeam = props => {
 			{props.error.length > 0 && (
 				<div className="errorModal">
 					<Card className="errorCard onboardingCard" elevation={Elevation.TWO}>
-						<button onClick={props.clearError}>X</button>
+						<button onClick={props.clearError}>x</button>
 						<h3>Oops . . .</h3>
 						<div>{props.error}</div>
 					</Card>

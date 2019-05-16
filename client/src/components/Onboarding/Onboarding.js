@@ -56,8 +56,6 @@ class Onboarding extends Component {
 		const randId = await teamId(8);
 		const joinCode = await joinId(6);
 
-		// splits email string into array by commas and removes spaces
-
 		//create an object to send to mail api
 		const mailObject = {
 			//email singular to ensure consistency with adding an new user email on the dashboard
@@ -75,7 +73,7 @@ class Onboarding extends Component {
 			localStorage.setItem('token', updated.data.token);
 
 			// if the user's entered emails, make the post call to the email endpoint
-			if (mailObject.email.length > 0) {
+			if (mailObject.email[0].length > 1) {
 				await axiosWithAuth().post(`${baseURL}/email`, mailObject);
 			}
 
@@ -96,7 +94,6 @@ class Onboarding extends Component {
 	// Sets the user's teamId to match the manager's
 	// Also gives user new token
 	submitHandler = async e => {
-		e.preventDefault();
 		console.log(this.state.joinCode);
 		try {
 			const newToken = await axiosWithAuth().get(
@@ -114,6 +111,7 @@ class Onboarding extends Component {
 	clearError = () => {
 		this.setState({ error: '' });
 	};
+	// splits email string into array by commas and removes spaces
 	separateEmails = () => {
 		const teamEmails = this.state.singleEmail.replace(/\s+/g, '').split(',');
 		this.setState({ emails: teamEmails });
