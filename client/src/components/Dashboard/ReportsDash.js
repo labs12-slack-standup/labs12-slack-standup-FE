@@ -61,7 +61,7 @@ class ReportsDash extends Component {
 		if (this.state.isLoading) {
 			return <Spinner intent={Intent.PRIMARY} />;
 		}
-		console.log(this.props);
+
 		return (
 			<div
 				className={

@@ -1,5 +1,6 @@
 import './reports.css';
 import React, { Component } from 'react';
+import jwt_decode from 'jwt-decode';
 import SingleReport from './SingleReport';
 import Slack from '../Slack/Slack';
 import { Link } from 'react-router-dom';
@@ -35,6 +36,8 @@ class Reports extends Component {
 		const { stepsEnabled, steps, initialStep } = this.state;
 
 		const activeReports = this.props.reports.filter(report => report.active);
+		const slackCheck = jwt_decode(localStorage.getItem('token')).slackTeamId;
+		console.log(slackCheck);
 		if (activeReports.length < 1) {
 			return (
 				<div>
@@ -53,6 +56,11 @@ class Reports extends Component {
 								Create Report
 							</Button>
 						</Link>
+						{!slackCheck ? (
+							<Slack />
+						) : (
+							<h2>Your reports will be delivered via Slack.</h2>
+						)}
 					</Card>
 				</div>
 			);
@@ -67,7 +75,11 @@ class Reports extends Component {
 							Create Report
 						</Button>
 					</Link>
-					<Slack />
+					{!slackCheck ? (
+						<Slack />
+					) : (
+						<h2>Your reports will be delivered via Slack.</h2>
+					)}
 				</Card>
 				{/* passing reports from state to individual components */}
 				{activeReports.map(report => (
