@@ -5,7 +5,8 @@ import {
 	Intent,
 	Button,
 	Card,
-	Elevation
+	Elevation,
+	TagInput
 } from '@blueprintjs/core';
 // import Input from '@material-ui/core/Input';
 // import InputLabel from '@material-ui/core/InputLabel';
@@ -66,10 +67,11 @@ const CreateTeam = props => {
 					className="createTeamEmail"
 					intent={Intent.PRIMARY}
 					placeholder="Emails, separated by commas"
-					value={props.emails}
+					value={props.singleEmails}
 					onChange={props.changeHandler}
-					name="emails"
+					name="singleEmail"
 				/>
+				{/* <TagInput /> */}
 				<Button onClick={props.createTeam} style={{ marginBottom: '100px' }}>
 					Create Team
 				</Button>

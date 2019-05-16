@@ -38,6 +38,7 @@ class Onboarding extends Component {
 	};
 
 	createTeam = async () => {
+		this.separateEmails();
 		const teamId = length => {
 			return Math.round(
 				Math.pow(9, length + 1) - Math.random() * Math.pow(9, length)
@@ -56,12 +57,11 @@ class Onboarding extends Component {
 		const joinCode = await joinId(6);
 
 		// splits email string into array by commas and removes spaces
-		const teamEmails = this.state.emails.replace(/\s+/g, '').split(',');
 
 		//create an object to send to mail api
 		const mailObject = {
 			//email singular to ensure consistency with adding an new user email on the dashboard
-			email: teamEmails,
+			email: this.state.emails,
 			joinCode: joinCode
 		};
 		console.log('mailObject', mailObject);
@@ -92,6 +92,9 @@ class Onboarding extends Component {
 		// this.setState({ teamId: randId });
 	};
 
+	// On submit to join a team by join code
+	// Sets the user's teamId to match the manager's
+	// Also gives user new token
 	submitHandler = async e => {
 		e.preventDefault();
 		console.log(this.state.joinCode);
@@ -99,7 +102,6 @@ class Onboarding extends Component {
 			const newToken = await axiosWithAuth().get(
 				`${baseURL}/users/joinCode/${this.state.joinCode}`
 			);
-			console.log('new token', newToken);
 			localStorage.setItem('token', newToken.data.updatedToken);
 			this.props.history.push('/dashboard');
 		} catch (err) {
@@ -111,6 +113,10 @@ class Onboarding extends Component {
 	};
 	clearError = () => {
 		this.setState({ error: '' });
+	};
+	separateEmails = () => {
+		const teamEmails = this.state.singleEmail.replace(/\s+/g, '').split(',');
+		this.setState({ emails: teamEmails });
 	};
 
 	render() {
