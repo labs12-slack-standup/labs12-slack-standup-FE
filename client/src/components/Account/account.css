@@ -1,7 +1,27 @@
+.userCard {
+	max-height: 100%;
+	height: 1000px;
+}
+
 .userCard img {
-	width: 200px;
-	height: 200px;
-	border-radius: 30px;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+}
+
+.profileCard {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.userCard input {
+	border-radius: 3px;
+}
+.userCard div h3 {
+	font-size: 40px;
+	margin: 40px auto;
+	text-align: center;
 }
 .userForm {
 	/* display: flex;
@@ -33,3 +53,9 @@
 /* .userCard img {
 	align-self: flex-end;
 } */
+
+.join-code {
+	display: flex;
+	flex-direction: row;
+	margin: 10px;
+}
