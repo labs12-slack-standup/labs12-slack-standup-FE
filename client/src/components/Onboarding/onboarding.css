@@ -55,3 +55,7 @@
 .errorJoinCard {
 	margin: 200px 40%;
 }
+.onboarding .bp3-button-text {
+	flex: 0 1 auto;
+	text-align: center;
+}
