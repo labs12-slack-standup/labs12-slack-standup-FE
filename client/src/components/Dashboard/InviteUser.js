@@ -7,6 +7,7 @@ const InviteUser = props => {
 			<h3>Invite a new user to your team:</h3>
 			<form onSubmit={props.addUser} className="inviteUser">
 				<input
+					className="bp3-input"
 					type="email"
 					placeholder="Email..."
 					onChange={props.changeHandler}
