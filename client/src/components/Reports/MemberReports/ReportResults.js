@@ -52,7 +52,10 @@ class ReportResults extends Component {
 				</Feed>
 				<Aside>
 					<Card interactive={true} elevation={Elevation.TWO}>
-						<MemberResponseForm {...this.props} />
+						<MemberResponseForm
+							{...this.props}
+							updateWithUserResponse={this.updateWithUserResponse}
+						/>
 						<DatePicker getByDate={this.getByDate} />
 					</Card>
 				</Aside>
@@ -77,6 +80,10 @@ class ReportResults extends Component {
 				console.log(err);
 			});
 	};
+
+	updateWithUserResponse = res => {
+		this.setState({ responses: res.data })
+	}
 }
 
 const Aside = styled.main`

@@ -65,13 +65,13 @@ class MemberResponseForm extends Component {
 		axiosWithAuth()
 			.post(endpoint, this.state.questions)
 			.then(res => {
+				this.props.updateWithUserResponse(res);
 				this.setState(prevState => ({
 					...prevState,
 					questions: prevState.questions.map(q => ({
 						question: q.question,
 						response: ''
-					})),
-					clientInfo: res.data.message
+					}))
 				}));
 			})
 			.catch(err => {
