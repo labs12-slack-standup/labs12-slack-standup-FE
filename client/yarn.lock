@@ -8672,7 +8672,7 @@ react-app-polyfill@^1.0.1:
     regenerator-runtime "0.13.2"
     whatwg-fetch "3.0.0"
 
-react-dates@^20.1.0:
+react-dates@^20.2.0:
   version "20.2.0"
   resolved "https://registry.yarnpkg.com/react-dates/-/react-dates-20.2.0.tgz#0ecd6d19bd94b49382604bebbc85d2c916d0d929"
   integrity sha512-ufpczVs48f5DP4KDKvU+YuDdeBB3RnFuZriCcHX9m5KLimee+W7Cqad8t0m3o/i1CwOYwuHCEAdZBrqgeSYWZw==
