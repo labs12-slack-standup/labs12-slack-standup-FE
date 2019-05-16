@@ -34,13 +34,17 @@ class Navigation extends React.Component {
 						<Navbar.Heading>Stand-Em-Ups</Navbar.Heading>
 					</NavLink>
 					<NavbarDivider />
+
 					<NavLink to="/dashboard/profile">
 						<Button icon="user" className={Classes.MINIMAL} text="Profile" />
+
 					</NavLink>
 					<NavLink to="/dashboard">
 						<Button icon="home" className={Classes.MINIMAL} text="Dashboard" />
 					</NavLink>
-					{this.props.location.pathname === '/login' ? (
+
+					{!loggedIn ? (
+
 						<NavLink to="/login">
 							<Button className={Classes.MINIMAL} text="Login" />
 						</NavLink>
