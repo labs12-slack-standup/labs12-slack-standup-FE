@@ -14,7 +14,8 @@ class Onboarding extends Component {
 			joinCode: '',
 			singleEmail: '',
 			emails: [],
-			teamId: null
+			teamId: null,
+			error: ''
 		};
 	}
 
@@ -59,7 +60,7 @@ class Onboarding extends Component {
 
 		//create an object to send to mail api
 		const mailObject = {
-		//email singular to ensure consistency with adding an new user email on the dashboard
+			//email singular to ensure consistency with adding an new user email on the dashboard
 			email: teamEmails,
 			joinCode: joinCode
 		};
@@ -82,15 +83,18 @@ class Onboarding extends Component {
 			this.props.history.push('/dashboard');
 		} catch (error) {
 			console.log(error);
+			this.setState({
+				error:
+					'There was an issue with the emails, please be sure to separate each email with a comma. Alternatively, you can pass the join code to your teammates manually.'
+			});
 		}
 		// took this out because it was trying to update after the push to dashboard, but not sure why it was here in the first place so I haven't deleted it -- eek
 		// this.setState({ teamId: randId });
 	};
 
-
 	submitHandler = async e => {
 		e.preventDefault();
-		console.log(this.state.joinCode)
+		console.log(this.state.joinCode);
 		try {
 			const newToken = await axiosWithAuth().get(
 				`${baseURL}/users/joinCode/${this.state.joinCode}`
@@ -100,7 +104,13 @@ class Onboarding extends Component {
 			this.props.history.push('/dashboard');
 		} catch (err) {
 			console.log(err);
+			this.setState({
+				error: 'There was an issue joining this team. Check your join code'
+			});
 		}
+	};
+	clearError = () => {
+		this.setState({ error: '' });
 	};
 
 	render() {
@@ -119,6 +129,8 @@ class Onboarding extends Component {
 				joinToggle={this.joinToggle}
 				toggleAllOff={this.toggleAllOff}
 				changeHandler={this.changeHandler}
+				error={this.state.error}
+				clearError={this.clearError}
 			/>
 		) : (
 			// Join a Team page - joinToggle true
@@ -127,6 +139,8 @@ class Onboarding extends Component {
 				toggleAllOff={this.toggleAllOff}
 				changeHandler={this.changeHandler}
 				submitHandler={this.submitHandler}
+				error={this.state.error}
+				clearError={this.clearError}
 			/>
 		);
 	}

@@ -60,6 +60,15 @@ const JoinTeam = props => {
 				<Button onClick={props.createToggle}>Create Team</Button>
 				<Button onClick={props.toggleAllOff}>Cancel</Button>
 			</Card>
+			{props.error.length > 0 && (
+				<div className="errorModal">
+					<Card className="errorJoinCard onboardingCard">
+						<button onClick={props.clearError}>X</button>
+						<h3>Oops...</h3>
+						<div>{props.error}</div>
+					</Card>
+				</div>
+			)}
 		</div>
 	);
 };

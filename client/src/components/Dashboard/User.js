@@ -3,7 +3,7 @@ import { Card, Button, Elevation } from '@blueprintjs/core';
 
 const User = props => {
 	return (
-		<Card className="singleUserContainer">
+		<div className="singleUserContainer">
 			<div
 				// className="userdiv"
 				interactive={true}
@@ -26,7 +26,7 @@ const User = props => {
 					</Button>
 				)} */}
 			</div>
-		</Card>
+		</div>
 	);
 };
 
