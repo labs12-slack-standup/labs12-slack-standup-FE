@@ -59,7 +59,7 @@ class Reports extends Component {
 						{!slackCheck ? (
 							<Slack />
 						) : (
-							<h2>Your reports will be delivered via Slack.</h2>
+							<h2>When created, your reports will be delivered via Slack.</h2>
 						)}
 					</Card>
 				</div>
