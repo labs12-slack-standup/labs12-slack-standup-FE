@@ -75,3 +75,12 @@
 /* .onboardingCard .bp3-tag {
 	font-size: 1rem;
 }  */
+
+.onboarding h2 {
+	font-size: 2.4rem;
+	margin-bottom: 100px;
+}
+.onboarding h4 {
+	font-size: 1.2rem;
+	margin-bottom: 20px;
+}

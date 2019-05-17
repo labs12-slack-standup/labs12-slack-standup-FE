@@ -11,7 +11,7 @@ const JoinTeam = props => {
 		<div className="onboarding">
 			<Card
 				interactive={false}
-				elevation={Elevation.TWO}
+				elevation={Elevation.THREE}
 				className="onboardingCard"
 			>
 				<h3> Enter Join Code (provided by your manger):</h3>
@@ -49,17 +49,10 @@ const JoinTeam = props => {
 				</FormControl>
 				<Button onClick={props.submitHandler}>Join Team</Button>
 			</Card>
-			<Card
-				interactive={false}
-				elevation={Elevation.TWO}
-				className="onboardingCard"
-			>
-				<p>
-					Actually don't have a join code? That's okay, let's create a team:
-				</p>
-				<Button onClick={props.createToggle}>Create Team</Button>
-				<Button onClick={props.toggleAllOff}>Cancel</Button>
-			</Card>
+
+			<Button onClick={props.createToggle}>Create Team</Button>
+			<Button onClick={props.toggleAllOff}>Cancel</Button>
+
 			{props.error.length > 0 && (
 				<div className="errorModal">
 					<Card className="errorJoinCard onboardingCard">

@@ -37,7 +37,7 @@ class Onboarding extends Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
-	createTeam = async () => {
+	createTeam = async (emails) => {
 		const teamId = length => {
 			return Math.round(
 				Math.pow(9, length + 1) - Math.random() * Math.pow(9, length)
@@ -116,10 +116,8 @@ class Onboarding extends Component {
 	// 	this.setState({ emails: teamEmails });
 	// };
 	changeEmail = email => {
-		console.log(email);
 		this.setState({ emails: email });
 		//this.separateEmails();
-		console.log(this.state.singleEmail);
 	};
 
 	render() {
