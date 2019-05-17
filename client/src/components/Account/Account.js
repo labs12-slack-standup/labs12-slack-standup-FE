@@ -115,7 +115,7 @@ class Account extends Component {
 		const inactiveReports = this.state.achivedReports.filter(
 			report => !report.active
 		);
-		return this.state.accountInfo.roles === 'admin' ? (
+		return (
 			<Card interactive={false} elevation={Elevation.TWO} className="userCard">
 				<div className="profileCard">
 					<h3 className="profilePic">{this.state.accountInfo.fullName}</h3>
@@ -335,6 +335,11 @@ class Account extends Component {
 							variant="outlined"
 							color="primary"
 							onClick={this.viewAchivedReports}
+							style={
+								this.state.accountInfo.roles === 'admin'
+									? { display: 'block' }
+									: { display: 'none' }
+							}
 						>
 							{this.state.openAchivedReports === false
 								? 'View Archived Reports'
@@ -361,45 +366,6 @@ class Account extends Component {
 							</Collapse>
 						</div>
 					</div>
-				</div>
-			</Card>
-		) : (
-			<Card interactive={true} elevation={Elevation.TWO} className="userCard">
-				<div>
-					<h3>{this.state.accountInfo.fullName}</h3>
-					<div>Email: {this.state.accountInfo.email}</div>
-					<div>
-						<img
-							src={this.state.accountInfo.profilePic}
-							alt="a headshot, preferably"
-						/>
-					</div>
-					<form className="userForm" onSubmit={this.updateUser}>
-						<div>
-							Change display name:
-							<input
-								type="text"
-								value={this.state.newName}
-								name="newName"
-								onChange={this.changeHandler}
-								placeholder="new name"
-							/>
-						</div>
-						<br />
-						<div>
-							Change profile picture:
-							<input
-								type="text"
-								value={this.state.newPic}
-								name="newPic"
-								placeholder="picture link"
-								onChange={this.changeHandler}
-							/>
-						</div>
-						<Button variant="outlined" color="primary" type="submit">
-							Submit Changes
-						</Button>
-					</form>
 				</div>
 			</Card>
 		);
