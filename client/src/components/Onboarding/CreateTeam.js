@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
 	EditableText,
 	TextArea,
@@ -8,61 +8,23 @@ import {
 	Elevation,
 	TagInput
 } from '@blueprintjs/core';
-// import Input from '@material-ui/core/Input';
-// import InputLabel from '@material-ui/core/InputLabel';
-// import FormControl from '@material-ui/core/FormControl';
-// import blue from '@material-ui/core/colors/blue';
 
 const CreateTeam = props => {
 	return (
 		<div className="onboarding">
-			{/* <Card
-				interactive={false}
-				elevation={Elevation.TWO}
-				className="onboardingCard"
-			>
-				<h3>Add Members to Your Team</h3>
-				<FormControl>
-					<InputLabel
-						htmlFor="custom-css-standard-input"
-						style={{
-							color: blue[500],
-							root: {
-								'&$cssFocused': {
-									color: blue[500]
-								}
-							},
-							focused: {}
-						}}
-					>
-						Emails, separated by commas
-					</InputLabel>
-					<Input
-						id="custom-css-standard-input"
-						style={{
-							width: '200px',
-							margin: '10px 0',
-							color: blue[500],
-							underline: {
-								'&:after': {
-									borderBottomColor: blue[500]
-								}
-							}
-						}}
-						type="text"
-						name="emails"
-						onChange={props.changeHandler}
-					/>
-				</FormControl>
-				<Button onClick={props.submitHandler}>Create Team</Button>
-			</Card> */}
 			<Card
 				interactive={false}
-				elevation={Elevation.TWO}
+				elevation={Elevation.THREE}
 				className="onboardingCard"
 			>
-				<h3>Add team member's email</h3>
-
+				<h4>Add team member's email</h4>
+				{/* <ChipInput
+						value={props.emails}
+						onRequestAdd={chip => props.changeEmail(chip)}
+						onRequestDelete={(chip, index) =>
+							props.changeEmail(chip, index)
+						}
+					/> */}
 				<TagInput
 					values={props.emails}
 					onChange={values => props.changeEmail(values)}
@@ -74,13 +36,12 @@ const CreateTeam = props => {
 				<div className="errorModal">
 					<Card className="errorCard onboardingCard" elevation={Elevation.TWO}>
 						<button onClick={props.clearError}>x</button>
-						<h3>Oops . . .</h3>
+						<h4>Oops . . .</h4>
 						<div>{props.error}</div>
 					</Card>
 				</div>
 			)}
 
-			<div>Have a join code?</div>
 			<Button onClick={props.joinToggle}>Join an Existing Team</Button>
 			<Button onClick={props.toggleAllOff}>Cancel</Button>
 		</div>

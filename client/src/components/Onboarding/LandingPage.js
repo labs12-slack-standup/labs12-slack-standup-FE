@@ -1,14 +1,25 @@
 import React from 'react';
-import { Card, Button } from '@blueprintjs/core';
+import { Card, Button, Elevation } from '@blueprintjs/core';
 
 const LandingPage = props => {
 	return (
 		<Card className="onboarding">
-			<h3>Welcome to Stand-Em-Ups!</h3>
-			<h4>Do you have a join code?</h4>
-			<h4>If not, no worries, you can create a team here too</h4>
-			<Button onClick={props.joinToggle}>I have a join code</Button>
-			<Button onClick={props.createToggle}>Create a Team</Button>
+			<h2>Welcome to Stand-Em-Ups!</h2>
+			<Card
+				interactive={false}
+				elevation={Elevation.FOUR}
+				className="onboardingCard"
+			>
+				<h4>Do you have a join code?</h4>
+				<div>
+					Yes:
+					<Button onClick={props.joinToggle}>Input join code</Button>
+				</div>
+				<div>
+					No:
+					<Button onClick={props.createToggle}>Create a Team</Button>
+				</div>
+			</Card>
 		</Card>
 	);
 };
