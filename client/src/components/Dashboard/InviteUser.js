@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, TextArea, Intent } from '@blueprintjs/core';
+import { Button, Card, Elevation } from '@blueprintjs/core';
 
 const InviteUser = props => {
 	return (
@@ -14,8 +14,27 @@ const InviteUser = props => {
 					name="newMemberEmail"
 				/>
 				<br />
-				<Button type="submit">Invite</Button>
+				<Button type="submit" onClick={props.addUser}>
+					Invite
+				</Button>
 			</form>
+			{props.message.includes('issue') && (
+				<div className="errorModal">
+					<Card className="errorCard onboardingCard" elevation={Elevation.TWO}>
+						<button onClick={props.clearMessage}>x</button>
+						<h4>Oops . . .</h4>
+						<div>{props.message}</div>
+					</Card>
+				</div>
+			)}
+			{props.message.includes('sent') && (
+				<div className="errorModal">
+					<Card className="errorCard onboardingCard" elevation={Elevation.TWO}>
+						<button onClick={props.clearMessage}>x</button>
+						<div>{props.message}</div>
+					</Card>
+				</div>
+			)}
 		</div>
 	);
 };

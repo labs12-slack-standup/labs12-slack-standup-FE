@@ -48,6 +48,7 @@
 	color: black;
 	text-align: center;
 }
+
 .errorCard {
 	position: relative;
 	left: 25%;
@@ -83,4 +84,15 @@
 .onboarding h4 {
 	font-size: 1.2rem;
 	margin-bottom: 20px;
+}
+
+.errorModal h4 {
+	font-size: 1.6rem;
+	margin: 20px 0;
+}
+.errorModal button {
+	border: none;
+	background-color: white;
+	width: 40px;
+	margin-left: 175px;
 }
