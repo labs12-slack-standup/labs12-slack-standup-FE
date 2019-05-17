@@ -1,17 +1,21 @@
 import React from 'react';
 import { Button, Card, Elevation } from '@blueprintjs/core';
+import TextField from '@material-ui/core/TextField';
 
 const InviteUser = props => {
 	return (
 		<div className="inviteUserBox">
-			<h3>Invite a new user to your team:</h3>
+			<h3>Invite new user to the team</h3>
 			<form onSubmit={props.addUser} className="inviteUser">
-				<input
-					className="bp3-input"
+				<TextField
+					id="outlined-email-input"
+					label="Email"
 					type="email"
-					placeholder="Email..."
 					onChange={props.changeHandler}
 					name="newMemberEmail"
+					autoComplete="email"
+					margin="normal"
+					variant="outlined"
 				/>
 				<br />
 				<Button type="submit" onClick={props.addUser}>
