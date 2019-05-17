@@ -38,12 +38,15 @@ textarea.bp3-input {
 	width: 75%;
 }
 .inviteUserBox h3 {
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 20px;
 	text-align: center;
 }
 .inviteUser {
 	display: flex;
 	flex-direction: column;
-	width: 50%;
+	width: 80%;
 	margin: 0 auto;
 }
 .onboarding .bp3-card {
@@ -67,6 +70,15 @@ textarea.bp3-input {
 	/* text-align: center; */
 }
 .usersContainer .singleUserContainer img {
+	display: block;
+	margin: auto;
 	width: 50px;
 	height: 50px;
+}
+
+.usersContainer .singleUserContainer h4 {
+	font-size: 14px;
+	line-height: 1.2;
+	padding-top: 8px;
+	text-align: center;
 }
