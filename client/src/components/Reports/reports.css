@@ -1,11 +1,72 @@
 .reportsCard {
 	width: 100%;
 }
-.reportsCard .bp3-button {
-	margin: 0 20px;
+
+.reports-card-title {
+	font-size: 24px;
+	font-weight: 700;
+	margin-top: 17px;
+}
+
+.reports-card-schedule {
+	font-size: 18px;
+	font-weight: 300;
+	margin-top: 30px;
+	margin-bottom: 12px;
+}
+
+.reports-card-flex {
+	display: flex;
+}
+
+.reports-card-flex-icon {
+	line-height: 20px;
+	padding-left: 3px;
+	padding-top: 5px;
+	width: 30px;
+	vertical-align: center;
+}
+
+.reports-card-time {
+	line-height: 20px;
+	padding-left: 3px;
+	padding-top: 5px;
+	width: 30px;
+	vertical-align: center;
+}
+
+.reports-card-flex-days {
+	display: flex;
+	flex: 1;
+	justify-content: space-between;
+	line-height: 20px;
+	max-width: 335px;
+	vertical-align: center;
+}
+
+.whitespace {
+	margin-bottom: 30px;
+}
+
+.flex {
+	display: flex;
+	justify-content: space-around;
+}
+
+.flex div {
 	width: 40%;
+}
+
+.reportsCard .bp3-button {
+	width: 100%;
 	color: #5294e2;
 }
+
+.link-condensed {
+	display: block;
+	width: 40%;
+}
+
 .createReportCard {
 	display: flex;
 	flex-direction: column;
@@ -19,4 +80,8 @@
 	margin: auto;
 	margin-top: 20px;
 	width: 140px;
+}
+
+.disabled-link {
+	display: none;
 }
