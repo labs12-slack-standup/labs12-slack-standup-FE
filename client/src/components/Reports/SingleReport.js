@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button, Icon } from '@blueprintjs/core';
 import { iconClass } from '@blueprintjs/core/lib/esm/common/classes';
-import dateFormat from 'dateformat';
 
 
 const SingleReport = props => {
