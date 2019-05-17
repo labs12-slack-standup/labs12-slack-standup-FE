@@ -37,7 +37,7 @@ class Onboarding extends Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
-	createTeam = async (emails) => {
+	createTeam = async emails => {
 		const teamId = length => {
 			return Math.round(
 				Math.pow(9, length + 1) - Math.random() * Math.pow(9, length)

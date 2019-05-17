@@ -12,7 +12,8 @@ export class Dashboard extends Component {
 		users: [],
 		newMemberEmail: '',
 		joinCode: '',
-		isLoading: true
+		isLoading: true,
+		message: ''
 	};
 
 	componentDidMount() {
@@ -105,15 +106,22 @@ export class Dashboard extends Component {
 			.post(endpoint, mailObject)
 			.then(res => {
 				console.log(res);
+				this.setState({ message: 'Email sent!' });
 			})
 			.catch(err => {
 				console.log(err);
+				this.setState({
+					message:
+						'There was an issue sending the email, please email your new team member manually.'
+				});
 			});
-		e.target.reset();
 	};
 
 	changeHandler = e => {
 		this.setState({ newMemberEmail: e.target.value });
+	};
+	clearMessage = () => {
+		this.setState({ message: '' });
 	};
 
 	render() {
@@ -129,7 +137,12 @@ export class Dashboard extends Component {
 					activateUser={this.activateUser}
 					deactivateUser={this.deactivateUser}
 				/>
-				<InviteUser changeHandler={this.changeHandler} addUser={this.addUser} />
+				<InviteUser
+					changeHandler={this.changeHandler}
+					addUser={this.addUser}
+					message={this.state.message}
+					clearMessage={this.clearMessage}
+				/>
 			</Card>
 		);
 	}
