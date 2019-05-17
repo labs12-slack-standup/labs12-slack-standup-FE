@@ -1,3 +1,14 @@
+h3 {
+	font-weight: bolder;
+	margin: 10px 0;
+}
+
+p {
+	font-size: 14px;
+	margin-top: 20px;
+	font-style: italic;
+}
+
 .days-flex {
 	display: flex;
 	height: 30px;
@@ -14,11 +25,11 @@
 
 .report-time {
 	margin: 20px 0;
-	margin-bottom: 40px;
+	margin-bottom: 10px;
 }
 
 .day {
-	border: 1px solid white;
+	border: 1px solid #5294e2;
 	border-radius: 5px;
 	cursor: pointer;
 	line-height: 30px;
@@ -55,11 +66,25 @@
 	margin: 20px auto;
 }
 
+.edit-report {
+	max-width: 600px;
+	width: 100%;
+	margin: 20px auto;
+}
+
 .report-name {
 	max-width: 500px;
 	width: 100%;
 	font-size: 20px;
 	margin: 30px 0;
+}
+
+.report-margin {
+	margin-top: 20px;
+}
+
+.slack-dropdown {
+	margin: 20px 0;
 }
 
 .button-block {
@@ -70,7 +95,11 @@
 .input-field {
 	max-width: 500px;
 	width: 100%;
-	margin: 30px 0;
+	margin: 10px 0;
+}
+
+.margin-fix {
+	margin-bottom: 10px;
 }
 
 .schedule-card {
@@ -79,4 +108,19 @@
 
 .schedule-card-content {
 	margin: 10px;
+}
+
+.divider {
+	margin: 30px 0;
+}
+
+.submit-button {
+	margin: 20px;
+}
+
+.top-input {
+	max-width: 500px;
+	width: 100%;
+	margin: 10px 0;
+	margin-top: 30px;
 }

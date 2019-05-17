@@ -11,9 +11,11 @@ const Slack = props => {
 			</h3>
 			<a
 				href={`https://slack.com/oauth/authorize?scope=incoming-webhook,commands,bot,channels:write&client_id=607645147937.621334967889&redirect_uri=${slackURL}`}
+				className="slack-icon"
 			>
 				<img
 					alt="Add to Slack"
+					// className="slack-icon"
 					height="40"
 					width="139"
 					src="https://platform.slack-edge.com/img/add_to_slack.png"
