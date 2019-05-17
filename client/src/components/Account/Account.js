@@ -116,9 +116,9 @@ class Account extends Component {
 			report => !report.active
 		);
 		return (
-			<Card interactive={false} elevation={Elevation.TWO} className="userCard">
+			<div className="userCard">
 				<div className="profileCard">
-					<h3 className="profilePic">{this.state.accountInfo.fullName}</h3>
+					<h3>{this.state.accountInfo.fullName}</h3>
 					<FormControl>
 						<InputLabel
 							htmlFor="custom-css-standard-input"
@@ -137,8 +137,9 @@ class Account extends Component {
 						<Input
 							id="custom-css-standard-input"
 							style={{
-								width: '200px',
-								margin: '10px 0',
+								maxWidth: '400px',
+								width: '400px',
+								margin: '40px 0',
 								color: blue[500],
 								underline: {
 									'&:after': {
@@ -147,6 +148,7 @@ class Account extends Component {
 								}
 							}}
 							value={this.state.accountInfo.email}
+							placeholder={this.state.accountInfo.email}
 							type="text"
 							readOnly
 						/>
@@ -155,84 +157,87 @@ class Account extends Component {
 						src={this.state.accountInfo.profilePic}
 						alt="a headshot, preferably"
 					/>
-
-					<Button
-						style={{ margin: '30px 0' }}
-						variant="outlined"
-						color="primary"
-						onClick={this.showJoinCode}
-					>
-						{this.state.showJoinCode ? 'Hide Join Code' : 'Show Join Code'}
-					</Button>
-					{!this.state.showJoinCode ? (
-						<FormControl>
-							<InputLabel
-								htmlFor="custom-css-standard-input"
-								style={{
-									color: blue[500],
-									root: {
-										'&$cssFocused': {
-											color: blue[500]
-										}
-									},
-									focused: {}
-								}}
+					{this.state.accountInfo.roles === 'admin' ? (
+						<div>
+							<Button
+								style={{ margin: '30px 0' }}
+								variant="outlined"
+								color="primary"
+								onClick={this.showJoinCode}
 							>
-								Join Code
-							</InputLabel>
-							<Input
-								id="custom-css-standard-input"
-								style={{
-									margin: '10px 0',
-									color: blue[500],
-									underline: {
-										'&:after': {
-											borderBottomColor: blue[500]
-										}
-									}
-								}}
-								value={this.state.accountInfo.joinCode}
-								type={
-									!this.state.accountInfo.showJoinCode ? 'password' : 'text'
-								}
-								readOnly
-							/>
-						</FormControl>
-					) : (
-						<div className="join-code">
-							<FormControl>
-								<InputLabel
-									htmlFor="custom-css-standard-input"
-									style={{
-										color: blue[500],
-										root: {
-											'&$cssFocused': {
-												color: blue[500]
+								{this.state.showJoinCode ? 'Hide Join Code' : 'Show Join Code'}
+							</Button>
+							{!this.state.showJoinCode ? (
+								<FormControl style={{ display: 'block' }}>
+									<InputLabel
+										htmlFor="custom-css-standard-input"
+										style={{
+											color: blue[500],
+											root: {
+												'&$cssFocused': {
+													color: blue[500]
+												}
+											},
+											focused: {}
+										}}
+									>
+										Join Code
+									</InputLabel>
+									<Input
+										id="custom-css-standard-input"
+										style={{
+											margin: '10px 0',
+											color: blue[500],
+											underline: {
+												'&:after': {
+													borderBottomColor: blue[500]
+												}
 											}
-										},
-										focused: {}
-									}}
-								>
-									Join Code
-								</InputLabel>
-								<Input
-									id="custom-css-standard-input"
-									style={{
-										margin: '10px 0',
-										color: blue[500],
-										underline: {
-											'&:after': {
-												borderBottomColor: blue[500]
-											}
+										}}
+										value={this.state.accountInfo.joinCode}
+										type={
+											!this.state.accountInfo.showJoinCode ? 'password' : 'text'
 										}
-									}}
-									value={this.state.accountInfo.joinCode}
-									type="text"
-									readOnly
-								/>
-							</FormControl>
+										readOnly
+									/>
+								</FormControl>
+							) : (
+								<div className="join-code">
+									<FormControl>
+										<InputLabel
+											htmlFor="custom-css-standard-input"
+											style={{
+												color: blue[500],
+												root: {
+													'&$cssFocused': {
+														color: blue[500]
+													}
+												},
+												focused: {}
+											}}
+										>
+											Join Code
+										</InputLabel>
+										<Input
+											id="custom-css-standard-input"
+											style={{
+												margin: '10px 0',
+												color: blue[500],
+												underline: {
+													'&:after': {
+														borderBottomColor: blue[500]
+													}
+												}
+											}}
+											value={this.state.accountInfo.joinCode}
+											type="text"
+											readOnly
+										/>
+									</FormControl>
+								</div>
+							)}
 						</div>
-					)}
+					) : null}
 				</div>
 				<div className="accountForms">
 					<div className="editUser">
@@ -245,7 +250,7 @@ class Account extends Component {
 						</Button>
 						<Collapse isOpen={this.state.openEditUser}>
 							<form className="userForm" onSubmit={this.updateUser}>
-								<FormControl>
+								<FormControl style={{ display: 'block' }}>
 									<InputLabel
 										htmlFor="custom-css-standard-input"
 										style={{
@@ -263,7 +268,7 @@ class Account extends Component {
 									<Input
 										id="custom-css-standard-input"
 										style={{
-											margin: '10px 0',
+											// margin: '10px 0',
 											color: blue[500],
 											underline: {
 												'&:after': {
@@ -275,6 +280,7 @@ class Account extends Component {
 										value={this.state.newName}
 										name="newName"
 										onChange={this.changeHandler}
+										placeholder="Enter new name"
 									/>
 								</FormControl>
 								<FormControl>
@@ -306,7 +312,7 @@ class Account extends Component {
 										type="text"
 										value={this.state.newPic}
 										name="newPic"
-										placeholder="Change Picture Link"
+										placeholder="Enter new picture Link"
 										onChange={this.changeHandler}
 									/>
 								</FormControl>
@@ -367,7 +373,7 @@ class Account extends Component {
 						</div>
 					</div>
 				</div>
-			</Card>
+			</div>
 		);
 	}
 }

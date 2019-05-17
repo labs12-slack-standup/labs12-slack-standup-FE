@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from "@material-ui/core/TextField";
 
 const ReportInput = props => {
+	console.log(props)
 	return (
 		<div className="member-report-input">
 			<h4>{props.question}</h4>
