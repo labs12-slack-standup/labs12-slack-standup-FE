@@ -5,7 +5,7 @@ import SingleReport from './SingleReport';
 import Slack from '../Slack/Slack';
 import { Link } from 'react-router-dom';
 import { Card, Button } from '@blueprintjs/core';
-import { Steps } from 'intro.js-react';
+//import { Steps } from 'intro.js-react';
 
 //import 'intro.js/introjs.css';
 
@@ -33,7 +33,7 @@ class Reports extends Component {
 	};
 
 	render() {
-		const { stepsEnabled, steps, initialStep } = this.state;
+		//const { stepsEnabled, steps, initialStep } = this.state;
 
 		const activeReports = this.props.reports.filter(report => report.active);
 		const slackCheck = jwt_decode(localStorage.getItem('token')).slackTeamId;
