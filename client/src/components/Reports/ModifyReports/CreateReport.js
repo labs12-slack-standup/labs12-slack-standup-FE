@@ -141,8 +141,9 @@ class CreateReport extends Component {
 				<Card raised={true} className="schedule-card">
 					<section className="schedule-card-content">
 						<h3 className="schedule-title">Report Information</h3>
+						<Divider className="divider" variant="fullWidth" />
 						<section>
-							<FormControl className="report-name" required>
+							<FormControl className="report-name report-margin" required>
 								<InputLabel
 									htmlFor="report-name"
 									style={{
@@ -168,7 +169,9 @@ class CreateReport extends Component {
 									value={this.state.reportName}
 								/>
 							</FormControl>
+							<p>Slack Channel</p>
 							<HTMLSelect
+								className="slack-dropdown"
 								name="slackChannelId"
 								onChange={this.changeHandler}
 								label="Slack Channel for Distribution"
@@ -214,6 +217,7 @@ class CreateReport extends Component {
 				<Card raised={true} className="schedule-card">
 					<section className="schedule-card-content">
 						<h3 className="schedule-title">Schedule</h3>
+						<Divider className="divider" variant="fullWidth" />
 						<p>Days of the week for report delivery</p>
 						<section className="days-flex">
 							{this.state.week.map(day => (
@@ -244,6 +248,7 @@ class CreateReport extends Component {
 				<Card raised={true} className="schedule-card">
 					<section className="schedule-card-content">
 						<h3 className="schedule-title">Questions</h3>
+						<Divider className="divider" variant="fullWidth" />
 						<p>Questions to be sent out for this report</p>
 						<section>
 							{this.state.questions.map(question => (
@@ -265,7 +270,7 @@ class CreateReport extends Component {
 							))}
 						</section>
 						<section>
-							<FormControl className="" required>
+							<FormControl className="input-field" required>
 								<InputLabel
 									htmlFor="report-question"
 									style={{
@@ -309,8 +314,10 @@ class CreateReport extends Component {
 				<Card raised={true} className="schedule-card">
 					<section className="schedule-card-content">
 						<h3 className="schedule-title">Submit Report</h3>
+						<Divider className="divider" variant="fullWidth" />
 						<FormControl>
 							<Button
+								style={{ display: 'block', marginTop: '30px' }}
 								variant="outlined"
 								color="primary"
 								onClick={this.addReport}
