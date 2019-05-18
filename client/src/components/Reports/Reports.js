@@ -48,14 +48,19 @@ class Reports extends Component {
 						onExit={this.onExit}
 					/> */}
 					<Card className={`createNewReportCard`}>
+						<header>
+							<h1>Your Reports</h1>
+							<Link to="/dashboard/reports/new">
+								<Button
+									className={
+										this.props.role !== 'admin' ? 'bp3-disabled' : null
+									}
+								>
+									Create Report
+								</Button>
+							</Link>
+						</header>
 						<h2>You have not created any reports</h2>
-						<Link to="/dashboard/reports/new">
-							<Button
-								className={this.props.role !== 'admin' ? 'bp3-disabled' : null}
-							>
-								Create Report
-							</Button>
-						</Link>
 						{!slackCheck ? (
 							<Slack />
 						) : (
@@ -67,20 +72,21 @@ class Reports extends Component {
 		}
 		return (
 			<div>
-				<Card className="createReportCard">
-					<Link to="/dashboard/reports/new">
+				<header className="reports-header">
+					<h1 className="bp3-heading">Your Reports</h1>
+					<div className="reports-header-buttons">
 						<Button
 							className={this.props.role !== 'admin' ? 'bp3-disabled' : null}
-						>
-							Create Report
-						</Button>
-					</Link>
-					{!slackCheck ? (
-						<Slack />
-					) : (
-						<h2>Your reports will be delivered via Slack.</h2>
-					)}
-				</Card>
+							icon="add"
+						/>
+						{/* {!slackCheck ? (
+							<Slack />
+						) : (
+							<h2>Your reports will be delivered via Slack.</h2>
+						)} */}
+					</div>
+				</header>
+				
 				{/* passing reports from state to individual components */}
 				{activeReports.map(report => (
 					<SingleReport
