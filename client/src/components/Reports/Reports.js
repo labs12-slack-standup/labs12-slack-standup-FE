@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode';
 import SingleReport from './SingleReport';
 import Slack from '../Slack/Slack';
 import { Link } from 'react-router-dom';
-import { Card, Button } from '@blueprintjs/core';
+import { Card, Button, Icon } from '@blueprintjs/core';
 import { Steps } from 'intro.js-react';
 
 //import 'intro.js/introjs.css';
@@ -47,26 +47,28 @@ class Reports extends Component {
 						initialStep={initialStep}
 						onExit={this.onExit}
 					/> */}
-					<Card className={`createNewReportCard`}>
-						<header>
-							<h1>Your Reports</h1>
+					<header className="reports-header">
+						<h1 className="bp3-heading">Your Reports</h1>
+						<div className="reports-header-buttons">
+							<h3 classname="bp3-heading">
+								Get started with your first report here{' '}
+							</h3>
+							<Icon icon="arrow-right" />
 							<Link to="/dashboard/reports/new">
 								<Button
 									className={
 										this.props.role !== 'admin' ? 'bp3-disabled' : null
 									}
-								>
-									Create Report
-								</Button>
+									icon="add"
+								/>
 							</Link>
-						</header>
-						<h2>You have not created any reports</h2>
-						{!slackCheck ? (
+							{/* {!slackCheck ? (
 							<Slack />
 						) : (
-							<h2>When created, your reports will be delivered via Slack.</h2>
-						)}
-					</Card>
+							<h2>Your reports will be delivered via Slack.</h2>
+						)} */}
+						</div>
+					</header>
 				</div>
 			);
 		}
@@ -75,10 +77,12 @@ class Reports extends Component {
 				<header className="reports-header">
 					<h1 className="bp3-heading">Your Reports</h1>
 					<div className="reports-header-buttons">
-						<Button
-							className={this.props.role !== 'admin' ? 'bp3-disabled' : null}
-							icon="add"
-						/>
+						<Link to="/dashboard/reports/new">
+							<Button
+								className={this.props.role !== 'admin' ? 'bp3-disabled' : null}
+								icon="add"
+							/>
+						</Link>
 						{/* {!slackCheck ? (
 							<Slack />
 						) : (
@@ -86,7 +90,7 @@ class Reports extends Component {
 						)} */}
 					</div>
 				</header>
-				
+
 				{/* passing reports from state to individual components */}
 				{activeReports.map(report => (
 					<SingleReport
