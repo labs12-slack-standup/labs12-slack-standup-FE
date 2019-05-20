@@ -13,12 +13,14 @@ export class Dashboard extends Component {
 		newMemberEmail: '',
 		joinCode: '',
 		isLoading: true,
-		message: ''
+		message: '',
+		active: true
 	};
 
 	componentDidMount() {
 		//get user's joinCode from token and setState accordingly. Necessary to invite new team members.
 		const joinCode = jwt_decode(localStorage.getItem('token')).joinCode;
+
 		this.setState({
 			joinCode: joinCode
 		});
