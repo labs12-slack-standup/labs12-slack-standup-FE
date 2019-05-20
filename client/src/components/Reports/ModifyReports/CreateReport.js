@@ -12,6 +12,7 @@ import blue from '@material-ui/core/colors/blue';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Card from '@material-ui/core/Card';
+import Slack from '../../Slack/Slack';
 
 class CreateReport extends Component {
 	state = {
@@ -142,6 +143,12 @@ class CreateReport extends Component {
 					<section className="schedule-card-content">
 						<h3 className="schedule-title">Report Information</h3>
 						<Divider className="divider" variant="fullWidth" />
+						{this.state.channels.length < 1 ? (
+							<div>
+								<h3>Authorize Slack to chose a channel for distribution:</h3>
+								<Slack />
+							</div>
+						) : null}
 						<section>
 							<FormControl className="report-name report-margin" required>
 								<InputLabel

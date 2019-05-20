@@ -13,9 +13,9 @@ class SlackRedirect extends Component {
     axiosWithAuth()
       .get(endpoint)
       .then(res => {
-        console.log('bad slack res',res)
         localStorage.setItem('token', res.data.token)
-        this.props.history.push('/dashboard');
+        console.log(this.props.history)
+        this.props.history.goBack();
       })
       .catch(err => console.log(err));
   }

@@ -4,10 +4,10 @@ import jwt_decode from 'jwt-decode';
 import SingleReport from './SingleReport';
 import Slack from '../Slack/Slack';
 import { Link } from 'react-router-dom';
+import { slackURL } from '../../config/axiosWithAuth';
 
 import { Card, Button, Icon } from '@blueprintjs/core';
 //import { Steps } from 'intro.js-react';
-
 
 //import 'intro.js/introjs.css';
 
@@ -49,59 +49,55 @@ class Reports extends Component {
 						initialStep={initialStep}
 						onExit={this.onExit}
 					/> */}
-					<header className="reports-header">
+
+					<Card className="reports-header-card">
+						{/* <div className="reports-header-buttons"> */}
 						<h1 className="bp3-heading">Your Reports</h1>
 						<div className="reports-header-buttons">
 							<h3 classname="bp3-heading">
-								Get started with your first report here{' '}
+								Get started with your first report here
 							</h3>
-							<Icon icon="arrow-right" />
-							<Link to="/dashboard/reports/new">
-								<Button
-									className={
-										this.props.role !== 'admin' ? 'bp3-disabled' : null
-									}
-									icon="add"
-								/>
-							</Link>
-							{/* {!slackCheck ? (
-							<Slack />
-						) : (
-							<h2>Your reports will be delivered via Slack.</h2>
-						)} */}
+							<Icon className="header-arrow" icon="arrow-right" />
 						</div>
-					</header>
-				</div>
-			);
-		}
-		return (
-			<div>
-				<header className="reports-header">
-					<h1 className="bp3-heading">Your Reports</h1>
-					<div className="reports-header-buttons">
 						<Link to="/dashboard/reports/new">
 							<Button
 								className={this.props.role !== 'admin' ? 'bp3-disabled' : null}
 								icon="add"
 							/>
 						</Link>
-						{/* {!slackCheck ? (
-							<Slack />
-						) : (
-							<h2>Your reports will be delivered via Slack.</h2>
-						)} */}
-					</div>
-				</header>
+						{/* </div> */}
+						{/* <Slack /> */}
+					</Card>
+					
 
-				{/* passing reports from state to individual components */}
-				{activeReports.map(report => (
-					<SingleReport
-						role={this.props.role}
-						key={report.id}
-						report={report}
-						archiveReport={this.props.archiveReport}
-					/>
-				))}
+				</div>
+			);
+		}
+		return (
+			<div>
+				<Card className="reports-header-card">
+					{/* <div className="reports-header-buttons"> */}
+					<h1 className="bp3-heading">Your Reports</h1>
+					<Link to="/dashboard/reports/new">
+						<Button
+							className={this.props.role !== 'admin' ? 'bp3-disabled' : null}
+							icon="add"
+						/>
+					</Link>
+					{/* </div> */}
+					{/* <Slack /> */}
+				</Card>
+				<div>
+					{/* passing reports from state to individual components */}
+					{activeReports.map(report => (
+						<SingleReport
+							role={this.props.role}
+							key={report.id}
+							report={report}
+							archiveReport={this.props.archiveReport}
+						/>
+					))}
+				</div>
 			</div>
 		);
 	}
