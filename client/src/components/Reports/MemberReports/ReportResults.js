@@ -11,7 +11,8 @@ class ReportResults extends Component {
 	state = {
 		responses: [],
 		clickedDate: null,
-		filteredResponse: []
+		filteredResponse: [],
+		completed: false
 	};
 
 	render() {
@@ -25,7 +26,9 @@ class ReportResults extends Component {
 		return (
 			<main className="report-results-container">
 				<section className="report-results-aside">
-					{this.state.filteredResponse.length > 0 ? (
+
+					{this.state.filteredResponse.length > 0 || this.state.completed ===true ? (
+
 						<Card
 							interactive={false}
 							elevation={Elevation.TWO}
@@ -123,7 +126,9 @@ class ReportResults extends Component {
 	};
 
 	updateWithUserResponse = res => {
-		this.setState({ responses: res.data });
+
+		this.setState({ responses: res.data, completed:true });
+
 	};
 }
 

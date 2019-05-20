@@ -10,7 +10,6 @@ class View extends Component {
 		roles: 'member'
 	};
 
-
 	componentDidMount() {
 		const roles = jwt_decode(localStorage.getItem('token')).roles;
 		this.setState({
@@ -18,15 +17,15 @@ class View extends Component {
 		});
 	}
 	render() {
-
 		return (
 			<div className="view">
+			
+				<Dashboard className="usersDash" role={this.state.roles} />
 				<ReportsDash
 					className="reportsDash"
 					role={this.state.roles}
 					{...this.props}
 				/>
-				<Dashboard className="usersDash" role={this.state.roles} />
 			</div>
 		);
 	}
