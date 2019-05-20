@@ -330,20 +330,20 @@ class EditReport extends Component {
 						</section>
 					</section>
 				</Card>
-				<Card raised={true} className="schedule-card">
+				{/* <Card raised={true} className="schedule-card">
 					<section className="schedule-card-content">
 						<h3 className="schedule-title">Submit Updated Report</h3>
-						<Divider className="divider" variant="fullWidth" />
+						<Divider className="divider" variant="fullWidth" /> */}
 						<Button
-							style={{ display: 'block', marginTop: '30px' }}
+							style={{ display: 'block', marginTop: '30px auto' }}
 							variant="outlined"
 							color="primary"
 							onClick={this.updateReport}
 						>
 							Update Report
 						</Button>
-					</section>
-				</Card>
+					{/* </section>
+				</Card> */}
 			</form>
 		);
 	}
