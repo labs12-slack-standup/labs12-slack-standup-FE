@@ -1,5 +1,5 @@
 h3 {
-	font-weight: bolder;
+	font-weight: 400;
 	margin: 10px 0;
 }
 
@@ -16,7 +16,7 @@ p {
 	max-width: 500px;
 	margin: 30px 0;
 	font-size: 20px;
-	font-weight: bolder;
+	font-weight: 400;
 }
 
 .schedule-title {
@@ -34,7 +34,12 @@ p {
 	cursor: pointer;
 	line-height: 30px;
 	text-align: center;
+	width: 35px;
+}
+
+.delete-icon {
 	width: 30px;
+	height: 30px;
 }
 
 .selected {
@@ -59,6 +64,10 @@ p {
 .question-button {
 	cursor: pointer;
 	width: 50px;
+}
+
+.enter-question {
+	display: flex;
 }
 
 .create-report {
@@ -107,7 +116,7 @@ p {
 }
 
 .schedule-card-content {
-	margin: 10px;
+	margin: 24px;
 }
 
 .divider {
