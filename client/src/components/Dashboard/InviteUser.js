@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Card, Elevation } from '@blueprintjs/core';
-import TextField from '@material-ui/core/TextField';
+import { Button, Elevation, Card } from '@blueprintjs/core';
+import { TextField } from '@material-ui/core';
 
 const InviteUser = props => {
 	return (

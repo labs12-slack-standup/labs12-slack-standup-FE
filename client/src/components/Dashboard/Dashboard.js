@@ -4,8 +4,8 @@ import jwt_decode from 'jwt-decode';
 import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import InviteUser from './InviteUser';
-import { Card } from '@blueprintjs/core';
 import { Spinner, Intent } from '@blueprintjs/core';
+import { Card } from '@material-ui/core';
 
 export class Dashboard extends Component {
 	state = {
@@ -129,7 +129,7 @@ export class Dashboard extends Component {
 			return <Spinner intent={Intent.PRIMARY} />;
 		}
 		return (
-			<Card className="teamDashboard">
+			<Card raised={true} className="teamDashboard">
 				<Team
 					className="teamContainer"
 					users={this.state.users}
