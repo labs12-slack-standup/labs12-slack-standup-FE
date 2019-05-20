@@ -31,7 +31,7 @@ class Team extends Component {
 					))}
 					<Button
 						className={
-							token.roles !== 'admin' ? 'activateButton' : 'bp3-disabled'
+							token.roles === 'admin' ? 'activateButton' : 'bp3-disabled'
 						}
 						onClick={this.viewInactiveUsers}
 					>
