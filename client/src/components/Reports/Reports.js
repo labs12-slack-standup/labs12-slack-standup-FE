@@ -49,30 +49,27 @@ class Reports extends Component {
 						initialStep={initialStep}
 						onExit={this.onExit}
 					/> */}
-					<header className="reports-header">
+
+					<Card className="reports-header-card">
+						{/* <div className="reports-header-buttons"> */}
 						<h1 className="bp3-heading">Your Reports</h1>
 						<div className="reports-header-buttons">
 							<h3 classname="bp3-heading">
 								Get started with your first report here
 							</h3>
 							<Icon className="header-arrow" icon="arrow-right" />
-							<Link to="/dashboard/reports/new">
-								<a
-									href={`https://slack.com/oauth/authorize?scope=incoming-webhook,commands,bot,channels:write&client_id=607645147937.621334967889&redirect_uri=${slackURL}`}
-									className="slack-icon"
-								>
-									<Button
-										className={
-											this.props.role !== 'admin' ? 'bp3-disabled' : null
-										}
-										icon="add"
-									/>
-								</a>
-							</Link>
-
-							<Slack />
 						</div>
-					</header>
+						<Link to="/dashboard/reports/new">
+							<Button
+								className={this.props.role !== 'admin' ? 'bp3-disabled' : null}
+								icon="add"
+							/>
+						</Link>
+						{/* </div> */}
+						{/* <Slack /> */}
+					</Card>
+					
+
 				</div>
 			);
 		}
