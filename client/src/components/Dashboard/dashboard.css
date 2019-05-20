@@ -37,6 +37,13 @@ textarea.bp3-input {
 .ReportsOnDash {
 	width: 75%;
 }
+
+@media(max-width: 800px){
+	.ReportsOnDash {
+		width: 100%;
+	}
+}
+
 .inviteUserBox h3 {
 	font-size: 20px;
 	font-weight: 500;

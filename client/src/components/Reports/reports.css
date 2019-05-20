@@ -1,6 +1,18 @@
 .reportsCard {
 	width: 100%;
 }
+.reports-header {
+	padding: 24px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.reports-header-buttons {
+	display: flex;
+	align-items: center;
+}
+
 
 .reports-card-title {
 	font-size: 24px;
