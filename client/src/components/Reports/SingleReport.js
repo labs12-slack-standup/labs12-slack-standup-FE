@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Card, Button, Icon } from '@blueprintjs/core';
 import { iconClass } from '@blueprintjs/core/lib/esm/common/classes';
 
-
 const SingleReport = props => {
 	const week = [
 		'Monday',
@@ -16,7 +15,10 @@ const SingleReport = props => {
 	];
 
 	const time = props.report.scheduleTime.split(':');
-	const timeStr = `${time[0]}:${time[1]}`
+	let timeStr = `${time[0]}:${time[1]}am`;
+	if (time[0] > 12) {
+		timeStr = `${time[0] - 12}:${time[1]}pm`;
+	}
 
 	return (
 		<Card className="reportsCard">
@@ -46,14 +48,14 @@ const SingleReport = props => {
 				</div>
 				<div className="reports-card-flex whitespace">
 					<div className="reports-card-flex-icon">
-						<Icon icon="time" />					
+						<Icon icon="time" />
 					</div>
 					<div className="reports-card-time">{timeStr}</div>
 				</div>
 			</Link>
 			<div className="flex">
-			<div>
-				<Link
+				<div>
+					<Link
 						to={`/dashboard/reports/${props.report.id}/edit`}
 						className={props.role !== 'admin' ? 'disabled-link' : ''}
 					>
@@ -61,21 +63,16 @@ const SingleReport = props => {
 							Edit{' '}
 						</Button>
 					</Link>
+				</div>
+				<div>
+					<Button
+						onClick={() => props.archiveReport(props.report.id)}
+						className={props.role !== 'admin' ? 'disabled-link' : ''}
+					>
+						Archive
+					</Button>
+				</div>
 			</div>
-			<div>
-				<Button
-					onClick={() => props.archiveReport(props.report.id)}
-					className={props.role !== 'admin' ? 'disabled-link' : ''}
-				>
-				Archive
-			</Button>
-			</div>
-				
-
-					
-			</div>
-
-			
 		</Card>
 	);
 };
