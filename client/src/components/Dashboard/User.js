@@ -23,7 +23,7 @@ const User = props => {
 				{props.user.active ? (
 					<Button
 						className={
-							token.role !== 'admin' ? 'activateButton' : 'bp3-disabled'
+							token.roles !== 'admin' ? 'activateButton' : 'bp3-disabled'
 						}
 						onClick={() => props.deactivateUser(props.user.id)}
 					>
@@ -32,11 +32,11 @@ const User = props => {
 				) : (
 					<Button
 						className={
-							token.role !== 'admin' ? 'activateButton' : 'bp3-disabled'
+							token.roles !== 'admin' ? 'activateButton' : 'bp3-disabled'
 						}
 						onClick={() => props.activateUser(props.user.id)}
 					>
-						{props.openInactive} ? View Inactive : Hide Inactive
+						Activate User
 					</Button>
 				)}
 			</div>
