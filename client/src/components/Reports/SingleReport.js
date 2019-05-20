@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Button, Icon } from '@blueprintjs/core';
+import { Button } from '@blueprintjs/core';
 import { iconClass } from '@blueprintjs/core/lib/esm/common/classes';
+
+import { Card, Fab } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import Icon from '@material-ui/core/Icon';
+//import Icon from '@material-ui/core/Icon';
+
+import './reports.css';
 
 const SingleReport = props => {
 	const week = [
@@ -21,57 +28,84 @@ const SingleReport = props => {
 	}
 
 	return (
-		<Card className="reportsCard">
-			{console.log(props.report)}
-			<Link
-				to={`/dashboard/reports/${props.report.id}`}
-				style={{ textDecoration: 'none' }}
-			>
+		<Card raised={true} className="reportsCard">
+			<div className="single-report-header">
 				<h1 className="reports-card-title">{props.report.reportName}</h1>
-				<h4 className="reports-card-schedule">Schedule</h4>
-				<div className="reports-card-flex">
-					<div className="reports-card-flex-icon">
-						<Icon icon="timeline-events" />
-					</div>
-					<section className="reports-card-flex-days">
-						{week.map(day => (
-							<div
-								key={day}
-								className={`day ${
-									props.report.schedule.includes(day) ? 'selected' : ''
-								}`}
-							>
-								{day.charAt(0)}
-							</div>
-						))}
-					</section>
-				</div>
-				<div className="reports-card-flex whitespace">
-					<div className="reports-card-flex-icon">
-						<Icon icon="time" />
-					</div>
-					<div className="reports-card-time">{timeStr}</div>
-				</div>
-			</Link>
-			<div className="flex">
-				<div>
+				<div className="single-report-buttons">
 					<Link
 						to={`/dashboard/reports/${props.report.id}/edit`}
 						className={props.role !== 'admin' ? 'disabled-link' : ''}
 					>
-						<Button className={props.role !== 'admin' ? 'bp3-disabled' : null}>
-							Edit{' '}
-						</Button>
+						<Fab
+							color="default"
+							size="small"
+							aria-label="Edit"
+							className={props.role !== 'admin' ? 'disabled-link' : ''}
+						>
+							<Icon>edit_icon</Icon>
+						</Fab>
 					</Link>
-				</div>
-				<div>
-					<Button
+					<Fab
+						color="secondary"
+						size="small"
+						aria-label="Delete"
 						onClick={() => props.archiveReport(props.report.id)}
 						className={props.role !== 'admin' ? 'disabled-link' : ''}
 					>
-						Archive
-					</Button>
+						<Icon>delete_icon</Icon>
+					</Fab>
 				</div>
+			</div>
+			<div className="single-report-content">
+				<Link
+					to={`/dashboard/reports/${props.report.id}`}
+					style={{ textDecoration: 'none' }}
+				>
+					<h4 className="reports-card-schedule">Schedule</h4>
+					<div className="reports-card-flex">
+						<div className="reports-card-flex-icon">
+							<Icon>calendar_today</Icon>
+						</div>
+						<section className="reports-card-flex-days">
+							{week.map(day => (
+								<div
+									key={day}
+									className={`day ${
+										props.report.schedule.includes(day) ? 'selected' : ''
+									}`}
+								>
+									{day.charAt(0) + day.charAt(1)}
+								</div>
+							))}
+						</section>
+					</div>
+					<div className="reports-card-flex whitespace">
+						<div className="reports-card-flex-icon">
+							<Icon>alarm</Icon>
+						</div>
+						<div className="reports-card-time">{timeStr}</div>
+					</div>
+				</Link>
+				{/* <div className="flex">
+					<div>
+						<Link
+							to={`/dashboard/reports/${props.report.id}/edit`}
+							className={props.role !== 'admin' ? 'disabled-link' : ''}
+						>
+							<Button className={props.role !== 'admin' ? 'disabled-link' : ''}>
+								Edit{' '}
+							</Button>
+						</Link>
+					</div>
+					<div>
+						<Button
+							onClick={() => props.archiveReport(props.report.id)}
+							className={props.role !== 'admin' ? 'disabled-link' : ''}
+						>
+							Archive
+						</Button>
+					</div>
+				</div> */}
 			</div>
 		</Card>
 	);

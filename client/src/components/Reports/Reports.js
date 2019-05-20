@@ -6,10 +6,14 @@ import Slack from '../Slack/Slack';
 import { Link } from 'react-router-dom';
 import { slackURL } from '../../config/axiosWithAuth';
 
-import { Card, Button, Icon } from '@blueprintjs/core';
+import { Card, Button } from '@blueprintjs/core';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import Icon from '@material-ui/core/Icon';
+import Typography from '@material-ui/core/Typography';
 //import { Steps } from 'intro.js-react';
 
-//import 'intro.js/introjs.css';
+import './reports.css';
 
 class Reports extends Component {
 	constructor(props) {
@@ -40,54 +44,24 @@ class Reports extends Component {
 		const activeReports = this.props.reports.filter(report => report.active);
 		const slackCheck = jwt_decode(localStorage.getItem('token')).slackTeamId;
 		console.log(slackCheck);
-		if (activeReports.length < 1) {
-			return (
-				<div>
-					{/* <Steps
-						enabled={stepsEnabled}
-						steps={steps}
-						initialStep={initialStep}
-						onExit={this.onExit}
-					/> */}
-
-					<Card className="reports-header-card">
-						{/* <div className="reports-header-buttons"> */}
-						<h1 className="bp3-heading">Your Reports</h1>
-						<div className="reports-header-buttons">
-							<h3 classname="bp3-heading">
-								Get started with your first report here
-							</h3>
-							<Icon className="header-arrow" icon="arrow-right" />
-						</div>
-						<Link to="/dashboard/reports/new">
-							<Button
-								className={this.props.role !== 'admin' ? 'bp3-disabled' : null}
-								icon="add"
-							/>
-						</Link>
-						{/* </div> */}
-						{/* <Slack /> */}
-					</Card>
-					
-
-				</div>
-			);
-		}
 		return (
 			<div>
-				<Card className="reports-header-card">
-					{/* <div className="reports-header-buttons"> */}
-					<h1 className="bp3-heading">Your Reports</h1>
-					<Link to="/dashboard/reports/new">
-						<Button
-							className={this.props.role !== 'admin' ? 'bp3-disabled' : null}
-							icon="add"
-						/>
-					</Link>
-					{/* </div> */}
-					{/* <Slack /> */}
-				</Card>
-				<div>
+				<header className="reports-header">
+					<Typography variant="h3">Your Reports</Typography>
+					<div className="reports-header-buttons">
+						<Link to="/dashboard/reports/new">
+							<Fab
+								color="primary"
+								aria-label="Add"
+								size="large"
+								className={this.props.role !== 'admin' ? 'disabled-link' : null}
+							>
+								<AddIcon />
+							</Fab>
+						</Link>
+				  </div>
+        </header>
+        <div>
 					{/* passing reports from state to individual components */}
 					{activeReports.map(report => (
 						<SingleReport
@@ -98,8 +72,8 @@ class Reports extends Component {
 						/>
 					))}
 				</div>
-			</div>
-		);
+      </div>
+			);
 	}
 }
 
