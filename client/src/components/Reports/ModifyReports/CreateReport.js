@@ -18,6 +18,8 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import blue from '@material-ui/core/colors/blue';
 
+import Slack from '../../Slack/Slack';
+
 class CreateReport extends Component {
 	state = {
 		// Main Report State
@@ -151,6 +153,12 @@ class CreateReport extends Component {
 						<section className="schedule-card-content">
 							<h3 className="schedule-title">Report Information</h3>
 							<Divider className="divider" variant="fullWidth" />
+              {this.state.channels.length < 1 ? (
+							<div>
+								<h3>Authorize Slack to chose a channel for distribution:</h3>
+								<Slack />
+							</div>
+						) : null}
 							<section>
 								<FormControl className="report-name report-margin" required>
 									<InputLabel

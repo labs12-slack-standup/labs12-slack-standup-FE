@@ -4,6 +4,7 @@ import jwt_decode from 'jwt-decode';
 import SingleReport from './SingleReport';
 import Slack from '../Slack/Slack';
 import { Link } from 'react-router-dom';
+import { slackURL } from '../../config/axiosWithAuth';
 
 import { Card, Button } from '@blueprintjs/core';
 import Fab from '@material-ui/core/Fab';
@@ -43,49 +44,6 @@ class Reports extends Component {
 		const activeReports = this.props.reports.filter(report => report.active);
 		const slackCheck = jwt_decode(localStorage.getItem('token')).slackTeamId;
 		console.log(slackCheck);
-		if (activeReports.length < 1) {
-			return (
-				<div>
-					{/* <Steps
-						enabled={stepsEnabled}
-						steps={steps}
-						initialStep={initialStep}
-						onExit={this.onExit}
-					/> */}
-					<header className="reports-header">
-						<Typography variant="h3">Your Reports</Typography>
-						<Link to="/dashboard/reports/new">
-							<Fab
-								className={this.props.role !== 'admin' ? 'disabled-link' : null}
-								color="primary"
-								aria-label="Add"
-							>
-								<AddIcon />
-							</Fab>
-						</Link>
-						<div className="reports-header-buttons">
-							<h3 classname="bp3-heading">
-								Get started with your first report here{' '}
-							</h3>
-							<Icon icon="arrow-right" />
-							<Link to="/dashboard/reports/new">
-								<Button
-									className={
-										this.props.role !== 'admin' ? 'bp3-disabled' : null
-									}
-									icon="add"
-								/>
-							</Link>
-							{/* {!slackCheck ? (
-							<Slack />
-						) : (
-							<h2>Your reports will be delivered via Slack.</h2>
-						)} */}
-						</div>
-					</header>
-				</div>
-			);
-		}
 		return (
 			<div>
 				<header className="reports-header">
@@ -101,25 +59,21 @@ class Reports extends Component {
 								<AddIcon />
 							</Fab>
 						</Link>
-						{/* {!slackCheck ? (
-							<Slack />
-						) : (
-							<h2>Your reports will be delivered via Slack.</h2>
-						)} */}
-					</div>
-				</header>
-
-				{/* passing reports from state to individual components */}
-				{activeReports.map(report => (
-					<SingleReport
-						role={this.props.role}
-						key={report.id}
-						report={report}
-						archiveReport={this.props.archiveReport}
-					/>
-				))}
-			</div>
-		);
+				  </div>
+        </header>
+        <div>
+					{/* passing reports from state to individual components */}
+					{activeReports.map(report => (
+						<SingleReport
+							role={this.props.role}
+							key={report.id}
+							report={report}
+							archiveReport={this.props.archiveReport}
+						/>
+					))}
+				</div>
+      </div>
+			);
 	}
 }
 
