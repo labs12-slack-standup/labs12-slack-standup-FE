@@ -51,9 +51,9 @@ class Reports extends Component {
 						<h1 className="bp3-heading">Your Reports</h1>
 						<div className="reports-header-buttons">
 							<h3 classname="bp3-heading">
-								Get started with your first report here{' '}
+								Get started with your first report here
 							</h3>
-							<Icon icon="arrow-right" />
+							<Icon className="header-arrow" icon="arrow-right" />
 							<Link to="/dashboard/reports/new">
 								<Button
 									className={
@@ -62,11 +62,8 @@ class Reports extends Component {
 									icon="add"
 								/>
 							</Link>
-							{/* {!slackCheck ? (
+
 							<Slack />
-						) : (
-							<h2>Your reports will be delivered via Slack.</h2>
-						)} */}
 						</div>
 					</header>
 				</div>
@@ -83,12 +80,9 @@ class Reports extends Component {
 								icon="add"
 							/>
 						</Link>
-						{/* {!slackCheck ? (
-							<Slack />
-						) : (
-							<h2>Your reports will be delivered via Slack.</h2>
-						)} */}
+
 					</div>
+						<Slack />
 				</header>
 
 				{/* passing reports from state to individual components */}
