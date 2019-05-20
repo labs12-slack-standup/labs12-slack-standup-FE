@@ -130,6 +130,9 @@ export class Dashboard extends Component {
 		}
 		return (
 			<Card className="teamDashboard">
+				<header className="teamDashboard-header">
+					<h1 className="bp3-heading">Your Team</h1>
+				</header>
 				<Team
 					className="teamContainer"
 					users={this.state.users}
