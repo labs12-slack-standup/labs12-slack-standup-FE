@@ -4,7 +4,6 @@ import jwt_decode from 'jwt-decode';
 
 const User = props => {
 	const token = jwt_decode(localStorage.getItem('token'));
-	console.log(token);
 	return (
 		<div className="singleUserContainer">
 			<div
