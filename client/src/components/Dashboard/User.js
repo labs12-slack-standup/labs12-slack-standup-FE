@@ -1,7 +1,10 @@
 import React from 'react';
 import { Card, Button, Elevation } from '@blueprintjs/core';
+import jwt_decode from 'jwt-decode';
 
 const User = props => {
+	const token = jwt_decode(localStorage.getItem('token'));
+	console.log(token);
 	return (
 		<div className="singleUserContainer">
 			<div
@@ -19,14 +22,21 @@ const User = props => {
 				<br />
 				{props.user.active ? (
 					<Button
-						className="deactivate"
+						className={
+							token.role !== 'admin' ? 'activateButton' : 'bp3-disabled'
+						}
 						onClick={() => props.deactivateUser(props.user.id)}
 					>
 						Deactivate User
 					</Button>
 				) : (
-					<Button onClick={() => props.activateUser(props.user.id)}>
-						Activate User
+					<Button
+						className={
+							token.role !== 'admin' ? 'activateButton' : 'bp3-disabled'
+						}
+						onClick={() => props.activateUser(props.user.id)}
+					>
+						{props.openInactive} ? View Inactive : Hide Inactive
 					</Button>
 				)}
 			</div>
