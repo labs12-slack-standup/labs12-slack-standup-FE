@@ -11,7 +11,7 @@ const ResponseTeamList = props => (
             const user = props.clickedResponder === responder.userId ? null : responder.userId;
             props.filter(props.clickedDate, user)
           }}
-          className="responders-user"
+          className={`responders-user ${props.clickedResponder === responder.userId ? 'transparent': ''}`}
         />
       ))
     }

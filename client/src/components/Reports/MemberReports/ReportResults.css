@@ -80,7 +80,11 @@
 
 .responders {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
+	margin: auto;
+	margin-top: 30px;
+	width: 321px;
 }
 
 .responders-user {
@@ -88,5 +92,10 @@
 	display: block;
 	height: 40px;
 	margin: 10px;
+	opacity: 0.2;
 	width: 40px;
+}
+
+.transparent {
+	opacity: 1;
 }

@@ -53,7 +53,7 @@ class ReportResults extends Component {
 						elevation={Elevation.TWO}
 						style={{ marginTop: '30px' }}
 					>
-						<h1 className="report-results-filter">Filter Responses</h1>
+						<h1 className="report-results-filter">Filters</h1>
 						<DatePicker
 							// getByDate={this.getByDate}
 							clickedDate={this.state.clickedDate}
