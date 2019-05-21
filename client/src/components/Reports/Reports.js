@@ -42,10 +42,9 @@ class Reports extends Component {
 		//const { stepsEnabled, steps, initialStep } = this.state;
 
 		const activeReports = this.props.reports.filter(report => report.active);
-		const slackCheck = jwt_decode(localStorage.getItem('token')).slackTeamId;
-		console.log(slackCheck);
+		
 		return (
-			<div>
+			<div className="user-reports-container">
 				<header className="reports-header">
 					<Typography variant="h3">Your Reports</Typography>
 					<div className="reports-header-buttons">
@@ -59,9 +58,9 @@ class Reports extends Component {
 								<AddIcon />
 							</Fab>
 						</Link>
-				  </div>
-        </header>
-        <div>
+					</div>
+				</header>
+				<div >
 					{/* passing reports from state to individual components */}
 					{activeReports.map(report => (
 						<SingleReport
@@ -72,8 +71,8 @@ class Reports extends Component {
 						/>
 					))}
 				</div>
-      </div>
-			);
+			</div>
+		);
 	}
 }
 

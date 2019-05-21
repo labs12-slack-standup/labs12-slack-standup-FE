@@ -1,6 +1,5 @@
 .reportsCard {
 	width: 100%;
-	margin: 10px;
 }
 
 .single-report-content {
@@ -16,13 +15,6 @@
 	align-items: center;
 	width: 100%;
 	/* border: 1px solid red; */
-}
-
-.reportsCard {
-	width: 100%;
-	/* border:1px solid red; */
-	margin-top: 24px;
-	padding: 24px;
 }
 
 .header-arrow {
