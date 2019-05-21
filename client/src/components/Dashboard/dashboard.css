@@ -7,11 +7,15 @@ textarea.bp3-input {
 	/* color: #a1d6e2; */
 	width: 35%;
 	margin: 24px 24px 24px 0;
+	padding: 12px;
 }
 .teamDashboard-header {
 	display: flex;
 	justify-content: center;
+	padding: 12px;
 }
+
+
 
 /* .bp3-card .usersContainer {
 	margin: 1rem;
@@ -52,15 +56,17 @@ textarea.bp3-input {
 .inviteUserBox h3 {
 	font-size: 20px;
 	font-weight: 500;
-	margin-bottom: 20px;
+	margin: 20px 0 10px 0;
 	text-align: center;
 }
+
 .inviteUser {
 	display: flex;
 	flex-direction: column;
 	width: 80%;
 	margin: 0 auto;
 }
+
 .onboarding .bp3-card {
 	display: flex;
 	flex-direction: column;

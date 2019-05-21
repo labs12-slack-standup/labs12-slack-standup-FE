@@ -30,7 +30,7 @@ class ReportResults extends Component {
 
 		return (
 			<main className="report-results-container">
-				<div>
+				<div className="report-results-container-backButton">
 					<Fab onClick={() => this.props.history.goBack()} color="default">
 						<Icon>arrow_back</Icon>
 					</Fab>
@@ -59,6 +59,7 @@ class ReportResults extends Component {
 						interactive={false}
 						elevation={Elevation.TWO}
 						style={{ marginTop: '30px' }}
+						className="report-results-filter-container"
 					>
 						<h1 className="report-results-filter">Filters</h1>
 						<DatePicker
@@ -86,28 +87,32 @@ class ReportResults extends Component {
 											.replace(',', '')}
 									</h3>
 									{batch.responses.map(response => (
-										<div key={response.userId} className="response-container">
-											<img
-												className="response-container-image"
-												src={response.profilePic}
-												alt={response.fullName}
-											/>
-											<div className="response-container-main">
-												<h3 className="response-container-main-name">
-													{response.fullName}
-												</h3>
-												{response.questions.map(({ question, answer, id }) => (
-													<div key={id}>
-														<h6 className="response-container-main-question">
-															{question}
-														</h6>
-														<p className="response-container-main-answer">
-															{answer}
-														</p>
-													</div>
-												))}
+										<Card>
+											<div key={response.userId} className="response-container">
+												<img
+													className="response-container-image"
+													src={response.profilePic}
+													alt={response.fullName}
+												/>
+												<div className="response-container-main">
+													<h3 className="response-container-main-name">
+														{response.fullName}
+													</h3>
+													{response.questions.map(
+														({ question, answer, id }) => (
+															<div key={id}>
+																<h6 className="response-container-main-question">
+																	{question}
+																</h6>
+																<p className="response-container-main-answer">
+																	{answer}
+																</p>
+															</div>
+														)
+													)}
+												</div>
 											</div>
-										</div>
+										</Card>
 									))}
 								</div>
 							)
@@ -130,14 +135,19 @@ class ReportResults extends Component {
 				const user = [];
 				const responders = [];
 				res.data.forEach(({ responses }) => {
-					responses.length > 0 && responses.forEach(({ userId, profilePic, fullName }) => {
-						if (!user.includes(userId)) {
-							user.push(userId);
-							responders.push({ userId, profilePic, fullName })
-						}
-					})
+					responses.length > 0 &&
+						responses.forEach(({ userId, profilePic, fullName }) => {
+							if (!user.includes(userId)) {
+								user.push(userId);
+								responders.push({ userId, profilePic, fullName });
+							}
+						});
 				});
-				this.setState({ responses: res.data, filteredResponse: filtered, responders });
+				this.setState({
+					responses: res.data,
+					filteredResponse: filtered,
+					responders
+				});
 			})
 			.catch(err => console.log(err));
 	}
@@ -168,7 +178,7 @@ class ReportResults extends Component {
 				console.log(err);
 			});
 		return;
-	}
+	};
 
 	updateWithUserResponse = res => {
 		this.setState({ responses: res.data, completed: true });
