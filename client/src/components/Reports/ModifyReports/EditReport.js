@@ -240,25 +240,6 @@ class EditReport extends Component {
 								/>
 							</FormControl>
 						</section>
-<<<<<<< HEAD
-					</section>
-				</Card>
-				{/* <Card raised={true} className="schedule-card">
-					<section className="schedule-card-content">
-						<h3 className="schedule-title">Submit Updated Report</h3>
-						<Divider className="divider" variant="fullWidth" /> */}
-						<Button
-							style={{ display: 'block', marginTop: '30px auto' }}
-							variant="outlined"
-							color="primary"
-							onClick={this.updateReport}
-						>
-							Update Report
-						</Button>
-					{/* </section>
-				</Card> */}
-			</form>
-=======
 					</Card>
 					<Card raised={true} className="schedule-card">
 						<section className="schedule-card-content">
@@ -365,7 +346,6 @@ class EditReport extends Component {
 					</Card>
 				</form>
 			</div>
->>>>>>> 8b2d17b798d86f0da58afe2773165726e34b56fe
 		);
 	}
 }

@@ -10,6 +10,8 @@ import PrivateRoute from './auth/PrivateRoute';
 import Slack from './components/Slack/Slack';
 import SlackRedirect from './components/Slack/SlackRedirect';
 import User from './components/Dashboard/User';
+import MarketingPage from './components/Marketing/MarketingPage';
+import DevTeam from './components/Marketing/DevTeam';
 
 import './App.css';
 import View from './components/View/View';
@@ -19,6 +21,10 @@ function App() {
 		<div>
 			{/* NAVIGATION ROUTES */}
 			<Route path="/" component={Navigation} />
+
+			{/* MARKETING PAGES */}
+			<Route exact path="/" component={MarketingPage} />
+			<Route exact path="/team" component={DevTeam} />
 
 			{/* AUTHENTICATION ROUTES */}
 			<Route path="/signup" component={Signup} />
