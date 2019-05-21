@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button, Card, Elevation } from '@blueprintjs/core';
-import TextField from '@material-ui/core/TextField';
+import { Button, Elevation, Card } from '@blueprintjs/core';
+import { TextField } from '@material-ui/core';
 
 const InviteUser = props => {
 	return (
 		<div className="inviteUserBox">
-			<h3>Invite new user to the team</h3>
+			<h3>Invite a new user to your team:</h3>
 			<form onSubmit={props.addUser} className="inviteUser">
 				<TextField
 					id="outlined-email-input"
