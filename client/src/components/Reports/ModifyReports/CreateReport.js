@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import { getHours } from 'date-fns';
-import { FormGroup, HTMLSelect, InputGroup } from '@blueprintjs/core';
+import { HTMLSelect } from '@blueprintjs/core';
 import './Report.css';
 
 import {
@@ -10,7 +10,6 @@ import {
 	Divider,
 	Input,
 	InputLabel,
-	TextField,
 	FormControl,
 	Fab,
 	Icon
@@ -306,7 +305,6 @@ class CreateReport extends Component {
 										placeholder="Ask a question..."
 										value={this.state.question}
 										onChange={this.enterQuestionsHandler}
-										required
 									/>
 								</FormControl>
 								<Fab

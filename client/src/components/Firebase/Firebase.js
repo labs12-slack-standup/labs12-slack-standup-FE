@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { Redirect } from 'react-router-dom';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import jstz from 'jstz';
 import { baseURL } from '../../config/axiosWithAuth';

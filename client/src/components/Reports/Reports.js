@@ -1,18 +1,12 @@
-import './reports.css';
 import React, { Component } from 'react';
-import jwt_decode from 'jwt-decode';
-import SingleReport from './SingleReport';
-import Slack from '../Slack/Slack';
-import { Link } from 'react-router-dom';
-import { slackURL } from '../../config/axiosWithAuth';
 
-import { Card, Button } from '@blueprintjs/core';
+import { Link } from 'react-router-dom';
+
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
-//import { Steps } from 'intro.js-react';
 
+import SingleReport from './SingleReport';
 import './reports.css';
 
 class Reports extends Component {
@@ -42,7 +36,7 @@ class Reports extends Component {
 		//const { stepsEnabled, steps, initialStep } = this.state;
 
 		const activeReports = this.props.reports.filter(report => report.active);
-		
+
 		return (
 			<div className="user-reports-container">
 				<header className="reports-header">
@@ -60,7 +54,7 @@ class Reports extends Component {
 						</Link>
 					</div>
 				</header>
-				<div >
+				<div>
 					{/* passing reports from state to individual components */}
 					{activeReports.map(report => (
 						<SingleReport

@@ -8,7 +8,7 @@ import Responders from '../../Responders/Responders';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import jwt_decode from 'jwt-decode';
 import './ReportResults.css';
-import { teal } from '@material-ui/core/colors';
+
 
 class ReportResults extends Component {
 	state = {

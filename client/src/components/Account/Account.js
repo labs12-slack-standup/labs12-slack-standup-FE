@@ -1,20 +1,15 @@
 import './account.css';
 import React, { Component } from 'react';
+
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
-import {
-	FocusStyleManager,
-	Card,
-	Elevation,
-	Collapse
-} from '@blueprintjs/core';
+
+import { FocusStyleManager, Collapse } from '@blueprintjs/core';
 
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import blue from '@material-ui/core/colors/blue';
 import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
 
 FocusStyleManager.onlyShowFocusOnTabs();
 class Account extends Component {

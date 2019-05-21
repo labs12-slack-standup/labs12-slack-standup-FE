@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
-import { Card, Elevation, Button, Collapse } from '@blueprintjs/core';
+import { Button, Collapse } from '@blueprintjs/core';
 import User from './User';
 
 class Team extends Component {
