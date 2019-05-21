@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import DatePicker from '../../DatePicker/DatePicker';
-import styled from 'styled-components';
 import { Card, Elevation } from '@blueprintjs/core';
 import MemberResponseForm from './MemberResponseForm';
+import Responders from '../../Responders/Responders';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import jwt_decode from 'jwt-decode';
 import './ReportResults.css';
+import { teal } from '@material-ui/core/colors';
 
 class ReportResults extends Component {
 	state = {
 		responses: [],
 		clickedDate: null,
 		filteredResponse: [],
+		clickedResponder: null,
+		responders: [],
 		completed: false
 	};
 
@@ -27,7 +30,7 @@ class ReportResults extends Component {
 			<main className="report-results-container">
 				<section className="report-results-aside">
 
-					{this.state.filteredResponse.length > 0 || this.state.completed ===true ? (
+					{this.state.filteredResponse.length > 0 || this.state.completed === true ? (
 
 						<Card
 							interactive={false}
@@ -50,10 +53,18 @@ class ReportResults extends Component {
 						elevation={Elevation.TWO}
 						style={{ marginTop: '30px' }}
 					>
-						<h1 className="report-results-filter">Filter by day</h1>
+						<h1 className="report-results-filter">Filter Responses</h1>
 						<DatePicker
-							getByDate={this.getByDate}
+							// getByDate={this.getByDate}
 							clickedDate={this.state.clickedDate}
+							clickedResponder={this.state.clickedResponder}
+							filter={this.filter}
+						/>
+						<Responders
+							responders={this.state.responders}
+							filter={this.filter}
+							clickedDate={this.state.clickedDate}
+							clickedResponder={this.state.clickedResponder}
 						/>
 					</Card>
 				</section>
@@ -108,27 +119,52 @@ class ReportResults extends Component {
 				const filtered = res.data[0].responses.filter(
 					response => response.userId === userId
 				);
-				console.log('filtered', filtered);
-				this.setState({ responses: res.data, filteredResponse: filtered });
+				// Filter all unique responders and push to state
+				const user = [];
+				const responders = [];
+				res.data.forEach(({ responses }) => {
+					responses.length > 0 && responses.forEach(({ userId, profilePic, fullName }) => {
+						if (!user.includes(userId)) {
+							user.push(userId);
+							responders.push({ userId, profilePic, fullName })
+						}
+					})
+				});
+				this.setState({ responses: res.data, filteredResponse: filtered, responders });
 			})
 			.catch(err => console.log(err));
 	}
 
-	getByDate = date => {
+	// getByDate = date => {
+	// 	axiosWithAuth()
+	// 		.post(`${baseURL}/responses/${this.props.match.params.reportId}/day`, {
+	// 			date
+	// 		})
+	// 		.then(res => this.setState({ responses: res.data, clickedDate: date }))
+	// 		.catch(err => {
+	// 			console.log(err);
+	// 		});
+	// };
+
+	filter = (date, responder) => {
+		console.log(date, responder);
 		axiosWithAuth()
-			.post(`${baseURL}/responses/${this.props.match.params.reportId}/day`, {
-				date
+			.post(`${baseURL}/responses/${this.props.match.params.reportId}/filter`, {
+				date: date,
+				user: responder
 			})
-			.then(res => this.setState({ responses: res.data, clickedDate: date }))
+			.then(res => {
+				const { clickedDate, clickedResponder, responses } = res.data;
+				this.setState({ clickedDate, clickedResponder, responses });
+			})
 			.catch(err => {
 				console.log(err);
 			});
-	};
+		return;
+	}
 
 	updateWithUserResponse = res => {
-
 		this.setState({ responses: res.data, completed:true });
-
 	};
 }
 

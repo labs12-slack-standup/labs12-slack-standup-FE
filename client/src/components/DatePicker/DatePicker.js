@@ -9,8 +9,11 @@ const DayPickerComp = props => (
     <DayPickerSingleDateController
       numberOfMonths={1}
       noBorder={true}
-      onDateChange={({_d}) => props.getByDate(_d)}
-      isDayHighlighted={({_d}) => isSameDay(props.clickedDate,_d) ? true : false}
+      onDateChange={({_d}) => {
+        const day = isSameDay(props.clickedDate, _d) ? null : _d;
+        props.filter(day, props.clickedResponder)
+      }}
+      isDayHighlighted={({_d}) => isSameDay(props.clickedDate, _d) ? true : false}
     />
   </div>
 )

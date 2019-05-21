@@ -17,12 +17,10 @@
 	}
 
 	.report-results-aside {
-		order: 2;
 		width: 450px;
 	}
 
 	.report-results-feed {
-		order: 1;
 		width: 70%;
 	}
 }
@@ -78,4 +76,17 @@
 	height: 331px;
 	margin: auto;
 	width: 321px;
+}
+
+.responders {
+	display: flex;
+	justify-content: space-between;
+}
+
+.responders-user {
+	border-radius: 50%;
+	display: block;
+	height: 40px;
+	margin: 10px;
+	width: 40px;
 }
