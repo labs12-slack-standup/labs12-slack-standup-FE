@@ -28,33 +28,61 @@ class Navigation extends React.Component {
 		const loggedIn = appToken && firebaseToken;
 
 		return (
-			<Navbar>
+			<Navbar className="navBar-container">
 				<NavbarGroup align={Alignment.LEFT}>
 					<NavLink to="/dashboard">
 						<Navbar.Heading>Stand-Em-Ups</Navbar.Heading>
 					</NavLink>
 					<NavbarDivider />
-					<NavLink to="/dashboard">
+					<NavLink className="wide-nav" to="/dashboard">
 						<Button icon="home" className={Classes.MINIMAL} text="Dashboard" />
 					</NavLink>
-					<NavLink to="/dashboard/profile">
+					<NavLink className="wide-nav" to="/dashboard/profile">
 						<Button icon="user" className={Classes.MINIMAL} text="Profile" />
+					</NavLink>
+					<NavLink className="narrow-nav" to="/dashboard">
+						<Button icon="home" className={Classes.MINIMAL} />
+					</NavLink>
+					<NavLink className="narrow-nav" to="/dashboard/profile">
+						<Button icon="user" className={Classes.MINIMAL} />
 					</NavLink>
 				</NavbarGroup>
 
 				<NavbarGroup align={Alignment.RIGHT}>
 					{!loggedIn ? (
-						<NavLink to="/login">
-							<Button icon="log-in" className={Classes.MINIMAL} text="Login" />
-						</NavLink>
+						<>
+							<NavLink className="wide-nav" to="/login">
+								<Button
+									icon="log-in"
+									className={Classes.MINIMAL}
+									text="Login"
+								/>
+							</NavLink>
+							<NavLink className="narrow-nav" to="/login">
+								<Button
+									icon="log-in"
+									className={Classes.MINIMAL}
+									
+								/>
+							</NavLink>
+						</>
 					) : (
-						<NavLink to="/login" onClick={this.handleLogout}>
-							<Button
-								icon="log-out"
-								className={Classes.MINIMAL}
-								text="Logout"
-							/>
-						</NavLink>
+						<>
+							<NavLink className="wide-nav" to="/login" onClick={this.handleLogout}>
+								<Button
+									icon="log-out"
+									className={Classes.MINIMAL}
+									text="Logout"
+								/>
+							</NavLink>
+							<NavLink className="narrow-nav" to="/login" onClick={this.handleLogout}>
+								<Button
+									icon="log-out"
+									className={Classes.MINIMAL}
+									
+								/>
+							</NavLink>
+						</>
 					)}
 				</NavbarGroup>
 			</Navbar>
