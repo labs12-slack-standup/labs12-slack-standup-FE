@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import { getHours } from 'date-fns';
-import { FormGroup, HTMLSelect, InputGroup } from '@blueprintjs/core';
+import { HTMLSelect } from '@blueprintjs/core';
 import './Report.css';
 
 import {
@@ -16,16 +16,16 @@ import {
 	Icon
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import blue from '@material-ui/core/colors/blue';
-
+import { TimePicker } from 'material-ui-pickers';
 import Slack from '../../Slack/Slack';
-
+import { getMinutes } from 'date-fns/esm';
 class CreateReport extends Component {
 	state = {
 		// Main Report State
 		reportName: '',
 		schedule: [],
-		scheduleTime: `${getHours(new Date()) + 1}:00`,
+		scheduleTime: new Date('2000-01-01T18:00:00'),
+		timePickDate: new Date('2000-01-01T18:00:00'),
 		message: '',
 		questions: [],
 		slackChannelId: null,
@@ -50,6 +50,17 @@ class CreateReport extends Component {
 	changeHandler = e => {
 		this.setState({
 			[e.target.name]: e.target.value
+		});
+	};
+
+	timeChangeHandler = date => {
+		const hours = getHours(date);
+		const min = getMinutes(date);
+		const militaryTime = `${hours}:${min}`;
+
+		this.setState({
+			scheduleTime: militaryTime,
+			timePickDate: date
 		});
 	};
 
@@ -153,28 +164,15 @@ class CreateReport extends Component {
 						<section className="schedule-card-content">
 							<h3 className="schedule-title">Report Information</h3>
 							<Divider className="divider" variant="fullWidth" />
-              {this.state.channels.length < 1 ? (
-							<div>
-								<h3>Authorize Slack to chose a channel for distribution:</h3>
-								<Slack />
-							</div>
-						) : null}
+							{this.state.channels.length < 1 ? (
+								<div>
+									<h3>Authorize Slack to chose a channel for distribution:</h3>
+									<Slack />
+								</div>
+							) : null}
 							<section>
 								<FormControl className="report-name report-margin" required>
-									<InputLabel
-										htmlFor="report-name"
-										style={{
-											color: blue[500],
-											root: {
-												'&$cssFocused': {
-													color: blue[500]
-												}
-											},
-											focused: {}
-										}}
-									>
-										Report Name
-									</InputLabel>
+									<InputLabel htmlFor="report-name">Report Name</InputLabel>
 									<Input
 										id="report-name"
 										className="input-field"
@@ -203,18 +201,7 @@ class CreateReport extends Component {
 							</section>
 							<section>
 								<FormControl className="input-field" required>
-									<InputLabel
-										htmlFor="report-message"
-										style={{
-											color: blue[500],
-											root: {
-												'&$cssFocused': {
-													color: blue[500]
-												}
-											},
-											focused: {}
-										}}
-									>
+									<InputLabel htmlFor="report-message">
 										Report Message
 									</InputLabel>
 									<Input
@@ -251,13 +238,12 @@ class CreateReport extends Component {
 							</section>
 							<p>Time each day for report delivery</p>
 							<section>
-								<Input
-									type="time"
-									className="report-time"
-									onChange={this.changeHandler}
+								<TimePicker
+									label="Schedule Time"
 									name="scheduleTime"
-									step="1800"
-									value={this.state.scheduleTime}
+									value={this.state.timePickDate}
+									minutesStep={30}
+									onChange={this.timeChangeHandler}
 								/>
 							</section>
 						</section>
@@ -283,18 +269,7 @@ class CreateReport extends Component {
 							</section>
 							<section className="enter-question">
 								<FormControl className="input-field" required>
-									<InputLabel
-										htmlFor="report-question"
-										style={{
-											color: blue[500],
-											root: {
-												'&$cssFocused': {
-													color: blue[500]
-												}
-											},
-											focused: {}
-										}}
-									>
+									<InputLabel htmlFor="report-question">
 										Enter a question...
 									</InputLabel>
 									<Input

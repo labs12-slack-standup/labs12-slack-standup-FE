@@ -14,14 +14,17 @@ import {
 	Icon
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import blue from '@material-ui/core/colors/blue';
+import { TimePicker } from 'material-ui-pickers';
+import { getHours } from 'date-fns';
+import { getMinutes } from 'date-fns/esm';
 
 class EditReport extends Component {
 	state = {
 		// Main Report State
 		reportName: '',
 		schedule: [],
-		scheduleTime: '',
+		scheduleTime: new Date('2000-01-01T18:00:00'),
+		timePickDate: new Date('2000-01-01T18:00:00'),
 		message: '',
 		questions: [],
 		slackChannelId: null,
@@ -70,6 +73,17 @@ class EditReport extends Component {
 	changeHandler = e => {
 		this.setState({
 			[e.target.name]: e.target.value
+		});
+	};
+
+	timeChangeHandler = date => {
+		const hours = getHours(date);
+		const min = getMinutes(date);
+		const militaryTime = `${hours}:${min}`;
+
+		this.setState({
+			scheduleTime: militaryTime,
+			timePickDate: date
 		});
 	};
 
@@ -169,20 +183,7 @@ class EditReport extends Component {
 							<h3 className="schedule-title">Report Information</h3>
 							<Divider className="divider" variant="fullWidth" />
 							<FormControl className="report-name report-margin" required>
-								<InputLabel
-									htmlFor="edit-report-name"
-									style={{
-										color: blue[500],
-										root: {
-											'&$cssFocused': {
-												color: blue[500]
-											}
-										},
-										focused: {}
-									}}
-								>
-									Report Name
-								</InputLabel>
+								<InputLabel htmlFor="edit-report-name">Report Name</InputLabel>
 								<Input
 									id="edit-report-name"
 									className="input-field top-input"
@@ -214,18 +215,7 @@ class EditReport extends Component {
 						</section>
 						<section className="schedule-card-content">
 							<FormControl className="input-field" required>
-								<InputLabel
-									htmlFor="edit-report-message"
-									style={{
-										color: blue[500],
-										root: {
-											'&$cssFocused': {
-												color: blue[500]
-											}
-										},
-										focused: {}
-									}}
-								>
+								<InputLabel htmlFor="edit-report-message">
 									Report Message
 								</InputLabel>
 								<Input
@@ -261,13 +251,12 @@ class EditReport extends Component {
 							</section>
 							<p>Time each day for report delivery</p>
 							<section>
-								<Input
-									type="time"
-									className="margin-fix"
-									onChange={this.changeHandler}
+								<TimePicker
+									label="Schedule Time"
 									name="scheduleTime"
-									step="1800"
-									value={this.state.scheduleTime}
+									value={this.state.timePickDate}
+									minutesStep={30}
+									onChange={this.timeChangeHandler}
 								/>
 							</section>
 						</section>
@@ -293,18 +282,7 @@ class EditReport extends Component {
 							</section>
 							<section className="enter-question">
 								<FormControl className="input-field" required>
-									<InputLabel
-										htmlFor="edit-report-question"
-										style={{
-											color: blue[500],
-											root: {
-												'&$cssFocused': {
-													color: blue[500]
-												}
-											},
-											focused: {}
-										}}
-									>
+									<InputLabel htmlFor="edit-report-question">
 										Enter a question...
 									</InputLabel>
 									<Input
