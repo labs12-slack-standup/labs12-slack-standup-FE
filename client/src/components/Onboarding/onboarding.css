@@ -6,9 +6,46 @@
 	justify-content: center;
 	height: 800px;
 }
+
+.onboardingCard {
+	margin: 24px;
+	max-width: 400px;
+	width: 95%;
+}
+
+.onboardingCard h3 {
+	text-align: center;
+}
+
+.onboardingCard button {
+	text-align: center;
+	margin: 10px auto;
+}
+
 .onboarding button {
-	width: 150px;
 	margin: 10px;
+}
+
+.onboarding-back {
+	width: 56px;
+}
+
+.onboarding-card-content {
+	margin: 24px;
+	display: flex;
+	flex-direction: column;
+}
+.create-team-buttons {
+	display: flex;
+}
+
+.landing-buttons {
+	text-align: center;
+}
+
+.landing-buttons p,
+button {
+	text-align: center;
 }
 
 .userCard {
@@ -67,15 +104,6 @@
 .onboarding .bp3-text-overflow-ellipsis {
 	color: #fefefe;
 }
-.onboardingCard {
-	width: 50%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-}
-/* .onboardingCard .bp3-tag {
-	font-size: 1rem;
-}  */
 
 .onboarding h2 {
 	font-size: 2.4rem;
@@ -95,4 +123,9 @@
 	background-color: white;
 	width: 40px;
 	margin-left: 175px;
+}
+
+#input-label {
+	text-align: center;
+	margin-left: 10px;
 }
