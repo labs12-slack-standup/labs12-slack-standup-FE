@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Card, Button, Fab, Icon } from '@material-ui/core';
 import ChipInput from 'material-ui-chip-input';

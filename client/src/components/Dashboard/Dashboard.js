@@ -5,6 +5,7 @@ import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import InviteUser from './InviteUser';
 import { Spinner, Intent } from '@blueprintjs/core';
+import Typography from '@material-ui/core/Typography';
 import { Card } from '@material-ui/core';
 import Slack from '../Slack/Slack';
 
@@ -134,7 +135,7 @@ export class Dashboard extends Component {
 		return (
 			<Card raised={true} className="teamDashboard">
 				<header className="teamDashboard-header">
-					<h1 className="bp3-heading">Your Team</h1>
+					<Typography variant="h3">Your Team</Typography>
 				</header>
 				<Team
 					className="teamContainer"
@@ -149,7 +150,7 @@ export class Dashboard extends Component {
 					message={this.state.message}
 					clearMessage={this.clearMessage}
 				/>
-				<Slack/>
+				<Slack />
 			</Card>
 		);
 	}

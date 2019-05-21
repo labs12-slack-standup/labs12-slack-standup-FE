@@ -1,18 +1,12 @@
-import './reports.css';
 import React, { Component } from 'react';
-import jwt_decode from 'jwt-decode';
-import SingleReport from './SingleReport';
-import Slack from '../Slack/Slack';
-import { Link } from 'react-router-dom';
-import { slackURL } from '../../config/axiosWithAuth';
 
-import { Card, Button } from '@blueprintjs/core';
+import { Link } from 'react-router-dom';
+
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
-//import { Steps } from 'intro.js-react';
 
+import SingleReport from './SingleReport';
 import './reports.css';
 
 class Reports extends Component {
@@ -42,10 +36,9 @@ class Reports extends Component {
 		//const { stepsEnabled, steps, initialStep } = this.state;
 
 		const activeReports = this.props.reports.filter(report => report.active);
-		const slackCheck = jwt_decode(localStorage.getItem('token')).slackTeamId;
-		console.log(slackCheck);
+
 		return (
-			<div>
+			<div className="user-reports-container">
 				<header className="reports-header">
 					<Typography variant="h3">Your Reports</Typography>
 					<div className="reports-header-buttons">
@@ -59,9 +52,9 @@ class Reports extends Component {
 								<AddIcon />
 							</Fab>
 						</Link>
-				  </div>
-        </header>
-        <div>
+					</div>
+				</header>
+				<div>
 					{/* passing reports from state to individual components */}
 					{activeReports.map(report => (
 						<SingleReport
@@ -72,8 +65,8 @@ class Reports extends Component {
 						/>
 					))}
 				</div>
-      </div>
-			);
+			</div>
+		);
 	}
 }
 

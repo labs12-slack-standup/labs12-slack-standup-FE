@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Elevation } from '@blueprintjs/core';
+import { Button, Elevation } from '@blueprintjs/core';
 import jwt_decode from 'jwt-decode';
 
 const User = props => {

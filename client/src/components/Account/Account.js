@@ -1,5 +1,6 @@
 import './account.css';
 import React, { Component } from 'react';
+
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import { Collapse } from '@blueprintjs/core';
 

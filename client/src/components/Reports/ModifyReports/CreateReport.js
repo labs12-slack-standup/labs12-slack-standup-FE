@@ -10,7 +10,6 @@ import {
 	Divider,
 	Input,
 	InputLabel,
-	TextField,
 	FormControl,
 	Fab,
 	Icon
@@ -281,7 +280,6 @@ class CreateReport extends Component {
 										placeholder="Ask a question..."
 										value={this.state.question}
 										onChange={this.enterQuestionsHandler}
-										required
 									/>
 								</FormControl>
 								<Fab
