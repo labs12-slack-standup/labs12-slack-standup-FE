@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Dashboard from '../Dashboard/Dashboard';
 import ReportsDash from '../Dashboard/ReportsDash';
 import jwt_decode from 'jwt-decode';
-import Slack from '../Slack/Slack';
+
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
 
 class View extends Component {

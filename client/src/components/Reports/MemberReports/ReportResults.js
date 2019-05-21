@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import DatePicker from '../../DatePicker/DatePicker';
-import styled from 'styled-components';
 import { Card, Elevation } from '@blueprintjs/core';
 import { Fab, Icon } from '@material-ui/core';
 
 import MemberResponseForm from './MemberResponseForm';
+import Responders from '../../Responders/Responders';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import jwt_decode from 'jwt-decode';
 import './ReportResults.css';
+
 
 class ReportResults extends Component {
 	state = {
 		responses: [],
 		clickedDate: null,
 		filteredResponse: [],
+		clickedResponder: null,
+		responders: [],
 		completed: false
 	};
 
@@ -27,7 +30,7 @@ class ReportResults extends Component {
 
 		return (
 			<main className="report-results-container">
-				<div>
+				<div className="report-results-container-backButton">
 					<Fab onClick={() => this.props.history.goBack()} color="default">
 						<Icon>arrow_back</Icon>
 					</Fab>
@@ -56,11 +59,21 @@ class ReportResults extends Component {
 						interactive={false}
 						elevation={Elevation.TWO}
 						style={{ marginTop: '30px' }}
+						className="report-results-filter-container"
 					>
 						<h1 className="report-results-filter">Filter by day</h1>
 						<DatePicker
-							getByDate={this.getByDate}
+							// getByDate={this.getByDate}
 							clickedDate={this.state.clickedDate}
+							clickedResponder={this.state.clickedResponder}
+							filter={this.filter}
+						/>
+						<h1 className="report-results-filter">Filter by team member</h1>
+						<Responders
+							responders={this.state.responders}
+							filter={this.filter}
+							clickedDate={this.state.clickedDate}
+							clickedResponder={this.state.clickedResponder}
 						/>
 					</Card>
 				</section>
@@ -75,28 +88,32 @@ class ReportResults extends Component {
 											.replace(',', '')}
 									</h3>
 									{batch.responses.map(response => (
-										<div key={response.userId} className="response-container">
-											<img
-												className="response-container-image"
-												src={response.profilePic}
-												alt={response.fullName}
-											/>
-											<div className="response-container-main">
-												<h3 className="response-container-main-name">
-													{response.fullName}
-												</h3>
-												{response.questions.map(({ question, answer, id }) => (
-													<div key={id}>
-														<h6 className="response-container-main-question">
-															{question}
-														</h6>
-														<p className="response-container-main-answer">
-															{answer}
-														</p>
-													</div>
-												))}
+										<Card>
+											<div key={response.userId} className="response-container">
+												<img
+													className="response-container-image"
+													src={response.profilePic}
+													alt={response.fullName}
+												/>
+												<div className="response-container-main">
+													<h3 className="response-container-main-name">
+														{response.fullName}
+													</h3>
+													{response.questions.map(
+														({ question, answer, id }) => (
+															<div key={id}>
+																<h6 className="response-container-main-question">
+																	{question}
+																</h6>
+																<p className="response-container-main-answer">
+																	{answer}
+																</p>
+															</div>
+														)
+													)}
+												</div>
 											</div>
-										</div>
+										</Card>
 									))}
 								</div>
 							)
@@ -115,22 +132,41 @@ class ReportResults extends Component {
 				const filtered = res.data[0].responses.filter(
 					response => response.userId === userId
 				);
-				console.log('filtered', filtered);
-				this.setState({ responses: res.data, filteredResponse: filtered });
+				// Filter all unique responders and push to state
+				const user = [];
+				const responders = [];
+				res.data.forEach(({ responses }) => {
+					responses.length > 0 &&
+						responses.forEach(({ userId, profilePic, fullName }) => {
+							if (!user.includes(userId)) {
+								user.push(userId);
+								responders.push({ userId, profilePic, fullName });
+							}
+						});
+				});
+				this.setState({
+					responses: res.data,
+					filteredResponse: filtered,
+					responders
+				});
 			})
 			.catch(err => console.log(err));
 	}
 
-	getByDate = date => {
+	filter = (date, responder) => {
 		axiosWithAuth()
-			.post(`${baseURL}/responses/${this.props.match.params.reportId}/day`, {
-				date
+			.post(`${baseURL}/responses/${this.props.match.params.reportId}/filter`, {
+				date: date,
+				user: responder
 			})
-			.then(res => this.setState({ responses: res.data, clickedDate: date }))
+			.then(res => {
+				const { clickedDate, clickedResponder, responses } = res.data;
+				this.setState({ clickedDate, clickedResponder, responses });
+			})
 			.catch(err => {
 				console.log(err);
 			});
-	};
+	}
 
 	updateWithUserResponse = res => {
 		this.setState({ responses: res.data, completed: true });

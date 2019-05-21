@@ -5,6 +5,10 @@
 	text-align: center;
 }
 
+.report-results-container-backButton {
+	margin: 24px;
+}
+
 .report-results-feed {
 	margin: 0 20px;
 }
@@ -17,12 +21,10 @@
 	}
 
 	.report-results-aside {
-		order: 2;
 		width: 450px;
 	}
 
 	.report-results-feed {
-		order: 1;
 		width: 70%;
 	}
 }
@@ -63,19 +65,51 @@
 	margin-top: 10px;
 }
 
+.report-results-filter-container {
+
+}
+
 .report-results-filter {
-	font-size: 22px;
+	display: block;
+	font-size: 16px;
 	font-weight: 500;
-	padding: 20px 0 10px;
-	text-align: center;
+	margin: auto;
+	max-width: 280px;
+	opacity: 0.87;
+}
+
+.report-results-filter:first-child {
+	margin-top: 30px;
 }
 
 .completed-report {
-	margin: 10px 0;
+	margin: 24px 0;
 }
 
 .report-results-date-picker {
 	height: 331px;
 	margin: auto;
 	width: 321px;
+}
+
+.responders {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	margin: auto;
+	width: 300px;
+}
+
+.responders-user {
+	border-radius: 50%;
+	display: block;
+	height: 40px;
+	margin: 10px;
+	opacity: 0.5;
+	width: 40px;
+}
+
+
+.transparent {
+	opacity: 1;
 }

@@ -70,7 +70,6 @@ class Onboarding extends Component {
 				joinCode
 			});
 			localStorage.setItem('token', updated.data.token);
-			
 
 			// if the user's entered emails, make the post call to the email endpoint
 			if (mailObject.email[0]) {
@@ -121,6 +120,14 @@ class Onboarding extends Component {
 		//this.separateEmails();
 	};
 
+	handleAddChip = () => {
+		this.setState({ emails: [...this.state.emails, this.state.singleEmail] });
+	};
+
+	handleChipChange = email => {
+		this.setState({ emails: [...email] });
+	};
+
 	render() {
 		// Landing Page - all booleans false
 		return !this.state.joinToggle && !this.state.createToggle ? (
@@ -139,6 +146,8 @@ class Onboarding extends Component {
 				changeEmail={this.changeEmail}
 				error={this.state.error}
 				clearError={this.clearError}
+				handleAddChip={this.handleAddChip}
+				handleChipChange={this.handleChipChange}
 			/>
 		) : (
 			// Join a Team page - joinToggle true
