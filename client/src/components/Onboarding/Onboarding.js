@@ -70,9 +70,10 @@ class Onboarding extends Component {
 				joinCode
 			});
 			localStorage.setItem('token', updated.data.token);
+			
 
 			// if the user's entered emails, make the post call to the email endpoint
-			if (mailObject.email[0].length > 1) {
+			if (mailObject.email[0]) {
 				await axiosWithAuth().post(`${baseURL}/email`, mailObject);
 			}
 

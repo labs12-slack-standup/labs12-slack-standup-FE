@@ -1,11 +1,32 @@
 .reportsCard {
 	width: 100%;
+	margin: 10px;
 }
+
+.single-report-content {
+	margin: 24px;
+}
+
 .reports-header {
 	padding: 24px;
+	margin-top: 24px;
 	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	width: 100%;
+	/* border: 1px solid red; */
+}
+
+.reportsCard {
+	width: 100%;
+	/* border:1px solid red; */
+	margin-top: 24px;
+	padding: 24px;
+}
+
+.header-arrow {
+	margin: 0 12px 0 0;
 }
 
 .reports-header-buttons {
@@ -13,11 +34,9 @@
 	align-items: center;
 }
 
-
 .reports-card-title {
 	font-size: 24px;
-	font-weight: 700;
-	margin-top: 17px;
+	font-weight: 500;
 }
 
 .reports-card-schedule {
@@ -37,6 +56,7 @@
 	padding-top: 5px;
 	width: 30px;
 	vertical-align: center;
+	margin-right: 20px;
 }
 
 .reports-card-time {
@@ -54,6 +74,20 @@
 	line-height: 20px;
 	max-width: 335px;
 	vertical-align: center;
+}
+
+.single-report-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	margin: 24px;
+}
+
+.single-report-buttons {
+	display: flex;
+	justify-content: space-between;
+	width: 100px;
+	margin: 10px;
 }
 
 .whitespace {

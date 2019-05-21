@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import DatePicker from '../../DatePicker/DatePicker';
 import { Card, Elevation } from '@blueprintjs/core';
+import { Fab, Icon } from '@material-ui/core';
+
 import MemberResponseForm from './MemberResponseForm';
 import Responders from '../../Responders/Responders';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
@@ -28,10 +30,15 @@ class ReportResults extends Component {
 
 		return (
 			<main className="report-results-container">
+				<div>
+					<Fab onClick={() => this.props.history.goBack()} color="default">
+						<Icon>arrow_back</Icon>
+					</Fab>
+				</div>
+
 				<section className="report-results-aside">
-
-					{this.state.filteredResponse.length > 0 || this.state.completed === true ? (
-
+					{this.state.filteredResponse.length > 0 ||
+					this.state.completed === true ? (
 						<Card
 							interactive={false}
 							elevation={Elevation.TWO}
@@ -164,7 +171,7 @@ class ReportResults extends Component {
 	}
 
 	updateWithUserResponse = res => {
-		this.setState({ responses: res.data, completed:true });
+		this.setState({ responses: res.data, completed: true });
 	};
 }
 

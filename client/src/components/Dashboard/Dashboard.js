@@ -4,8 +4,9 @@ import jwt_decode from 'jwt-decode';
 import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import InviteUser from './InviteUser';
-import { Card } from '@blueprintjs/core';
 import { Spinner, Intent } from '@blueprintjs/core';
+import { Card } from '@material-ui/core';
+import Slack from '../Slack/Slack';
 
 export class Dashboard extends Component {
 	state = {
@@ -13,12 +14,14 @@ export class Dashboard extends Component {
 		newMemberEmail: '',
 		joinCode: '',
 		isLoading: true,
-		message: ''
+		message: '',
+		active: true
 	};
 
 	componentDidMount() {
 		//get user's joinCode from token and setState accordingly. Necessary to invite new team members.
 		const joinCode = jwt_decode(localStorage.getItem('token')).joinCode;
+
 		this.setState({
 			joinCode: joinCode
 		});
@@ -129,7 +132,10 @@ export class Dashboard extends Component {
 			return <Spinner intent={Intent.PRIMARY} />;
 		}
 		return (
-			<Card className="teamDashboard">
+			<Card raised={true} className="teamDashboard">
+				<header className="teamDashboard-header">
+					<h1 className="bp3-heading">Your Team</h1>
+				</header>
 				<Team
 					className="teamContainer"
 					users={this.state.users}
@@ -143,6 +149,7 @@ export class Dashboard extends Component {
 					message={this.state.message}
 					clearMessage={this.clearMessage}
 				/>
+				<Slack/>
 			</Card>
 		);
 	}

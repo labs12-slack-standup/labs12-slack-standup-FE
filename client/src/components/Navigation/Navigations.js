@@ -30,19 +30,20 @@ class Navigation extends React.Component {
 
 		return (
 			<Navbar>
-				<NavbarGroup>
+				<NavbarGroup align={Alignment.LEFT}>
 					<NavLink to="/dashboard">
 						<Navbar.Heading>Stand-Em-Ups</Navbar.Heading>
 					</NavLink>
 					<NavbarDivider />
-
-					<NavLink to="/dashboard/profile">
-						<Button icon="user" className={Classes.MINIMAL} text="Profile" />
-					</NavLink>
 					<NavLink to="/dashboard">
 						<Button icon="home" className={Classes.MINIMAL} text="Dashboard" />
 					</NavLink>
+					<NavLink to="/dashboard/profile">
+						<Button icon="user" className={Classes.MINIMAL} text="Profile" />
+					</NavLink>
+				</NavbarGroup>
 
+				<NavbarGroup align={Alignment.RIGHT}>
 					{!loggedIn ? (
 						<NavLink to="/login">
 							<Button icon="log-in" className={Classes.MINIMAL} text="Login" />

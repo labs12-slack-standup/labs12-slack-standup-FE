@@ -4,11 +4,11 @@ import { slackURL } from '../../config/axiosWithAuth';
 const Slack = props => {
 	return (
 		<div>
-			<h3>
+			{/* <h3>
 				{!props.slackTest
 					? 'Respond to your daily standup on Slack by adding the integration below.'
 					: 'Your Slack integration has been set up. Click the button below if you would like to edit your settings (even though it says Add).'}
-			</h3>
+			</h3> */}
 			<a
 				href={`https://slack.com/oauth/authorize?scope=incoming-webhook,commands,bot,channels:write&client_id=607645147937.621334967889&redirect_uri=${slackURL}`}
 				className="slack-icon"
