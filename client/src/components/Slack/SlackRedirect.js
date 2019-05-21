@@ -1,10 +1,46 @@
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
+import { Spinner, Intent } from '@blueprintjs/core';
+import ClearCookiesHelper from './ClearCookiesHelper';
+import Button from '@material-ui/core/Button';
+import './SlackRedirect.css';
 
 class SlackRedirect extends Component {
+  state = {
+    error: ''
+  }
   render() {
     return (
-      <div>Authorising User</div>
+      <div className="redirect-container">
+        {
+          this.state.error.length > 0 ?
+          (
+            <>
+              <h1 className="redirect-container-title">{this.state.error}</h1>
+              {
+                this.state.error === 'Browser associated with another user, clear cookies' ?
+                <ClearCookiesHelper /> :
+                null
+              }
+              <Button
+                onClick={this.goBack}
+                style={{ display: 'block', margin:'auto', marginTop: '20px' }}
+                variant="outlined"
+                color="primary"
+              >
+                Return to dashboard
+              </Button>
+            </>
+          ) :
+          (
+            <>
+              <Spinner intent={Intent.PRIMARY} />
+              <h1 className="redirect-container-title">Authorising User</h1>
+            </>  
+          )
+        }
+      </div>
+        
     )
   }
 
@@ -14,10 +50,16 @@ class SlackRedirect extends Component {
       .get(endpoint)
       .then(res => {
         localStorage.setItem('token', res.data.token)
-        console.log(this.props.history)
         this.props.history.goBack();
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({ error: err.response.data.message });
+      })
+  }
+
+  goBack = () => {
+    this.setState({ error: ''});
+    this.props.history.push('/dashboard');
   }
 }
 
