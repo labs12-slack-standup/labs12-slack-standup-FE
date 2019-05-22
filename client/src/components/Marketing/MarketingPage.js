@@ -32,7 +32,7 @@ class MarketingPage extends Component {
 					<Typography variant="h1">Stand-Em-Ups</Typography>
 					<BodyText>
 						Stand-Em-Ups is an asynchronous stand-up platform for fast-paced
-						teams
+						teams.
 					</BodyText>
 					<HeaderButtons>
 						<Link to='/login'>
@@ -45,16 +45,15 @@ class MarketingPage extends Component {
 				<MarketingSection name='MarketingSection'>
 					<SectionDivider>
 						<SectionTitle>Manage Your Team With Efficency</SectionTitle>
-						<BodyText>Say goodbye to long stand-ups!</BodyText>
+						<BodyText>Say goodbye to long stand-ups! Discover the blockers your team is facing without all the commentary. Daily reports are customizable, so you only ask the questions you care about, and only get the answers that matter. </BodyText>
 					</SectionDivider>
 					<MarketingImg src={undrawCollab} />
 				</MarketingSection>
 				<MarketingSection1>
 					<SectionDivider>
-						<SectionTitle>Your Team, Your Pace</SectionTitle>
+						<SectionTitle>Your Team, Fully Transparent</SectionTitle>
 						<BodyText>
-							Stand-Em-Ups allows you review team member's responses as an admin
-							or a peer, whenever is most convienient for you.
+							Stand-Em-Ups allows admins and peers to review team members' responses in Slack or on the web app, whenever is most convienient for you.
 						</BodyText>
 					</SectionDivider>
 					<MarketingImg src={undrawStatus} />
@@ -63,8 +62,7 @@ class MarketingPage extends Component {
 					<SectionDivider>
 						<SectionTitle>Record Your Progress</SectionTitle>
 						<BodyText>
-							Stand-Em-Ups allows you access your team's previous answers so
-							that you can keep each other accountable.
+							Stand-Em-Ups allows you access your team's historical reports, so you can hold each other accountable. 
 						</BodyText>
 					</SectionDivider>
 					<MarketingImg src={undrawDeveloper} />

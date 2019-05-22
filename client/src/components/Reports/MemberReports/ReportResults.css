@@ -5,6 +5,9 @@
 	text-align: center;
 }
 
+.report-results-aside {
+	margin: 24px 12px 0 0;
+}
 .report-results-container-backButton {
 	margin: 24px;
 }
@@ -31,7 +34,9 @@
 
 .response-container {
 	display: flex;
-	padding-top: 20px;
+	margin-top: 24px;
+	padding-top: 24px;
+
 }
 
 .response-container-image {
@@ -82,9 +87,9 @@
 	margin-top: 30px;
 }
 
-.completed-report {
+/* .completed-report {
 	margin: 24px 0;
-}
+} */
 
 .report-results-date-picker {
 	height: 331px;

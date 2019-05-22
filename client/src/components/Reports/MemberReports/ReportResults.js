@@ -9,7 +9,6 @@ import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import jwt_decode from 'jwt-decode';
 import './ReportResults.css';
 
-
 class ReportResults extends Component {
 	state = {
 		responses: [],
@@ -47,7 +46,7 @@ class ReportResults extends Component {
 							<h3>Thank you for filling out this report!</h3>
 						</Card>
 					) : (
-						<Card interactive={false} elevation={Elevation.TWO}>
+						<Card className="response-card" interactive={false} elevation={Elevation.TWO}>
 							<MemberResponseForm
 								{...this.props}
 								updateWithUserResponse={this.updateWithUserResponse}
@@ -88,8 +87,7 @@ class ReportResults extends Component {
 											.replace(',', '')}
 									</h3>
 									{batch.responses.map(response => (
-										<Card>
-											<div key={response.userId} className="response-container">
+										<Card interactive={false} elevation={Elevation.TWO}className="response-container">
 												<img
 													className="response-container-image"
 													src={response.profilePic}
@@ -112,7 +110,7 @@ class ReportResults extends Component {
 														)
 													)}
 												</div>
-											</div>
+											
 										</Card>
 									))}
 								</div>
@@ -149,6 +147,7 @@ class ReportResults extends Component {
 					filteredResponse: filtered,
 					responders
 				});
+				console.log('responses', this.state.responses);
 			})
 			.catch(err => console.log(err));
 	}
@@ -166,7 +165,7 @@ class ReportResults extends Component {
 			.catch(err => {
 				console.log(err);
 			});
-	}
+	};
 
 	updateWithUserResponse = res => {
 		this.setState({ responses: res.data, completed: true });
