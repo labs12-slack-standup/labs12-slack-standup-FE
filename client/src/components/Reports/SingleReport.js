@@ -23,20 +23,19 @@ const SingleReport = props => {
 	}
 
 	return (
-		<Card raised={true} className="reportsCard">
+		<Card raised={true} className="reportsCard" style={{ margin: '10px' }}>
 			<div className="single-report-header">
 				<h1 className="reports-card-title">{props.report.reportName}</h1>
-				<div className="single-report-buttons">
+				<div
+					className={
+						props.role !== 'admin' ? 'display-link' : 'single-report-buttons'
+					}
+				>
 					<Link
 						to={`/dashboard/reports/${props.report.id}/edit`}
 						className={props.role !== 'admin' ? 'disabled-link' : ''}
 					>
-						<Fab
-							color="default"
-							size="small"
-							aria-label="Edit"
-							className={props.role !== 'admin' ? 'disabled-link' : ''}
-						>
+						<Fab color="default" size="small" aria-label="Edit">
 							<Icon>edit_icon</Icon>
 						</Fab>
 					</Link>
@@ -45,7 +44,6 @@ const SingleReport = props => {
 						size="small"
 						aria-label="Delete"
 						onClick={() => props.archiveReport(props.report.id)}
-						className={props.role !== 'admin' ? 'disabled-link' : ''}
 					>
 						<Icon>delete_icon</Icon>
 					</Fab>
@@ -76,9 +74,11 @@ const SingleReport = props => {
 					</div>
 					<div className="reports-card-flex whitespace">
 						<div className="reports-card-flex-icon">
-							<Icon>alarm</Icon>
+							<Icon style={{ color: '#3f51b5' }}>alarm</Icon>
 						</div>
-						<div className="reports-card-time">{timeStr}</div>
+						<div className="reports-card-time" style={{ color: '#3f51b5' }}>
+							{timeStr}
+						</div>
 					</div>
 				</Link>
 				{/* <div className="flex">

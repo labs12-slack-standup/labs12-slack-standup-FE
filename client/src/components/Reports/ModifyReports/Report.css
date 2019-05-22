@@ -43,9 +43,9 @@ p {
 }
 
 .selected {
-	border: 2px solid #5294e2;
+	border: 2px solid #3f51b5;
 	color: white;
-	background-color: #5294e2;
+	background-color: #3f51b5;
 }
 
 .question-flex {

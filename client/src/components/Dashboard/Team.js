@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
-
-import { Button, Collapse } from '@blueprintjs/core';
 import User from './User';
 
 class Team extends Component {
@@ -28,16 +26,16 @@ class Team extends Component {
 							deactivateUser={this.props.deactivateUser}
 						/>
 					))}
-					<Button
+					{/* <Button
 						className={
 							token.roles === 'admin' ? 'activateButton' : 'bp3-disabled'
 						}
 						onClick={this.viewInactiveUsers}
 					>
 						{this.state.openInactiveUsers ? 'Hide Inactive' : 'View Inactive'}
-					</Button>
+					</Button> */}
 				</div>
-				<div className="usersContainer">
+				{/* <div className="usersContainer">
 					<Collapse isOpen={this.state.openInactiveUsers}>
 						{inactiveUsers.map(user => (
 							<User
@@ -50,7 +48,7 @@ class Team extends Component {
 							/>
 						))}
 					</Collapse>
-				</div>
+				</div> */}
 			</div>
 		);
 	}

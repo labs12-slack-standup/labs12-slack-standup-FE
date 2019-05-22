@@ -49,6 +49,7 @@
 	width: 30px;
 	vertical-align: center;
 	margin-right: 20px;
+	color: #3f51b5;
 }
 
 .reports-card-time {
@@ -96,8 +97,9 @@
 }
 
 .reportsCard .bp3-button {
+	margin: 10px;
 	width: 100%;
-	color: #5294e2;
+	color: #3f51b5;
 }
 
 .link-condensed {
@@ -120,6 +122,10 @@
 	width: 140px;
 }
 
-.disabled-link {
+.display-link {
+	display: none;
+}
+
+#display-edit {
 	display: none;
 }
