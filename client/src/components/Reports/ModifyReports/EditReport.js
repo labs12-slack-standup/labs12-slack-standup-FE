@@ -196,7 +196,6 @@ class EditReport extends Component {
 									type="text"
 									onChange={this.changeHandler}
 									name="reportName"
-									placeholder="Report Name"
 									value={this.state.reportName}
 								/>
 							</FormControl>
@@ -307,7 +306,6 @@ class EditReport extends Component {
 										className="input-field"
 										type="text"
 										name="question"
-										placeholder="Ask a question..."
 										value={this.state.question}
 										onChange={this.enterQuestionsHandler}
 									/>
