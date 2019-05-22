@@ -23,8 +23,8 @@ class CreateReport extends Component {
 		// Main Report State
 		reportName: '',
 		schedule: [],
-		scheduleTime: new Date('2000-01-01T18:00:00'),
-		timePickDate: new Date('2000-01-01T18:00:00'),
+		scheduleTime: '8:0',
+		timePickDate: new Date('2000-01-01T08:00:00'),
 		message: '',
 		questions: [],
 		slackChannelId: null,
@@ -170,39 +170,42 @@ class CreateReport extends Component {
 							<Divider className="divider" variant="fullWidth" />
 							{this.state.channels.length < 1 ? (
 								<div>
-									<h3>Authorize Slack to chose a channel for distribution:</h3>
+									<h3 style={{ textAlign: 'center' }}>
+										Authorize Slack to chose a channel for distribution:
+									</h3>
 									<Slack />
 								</div>
-							) : null}
-							<section>
-								<FormControl className="report-name report-margin" required>
-									<InputLabel htmlFor="report-name">Report Name</InputLabel>
-									<Input
-										id="report-name"
-										className="input-field"
-										required
-										type="text"
+							) : (
+								<section>
+									<p>Slack Channel</p>
+									<HTMLSelect
+										className="slack-dropdown"
+										name="slackChannelId"
 										onChange={this.changeHandler}
-										name="reportName"
-										placeholder="Report Name"
-										value={this.state.reportName}
-									/>
-								</FormControl>
-								<p>Slack Channel</p>
-								<HTMLSelect
-									className="slack-dropdown"
-									name="slackChannelId"
+										// label="Slack Channel for Distribution"
+									>
+										<option>Choose a Slack Channel for distribution...</option>
+										{this.state.channels.map(channel => (
+											<option key={channel.id} value={channel.id}>
+												{channel.name}
+											</option>
+										))}
+									</HTMLSelect>
+								</section>
+							)}
+
+							<FormControl className="report-name report-margin" required>
+								<InputLabel htmlFor="report-name">Report Name</InputLabel>
+								<Input
+									id="report-name"
+									className="input-field"
+									required
+									type="text"
 									onChange={this.changeHandler}
-									label="Slack Channel for Distribution"
-								>
-									<option>Choose a Slack Channel for distribution...</option>
-									{this.state.channels.map(channel => (
-										<option key={channel.id} value={channel.id}>
-											{channel.name}
-										</option>
-									))}
-								</HTMLSelect>
-							</section>
+									name="reportName"
+									value={this.state.reportName}
+								/>
+							</FormControl>
 							<section>
 								<FormControl className="input-field" required>
 									<InputLabel htmlFor="report-message">
@@ -224,14 +227,13 @@ class CreateReport extends Component {
 					</Card>
 					<Card raised={true} className="schedule-card">
 						<section className="schedule-card-content">
-							<h3 className="schedule-title">Schedule</h3>
+							<h3 className="schedule-title">Delivery Schedule</h3>
 							<Divider className="divider" variant="fullWidth" />
 							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-								<p>Days to be Delivered</p>
+								<p style={{ marginTop: '40px' }}>Days</p>
 								<Button
 									style={{ marginTop: '20px' }}
 									variant="outlined"
-									
 									onClick={() => this.selectWeekdays()}
 								>
 									Select Weekdays
@@ -293,7 +295,6 @@ class CreateReport extends Component {
 										className="input-field"
 										type="text"
 										name="question"
-										placeholder="Ask a question..."
 										value={this.state.question}
 										onChange={this.enterQuestionsHandler}
 									/>
