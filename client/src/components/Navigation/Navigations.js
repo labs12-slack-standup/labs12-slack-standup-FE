@@ -1,14 +1,31 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './navigation.css';
-import {
-	Navbar,
-	Button,
-	Classes,
-	NavbarGroup,
-	NavbarDivider,
-	Alignment
-} from '@blueprintjs/core';
+
+import { AppBar, Toolbar, Button, Icon, Avatar } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+	root: {
+		flexGrow: 1,
+		color: 'white'
+	},
+	grow: {
+		flexGrow: 1,
+		color: 'white'
+	},
+	menuButton: {
+		marginLeft: 0,
+		marginRight: 20
+	},
+	logoLink: {
+		borderRight: '1px solid #FFF'
+	},
+	logLink: {},
+	navLinks: {
+		display: 'flex'
+	}
+};
 
 class Navigation extends React.Component {
 	// Add modal here?
@@ -26,78 +43,43 @@ class Navigation extends React.Component {
 		);
 
 		const loggedIn = appToken && firebaseToken;
-
+		const { classes } = this.props;
 		return (
-			<Navbar className="navBar-container">
-				<NavbarGroup align={Alignment.LEFT}>
-					<NavLink to="/dashboard">
-						<Navbar.Heading>Stand-Em-Ups</Navbar.Heading>
-					</NavLink>
-					<NavbarDivider />
-					<NavLink className="wide-nav" to="/dashboard">
-						<Button
-							icon="home"
-							minimal={true}					
-							text="Dashboard"
-							textDecoration="underline"
+			<AppBar position="static">
+				<Toolbar>
+					<NavLink to="/dashboard" className={classes.logoLink}>
+						<Avatar
+							className={classes.menuButton}
+							src={require('./rocket-small.png')}
 						/>
 					</NavLink>
-					<NavLink className="wide-nav" to="/dashboard/profile">
-						<Button
-							icon="user"
-							minimal={
-								this.props.history.location.pathname === '/dashboard/profile'
-									? false
-									: true
-							}
-							text="Profile"
-						/>
-					</NavLink>
-					<NavLink className="narrow-nav" to="/dashboard">
-						<Button
-							icon="home"
-							minimal={
-								this.props.history.location.pathname === '/dashboard'
-									? false
-									: true
-							}
-							className={Classes.MINIMAL}
-						/>
-					</NavLink>
-					<NavLink className="narrow-nav" to="/dashboard/profile">
-						<Button
-							icon="user"
-							minimal={
-								this.props.history.location.pathname === '/dashboard/profile'
-									? false
-									: true
-							}
-							className={Classes.MINIMAL}
-						/>
-					</NavLink>
-				</NavbarGroup>
-
-				<NavbarGroup align={Alignment.RIGHT}>
-					<>
-						<NavLink
-							className="wide-nav"
-							to="/login"
-							onClick={!loggedIn ? null : this.handleLogout}
-						>
-							<Button
-								icon={!loggedIn ? 'log-in' : 'log-out'}
-								className={Classes.MINIMAL}
-								text={!loggedIn ? 'Login' : 'Logout'}
-							/>
-						</NavLink>
-						<NavLink className="narrow-nav" to="/login">
-							<Button icon="log-in" className={Classes.MINIMAL} />
-						</NavLink>
-					</>
-				</NavbarGroup>
-			</Navbar>
+					<div className="nav-links">
+						<div>
+							<NavLink to="/dashboard">
+								<Button className={classes.grow}>
+									<Icon>home</Icon>
+								</Button>
+							</NavLink>
+							<NavLink to="/dashboard/profile">
+								<Button className={classes.grow}>
+									<Icon>account_circle</Icon>
+								</Button>
+							</NavLink>
+						</div>
+						{!loggedIn ? (
+							<NavLink to="/login">
+								<Button className={classes.grow}>Login</Button>
+							</NavLink>
+						) : (
+							<NavLink to="/login" onClick={this.handleLogout}>
+								<Button className={classes.grow}>Logout</Button>
+							</NavLink>
+						)}
+					</div>
+				</Toolbar>
+			</AppBar>
 		);
 	}
 }
 
-export default Navigation;
+export default withStyles(styles)(Navigation);

@@ -3,24 +3,16 @@
 	justify-content: center;
 	width: 100%;
 } */
-.bp3-navbar {
-	background-color: #616df6;
-}
-.bp3-navbar .bp3-navbar-heading {
-	color: white;
-}
-.bp3-navbar .bp3-button-text {
-	color: white;
-}
-.bp3-navbar .bp3-icon {
+
+.nav-header {
 	color: white;
 }
 
-
-/*  
-.navigation .bp3-button {
-	fill: true;
-}  */
+.nav-links {
+	display: flex;
+	justify-content: space-between;
+	width: 95%;
+}
 
 @media (min-width: 550px) {
 	.narrow-nav {
