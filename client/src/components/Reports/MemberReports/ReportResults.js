@@ -46,7 +46,7 @@ class ReportResults extends Component {
 							<h3>Thank you for filling out this report!</h3>
 						</Card>
 					) : (
-						<Card interactive={false} elevation={Elevation.TWO}>
+						<Card className="response-card" interactive={false} elevation={Elevation.TWO}>
 							<MemberResponseForm
 								{...this.props}
 								updateWithUserResponse={this.updateWithUserResponse}
@@ -87,8 +87,7 @@ class ReportResults extends Component {
 											.replace(',', '')}
 									</h3>
 									{batch.responses.map(response => (
-										<Card interactive={false} elevation={Elevation.TWO}>
-											<div key={response.userId} className="response-container">
+										<Card interactive={false} elevation={Elevation.TWO}className="response-container">
 												<img
 													className="response-container-image"
 													src={response.profilePic}
@@ -111,7 +110,7 @@ class ReportResults extends Component {
 														)
 													)}
 												</div>
-											</div>
+											
 										</Card>
 									))}
 								</div>
