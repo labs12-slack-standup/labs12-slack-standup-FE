@@ -25,7 +25,12 @@ const SingleReport = props => {
 	return (
 		<Card raised={true} className="reportsCard">
 			<div className="single-report-header">
-				<h1 className="reports-card-title">{props.report.reportName}</h1>
+				<Link
+					to={`/dashboard/reports/${props.report.id}`}
+					style={{ textDecoration: 'none' }}
+				>
+					<h1 className="reports-card-title">{props.report.reportName}</h1>
+				</Link>
 				<div className="single-report-buttons">
 					<Link
 						to={`/dashboard/reports/${props.report.id}/edit`}
@@ -62,14 +67,17 @@ const SingleReport = props => {
 							<Icon>calendar_today</Icon>
 						</div>
 						<section className="reports-card-flex-days">
-							{week.map(day => (
+							{week.map((day, idx) => (
 								<div
 									key={day}
 									className={`day ${
 										props.report.schedule.includes(day) ? 'selected' : ''
 									}`}
 								>
-									{day.charAt(0) + day.charAt(1)}
+									 {/* if M/W/F, only show first letter, otherwise first 2 */}
+									{idx === 0 || idx === 2 || idx === 4
+										? day.charAt(0)
+										: day.charAt(0) + day.charAt(1)}
 								</div>
 							))}
 						</section>
