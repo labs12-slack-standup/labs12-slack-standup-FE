@@ -4,17 +4,19 @@
 	width: 100%;
 } */
 .bp3-navbar {
-	background-color: #f4f4f4;
+	background-color: #616df6;
 }
 .bp3-navbar .bp3-navbar-heading {
-	color: #5294e2;
+	color: white;
 }
 .bp3-navbar .bp3-button-text {
-	color: #5294e2;
+	color: white;
 }
 .bp3-navbar .bp3-icon {
-	color: #5294e2;
+	color: white;
 }
+
+
 /*  
 .navigation .bp3-button {
 	fill: true;

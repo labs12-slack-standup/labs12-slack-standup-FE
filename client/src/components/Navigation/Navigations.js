@@ -37,12 +37,9 @@ class Navigation extends React.Component {
 					<NavLink className="wide-nav" to="/dashboard">
 						<Button
 							icon="home"
-							minimal={
-								this.props.history.location.pathname === '/dashboard'
-									? false
-									: true
-							}
+							minimal={true}					
 							text="Dashboard"
+							textDecoration="underline"
 						/>
 					</NavLink>
 					<NavLink className="wide-nav" to="/dashboard/profile">
