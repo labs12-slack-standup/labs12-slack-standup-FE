@@ -18,7 +18,7 @@ class SlackRedirect extends Component {
             <>
               <h1 className="redirect-container-title">{this.state.error}</h1>
               {
-                this.state.error === 'Browser associated with another user, clear cookies' ?
+                this.state.error === 'This browser is associated with another Slack user, please clear your cookies.' ?
                 <ClearCookiesHelper /> :
                 null
               }

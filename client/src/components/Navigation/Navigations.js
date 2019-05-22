@@ -44,10 +44,14 @@ class Navigation extends React.Component {
 		// console.log(appToken);
 		const loggedIn = appToken && firebaseToken;
 		const { classes } = this.props;
+
 		return (
 			<AppBar position="static">
 				<Toolbar>
-					<NavLink to="/dashboard" className={classes.logoLink}>
+					<NavLink
+						to={loggedIn ? '/dashboard' : '/'}
+						className={classes.logoLink}
+					>
 						<Avatar
 							className={classes.menuButton}
 							src={require('./rocket-small.png')}
@@ -56,12 +60,12 @@ class Navigation extends React.Component {
 					<div className="nav-links">
 						<div>
 							<NavLink to="/dashboard">
-								<Button className={classes.grow}>
+								<Button disabled={this.props.history.location.pathname ==='/dashboard' ? true : false} className={classes.grow}>
 									<Icon>home</Icon>
 								</Button>
 							</NavLink>
 							<NavLink to="/dashboard/profile">
-								<Button className={classes.grow}>
+								<Button disabled={this.props.history.location.pathname ==='/dashboard/profile' ? true : false} className={classes.grow}className={classes.grow}>
 									<Icon>account_circle</Icon>
 								</Button>
 							</NavLink>
