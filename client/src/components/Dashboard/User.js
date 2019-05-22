@@ -8,7 +8,7 @@ const User = props => {
 		<div className="singleUserContainer">
 			<div
 				// className="userdiv"
-				interactive={false}
+				// interactive={false}
 				elevation={Elevation.TWO}
 				key={props.user.id}
 			>
