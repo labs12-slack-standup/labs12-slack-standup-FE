@@ -10,7 +10,7 @@ const CreateTeam = props => {
 		<div className="onboarding">
 			<Card raised={true} className="onboardingCard">
 				<div className="onboarding-card-content">
-					<h3>Add a team member's email</h3>
+					<h3>Add Team Members by Email</h3>
 					<ChipInput
 						label="Email"
 						variant="outlined"
