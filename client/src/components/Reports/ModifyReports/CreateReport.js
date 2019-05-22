@@ -223,7 +223,7 @@ class CreateReport extends Component {
 							<Divider className="divider" variant="fullWidth" />
 							<p>Days of the week for report delivery</p>
 							<section className="days-flex">
-								{this.state.week.map(day => (
+								{this.state.week.map((day, idx) => (
 									<div
 										key={day}
 										onClick={e => this.updateSchedule(day)}
@@ -231,7 +231,11 @@ class CreateReport extends Component {
 											this.state.schedule.includes(day) ? 'selected' : ''
 										}`}
 									>
-										{day.charAt(0) + day.charAt(1)}
+								// if M/W/F, only show first letter, otherwise first 2
+
+										{idx === 0 || idx === 2 || idx === 4
+											? day.charAt(0)
+											: day.charAt(0) + day.charAt(1)}
 									</div>
 								))}
 							</section>

@@ -62,14 +62,16 @@ const SingleReport = props => {
 							<Icon>calendar_today</Icon>
 						</div>
 						<section className="reports-card-flex-days">
-							{week.map(day => (
+							{week.map((day, idx) => (
 								<div
 									key={day}
 									className={`day ${
 										props.report.schedule.includes(day) ? 'selected' : ''
 									}`}
 								>
-									{day.charAt(0) + day.charAt(1)}
+									{idx === 0 || idx === 2 || idx === 4
+											? day.charAt(0)
+											: day.charAt(0) + day.charAt(1)}
 								</div>
 							))}
 						</section>
