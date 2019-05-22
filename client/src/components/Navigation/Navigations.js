@@ -1,14 +1,31 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './navigation.css';
-import {
-	Navbar,
-	Button,
-	Classes,
-	NavbarGroup,
-	NavbarDivider,
-	Alignment
-} from '@blueprintjs/core';
+
+import { AppBar, Toolbar, Button, Icon, Avatar } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+	root: {
+		flexGrow: 1,
+		color: 'white'
+	},
+	grow: {
+		flexGrow: 1,
+		color: 'white'
+	},
+	menuButton: {
+		marginLeft: 0,
+		marginRight: 20
+	},
+	logoLink: {
+		borderRight: '1px solid #FFF'
+	},
+	logLink: {},
+	navLinks: {
+		display: 'flex'
+	}
+};
 
 class Navigation extends React.Component {
 	// Add modal here?
@@ -26,40 +43,43 @@ class Navigation extends React.Component {
 		);
 		console.log(appToken);
 		const loggedIn = appToken && firebaseToken;
-
+		const { classes } = this.props;
 		return (
-			<Navbar>
-				<NavbarGroup align={Alignment.LEFT}>
-					<NavLink to="/dashboard">
-						<Navbar.Heading>Stand-Em-Ups</Navbar.Heading>
+			<AppBar position="static">
+				<Toolbar>
+					<NavLink to="/dashboard" className={classes.logoLink}>
+						<Avatar
+							className={classes.menuButton}
+							src={require('./rocket-small.png')}
+						/>
 					</NavLink>
-					<NavbarDivider />
-					<NavLink to="/dashboard">
-						<Button icon="home" className={Classes.MINIMAL} text="Dashboard" />
-					</NavLink>
-					<NavLink to="/dashboard/profile">
-						<Button icon="user" className={Classes.MINIMAL} text="Profile" />
-					</NavLink>
-				</NavbarGroup>
-
-				<NavbarGroup align={Alignment.RIGHT}>
-					{!loggedIn ? (
-						<NavLink to="/login">
-							<Button icon="log-in" className={Classes.MINIMAL} text="Login" />
-						</NavLink>
-					) : (
-						<NavLink to="/login" onClick={this.handleLogout}>
-							<Button
-								icon="log-out"
-								className={Classes.MINIMAL}
-								text="Logout"
-							/>
-						</NavLink>
-					)}
-				</NavbarGroup>
-			</Navbar>
+					<div className="nav-links">
+						<div>
+							<NavLink to="/dashboard">
+								<Button className={classes.grow}>
+									<Icon>home</Icon>
+								</Button>
+							</NavLink>
+							<NavLink to="/dashboard/profile">
+								<Button className={classes.grow}>
+									<Icon>account_circle</Icon>
+								</Button>
+							</NavLink>
+						</div>
+						{!loggedIn ? (
+							<NavLink to="/login">
+								<Button className={classes.grow}>Login</Button>
+							</NavLink>
+						) : (
+							<NavLink to="/login" onClick={this.handleLogout}>
+								<Button className={classes.grow}>Logout</Button>
+							</NavLink>
+						)}
+					</div>
+				</Toolbar>
+			</AppBar>
 		);
 	}
 }
 
-export default Navigation;
+export default withStyles(styles)(Navigation);
