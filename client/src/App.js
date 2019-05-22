@@ -12,6 +12,7 @@ import SlackRedirect from './components/Slack/SlackRedirect';
 import User from './components/Dashboard/User';
 import MarketingPage from './components/Marketing/MarketingPage';
 import DevTeam from './components/Marketing/DevTeam';
+import Footer from './components/Navigation/Footer';
 
 import './App.css';
 import View from './components/View/View';
@@ -47,6 +48,9 @@ function App() {
 			{/* CONNECT TO SLACK */}
 			<Route exact path="/slack" component={Slack} />
 			<Route exact path="/slack/auth" component={SlackRedirect} />
+
+			{/* FOOTER ROUTES */}
+			<Route path="/" component={Footer} />
 		</div>
 	);
 }

@@ -41,7 +41,7 @@ class Navigation extends React.Component {
 		const firebaseToken = localStorage.getItem(
 			'firebaseui::rememberedAccounts'
 		);
-
+		// console.log(appToken);
 		const loggedIn = appToken && firebaseToken;
 		const { classes } = this.props;
 		return (
