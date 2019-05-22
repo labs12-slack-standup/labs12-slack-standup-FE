@@ -7,8 +7,7 @@ import {
 	Classes,
 	NavbarGroup,
 	NavbarDivider,
-	Alignment,
-	
+	Alignment
 } from '@blueprintjs/core';
 
 class Navigation extends React.Component {
@@ -25,9 +24,9 @@ class Navigation extends React.Component {
 		const firebaseToken = localStorage.getItem(
 			'firebaseui::rememberedAccounts'
 		);
-		console.log(appToken);
+
 		const loggedIn = appToken && firebaseToken;
-		console.log(this.props.history)
+
 		return (
 			<Navbar className="navBar-container">
 				<NavbarGroup align={Alignment.LEFT}>
@@ -36,55 +35,68 @@ class Navigation extends React.Component {
 					</NavLink>
 					<NavbarDivider />
 					<NavLink className="wide-nav" to="/dashboard">
-						<Button icon="home" minimal={this.props.history.location.pathname === '/dashboard' ? false : true} text="Dashboard" />
+						<Button
+							icon="home"
+							minimal={
+								this.props.history.location.pathname === '/dashboard'
+									? false
+									: true
+							}
+							text="Dashboard"
+						/>
 					</NavLink>
 					<NavLink className="wide-nav" to="/dashboard/profile">
-						<Button icon="user" minimal={this.props.history.location.pathname === '/dashboard/profile' ? false : true} text="Profile" />
+						<Button
+							icon="user"
+							minimal={
+								this.props.history.location.pathname === '/dashboard/profile'
+									? false
+									: true
+							}
+							text="Profile"
+						/>
 					</NavLink>
 					<NavLink className="narrow-nav" to="/dashboard">
-						<Button icon="home" minimal={this.props.history.location.pathname === '/dashboard' ? false : true} className={Classes.MINIMAL} />
+						<Button
+							icon="home"
+							minimal={
+								this.props.history.location.pathname === '/dashboard'
+									? false
+									: true
+							}
+							className={Classes.MINIMAL}
+						/>
 					</NavLink>
 					<NavLink className="narrow-nav" to="/dashboard/profile">
-						<Button icon="user" minimal={this.props.history.location.pathname === '/dashboard/profile' ? false : true} className={Classes.MINIMAL} />
+						<Button
+							icon="user"
+							minimal={
+								this.props.history.location.pathname === '/dashboard/profile'
+									? false
+									: true
+							}
+							className={Classes.MINIMAL}
+						/>
 					</NavLink>
 				</NavbarGroup>
 
 				<NavbarGroup align={Alignment.RIGHT}>
-					{!loggedIn ? (
-						<>
-							<NavLink className="wide-nav" to="/login">
-								<Button
-									icon="log-in"
-									className={Classes.MINIMAL}
-									text="Login"
-								/>
-							</NavLink>
-							<NavLink className="narrow-nav" to="/login">
-								<Button
-									icon="log-in"
-									className={Classes.MINIMAL}
-									
-								/>
-							</NavLink>
-						</>
-					) : (
-						<>
-							<NavLink className="wide-nav" to="/login" onClick={this.handleLogout}>
-								<Button
-									icon="log-out"
-									className={Classes.MINIMAL}
-									text="Logout"
-								/>
-							</NavLink>
-							<NavLink className="narrow-nav" to="/login" onClick={this.handleLogout}>
-								<Button
-									icon="log-out"
-									className={Classes.MINIMAL}
-									
-								/>
-							</NavLink>
-						</>
-					)}
+					<>
+						<NavLink
+							className="wide-nav"
+							to="/login"
+							onClick={!loggedIn ? null : this.handleLogout}
+						>
+							<Button
+								icon={!loggedIn ? 'log-in' : 'log-out'}
+								className={Classes.MINIMAL}
+								text={!loggedIn ? 'Login' : 'Logout'}
+							/>
+						</NavLink>
+						<NavLink className="narrow-nav" to="/login">
+							<Button icon="log-in" className={Classes.MINIMAL} />
+						</NavLink>
+					</>
 				</NavbarGroup>
 			</Navbar>
 		);
