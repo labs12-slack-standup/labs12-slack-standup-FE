@@ -244,8 +244,7 @@ class EditReport extends Component {
 											this.state.schedule.includes(day) ? 'selected' : ''
 										}`}
 									>
-																	// if M/W/F, only show first letter, otherwise first 2
-
+										{/* if M/W/F, only show first letter, otherwise first 2 */}
 										{idx === 0 || idx === 2 || idx === 4
 											? day.charAt(0)
 											: day.charAt(0) + day.charAt(1)}
