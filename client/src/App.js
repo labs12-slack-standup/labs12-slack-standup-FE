@@ -1,21 +1,34 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Signup from './components/Signup/Signup';
+
+// Firebase Login
 import Login from './components/Login/Login';
-import Profile from './components/Account/Account';
+
 import Onboarding from './components/Onboarding/Onboarding';
-import Navigation from './components/Navigation/Navigations';
 import ReportsDash from './components/Dashboard/ReportsDash';
-import PrivateRoute from './auth/PrivateRoute';
-import Slack from './components/Slack/Slack';
-import SlackRedirect from './components/Slack/SlackRedirect';
 import User from './components/Dashboard/User';
+
+// Marketing Page
 import MarketingPage from './components/Marketing/MarketingPage';
 import DevTeam from './components/Marketing/DevTeam';
+
+// Nav and Footer
+import Navigation from './components/Navigation/Navigations';
 import Footer from './components/Navigation/Footer';
 
-import './App.css';
+import Profile from './components/Account/Account';
 import View from './components/View/View';
+
+// Slack Routes
+import Slack from './components/Slack/Slack';
+import SlackRedirect from './components/Slack/SlackRedirect';
+
+// CSS
+import './App.css';
+
+//Protected Routes
+import PrivateRoute from './auth/PrivateRoute';
+import NewUserRoute from './auth/NewUserRoute';
 
 function App() {
 	return (
@@ -28,11 +41,10 @@ function App() {
 			<Route exact path="/team" component={DevTeam} />
 
 			{/* AUTHENTICATION ROUTES */}
-			<Route path="/signup" component={Signup} />
 			<Route path="/login" component={Login} />
 
 			{/* ONBOARDING */}
-			<Route exact path="/onboarding" component={Onboarding} />
+			<NewUserRoute exact path="/onboarding" component={Onboarding} />
 
 			{/* DASHBOARD */}
 			<PrivateRoute exact path="/dashboard" component={View} />
