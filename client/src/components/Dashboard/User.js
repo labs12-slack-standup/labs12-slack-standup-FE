@@ -1,15 +1,14 @@
 import React from 'react';
-import { Button, Elevation } from '@blueprintjs/core';
+import { Button } from '@material-ui/core';
 import jwt_decode from 'jwt-decode';
+
+import './dashboard.css';
 
 const User = props => {
 	const token = jwt_decode(localStorage.getItem('token'));
 	return (
 		<div className="singleUserContainer">
 			<div
-				// className="userdiv"
-				// interactive={false}
-				elevation={Elevation.TWO}
 				key={props.user.id}
 			>
 				<img
@@ -18,26 +17,14 @@ const User = props => {
 					alt="profile pic"
 				/>
 				<h4>{props.user.fullName}</h4>
-				<br />
-				{props.user.active ? (
-					<Button
-						className={
-							token.roles === 'admin' ? 'activateButton' : 'bp3-disabled'
-						}
-						onClick={() => props.deactivateUser(props.user.id)}
-					>
-						Deactivate User
-					</Button>
-				) : (
-					<Button
-						className={
-							token.roles === 'admin' ? 'activateButton' : 'bp3-disabled'
-						}
-						onClick={() => props.activateUser(props.user.id)}
-					>
-						Activate User
-					</Button>
-				)}
+				<Button
+					variant="outlined"
+					id={token.roles === 'admin' ? 'activateButton' : 'display-button'}
+					onClick={() => props.deactivateUser(props.user.id)}
+					style={{ padding: '0 8px', marginTop: '4px' }}
+				>
+					Deactivate
+				</Button>
 			</div>
 		</div>
 	);

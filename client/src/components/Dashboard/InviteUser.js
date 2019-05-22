@@ -1,6 +1,8 @@
 import React from 'react';
-import { Button, Elevation, Card } from '@blueprintjs/core';
-import { TextField } from '@material-ui/core';
+// import { Button, Elevation, Card } from '@blueprintjs/core';
+import { TextField, Button, Card, Icon } from '@material-ui/core';
+
+import './dashboard.css';
 
 const InviteUser = props => {
 	return (
@@ -18,24 +20,34 @@ const InviteUser = props => {
 					variant="outlined"
 				/>
 				<br />
-				<Button type="submit" onClick={props.addUser}>
+				<Button variant="outlined" type="submit" onClick={props.addUser}>
 					Invite
 				</Button>
 			</form>
 			{props.message.includes('issue') && (
 				<div className="errorModal">
-					<Card className="errorCard onboardingCard" elevation={Elevation.TWO}>
-						<button onClick={props.clearMessage}>x</button>
-						<h4>Oops . . .</h4>
-						<div>{props.message}</div>
+					<Card raised={true} className="errorCard onboardingCard">
+						<div className="errorCard-content">
+							<div className="email-failure">
+								<h4>Oops . . .</h4>
+								<Button onClick={props.clearMessage}>
+									<Icon>cancel</Icon>
+								</Button>
+							</div>
+							<h6>{props.message}</h6>
+						</div>
 					</Card>
 				</div>
 			)}
 			{props.message.includes('sent') && (
 				<div className="errorModal">
-					<Card className="errorCard onboardingCard" elevation={Elevation.TWO}>
-						<button onClick={props.clearMessage}>x</button>
-						<div>{props.message}</div>
+					<Card raised={true} className="errorCard onboardingCard">
+						<div className="errorCard-content email-success">
+							<h3>{props.message}</h3>
+							<Button onClick={props.clearMessage}>
+								<Icon>cancel</Icon>
+							</Button>
+						</div>
 					</Card>
 				</div>
 			)}

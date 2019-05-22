@@ -13,6 +13,12 @@
 	margin: 24px;
 }
 
+@media (max-width: 800px) {
+	.userCard-content {
+		flex-direction: column-reverse;
+	}
+}
+
 .userCard img {
 	width: 300px;
 	height: 300px;
@@ -42,7 +48,7 @@
 	display: block;
 }
 .accountForms {
-	width: 100%;
+	/* width: 100%; */
 	margin: 24px;
 }
 
@@ -51,22 +57,112 @@
 	width: 100%;
 }
 
+.email-field::placeholder {
+	color: black;
+}
+
 .userCard .bp3-button {
 	background-color: #fafafad2;
 }
 
-/* .userCard img {
-	align-self: flex-end;
-} */
+#profilePic {
+	max-width: 50px;
+	width: 100%;
+	height: 50px;
+	border-radius: 50px;
+	margin: 5px auto;
+}
+
+.admin-controls {
+	display: flex;
+	align-content: center;
+	justify-content: space-between;
+}
+
+@media (max-width: 810px) {
+	.admin-controls {
+		display: block;
+	}
+}
 
 .join-code {
+	max-width: 15%;
+	width: 100%;
+	margin: 0 auto;
+}
+
+@media (max-width: 810px) {
+	.join-code {
+		max-width: 90%;
+	}
+}
+
+.deactivated-users {
+	max-width: 40%;
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+@media (max-width: 810px) {
+	.deactivated-users {
+		max-width: 90%;
+	}
+}
+
+.deactivated-reports {
+	max-width: 40%;
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+@media (max-width: 810px) {
+	.deactivated-reports {
+		max-width: 90%;
+	}
+}
+
+.inactive-user-card {
 	display: flex;
 	flex-direction: row;
-	margin: 10px;
+	justify-content: space-around;
+	align-content: center;
+	margin: 24px;
+	align-items: baseline;
+}
+
+.inactive-user-content {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+}
+
+.inactive-user-card h4,
+button {
+	margin: 0 auto;
+}
+
+.inactive-user-card button {
+	flex-grow: initial;
+}
+
+.inactive-reports-content {
+	margin: 24px;
+}
+
+.report-title {
+	margin-bottom: 10px;
 }
 
 .edit-user-toggle {
 	margin: 10px;
+}
+
+.display-button {
+	display: none;
 }
 
 #edit-user-button {

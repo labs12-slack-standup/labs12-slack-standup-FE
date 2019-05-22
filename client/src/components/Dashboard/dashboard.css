@@ -15,24 +15,10 @@ textarea.bp3-input {
 	padding: 12px;
 }
 
-
-
-/* .bp3-card .usersContainer {
-	margin: 1rem;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-
-	width: 25%;
-} */
-
 .bp3-card .singleUserContainer {
 	margin: 0.5rem;
 }
 
-/* .teamCard h4 {
-	margin: 0 auto;
-} */
 .teamCard h4 {
 	/* padding: 5px 5%; */
 	margin: 0 auto;
@@ -67,7 +53,7 @@ textarea.bp3-input {
 	margin: 0 auto;
 }
 
-.onboarding .bp3-card {
+.onboarding {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -100,6 +86,27 @@ textarea.bp3-input {
 	padding-top: 8px;
 	text-align: center;
 }
+
+.errorCard-content {
+	margin: 24px;
+}
+
+.email-success {
+	display: flex;
+	justify-content: space-between;
+	align-content: baseline;
+}
+
+.email-failure {
+	display: flex;
+	justify-content: space-between;
+	align-content: baseline;
+}
+
 .deactivate {
 	text-align: center;
+}
+
+#display-button {
+	display: none;
 }
