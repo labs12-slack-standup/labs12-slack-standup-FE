@@ -294,21 +294,21 @@ class CreateReport extends Component {
 								</Fab>
 							</section>
 						</section>
-						<section className="schedule-card-content">
+						{/* <section className="schedule-card-content">
 							<h3 className="schedule-title">Submit Report</h3>
 							<Divider className="divider" variant="fullWidth" />
-							<FormControl>
-								<Button
-									style={{ display: 'block', marginTop: '30px' }}
-									variant="contained"
-									color="primary"
-									onClick={this.addReport}
-									disabled={this.state.questions.length === 0 ? true : false}
-								>
-									Create Report
-								</Button>
-							</FormControl>
-						</section>
+							<FormControl> */}
+						<Button
+							style={{ display: 'block', marginTop: '30px' }}
+							variant="contained"
+							color="primary"
+							onClick={this.addReport}
+							disabled={this.state.questions.length === 0 ? true : false}
+						>
+							Create Report
+						</Button>
+						{/* </FormControl>
+						</section> */}
 					</Card>
 				</form>
 			</div>
