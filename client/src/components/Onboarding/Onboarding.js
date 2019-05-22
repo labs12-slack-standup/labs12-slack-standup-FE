@@ -3,6 +3,7 @@ import './onboarding.css';
 import CreateTeam from './CreateTeam';
 import LandingPage from './LandingPage';
 import JoinTeam from './JoinTeam';
+import jwt_decode from 'jwt-decode';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
 class Onboarding extends Component {
@@ -129,6 +130,11 @@ class Onboarding extends Component {
 	};
 
 	render() {
+		const token = jwt_decode(localStorage.getItem('token'));
+		if (token.teamId) {
+			this.props.history.push('/dashboard');
+		}
+
 		// Landing Page - all booleans false
 		return !this.state.joinToggle && !this.state.createToggle ? (
 			<LandingPage

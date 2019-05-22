@@ -21,7 +21,9 @@ const styles = {
 	logoLink: {
 		borderRight: '1px solid #FFF'
 	},
-	logLink: {},
+	appBar: {
+		backgroundColor: '#5475EE'
+	},
 	navLinks: {
 		display: 'flex'
 	}
@@ -45,12 +47,12 @@ class Navigation extends React.Component {
 		const loggedIn = appToken && firebaseToken;
 		const { classes } = this.props;
 		return (
-			<AppBar position="static">
+			<AppBar position="static" className={classes.appBar}>
 				<Toolbar>
 					<NavLink to="/dashboard" className={classes.logoLink}>
 						<Avatar
 							className={classes.menuButton}
-							src={require('./rocket-small.png')}
+							src={require('./rocket-logo.png')}
 						/>
 					</NavLink>
 					<div className="nav-links">

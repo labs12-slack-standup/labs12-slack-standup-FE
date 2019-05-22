@@ -74,33 +74,13 @@ const SingleReport = props => {
 					</div>
 					<div className="reports-card-flex whitespace">
 						<div className="reports-card-flex-icon">
-							<Icon style={{ color: '#3f51b5' }}>alarm</Icon>
+							<Icon style={{ color: '#5475EE' }}>alarm</Icon>
 						</div>
-						<div className="reports-card-time" style={{ color: '#3f51b5' }}>
+						<div className="reports-card-time" style={{ color: '#000' }}>
 							{timeStr}
 						</div>
 					</div>
 				</Link>
-				{/* <div className="flex">
-					<div>
-						<Link
-							to={`/dashboard/reports/${props.report.id}/edit`}
-							className={props.role !== 'admin' ? 'disabled-link' : ''}
-						>
-							<Button className={props.role !== 'admin' ? 'disabled-link' : ''}>
-								Edit{' '}
-							</Button>
-						</Link>
-					</div>
-					<div>
-						<Button
-							onClick={() => props.archiveReport(props.report.id)}
-							className={props.role !== 'admin' ? 'disabled-link' : ''}
-						>
-							Archive
-						</Button>
-					</div>
-				</div> */}
 			</div>
 		</Card>
 	);
