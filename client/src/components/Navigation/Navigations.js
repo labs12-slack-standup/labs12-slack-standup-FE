@@ -7,7 +7,8 @@ import {
 	Classes,
 	NavbarGroup,
 	NavbarDivider,
-	Alignment
+	Alignment,
+	
 } from '@blueprintjs/core';
 
 class Navigation extends React.Component {
@@ -26,7 +27,7 @@ class Navigation extends React.Component {
 		);
 		console.log(appToken);
 		const loggedIn = appToken && firebaseToken;
-
+		console.log(this.props.history)
 		return (
 			<Navbar className="navBar-container">
 				<NavbarGroup align={Alignment.LEFT}>
@@ -35,16 +36,16 @@ class Navigation extends React.Component {
 					</NavLink>
 					<NavbarDivider />
 					<NavLink className="wide-nav" to="/dashboard">
-						<Button icon="home" className={Classes.MINIMAL} text="Dashboard" />
+						<Button icon="home" minimal={this.props.history.location.pathname === '/dashboard' ? false : true} text="Dashboard" />
 					</NavLink>
 					<NavLink className="wide-nav" to="/dashboard/profile">
-						<Button icon="user" className={Classes.MINIMAL} text="Profile" />
+						<Button icon="user" minimal={this.props.history.location.pathname === '/dashboard/profile' ? false : true} text="Profile" />
 					</NavLink>
 					<NavLink className="narrow-nav" to="/dashboard">
-						<Button icon="home" className={Classes.MINIMAL} />
+						<Button icon="home" minimal={this.props.history.location.pathname === '/dashboard' ? false : true} className={Classes.MINIMAL} />
 					</NavLink>
 					<NavLink className="narrow-nav" to="/dashboard/profile">
-						<Button icon="user" className={Classes.MINIMAL} />
+						<Button icon="user" minimal={this.props.history.location.pathname === '/dashboard/profile' ? false : true} className={Classes.MINIMAL} />
 					</NavLink>
 				</NavbarGroup>
 
