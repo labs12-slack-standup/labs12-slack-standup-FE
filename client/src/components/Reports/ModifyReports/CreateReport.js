@@ -18,6 +18,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { TimePicker } from 'material-ui-pickers';
 import Slack from '../../Slack/Slack';
 import { getMinutes } from 'date-fns/esm';
+
 class CreateReport extends Component {
 	state = {
 		// Main Report State
@@ -28,6 +29,7 @@ class CreateReport extends Component {
 		message: '',
 		questions: [],
 		slackChannelId: null,
+		slackAuthorized: false,
 		// Temporary State
 		channels: [],
 		question: '',
@@ -163,12 +165,6 @@ class CreateReport extends Component {
 						<section className="schedule-card-content">
 							<h3 className="schedule-title">Report Information</h3>
 							<Divider className="divider" variant="fullWidth" />
-							{this.state.channels.length < 1 ? (
-								<div>
-									<h3>Authorize Slack to chose a channel for distribution:</h3>
-									<Slack />
-								</div>
-							) : null}
 							<section>
 								<FormControl className="report-name report-margin" required>
 									<InputLabel htmlFor="report-name">Report Name</InputLabel>
@@ -183,20 +179,26 @@ class CreateReport extends Component {
 										value={this.state.reportName}
 									/>
 								</FormControl>
-								<p>Slack Channel</p>
-								<HTMLSelect
-									className="slack-dropdown"
-									name="slackChannelId"
-									onChange={this.changeHandler}
-									label="Slack Channel for Distribution"
-								>
-									<option>Choose a Slack Channel for distribution...</option>
-									{this.state.channels.map(channel => (
-										<option key={channel.id} value={channel.id}>
-											{channel.name}
-										</option>
-									))}
-								</HTMLSelect>
+								{this.state.channels.length > 0 ? (
+									<>
+										<p>Slack Channel</p>
+										<HTMLSelect
+											className="slack-dropdown"
+											name="slackChannelId"
+											onChange={this.changeHandler}
+											label="Slack Channel for Distribution"
+										>
+											<option>
+												Choose a Slack Channel for distribution...
+											</option>
+											{this.state.channels.map(channel => (
+												<option key={channel.id} value={channel.id}>
+													{channel.name}
+												</option>
+											))}
+										</HTMLSelect>{' '}
+									</>
+								) : null}
 							</section>
 							<section>
 								<FormControl className="input-field" required>
