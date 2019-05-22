@@ -9,7 +9,6 @@ const User = props => {
 	return (
 		<div className="singleUserContainer">
 			<div
-				// className="userdiv"
 				key={props.user.id}
 			>
 				<img

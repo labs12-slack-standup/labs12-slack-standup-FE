@@ -23,7 +23,9 @@ class View extends Component {
 					roles: roles
 				})
 			)
-			.catch(err => console.log(err));
+			.catch(err => {
+				console.log(err.response.data)
+			});
 	}
 	render() {
 		return this.state.active ? (
