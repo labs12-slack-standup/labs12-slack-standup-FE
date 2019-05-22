@@ -14,21 +14,14 @@
 	width: 95%;
 }
 
-/* @media (max-width: 500px) {
-	.navigation {
-		padding: 0 10%;
-		height: 200px;
-		 align-content: center; 
+@media (min-width: 550px) {
+	.narrow-nav {
+		display: none
 	}
-	.bp3-navbar {
-		padding: 0;
-		margin: 0 auto;
-		box-shadow: none;
+}
+
+@media (max-width: 550px) {
+	.wide-nav {
+		display: none
 	}
-	.bp3-navbar-group {
-		flex-direction: column;
-	}
-	.bp3-navbar-heading {
-		font-size: 32px;
-	}
-} */
+}
