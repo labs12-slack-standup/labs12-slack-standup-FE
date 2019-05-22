@@ -32,7 +32,7 @@ class EditReport extends Component {
 		question: '',
 		week: [
 			'Monday',
-			'Tueday',
+			'Tuesday',
 			'Wednesday',
 			'Thursday',
 			'Friday',
@@ -136,6 +136,12 @@ class EditReport extends Component {
 		});
 	};
 
+	selectWeekdays = () => {
+		this.setState({
+			schedule: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+		});
+	};
+
 	updateReport = e => {
 		e.preventDefault();
 		let slackChannelName;
@@ -234,7 +240,16 @@ class EditReport extends Component {
 						<section className="schedule-card-content">
 							<h3 className="schedule-title">Schedule</h3>
 							<Divider className="divider" variant="fullWidth" />
-							<p>Days of the week for report delivery</p>
+							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+								<p>Days to be Delivered</p>
+								<Button
+									style={{ marginTop: '20px' }}
+									variant="outlined"
+									onClick={() => this.selectWeekdays()}
+								>
+									Select Weekdays
+								</Button>
+							</div>
 							<section className="days-flex">
 								{this.state.week.map((day, idx) => (
 									<div
@@ -251,10 +266,10 @@ class EditReport extends Component {
 									</div>
 								))}
 							</section>
-							<p>Time each day for report delivery</p>
+							<p>Time</p>
 							<section>
 								<TimePicker
-									label="Schedule Time"
+									// label="Schedule Time"
 									name="scheduleTime"
 									value={this.state.timePickDate}
 									minutesStep={30}
@@ -267,7 +282,6 @@ class EditReport extends Component {
 						<section className="schedule-card-content">
 							<h3 className="schedule-title">Questions</h3>
 							<Divider className="divider" variant="fullWidth" />
-							<p>Questions to be sent out for this report</p>
 							<section>
 								{this.state.questions.map(question => (
 									<article className="question-flex" key={question}>
@@ -309,20 +323,17 @@ class EditReport extends Component {
 									<AddIcon />
 								</Fab>
 							</section>
-							<section>
-								<h3 className="schedule-title">Submit Updated Report</h3>
-								<Divider className="divider" variant="fullWidth" />
-								<Button
-									style={{ display: 'block', marginTop: '30px' }}
-									variant="contained"
-									color="primary"
-									onClick={this.updateReport}
-								>
-									Update Report
-								</Button>
-							</section>
 						</section>
 					</Card>
+
+					<Button
+						style={{ display: 'block', marginTop: '30px' }}
+						variant="contained"
+						color="primary"
+						onClick={this.updateReport}
+					>
+						Update Report
+					</Button>
 				</form>
 			</div>
 		);
