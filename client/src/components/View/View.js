@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Dashboard from '../Dashboard/Dashboard';
 import ReportsDash from '../Dashboard/ReportsDash';
 import jwt_decode from 'jwt-decode';
+import { Card } from '@blueprintjs/core';
 
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
 
@@ -24,7 +25,7 @@ class View extends Component {
 				})
 			)
 			.catch(err => {
-				console.log(err.response.data)
+				console.log(err.response.data);
 			});
 	}
 	render() {
@@ -38,10 +39,10 @@ class View extends Component {
 				/>
 			</div>
 		) : (
-			<div>
-				Looks like your account has been deactivated. If you this this is an
-				error, please contact your manager.
-			</div>
+			<Card style={{ textAlign: 'center' }}>
+				Looks like your account has been deactivated. If you believe this this
+				is an error, please contact your manager.
+			</Card>
 		);
 	}
 }
