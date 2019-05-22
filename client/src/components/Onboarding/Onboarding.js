@@ -32,11 +32,13 @@ class Onboarding extends Component {
 		this.setState({ createToggle: false });
 		this.setState({ joinToggle: false });
 	};
-	// change handlers
+
+	// change handler
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
+	// called when a user clicks 'create team' button in CreateTeam.js
 	createTeam = async emails => {
 		const teamId = length => {
 			return Math.round(
@@ -85,8 +87,6 @@ class Onboarding extends Component {
 					'There was an issue with the emails, please be sure to separate each email with a comma. Alternatively, you can pass the join code to your teammates manually.'
 			});
 		}
-		// took this out because it was trying to update after the push to dashboard, but not sure why it was here in the first place so I haven't deleted it -- eek
-		// this.setState({ teamId: randId });
 	};
 
 	// On submit to join a team by join code
@@ -107,17 +107,15 @@ class Onboarding extends Component {
 			});
 		}
 	};
+
+	// If there was an error at any point while onboarding, exiting the error message will remove the error from state
 	clearError = () => {
 		this.setState({ error: '' });
 	};
-	// splits email string into array by commas and removes spaces
-	// separateEmails = () => {
-	// 	const teamEmails = this.state.singleEmail.replace(/\s+/g, '').split(',');
-	// 	this.setState({ emails: teamEmails });
-	// };
+	
+	// Adds emails to state (in an array) from CreateTeam
 	changeEmail = email => {
 		this.setState({ emails: email });
-		//this.separateEmails();
 	};
 
 	render() {
