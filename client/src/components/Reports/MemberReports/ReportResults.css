@@ -70,10 +70,16 @@
 }
 
 .report-results-filter {
-	font-size: 22px;
+	display: block;
+	font-size: 16px;
 	font-weight: 500;
-	padding: 20px 0 10px;
-	text-align: center;
+	margin: auto;
+	max-width: 280px;
+	opacity: 0.87;
+}
+
+.report-results-filter:first-child {
+	margin-top: 30px;
 }
 
 .completed-report {
@@ -89,10 +95,9 @@
 .responders {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: flex-start;
 	margin: auto;
-	margin-top: 30px;
-	width: 321px;
+	width: 300px;
 }
 
 .responders-user {
@@ -100,7 +105,7 @@
 	display: block;
 	height: 40px;
 	margin: 10px;
-	opacity: 0.2;
+	opacity: 0.5;
 	width: 40px;
 }
 

@@ -61,13 +61,14 @@ class ReportResults extends Component {
 						style={{ marginTop: '30px' }}
 						className="report-results-filter-container"
 					>
-						<h1 className="report-results-filter">Filters</h1>
+						<h1 className="report-results-filter">Filter by day</h1>
 						<DatePicker
 							// getByDate={this.getByDate}
 							clickedDate={this.state.clickedDate}
 							clickedResponder={this.state.clickedResponder}
 							filter={this.filter}
 						/>
+						<h1 className="report-results-filter">Filter by team member</h1>
 						<Responders
 							responders={this.state.responders}
 							filter={this.filter}
@@ -152,19 +153,7 @@ class ReportResults extends Component {
 			.catch(err => console.log(err));
 	}
 
-	// getByDate = date => {
-	// 	axiosWithAuth()
-	// 		.post(`${baseURL}/responses/${this.props.match.params.reportId}/day`, {
-	// 			date
-	// 		})
-	// 		.then(res => this.setState({ responses: res.data, clickedDate: date }))
-	// 		.catch(err => {
-	// 			console.log(err);
-	// 		});
-	// };
-
 	filter = (date, responder) => {
-		console.log(date, responder);
 		axiosWithAuth()
 			.post(`${baseURL}/responses/${this.props.match.params.reportId}/filter`, {
 				date: date,
@@ -177,8 +166,7 @@ class ReportResults extends Component {
 			.catch(err => {
 				console.log(err);
 			});
-		return;
-	};
+	}
 
 	updateWithUserResponse = res => {
 		this.setState({ responses: res.data, completed: true });
