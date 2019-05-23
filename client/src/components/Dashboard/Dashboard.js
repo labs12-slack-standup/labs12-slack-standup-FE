@@ -19,23 +19,27 @@ export class Dashboard extends Component {
 		isLoading: true,
 		message: '',
 		active: true,
-		modal: false
+		modal: false,
+		anchorEl: null
 	};
 	render() {
 		if (this.state.isLoading) {
-			return <Spinner intent={Intent.PRIMARY} />;
+			return <Spinner intent={Intent.PRIMARY} className="loading-spinner" />;
 		}
 		return (
 			<Card raised={true} className="teamDashboard">
 				<header className="teamDashboard-header">
-					<Typography variant="h3">Your Team</Typography>
+					<Typography variant="h3">Team</Typography>
 				</header>
 				<Team
 					className="teamContainer"
 					users={this.state.users}
 					updateUser={this.updateUser}
+					anchorEl={this.state.anchorEl}
 					activateUser={this.activateUser}
 					deactivateUser={this.deactivateUser}
+					handleClickMenu={this.handleClickMenu}
+					handleCloseMenu={this.handleCloseMenu}
 				/>
 				<InviteUser
 					changeHandler={this.changeHandler}
@@ -117,12 +121,21 @@ export class Dashboard extends Component {
 			.then(res => {
 				newUsers.push(res.data.editedUser);
 				this.setState({
-					users: newUsers
+					users: newUsers,
+					anchorEl: null
 				});
 			})
 			.catch(err => {
 				console.log(err);
 			});
+	};
+
+	handleClickMenu = e => {
+		this.setState({ anchorEl: e.currentTarget });
+	};
+
+	handleCloseMenu = () => {
+		this.setState({ anchorEl: null });
 	};
 
 	addUser = e => {

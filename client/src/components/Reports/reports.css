@@ -1,5 +1,6 @@
 .reportsCard {
 	width: 100%;
+	margin: 10px 0;
 }
 
 .single-report-content {
@@ -122,7 +123,7 @@
 	width: 140px;
 }
 
-.display-link {
+#display-link {
 	display: none;
 }
 

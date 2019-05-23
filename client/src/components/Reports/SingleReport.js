@@ -39,13 +39,13 @@ const SingleReport = props => {
 				<div className="single-report-buttons">
 					<Link
 						to={`/dashboard/reports/${props.report.id}/edit`}
-						className={props.role !== 'admin' ? 'disabled-link' : ''}
+						id={props.role !== 'admin' ? 'display-link' : ''}
 					>
 						<Fab
 							color="default"
 							size="small"
 							aria-label="Edit"
-							className={props.role !== 'admin' ? 'disabled-link' : ''}
+							id={props.role !== 'admin' ? 'disabled-link' : ''}
 						>
 							<Icon>edit_icon</Icon>
 						</Fab>
@@ -55,7 +55,7 @@ const SingleReport = props => {
 						size="small"
 						aria-label="Delete"
 						onClick={() => props.archiveReport(props.report.id)}
-						className={props.role !== 'admin' ? 'disabled-link' : ''}
+						id={props.role !== 'admin' ? 'display-link' : ''}
 					>
 						<Icon>delete_icon</Icon>
 					</Fab>
