@@ -7,6 +7,7 @@ import { baseURL, axiosWithAuth } from '../../config/axiosWithAuth';
 import { Spinner, Intent } from '@blueprintjs/core';
 import SingleReportResults from '../Reports/MemberReports/ReportResults';
 
+// this component houses all things reports
 class ReportsDash extends Component {
 	state = {
 		message: '',
@@ -27,7 +28,6 @@ class ReportsDash extends Component {
 					message: res.data.message,
 					reports: res.data.reports
 				});
-
 				this.setState({ isLoading: false });
 			})
 			.catch(err => console.log(err));
@@ -41,7 +41,6 @@ class ReportsDash extends Component {
 		axiosWithAuth()
 			.put(endpoint, updatedReport)
 			.then(res => {
-				//this.setResponseAsState(res.data.reports);
 				this.getReports();
 			})
 			.catch(err => console.log(err));
@@ -57,7 +56,6 @@ class ReportsDash extends Component {
 		if (this.state.isLoading) {
 			return <Spinner intent={Intent.PRIMARY} />;
 		}
-
 		return (
 			<div
 				className={

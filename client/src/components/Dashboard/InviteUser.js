@@ -1,8 +1,9 @@
 import React from 'react';
-// import { Button, Elevation, Card } from '@blueprintjs/core';
 import { TextField, Button, Card, Icon } from '@material-ui/core';
 
 import './dashboard.css';
+
+// component to invite user to team (only admin access - BE preventions also)
 
 const InviteUser = props => {
 	return (
