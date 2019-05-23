@@ -14,34 +14,18 @@ import Slack from '../Slack/Slack';
 import SingleReport from './SingleReport';
 import './reports.css';
 
+// Container for all reports including title
+// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
+
 function Transition(props) {
 	return <Slide direction="up" {...props} />;
 }
 
 class Reports extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
+	state = {
 			slackModal: false,
-			stepsEnabled: true,
 			archiveModal: false,
-			initialStep: 0,
-			steps: [
-				{
-					element: 'navbar',
-					intro: "You don't have any active reports."
-				},
-				{
-					element: '.createNewReportCard',
-					intro: 'Start by creating one...'
-				}
-			]
 		};
-	}
-	onExit = () => {
-		this.setState(() => ({ stepsEnabled: false }));
-	};
 
 	slackAuthCheck = e => {
 		e.preventDefault();
