@@ -19,6 +19,33 @@ export class Dashboard extends Component {
 		active: true,
 		modal: false
 	};
+	render() {
+		if (this.state.isLoading) {
+			return <Spinner intent={Intent.PRIMARY} />;
+		}
+		return (
+			<Card raised={true} className="teamDashboard">
+				<header className="teamDashboard-header">
+					<Typography variant="h3">Your Team</Typography>
+				</header>
+				<Team
+					className="teamContainer"
+					users={this.state.users}
+					updateUser={this.updateUser}
+					activateUser={this.activateUser}
+					deactivateUser={this.deactivateUser}
+				/>
+				<InviteUser
+					changeHandler={this.changeHandler}
+					addUser={this.addUser}
+					message={this.state.message}
+					clearMessage={this.clearMessage}
+					modal={this.state.modal}
+				/>
+				<Slack />
+			</Card>
+		);
+	}
 
 	componentDidMount() {
 		// get user's joinCode from token and setState accordingly. Necessary to invite new team members.
@@ -128,34 +155,6 @@ export class Dashboard extends Component {
 	clearMessage = () => {
 		this.setState({ message: '', modal: false });
 	};
-
-	render() {
-		if (this.state.isLoading) {
-			return <Spinner intent={Intent.PRIMARY} />;
-		}
-		return (
-			<Card raised={true} className="teamDashboard">
-				<header className="teamDashboard-header">
-					<Typography variant="h3">Your Team</Typography>
-				</header>
-				<Team
-					className="teamContainer"
-					users={this.state.users}
-					updateUser={this.updateUser}
-					activateUser={this.activateUser}
-					deactivateUser={this.deactivateUser}
-				/>
-				<InviteUser
-					changeHandler={this.changeHandler}
-					addUser={this.addUser}
-					message={this.state.message}
-					clearMessage={this.clearMessage}
-					modal={this.state.modal}
-				/>
-				<Slack />
-			</Card>
-		);
-	}
 }
 
 export default Dashboard;
