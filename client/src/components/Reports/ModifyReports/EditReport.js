@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
-import './Report.css';
 
+// style imports
+import './Report.css';
 import {
 	Card,
 	Button,
@@ -16,6 +17,9 @@ import AddIcon from '@material-ui/icons/Add';
 import { TimePicker } from 'material-ui-pickers';
 import { getHours } from 'date-fns';
 import { getMinutes } from 'date-fns/esm';
+
+// this edits reports - admin only
+// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
 
 class EditReport extends Component {
 	state = {
@@ -40,6 +44,166 @@ class EditReport extends Component {
 			'Sunday'
 		]
 	};
+	render() {
+		return (
+			<div className="create-report">
+				<Fab onClick={() => this.props.history.goBack()} color="default">
+					<Icon>arrow_back</Icon>
+				</Fab>
+				<form className="edit-report">
+					<Card raised={true} className="schedule-card">
+						<section className="schedule-card-content">
+							<h3 className="schedule-title">Report Information</h3>
+							<Divider className="divider" variant="fullWidth" />
+							<FormControl className="report-name report-margin" required>
+								<InputLabel htmlFor="edit-report-name">Report Name</InputLabel>
+								<Input
+									id="edit-report-name"
+									className="input-field top-input"
+									required
+									type="text"
+									onChange={this.changeHandler}
+									name="reportName"
+									value={this.state.reportName}
+								/>
+							</FormControl>
+							{this.state.slackChannelId ? (
+								<div>
+									<p>Slack Channel</p>
+									<select
+										className="slack-dropdown"
+										name="slackChannelId"
+										onChange={this.changeHandler}
+										value={this.state.slackChannelId}
+									>
+										{this.state.channels.map(channel => (
+											<option key={channel.id} value={channel.id}>
+												{channel.name}
+											</option>
+										))}
+									</select>
+								</div>
+							) : null}
+						</section>
+						<section className="schedule-card-content">
+							<FormControl className="input-field" required>
+								<InputLabel htmlFor="edit-report-message">
+									Report Message
+								</InputLabel>
+								<Input
+									required
+									className="input-field margin-fix"
+									id="edit-report-message"
+									type="textarea"
+									onChange={this.changeHandler}
+									name="message"
+									placeholder="Message to be sent with each report"
+									value={this.state.message}
+								/>
+							</FormControl>
+						</section>
+					</Card>
+					<Card raised={true} className="schedule-card">
+						<section className="schedule-card-content">
+							<h3 className="schedule-title">Schedule</h3>
+							<Divider className="divider" variant="fullWidth" />
+							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+								<p>Days to be Delivered</p>
+								<Button
+									style={{ marginTop: '20px' }}
+									variant="outlined"
+									onClick={() => this.selectWeekdays()}
+								>
+									Select Weekdays
+								</Button>
+							</div>
+							<section className="days-flex">
+								{this.state.week.map((day, idx) => (
+									<div
+										key={day}
+										onClick={e => this.updateSchedule(day)}
+										className={`day ${
+											this.state.schedule.includes(day) ? 'selected' : ''
+										}`}
+									>
+										{/* if M/W/F, only show first letter, otherwise first 2 */}
+										{idx === 0 || idx === 2 || idx === 4
+											? day.charAt(0)
+											: day.charAt(0) + day.charAt(1)}
+									</div>
+								))}
+							</section>
+							<p>Time</p>
+							<section>
+								<TimePicker
+									// label="Schedule Time"
+									name="scheduleTime"
+									value={this.state.timePickDate}
+									minutesStep={30}
+									onChange={this.timeChangeHandler}
+								/>
+							</section>
+						</section>
+					</Card>
+					<Card raised={true} className="schedule-card">
+						<section className="schedule-card-content">
+							<h3 className="schedule-title">Questions</h3>
+							<Divider className="divider" variant="fullWidth" />
+							<section>
+								{this.state.questions.map(question => (
+									<article className="question-flex" key={question}>
+										<p className="question">{question}</p>
+										<Fab
+											size="small"
+											color="secondary"
+											onClick={e => this.removeQuestion(e, question)}
+										>
+											<Icon>delete_icon</Icon>
+										</Fab>
+									</article>
+								))}
+							</section>
+							<section className="enter-question">
+								<FormControl className="input-field" required>
+									<InputLabel htmlFor="edit-report-question">
+										Enter a question...
+									</InputLabel>
+									<Input
+										id="edit-report-question"
+										required
+										className="input-field"
+										type="text"
+										name="question"
+										value={this.state.question}
+										onChange={this.enterQuestionsHandler}
+									/>
+								</FormControl>
+								<Fab
+									size="small"
+									style={{ display: 'block', margin: '10px 0' }}
+									color="primary"
+									onClick={this.questionsHandler}
+									disabled={this.state.question.length === 0 ? true : false}
+									type="submit"
+								>
+									<AddIcon />
+								</Fab>
+							</section>
+						</section>
+					</Card>
+
+					<Button
+						style={{ display: 'block', marginTop: '30px' }}
+						variant="contained"
+						color="primary"
+						onClick={this.updateReport}
+					>
+						Update Report
+					</Button>
+				</form>
+			</div>
+		);
+	}
 
 	componentDidMount() {
 		this.fetchSlackChannels();
@@ -175,169 +339,6 @@ class EditReport extends Component {
 			})
 			.catch(err => console.log(err));
 	};
-
-	render() {
-		return (
-			<div className="create-report">
-				<Fab onClick={() => this.props.history.goBack()} color="default">
-					<Icon>arrow_back</Icon>
-				</Fab>
-				<form className="edit-report">
-					<Card raised={true} className="schedule-card">
-						<section className="schedule-card-content">
-							<h3 className="schedule-title">Report Information</h3>
-							<Divider className="divider" variant="fullWidth" />
-							<FormControl className="report-name report-margin" required>
-								<InputLabel htmlFor="edit-report-name">Report Name</InputLabel>
-								<Input
-									id="edit-report-name"
-									className="input-field top-input"
-									required
-									type="text"
-									onChange={this.changeHandler}
-									name="reportName"
-									placeholder="Report Name"
-									value={this.state.reportName}
-								/>
-							</FormControl>
-							{this.state.slackChannelId ? (
-								<div>
-									<p>Slack Channel</p>
-									<select
-										className="slack-dropdown"
-										name="slackChannelId"
-										onChange={this.changeHandler}
-										value={this.state.slackChannelId}
-									>
-										{this.state.channels.map(channel => (
-											<option key={channel.id} value={channel.id}>
-												{channel.name}
-											</option>
-										))}
-									</select>
-								</div>
-							) : null}
-						</section>
-						<section className="schedule-card-content">
-							<FormControl className="input-field" required>
-								<InputLabel htmlFor="edit-report-message">
-									Report Message
-								</InputLabel>
-								<Input
-									required
-									className="input-field margin-fix"
-									id="edit-report-message"
-									type="textarea"
-									onChange={this.changeHandler}
-									name="message"
-									placeholder="Message to be sent with each report"
-									value={this.state.message}
-								/>
-							</FormControl>
-						</section>
-					</Card>
-					<Card raised={true} className="schedule-card">
-						<section className="schedule-card-content">
-							<h3 className="schedule-title">Schedule</h3>
-							<Divider className="divider" variant="fullWidth" />
-							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-								<p>Days to be Delivered</p>
-								<Button
-									style={{ marginTop: '20px' }}
-									variant="outlined"
-									onClick={() => this.selectWeekdays()}
-								>
-									Select Weekdays
-								</Button>
-							</div>
-							<section className="days-flex">
-								{this.state.week.map((day, idx) => (
-									<div
-										key={day}
-										onClick={e => this.updateSchedule(day)}
-										className={`day ${
-											this.state.schedule.includes(day) ? 'selected' : ''
-										}`}
-									>
-										{/* if M/W/F, only show first letter, otherwise first 2 */}
-										{idx === 0 || idx === 2 || idx === 4
-											? day.charAt(0)
-											: day.charAt(0) + day.charAt(1)}
-									</div>
-								))}
-							</section>
-							<p>Time</p>
-							<section>
-								<TimePicker
-									// label="Schedule Time"
-									name="scheduleTime"
-									value={this.state.timePickDate}
-									minutesStep={30}
-									onChange={this.timeChangeHandler}
-								/>
-							</section>
-						</section>
-					</Card>
-					<Card raised={true} className="schedule-card">
-						<section className="schedule-card-content">
-							<h3 className="schedule-title">Questions</h3>
-							<Divider className="divider" variant="fullWidth" />
-							<section>
-								{this.state.questions.map(question => (
-									<article className="question-flex" key={question}>
-										<p className="question">{question}</p>
-										<Fab
-											size="small"
-											color="secondary"
-											onClick={e => this.removeQuestion(e, question)}
-										>
-											<Icon>delete_icon</Icon>
-										</Fab>
-									</article>
-								))}
-							</section>
-							<section className="enter-question">
-								<FormControl className="input-field" required>
-									<InputLabel htmlFor="edit-report-question">
-										Enter a question...
-									</InputLabel>
-									<Input
-										id="edit-report-question"
-										required
-										className="input-field"
-										type="text"
-										name="question"
-										placeholder="Ask a question..."
-										value={this.state.question}
-										onChange={this.enterQuestionsHandler}
-									/>
-								</FormControl>
-								<Fab
-									size="small"
-									style={{ display: 'block', margin: '10px 0' }}
-									color="primary"
-									onClick={this.questionsHandler}
-									disabled={this.state.question.length === 0 ? true : false}
-									type="submit"
-								>
-									<AddIcon />
-								</Fab>
-							</section>
-						</section>
-					</Card>
-
-					<Button
-						style={{ display: 'block', marginTop: '30px' }}
-						variant="contained"
-						color="primary"
-						onClick={this.updateReport}
-					>
-						Update Report
-					</Button>
-				</form>
-			</div>
-		);
-	}
 }
 
 export default EditReport;

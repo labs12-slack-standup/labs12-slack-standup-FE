@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './navigation.css';
 
+// style imports
+import './navigation.css';
 import { AppBar, Toolbar, Button, Icon, Avatar } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -28,7 +29,6 @@ const styles = {
 };
 
 class Navigation extends React.Component {
-	// Add modal here?
 	handleLogout = e => {
 		e.preventDefault();
 		localStorage.removeItem('firebaseui::rememberedAccounts');
@@ -41,7 +41,7 @@ class Navigation extends React.Component {
 		const firebaseToken = localStorage.getItem(
 			'firebaseui::rememberedAccounts'
 		);
-		// console.log(appToken);
+
 		const loggedIn = appToken && firebaseToken;
 		const { classes } = this.props;
 
@@ -49,6 +49,7 @@ class Navigation extends React.Component {
 			<AppBar position="static">
 				<Toolbar>
 					<NavLink
+						// if user is logged in, icon takes them to dashboard, otherwise go to marketing page
 						to={loggedIn ? '/dashboard' : '/'}
 						className={classes.logoLink}
 					>
@@ -60,16 +61,33 @@ class Navigation extends React.Component {
 					<div className="nav-links">
 						<div>
 							<NavLink to="/dashboard">
-								<Button disabled={this.props.history.location.pathname ==='/dashboard' ? true : false} className={classes.grow}>
+								{/* disabled prop here highlights which tab user is currently on */}
+								<Button
+									disabled={
+										this.props.history.location.pathname === '/dashboard'
+											? false
+											: true
+									}
+									className={classes.grow}
+								>
 									<Icon>home</Icon>
 								</Button>
 							</NavLink>
 							<NavLink to="/dashboard/profile">
-								<Button disabled={this.props.history.location.pathname ==='/dashboard/profile' ? true : false} className={classes.grow}className={classes.grow}>
+								<Button
+									disabled={
+										this.props.history.location.pathname ===
+										'/dashboard/profile'
+											? false
+											: true
+									}
+									className={classes.grow}
+								>
 									<Icon>account_circle</Icon>
 								</Button>
 							</NavLink>
 						</div>
+						{/* login/logout operator */}
 						{!loggedIn ? (
 							<NavLink to="/login">
 								<Button className={classes.grow}>Login</Button>

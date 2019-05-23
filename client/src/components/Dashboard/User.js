@@ -1,16 +1,14 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
 import jwt_decode from 'jwt-decode';
 
+import { Button } from '@material-ui/core';
 import './dashboard.css';
 
 const User = props => {
 	const token = jwt_decode(localStorage.getItem('token'));
 	return (
 		<div className="singleUserContainer">
-			<div
-				key={props.user.id}
-			>
+			<div key={props.user.id}>
 				<img
 					src={props.user.profilePic}
 					className="profilePic"

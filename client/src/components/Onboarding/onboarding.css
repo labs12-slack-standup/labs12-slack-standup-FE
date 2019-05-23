@@ -73,18 +73,6 @@ button {
 	margin: 40px auto;
 	text-align: center;
 }
-.errorModal {
-	position: fixed;
-	z-index: 1;
-	width: 100%;
-	height: 100%;
-	left: 0;
-	top: 0;
-	background-color: gray;
-	opacity: 0.95;
-	color: black;
-	text-align: center;
-}
 
 .errorCard {
 	position: relative;

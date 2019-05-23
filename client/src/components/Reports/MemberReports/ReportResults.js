@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import DatePicker from '../../DatePicker/DatePicker';
-import { Card, Elevation } from '@blueprintjs/core';
-import { Fab, Icon } from '@material-ui/core';
-
-import MemberResponseForm from './MemberResponseForm';
-import Responders from '../../Responders/Responders';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import jwt_decode from 'jwt-decode';
+
+// component imports
+import MemberResponseForm from './MemberResponseForm';
+import Responders from '../../Responders/Responders';
+import DatePicker from '../../DatePicker/DatePicker';
+
+// style imports
+import { Card, Elevation } from '@blueprintjs/core';
+import { Fab, Icon } from '@material-ui/core';
 import './ReportResults.css';
+
+// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
 
 class ReportResults extends Component {
 	state = {
@@ -46,7 +51,11 @@ class ReportResults extends Component {
 							<h3>Thank you for filling out this report!</h3>
 						</Card>
 					) : (
-						<Card className="response-card" interactive={false} elevation={Elevation.TWO}>
+						<Card
+							className="response-card"
+							interactive={false}
+							elevation={Elevation.TWO}
+						>
 							<MemberResponseForm
 								{...this.props}
 								updateWithUserResponse={this.updateWithUserResponse}
@@ -86,31 +95,33 @@ class ReportResults extends Component {
 											.toLocaleDateString('en-US', options)
 											.replace(',', '')}
 									</h3>
-									{batch.responses.map(response => (
-										<Card interactive={false} elevation={Elevation.TWO}className="response-container">
-												<img
-													className="response-container-image"
-													src={response.profilePic}
-													alt={response.fullName}
-												/>
-												<div className="response-container-main">
-													<h3 className="response-container-main-name">
-														{response.fullName}
-													</h3>
-													{response.questions.map(
-														({ question, answer, id }) => (
-															<div key={id}>
-																<h6 className="response-container-main-question">
-																	{question}
-																</h6>
-																<p className="response-container-main-answer">
-																	{answer}
-																</p>
-															</div>
-														)
-													)}
-												</div>
-											
+									{batch.responses.map((response, idx) => (
+										<Card
+											key={idx}
+											interactive={false}
+											elevation={Elevation.TWO}
+											className="response-container"
+										>
+											<img
+												className="response-container-image"
+												src={response.profilePic}
+												alt={response.fullName}
+											/>
+											<div className="response-container-main">
+												<h3 className="response-container-main-name">
+													{response.fullName}
+												</h3>
+												{response.questions.map(({ question, answer, id }) => (
+													<div key={id}>
+														<h6 className="response-container-main-question">
+															{question}
+														</h6>
+														<p className="response-container-main-answer">
+															{answer}
+														</p>
+													</div>
+												))}
+											</div>
 										</Card>
 									))}
 								</div>
@@ -123,7 +134,6 @@ class ReportResults extends Component {
 
 	componentDidMount() {
 		const userId = jwt_decode(localStorage.getItem('token')).subject;
-		console.log('userid', userId);
 		axiosWithAuth()
 			.get(`${baseURL}/responses/${this.props.match.params.reportId}`)
 			.then(res => {
@@ -147,7 +157,6 @@ class ReportResults extends Component {
 					filteredResponse: filtered,
 					responders
 				});
-				console.log('responses', this.state.responses);
 			})
 			.catch(err => console.log(err));
 	}

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
-import { getHours } from 'date-fns';
-import { HTMLSelect } from '@blueprintjs/core';
-import './Report.css';
 
+// imports for time schedule
+import { getHours } from 'date-fns';
+import { getMinutes } from 'date-fns/esm';
+
+import Slack from '../../Slack/Slack';
+
+// style imports
 import {
 	Card,
 	Button,
@@ -14,10 +18,15 @@ import {
 	Fab,
 	Icon
 } from '@material-ui/core';
+import { HTMLSelect } from '@blueprintjs/core';
 import AddIcon from '@material-ui/icons/Add';
 import { TimePicker } from 'material-ui-pickers';
-import Slack from '../../Slack/Slack';
-import { getMinutes } from 'date-fns/esm';
+
+import './Report.css';
+
+// this component does what it says - admin can create a new report
+// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
+
 
 class CreateReport extends Component {
 	state = {
@@ -43,122 +52,6 @@ class CreateReport extends Component {
 			'Sunday'
 		]
 	};
-
-	componentDidMount() {
-		this.fetchSlackChannels();
-	}
-
-	changeHandler = e => {
-		this.setState({
-			[e.target.name]: e.target.value
-		});
-	};
-
-	timeChangeHandler = date => {
-		const hours = getHours(date);
-		const min = getMinutes(date);
-		const militaryTime = `${hours}:${min}`;
-
-		this.setState({
-			scheduleTime: militaryTime,
-			timePickDate: date
-		});
-	};
-
-	fetchSlackChannels = () => {
-		const endpoint = `${baseURL}/slack/channels`;
-		axiosWithAuth()
-			.get(endpoint)
-			.then(res => {
-				this.setState({
-					channels: res.data,
-					slackChannelId: res.data[0].id || ''
-				});
-			})
-			.catch(err => {
-				console.log(err.response.data);
-			});
-	};
-
-	enterQuestionsHandler = e => {
-		e.preventDefault();
-		const code = e.keyCode || e.which;
-		if (code === 13) {
-			this.setState(prevState => ({
-				questions: [...prevState.questions, this.state.question],
-				question: ''
-			}));
-		} else {
-			this.setState({
-				[e.target.name]: e.target.value
-			});
-		}
-	};
-
-	questionsHandler = e => {
-		e.preventDefault();
-		this.setState(prevState => ({
-			questions: [...prevState.questions, this.state.question],
-			question: ''
-		}));
-	};
-
-	removeQuestion = (e, question) => {
-		e.preventDefault();
-		this.setState(prevState => ({
-			questions: prevState.questions.filter(q => q !== question)
-		}));
-	};
-
-	updateSchedule = day => {
-		const { schedule } = this.state;
-		const includes = schedule.includes(day);
-		this.setState({
-			schedule: includes ? schedule.filter(d => d !== day) : [...schedule, day]
-		});
-	};
-	selectWeekdays = () => {
-		this.setState({
-			schedule: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-		});
-	};
-
-	addReport = e => {
-		e.preventDefault();
-		let slackChannelName;
-		this.state.channels.forEach(channel => {
-			if (channel.id === this.state.slackChannelId)
-				slackChannelName = channel.name;
-		});
-		const {
-			reportName,
-			schedule,
-			scheduleTime,
-			message,
-			questions,
-			slackChannelId
-		} = this.state;
-		const report = {
-			reportName,
-			schedule: JSON.stringify(schedule),
-			scheduleTime,
-			message,
-			questions: JSON.stringify(questions),
-			slackChannelId,
-			slackChannelName,
-			created_at: new Date()
-		};
-		const endpoint = `${baseURL}/reports`;
-		axiosWithAuth()
-			.post(endpoint, report)
-			.then(res => {
-				this.props.setResponseAsState(res.data);
-
-				this.props.history.push('/dashboard');
-			})
-			.catch(err => console.log(err));
-	};
-
 	render() {
 		return (
 			<div className="create-report">
@@ -326,6 +219,121 @@ class CreateReport extends Component {
 			</div>
 		);
 	}
+
+	componentDidMount() {
+		this.fetchSlackChannels();
+	}
+
+	changeHandler = e => {
+		this.setState({
+			[e.target.name]: e.target.value
+		});
+	};
+
+	timeChangeHandler = date => {
+		const hours = getHours(date);
+		const min = getMinutes(date);
+		const militaryTime = `${hours}:${min}`;
+
+		this.setState({
+			scheduleTime: militaryTime,
+			timePickDate: date
+		});
+	};
+
+	fetchSlackChannels = () => {
+		const endpoint = `${baseURL}/slack/channels`;
+		axiosWithAuth()
+			.get(endpoint)
+			.then(res => {
+				this.setState({
+					channels: res.data,
+					slackChannelId: res.data[0].id || ''
+				});
+			})
+			.catch(err => {
+				console.log(err.response.data);
+			});
+	};
+
+	enterQuestionsHandler = e => {
+		e.preventDefault();
+		const code = e.keyCode || e.which;
+		if (code === 13) {
+			this.setState(prevState => ({
+				questions: [...prevState.questions, this.state.question],
+				question: ''
+			}));
+		} else {
+			this.setState({
+				[e.target.name]: e.target.value
+			});
+		}
+	};
+
+	questionsHandler = e => {
+		e.preventDefault();
+		this.setState(prevState => ({
+			questions: [...prevState.questions, this.state.question],
+			question: ''
+		}));
+	};
+
+	removeQuestion = (e, question) => {
+		e.preventDefault();
+		this.setState(prevState => ({
+			questions: prevState.questions.filter(q => q !== question)
+		}));
+	};
+
+	updateSchedule = day => {
+		const { schedule } = this.state;
+		const includes = schedule.includes(day);
+		this.setState({
+			schedule: includes ? schedule.filter(d => d !== day) : [...schedule, day]
+		});
+	};
+	selectWeekdays = () => {
+		this.setState({
+			schedule: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+		});
+	};
+
+	addReport = e => {
+		e.preventDefault();
+		let slackChannelName;
+		this.state.channels.forEach(channel => {
+			if (channel.id === this.state.slackChannelId)
+				slackChannelName = channel.name;
+		});
+		const {
+			reportName,
+			schedule,
+			scheduleTime,
+			message,
+			questions,
+			slackChannelId
+		} = this.state;
+		const report = {
+			reportName,
+			schedule: JSON.stringify(schedule),
+			scheduleTime,
+			message,
+			questions: JSON.stringify(questions),
+			slackChannelId,
+			slackChannelName,
+			created_at: new Date()
+		};
+		const endpoint = `${baseURL}/reports`;
+		axiosWithAuth()
+			.post(endpoint, report)
+			.then(res => {
+				this.props.setResponseAsState(res.data);
+
+				this.props.history.push('/dashboard');
+			})
+			.catch(err => console.log(err));
+	};
 }
 
 export default CreateReport;
