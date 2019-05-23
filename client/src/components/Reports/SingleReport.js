@@ -8,7 +8,7 @@ import './reports.css';
 const SingleReport = props => {
 	const week = [
 		'Monday',
-		'Tueday',
+		'Tuesday',
 		'Wednesday',
 		'Thursday',
 		'Friday',
@@ -23,20 +23,20 @@ const SingleReport = props => {
 	}
 
 	return (
-		<Card raised={true} className="reportsCard">
+		<Card raised={true} className="reportsCard" style={{ margin: '10px' }}>
 			<div className="single-report-header">
-				<h1 className="reports-card-title">{props.report.reportName}</h1>
-				<div className="single-report-buttons">
+				<Link
+					to={`/dashboard/reports/${props.report.id}`}
+					style={{ textDecoration: 'none' }}
+				>
+					<h1 className="reports-card-title">{props.report.reportName}</h1>
+				</Link>
+				<div className={props.role !== 'admin' ? 'display-link' : 'single-report-buttons'}>
 					<Link
 						to={`/dashboard/reports/${props.report.id}/edit`}
 						className={props.role !== 'admin' ? 'disabled-link' : ''}
 					>
-						<Fab
-							color="default"
-							size="small"
-							aria-label="Edit"
-							className={props.role !== 'admin' ? 'disabled-link' : ''}
-						>
+						<Fab color="default" size="small" aria-label="Edit">
 							<Icon>edit_icon</Icon>
 						</Fab>
 					</Link>
@@ -45,7 +45,6 @@ const SingleReport = props => {
 						size="small"
 						aria-label="Delete"
 						onClick={() => props.archiveReport(props.report.id)}
-						className={props.role !== 'admin' ? 'disabled-link' : ''}
 					>
 						<Icon>delete_icon</Icon>
 					</Fab>
@@ -62,23 +61,28 @@ const SingleReport = props => {
 							<Icon>calendar_today</Icon>
 						</div>
 						<section className="reports-card-flex-days">
-							{week.map(day => (
+							{week.map((day, idx) => (
 								<div
 									key={day}
 									className={`day ${
 										props.report.schedule.includes(day) ? 'selected' : ''
 									}`}
 								>
-									{day.charAt(0) + day.charAt(1)}
+									 {/* if M/W/F, only show first letter, otherwise first 2 */}
+									{idx === 0 || idx === 2 || idx === 4
+										? day.charAt(0)
+										: day.charAt(0) + day.charAt(1)}
 								</div>
 							))}
 						</section>
 					</div>
 					<div className="reports-card-flex whitespace">
 						<div className="reports-card-flex-icon">
-							<Icon>alarm</Icon>
+							<Icon style={{ color: '#3f51b5' }}>alarm</Icon>
 						</div>
-						<div className="reports-card-time">{timeStr}</div>
+						<div className="reports-card-time" style={{ color: '#3f51b5' }}>
+							{timeStr}
+						</div>
 					</div>
 				</Link>
 				{/* <div className="flex">

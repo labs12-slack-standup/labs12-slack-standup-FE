@@ -1,6 +1,6 @@
 import './account.css';
 import React, { Component } from 'react';
-
+import User from '../Dashboard/User';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import { Collapse } from '@blueprintjs/core';
 
@@ -18,12 +18,14 @@ class Account extends Component {
 		super(props);
 		this.state = {
 			accountInfo: [],
+			users: [],
 			newName: '',
 			newPic: '',
 			achivedReports: [],
 			openAchivedReports: false,
 			openEditUser: false,
-			showJoinCode: false
+			showJoinCode: false,
+			openInactiveUsers: false
 		};
 	}
 
@@ -36,6 +38,13 @@ class Account extends Component {
 					accountInfo: res.data.user
 				})
 			)
+			.catch(err => console.log(err));
+
+		axiosWithAuth()
+			.get(`${baseURL}/users/team`)
+			.then(res => {
+				this.setState({ users: res.data.users });
+			})
 			.catch(err => console.log(err));
 	}
 	viewAchivedReports = () => {
@@ -107,10 +116,37 @@ class Account extends Component {
 		this.setState({ showJoinCode: !this.state.showJoinCode });
 	};
 
+	viewInactiveUsers = () => {
+		this.setState({ openInactiveUsers: !this.state.openInactiveUsers });
+	};
+
+	activateUser = id => {
+		const endpoint = `${baseURL}/users/${id}`;
+		const editedUser = {
+			active: true
+		};
+		//create an array with everyone but the user the function's been called on
+		const newUsers = this.state.users.filter(user => user.id !== id);
+
+		axiosWithAuth()
+			.put(endpoint, editedUser)
+			.then(res => {
+				newUsers.push(res.data.editedUser);
+				this.setState({
+					users: newUsers
+				});
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	};
+
 	render() {
 		const inactiveReports = this.state.achivedReports.filter(
 			report => !report.active
 		);
+
+		const inactiveUsers = this.state.users.filter(user => !user.active);
 		return (
 			<div className="userCard">
 				<Card raised={true} className="top-user-card">
@@ -121,7 +157,7 @@ class Account extends Component {
 								InputLabelProps={{ shrink: true }}
 								className="email-field"
 								label="Email"
-								value={this.state.accountInfo.email}
+								placeholder={this.state.accountInfo.email}
 								margin="normal"
 								variant="outlined"
 								color="primary"
@@ -190,8 +226,8 @@ class Account extends Component {
 					<Card raised={true} className="top-user-card">
 						<div className="accountForms">
 							<h3>Admin Controls</h3>
-							<div>
-								<div>
+							<div className="admin-controls">
+								<div className="join-code">
 									<Button
 										style={{ margin: '10px 0' }}
 										id="edit-user-button"
@@ -203,6 +239,7 @@ class Account extends Component {
 									</Button>
 									{this.state.showJoinCode === true ? (
 										<TextField
+											style={{ maxWidth: '105px' }}
 											label="Join Code"
 											value={this.state.accountInfo.joinCode}
 											margin="normal"
@@ -211,16 +248,68 @@ class Account extends Component {
 										/>
 									) : null}
 								</div>
-								<div className="editUser">
+								<div className="deactivated-users">
 									<Button
+										style={{ margin: '10px 0' }}
+										variant="outlined"
+										color="primary"
+										className={
+											this.state.accountInfo.roles === 'admin'
+												? 'activateButton'
+												: 'display-button'
+										}
+										onClick={this.viewInactiveUsers}
+									>
+										{this.state.openInactiveUsers
+											? 'Hide Inactive Users'
+											: 'View Inactive Users'}
+									</Button>
+									<div>
+										<Collapse isOpen={this.state.openInactiveUsers}>
+											{inactiveUsers.length > 0 ? (
+												inactiveUsers.map(user => (
+													<Card key={user.id}>
+														<div key={user.id} className="inactive-user-card">
+															<div className="inactive-user-content">
+																<img
+																	src={user.profilePic}
+																	id="profilePic"
+																	alt="a headshot, preferably"
+																/>
+																<h4>{user.fullName}</h4>
+															</div>
+															<Button
+																variant="outlined"
+																className={
+																	this.state.accountInfo.roles === 'admin'
+																		? 'activateButton'
+																		: 'display-button'
+																}
+																onClick={() => this.activateUser(user.id)}
+																style={{ padding: '0 8px', marginTop: '4px' }}
+															>
+																Activate
+															</Button>
+														</div>
+													</Card>
+												))
+											) : (
+												<p>No inactive users</p>
+											)}
+										</Collapse>
+									</div>
+								</div>
+								<div className="deactivated-reports">
+									<Button
+										style={{ margin: '10px 0' }}
+										className={
+											this.state.accountInfo.roles === 'admin'
+												? 'activateButton'
+												: 'display-button'
+										}
 										variant="outlined"
 										color="primary"
 										onClick={this.viewAchivedReports}
-										style={
-											this.state.accountInfo.roles === 'admin'
-												? { display: 'block' }
-												: { display: 'none' }
-										}
 									>
 										{this.state.openAchivedReports === false
 											? 'View Archived Reports'
@@ -229,19 +318,22 @@ class Account extends Component {
 									<div>
 										<Collapse isOpen={this.state.openAchivedReports}>
 											{inactiveReports.length < 1 ? (
-												<div>No archived Reports</div>
+												<p>No archived Reports</p>
 											) : (
 												inactiveReports.map((report, idx) => (
-													<div key={idx}>
-														<h3>{report.reportName}</h3>
-														<Button
-															variant="outlined"
-															color="primary"
-															onClick={() => this.reactivateReport(report.id)}
-														>
-															Reactivate Report
-														</Button>
-													</div>
+													<Card key={idx}>
+														<div key={idx} className="inactive-reports-content">
+															<h4 className="report-title">
+																{report.reportName}
+															</h4>
+															<Button
+																variant="outlined"
+																onClick={() => this.reactivateReport(report.id)}
+															>
+																Activate
+															</Button>
+														</div>
+													</Card>
 												))
 											)}
 										</Collapse>

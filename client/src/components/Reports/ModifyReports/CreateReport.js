@@ -24,8 +24,8 @@ class CreateReport extends Component {
 		// Main Report State
 		reportName: '',
 		schedule: [],
-		scheduleTime: new Date('2000-01-01T18:00:00'),
-		timePickDate: new Date('2000-01-01T18:00:00'),
+		scheduleTime: '8:0',
+		timePickDate: new Date('2000-01-01T08:00:00'),
 		message: '',
 		questions: [],
 		slackChannelId: null,
@@ -35,7 +35,7 @@ class CreateReport extends Component {
 		question: '',
 		week: [
 			'Monday',
-			'Tueday',
+			'Tuesday',
 			'Wednesday',
 			'Thursday',
 			'Friday',
@@ -117,6 +117,11 @@ class CreateReport extends Component {
 			schedule: includes ? schedule.filter(d => d !== day) : [...schedule, day]
 		});
 	};
+	selectWeekdays = () => {
+		this.setState({
+			schedule: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+		});
+	};
 
 	addReport = e => {
 		e.preventDefault();
@@ -165,6 +170,7 @@ class CreateReport extends Component {
 						<section className="schedule-card-content">
 							<h3 className="schedule-title">Report Information</h3>
 							<Divider className="divider" variant="fullWidth" />
+
 							<section>
 								<FormControl className="report-name report-margin" required>
 									<InputLabel htmlFor="report-name">Report Name</InputLabel>
@@ -200,6 +206,7 @@ class CreateReport extends Component {
 									</>
 								) : null}
 							</section>
+
 							<section>
 								<FormControl className="input-field" required>
 									<InputLabel htmlFor="report-message">
@@ -221,11 +228,20 @@ class CreateReport extends Component {
 					</Card>
 					<Card raised={true} className="schedule-card">
 						<section className="schedule-card-content">
-							<h3 className="schedule-title">Schedule</h3>
+							<h3 className="schedule-title">Delivery Schedule</h3>
 							<Divider className="divider" variant="fullWidth" />
-							<p>Days of the week for report delivery</p>
+							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+								<p style={{ marginTop: '40px' }}>Days</p>
+								<Button
+									style={{ marginTop: '20px' }}
+									variant="outlined"
+									onClick={() => this.selectWeekdays()}
+								>
+									Select Weekdays
+								</Button>
+							</div>
 							<section className="days-flex">
-								{this.state.week.map(day => (
+								{this.state.week.map((day, idx) => (
 									<div
 										key={day}
 										onClick={e => this.updateSchedule(day)}
@@ -233,14 +249,16 @@ class CreateReport extends Component {
 											this.state.schedule.includes(day) ? 'selected' : ''
 										}`}
 									>
-										{day.charAt(0) + day.charAt(1)}
+										{/* if M/W/F, only show first letter, otherwise first 2 */}
+										{idx === 0 || idx === 2 || idx === 4
+											? day.charAt(0)
+											: day.charAt(0) + day.charAt(1)}
 									</div>
 								))}
 							</section>
-							<p>Time each day for report delivery</p>
+							<p>Time</p>
 							<section>
 								<TimePicker
-									label="Schedule Time"
 									name="scheduleTime"
 									value={this.state.timePickDate}
 									minutesStep={30}
@@ -253,7 +271,6 @@ class CreateReport extends Component {
 						<section className="schedule-card-content">
 							<h3 className="schedule-title">Questions</h3>
 							<Divider className="divider" variant="fullWidth" />
-							<p>Questions to be sent out for this report</p>
 							<section>
 								{this.state.questions.map(question => (
 									<article className="question-flex" key={question}>
@@ -279,7 +296,6 @@ class CreateReport extends Component {
 										className="input-field"
 										type="text"
 										name="question"
-										placeholder="Ask a question..."
 										value={this.state.question}
 										onChange={this.enterQuestionsHandler}
 									/>
@@ -296,22 +312,16 @@ class CreateReport extends Component {
 								</Fab>
 							</section>
 						</section>
-						<section className="schedule-card-content">
-							<h3 className="schedule-title">Submit Report</h3>
-							<Divider className="divider" variant="fullWidth" />
-							<FormControl>
-								<Button
-									style={{ display: 'block', marginTop: '30px' }}
-									variant="contained"
-									color="primary"
-									onClick={this.addReport}
-									disabled={this.state.questions.length === 0 ? true : false}
-								>
-									Create Report
-								</Button>
-							</FormControl>
-						</section>
 					</Card>
+					<Button
+						style={{ display: 'block', marginTop: '30px' }}
+						variant="contained"
+						color="primary"
+						onClick={this.addReport}
+						disabled={this.state.questions.length === 0 ? true : false}
+					>
+						Create Report
+					</Button>
 				</form>
 			</div>
 		);
