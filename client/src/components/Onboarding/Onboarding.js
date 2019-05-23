@@ -15,7 +15,8 @@ class Onboarding extends Component {
 			singleEmail: '',
 			emails: [],
 			teamId: null,
-			error: ''
+			error: '',
+			errorModal: false
 		};
 	}
 
@@ -84,7 +85,8 @@ class Onboarding extends Component {
 			console.log(error);
 			this.setState({
 				error:
-					'There was an issue with the emails, please be sure to separate each email with a comma. Alternatively, you can pass the join code to your teammates manually.'
+					'There was an issue sending the emails, please be sure to enter valid email addresses. Alternatively, you can pass the join code to your teammates manually.',
+				errorModal: true
 			});
 		}
 	};
@@ -103,19 +105,29 @@ class Onboarding extends Component {
 		} catch (err) {
 			console.log(err);
 			this.setState({
-				error: 'There was an issue joining this team. Check your join code'
+				error: 'There was an issue joining this team. Check your join code',
+				errorModal: true
 			});
 		}
 	};
 
 	// If there was an error at any point while onboarding, exiting the error message will remove the error from state
 	clearError = () => {
-		this.setState({ error: '' });
+		this.setState({ error: '', errorModal: false });
 	};
-	
+
 	// Adds emails to state (in an array) from CreateTeam
 	changeEmail = email => {
 		this.setState({ emails: email });
+	};
+
+	// change handlers for email inputs
+	handleAddChip = () => {
+		this.setState({ emails: [...this.state.emails, this.state.singleEmail] });
+	};
+
+	handleChipChange = email => {
+		this.setState({ emails: [...email] });
 	};
 
 	render() {
@@ -136,6 +148,9 @@ class Onboarding extends Component {
 				changeEmail={this.changeEmail}
 				error={this.state.error}
 				clearError={this.clearError}
+				errorModal={this.state.errorModal}
+				handleAddChip={this.handleAddChip}
+				handleChipChange={this.handleChipChange}
 			/>
 		) : (
 			// Join a Team page - joinToggle true
@@ -145,6 +160,7 @@ class Onboarding extends Component {
 				changeHandler={this.changeHandler}
 				submitHandler={this.submitHandler}
 				error={this.state.error}
+				errorModal={this.state.errorModal}
 				clearError={this.clearError}
 			/>
 		);
