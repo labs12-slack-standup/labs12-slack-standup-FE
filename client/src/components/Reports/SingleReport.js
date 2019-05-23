@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+// style imports
 import { Card, Fab } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
-
 import './reports.css';
+
+// this component displays a single report as a card on /dashboard
+// parent component = Reports.js
 
 const SingleReport = props => {
 	const week = [
@@ -16,6 +20,7 @@ const SingleReport = props => {
 		'Sunday'
 	];
 
+	// time refactor for api call
 	const time = props.report.scheduleTime.split(':');
 	let timeStr = `${time[0]}:${time[1]}am`;
 	if (time[0] > 12) {
@@ -89,26 +94,6 @@ const SingleReport = props => {
 						<div className="reports-card-time">{timeStr}</div>
 					</div>
 				</Link>
-				{/* <div className="flex">
-					<div>
-						<Link
-							to={`/dashboard/reports/${props.report.id}/edit`}
-							className={props.role !== 'admin' ? 'disabled-link' : ''}
-						>
-							<Button className={props.role !== 'admin' ? 'disabled-link' : ''}>
-								Edit{' '}
-							</Button>
-						</Link>
-					</div>
-					<div>
-						<Button
-							onClick={() => props.archiveReport(props.report.id)}
-							className={props.role !== 'admin' ? 'disabled-link' : ''}
-						>
-							Archive
-						</Button>
-					</div>
-				</div> */}
 			</div>
 		</Card>
 	);

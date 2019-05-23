@@ -9,6 +9,9 @@ import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 import './reports.css';
 
+// Container for all reports including title
+// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
+
 const Reports = props => {
 	// filter only the active reports
 	const activeReports = props.reports.filter(report => report.active);
