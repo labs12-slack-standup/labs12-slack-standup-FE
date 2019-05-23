@@ -108,9 +108,11 @@ const SingleReport = props => {
 					</div>
 					<div className="reports-card-flex whitespace">
 						<div className="reports-card-flex-icon">
-							<Icon>alarm</Icon>
+							<Icon style={{ color: '#5475EE' }}>alarm</Icon>
 						</div>
-						<div className="reports-card-time">{timeStr}</div>
+						<div className="reports-card-time" style={{ color: '#000' }}>
+							{timeStr}
+						</div>
 					</div>
 				</Link>
 			</div>

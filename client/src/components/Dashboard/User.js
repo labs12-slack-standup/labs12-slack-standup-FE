@@ -17,7 +17,11 @@ const User = props => {
 				<h4>{props.user.fullName}</h4>
 				<Button
 					variant="outlined"
-					id={token.roles === 'admin' ? 'activateButton' : 'display-button'}
+					id={
+						token.roles === 'member' || token.subject === props.user.id
+							? 'display-button'
+							: 'activateButton'
+					}
 					onClick={() => props.deactivateUser(props.user.id)}
 					style={{ padding: '0 8px', marginTop: '4px' }}
 				>

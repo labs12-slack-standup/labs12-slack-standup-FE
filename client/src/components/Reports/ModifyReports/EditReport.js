@@ -26,7 +26,7 @@ class EditReport extends Component {
 		// Main Report State
 		reportName: '',
 		schedule: [],
-		scheduleTime: new Date('2000-01-01T18:00:00'),
+		scheduleTime: '',
 		timePickDate: new Date('2000-01-01T18:00:00'),
 		message: '',
 		questions: [],
@@ -44,6 +44,143 @@ class EditReport extends Component {
 			'Sunday'
 		]
 	};
+
+	componentDidMount() {
+		this.fetchSlackChannels();
+		const endpoint = `${baseURL}/reports/${this.props.match.params.reportId}`;
+		axiosWithAuth()
+			.get(endpoint)
+			.then(res => {
+				const {
+					reportName,
+					schedule,
+					scheduleTime,
+					message,
+					questions,
+					slackChannelId
+				} = res.data.report;
+				this.setState({
+					reportName,
+					schedule,
+					scheduleTime,
+					timePickDate: new Date(`2000-01-01T${scheduleTime}`),
+					message,
+					questions,
+					slackChannelId
+				});
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
+
+	changeHandler = e => {
+		this.setState({
+			[e.target.name]: e.target.value
+		});
+	};
+
+	timeChangeHandler = date => {
+		const hours = getHours(date);
+		const min = getMinutes(date);
+		const militaryTime = `${hours}:${min}`;
+
+		this.setState({
+			scheduleTime: militaryTime,
+			timePickDate: date
+		});
+	};
+
+	fetchSlackChannels = () => {
+		const endpoint = `${baseURL}/slack/channels`;
+		axiosWithAuth()
+			.get(endpoint)
+			.then(res => {
+				this.setState({
+					channels: res.data
+				});
+			})
+			.catch(err => console.log(err));
+	};
+
+	enterQuestionsHandler = e => {
+		e.preventDefault();
+		const code = e.keyCode || e.which;
+		if (code === 13) {
+			this.setState(prevState => ({
+				questions: [...prevState.questions, this.state.question],
+				question: ''
+			}));
+		} else {
+			this.setState({
+				[e.target.name]: e.target.value
+			});
+		}
+	};
+
+	questionsHandler = e => {
+		e.preventDefault();
+		this.setState(prevState => ({
+			questions: [...prevState.questions, this.state.question],
+			question: ''
+		}));
+	};
+
+	removeQuestion = (e, question) => {
+		e.preventDefault();
+		this.setState(prevState => ({
+			questions: prevState.questions.filter(q => q !== question)
+		}));
+	};
+
+	updateSchedule = day => {
+		const { schedule } = this.state;
+		const includes = schedule.includes(day);
+		this.setState({
+			schedule: includes ? schedule.filter(d => d !== day) : [...schedule, day]
+		});
+	};
+
+	selectWeekdays = () => {
+		this.setState({
+			schedule: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+		});
+	};
+
+	updateReport = e => {
+		e.preventDefault();
+		let slackChannelName;
+		this.state.channels.forEach(channel => {
+			if (channel.id === this.state.slackChannelId)
+				slackChannelName = channel.name;
+		});
+		const {
+			reportName,
+			schedule,
+			scheduleTime,
+			message,
+			questions,
+			slackChannelId
+		} = this.state;
+		const report = {
+			reportName,
+			schedule: JSON.stringify(schedule),
+			scheduleTime,
+			message,
+			questions: JSON.stringify(questions),
+			slackChannelId,
+			slackChannelName
+		};
+		const endpoint = `${baseURL}/reports/${this.props.match.params.reportId}`;
+		axiosWithAuth()
+			.put(endpoint, report)
+			.then(res => {
+				this.props.setResponseAsState(res.data);
+				this.props.history.push('/dashboard');
+			})
+			.catch(err => console.log(err));
+	};
+
 	render() {
 		return (
 			<div className="create-report">
@@ -136,7 +273,6 @@ class EditReport extends Component {
 							<p>Time</p>
 							<section>
 								<TimePicker
-									// label="Schedule Time"
 									name="scheduleTime"
 									value={this.state.timePickDate}
 									minutesStep={30}
@@ -203,34 +339,6 @@ class EditReport extends Component {
 				</form>
 			</div>
 		);
-	}
-
-	componentDidMount() {
-		this.fetchSlackChannels();
-		const endpoint = `${baseURL}/reports/${this.props.match.params.reportId}`;
-		axiosWithAuth()
-			.get(endpoint)
-			.then(res => {
-				const {
-					reportName,
-					schedule,
-					scheduleTime,
-					message,
-					questions,
-					slackChannelId
-				} = res.data.report;
-				this.setState({
-					reportName,
-					schedule,
-					scheduleTime,
-					message,
-					questions,
-					slackChannelId
-				});
-			})
-			.catch(err => {
-				console.log(err);
-			});
 	}
 
 	changeHandler = e => {
