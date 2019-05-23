@@ -35,21 +35,6 @@ const InviteUser = props => {
 					Invite
 				</Button>
 			</form>
-			{/* {props.message.includes('issue') && (
-				<div className="errorModal">
-					<Card raised={true} className="errorCard onboardingCard">
-						<div className="errorCard-content">
-							<div className="email-failure">
-								<h4>Oops . . .</h4>
-								<Button onClick={props.clearMessage}>
-									<Icon>cancel</Icon>
-								</Button>
-							</div>
-							<h6>{props.message}</h6>
-						</div>
-					</Card>
-				</div>
-			)} */}
 			<Dialog
 				open={props.modal}
 				TransitionComponent={Transition}
