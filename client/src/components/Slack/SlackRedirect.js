@@ -51,7 +51,7 @@ class SlackRedirect extends Component {
       .then(res => {
         localStorage.setItem('token', res.data.token)
         console.log(this.props.history)
-        this.props.history.goBack();
+        this.props.history.push('/dashboard');
       })
       .catch(err => {
         this.setState({ error: err.response.data.message });
