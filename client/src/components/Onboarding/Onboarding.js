@@ -86,7 +86,7 @@ class Onboarding extends Component {
 		} catch (error) {
 			this.setState({
 				error:
-					'There was an issue sending the emails, please be sure to enter valid email addresses. Alternatively, you can pass the join code to your teammates manually.',
+					'There was an issue sending the emails, please be sure to enter valid email addresses. Alternatively, you can pass the join code to your teammates manually. It can be found on your profile.',
 				errorModal: true
 			});
 		}
@@ -104,7 +104,7 @@ class Onboarding extends Component {
 			this.props.history.push('/dashboard');
 		} catch (err) {
 			this.setState({
-				error: 'There was an issue joining this team. Check your join code',
+				error: 'There was an issue joining this team. Check your join code.',
 				errorModal: true
 			});
 		}

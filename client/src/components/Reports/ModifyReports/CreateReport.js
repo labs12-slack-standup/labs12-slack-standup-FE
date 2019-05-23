@@ -5,8 +5,6 @@ import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import { getHours } from 'date-fns';
 import { getMinutes } from 'date-fns/esm';
 
-import Slack from '../../Slack/Slack';
-
 // style imports
 import {
 	Card,
@@ -26,7 +24,6 @@ import './Report.css';
 
 // this component does what it says - admin can create a new report
 // Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
-
 
 class CreateReport extends Component {
 	state = {
@@ -52,6 +49,7 @@ class CreateReport extends Component {
 			'Sunday'
 		]
 	};
+
 	render() {
 		return (
 			<div className="create-report">
@@ -63,24 +61,39 @@ class CreateReport extends Component {
 						<section className="schedule-card-content">
 							<h3 className="schedule-title">Report Information</h3>
 							<Divider className="divider" variant="fullWidth" />
-
+							<FormControl className="report-name report-margin" required>
+								<InputLabel htmlFor="report-name">Report Name</InputLabel>
+								<Input
+									id="report-name"
+									className="input-field"
+									required
+									type="text"
+									onChange={this.changeHandler}
+									name="reportName"
+									placeholder="Report Name"
+									value={this.state.reportName}
+								/>
+							</FormControl>
 							<section>
-								<FormControl className="report-name report-margin" required>
-									<InputLabel htmlFor="report-name">Report Name</InputLabel>
+								<FormControl className="input-field" required>
+									<InputLabel htmlFor="report-message">
+										Report Message
+									</InputLabel>
 									<Input
-										id="report-name"
-										className="input-field"
 										required
-										type="text"
+										className="input-field"
+										id="report-message"
+										type="textarea"
 										onChange={this.changeHandler}
-										name="reportName"
-										placeholder="Report Name"
-										value={this.state.reportName}
+										name="message"
+										placeholder="Message to be sent with each report"
+										value={this.state.message}
 									/>
 								</FormControl>
+							</section>
+							<section>
 								{this.state.channels.length > 0 ? (
 									<>
-										<p>Slack Channel</p>
 										<HTMLSelect
 											className="slack-dropdown"
 											name="slackChannelId"
@@ -98,24 +111,6 @@ class CreateReport extends Component {
 										</HTMLSelect>{' '}
 									</>
 								) : null}
-							</section>
-
-							<section>
-								<FormControl className="input-field" required>
-									<InputLabel htmlFor="report-message">
-										Report Message
-									</InputLabel>
-									<Input
-										required
-										className="input-field"
-										id="report-message"
-										type="textarea"
-										onChange={this.changeHandler}
-										name="message"
-										placeholder="Message to be sent with each report"
-										value={this.state.message}
-									/>
-								</FormControl>
 							</section>
 						</section>
 					</Card>
