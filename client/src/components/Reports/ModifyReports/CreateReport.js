@@ -16,7 +16,7 @@ import {
 	InputLabel,
 	FormControl,
 	Fab,
-	Icon,
+	Icon
 } from '@material-ui/core';
 import { HTMLSelect } from '@blueprintjs/core';
 import AddIcon from '@material-ui/icons/Add';
