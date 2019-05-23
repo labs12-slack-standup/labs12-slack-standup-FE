@@ -16,7 +16,6 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { TimePicker } from 'material-ui-pickers';
-import Slack from '../../Slack/Slack';
 import { getMinutes } from 'date-fns/esm';
 
 class CreateReport extends Component {

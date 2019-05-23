@@ -1,6 +1,5 @@
 import './profile.css';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
 // style imports
@@ -31,7 +30,7 @@ class Profile extends Component {
 	};
 	render() {
 		const inactiveUsers = this.state.users.filter(user => !user.active);
-		
+
 		return (
 			<div className="userCard">
 				<Card raised={true} className="top-user-card">
