@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 
 import SingleReport from './SingleReport';
@@ -7,6 +8,7 @@ import SingleReport from './SingleReport';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
+
 import './reports.css';
 
 // Container for all reports including title
@@ -30,6 +32,7 @@ const Reports = props => {
 							<AddIcon />
 						</Fab>
 					</Link>
+
 				</div>
 			</header>
 			<div>

@@ -21,10 +21,12 @@ import {
 import { HTMLSelect } from '@blueprintjs/core';
 import AddIcon from '@material-ui/icons/Add';
 import { TimePicker } from 'material-ui-pickers';
+
 import './Report.css';
 
 // this component does what it says - admin can create a new report
 // Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
+
 
 class CreateReport extends Component {
 	state = {
@@ -36,6 +38,7 @@ class CreateReport extends Component {
 		message: '',
 		questions: [],
 		slackChannelId: null,
+		slackAuthorized: false,
 		// Temporary State
 		channels: [],
 		question: '',
@@ -60,44 +63,43 @@ class CreateReport extends Component {
 						<section className="schedule-card-content">
 							<h3 className="schedule-title">Report Information</h3>
 							<Divider className="divider" variant="fullWidth" />
-							{this.state.channels.length < 1 ? (
-								<div>
-									<h3 style={{ textAlign: 'center' }}>
-										Authorize Slack to chose a channel for distribution:
-									</h3>
-									<Slack />
-								</div>
-							) : (
-								<section>
-									<p>Slack Channel</p>
-									<HTMLSelect
-										className="slack-dropdown"
-										name="slackChannelId"
-										onChange={this.changeHandler}
-										// label="Slack Channel for Distribution"
-									>
-										<option>Choose a Slack Channel for distribution...</option>
-										{this.state.channels.map(channel => (
-											<option key={channel.id} value={channel.id}>
-												{channel.name}
-											</option>
-										))}
-									</HTMLSelect>
-								</section>
-							)}
 
-							<FormControl className="report-name report-margin" required>
-								<InputLabel htmlFor="report-name">Report Name</InputLabel>
-								<Input
-									id="report-name"
-									className="input-field"
-									required
-									type="text"
-									onChange={this.changeHandler}
-									name="reportName"
-									value={this.state.reportName}
-								/>
-							</FormControl>
+							<section>
+								<FormControl className="report-name report-margin" required>
+									<InputLabel htmlFor="report-name">Report Name</InputLabel>
+									<Input
+										id="report-name"
+										className="input-field"
+										required
+										type="text"
+										onChange={this.changeHandler}
+										name="reportName"
+										placeholder="Report Name"
+										value={this.state.reportName}
+									/>
+								</FormControl>
+								{this.state.channels.length > 0 ? (
+									<>
+										<p>Slack Channel</p>
+										<HTMLSelect
+											className="slack-dropdown"
+											name="slackChannelId"
+											onChange={this.changeHandler}
+											label="Slack Channel for Distribution"
+										>
+											<option>
+												Choose a Slack Channel for distribution...
+											</option>
+											{this.state.channels.map(channel => (
+												<option key={channel.id} value={channel.id}>
+													{channel.name}
+												</option>
+											))}
+										</HTMLSelect>{' '}
+									</>
+								) : null}
+							</section>
+
 							<section>
 								<FormControl className="input-field" required>
 									<InputLabel htmlFor="report-message">
