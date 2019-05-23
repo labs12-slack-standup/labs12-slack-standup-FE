@@ -12,7 +12,7 @@ import './reports.css';
 const SingleReport = props => {
 	const week = [
 		'Monday',
-		'Tueday',
+		'Tuesday',
 		'Wednesday',
 		'Thursday',
 		'Friday',
