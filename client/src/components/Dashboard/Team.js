@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import jwt_decode from 'jwt-decode';
 import User from './User';
 
 class Team extends Component {
