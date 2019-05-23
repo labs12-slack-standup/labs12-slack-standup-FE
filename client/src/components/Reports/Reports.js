@@ -62,8 +62,8 @@ class Reports extends Component {
 	handleArchive = () => {
 		this.setState({
 			archiveModal: !this.state.archiveModal
-		});
-	};
+		})
+	}
 
 	render() {
 		//const { stepsEnabled, steps, initialStep } = this.state;
