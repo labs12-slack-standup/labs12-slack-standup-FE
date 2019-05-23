@@ -110,8 +110,8 @@ class Profile extends Component {
 					</div>
 				</Card>
 
-                {/* ADMIN VIEW STARTS HERE */}
-                
+				{/* ADMIN VIEW STARTS HERE */}
+
 				{this.state.profileInfo.roles === 'admin' ? (
 					<Card raised={true} className="top-user-card">
 						<div className="profileForms">

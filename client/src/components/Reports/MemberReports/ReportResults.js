@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import DatePicker from '../../DatePicker/DatePicker';
-import { Card, Elevation } from '@blueprintjs/core';
-import { Fab, Icon } from '@material-ui/core';
-
-import MemberResponseForm from './MemberResponseForm';
-import Responders from '../../Responders/Responders';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import jwt_decode from 'jwt-decode';
+
+// component imports
+import MemberResponseForm from './MemberResponseForm';
+import Responders from '../../Responders/Responders';
+import DatePicker from '../../DatePicker/DatePicker';
+
+// style imports
+import { Card, Elevation } from '@blueprintjs/core';
+import { Fab, Icon } from '@material-ui/core';
 import './ReportResults.css';
 
 class ReportResults extends Component {
