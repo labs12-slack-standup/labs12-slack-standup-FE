@@ -11,7 +11,10 @@ import {
 	InputLabel,
 	FormControl,
 	Fab,
-	Icon
+	Icon,
+	TextField,
+	MenuItem,
+	withStyles
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { TimePicker } from 'material-ui-pickers';
@@ -20,6 +23,21 @@ import { getMinutes } from 'date-fns/esm';
 
 // this edits reports - admin only
 // Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
+
+const styles = theme => ({
+	container: {
+		display: 'flex',
+		flexWrap: 'wrap'
+	},
+	textField: {
+		marginLeft: 0,
+		marginRight: theme.spacing.unit,
+		width: 200
+	},
+	menu: {
+		width: 200
+	}
+});
 
 class EditReport extends Component {
 	state = {
@@ -182,6 +200,8 @@ class EditReport extends Component {
 	};
 
 	render() {
+		const { classes } = this.props;
+
 		return (
 			<div className="create-report">
 				<Fab onClick={() => this.props.history.goBack()} color="default">
@@ -207,18 +227,29 @@ class EditReport extends Component {
 							{this.state.slackChannelId ? (
 								<div>
 									<p>Slack Channel</p>
-									<select
-										className="slack-dropdown"
+									<TextField
+										id="select-currency"
+										select
+										label="Select"
 										name="slackChannelId"
-										onChange={this.changeHandler}
+										className={classes.textField}
 										value={this.state.slackChannelId}
+										onChange={this.changeHandler}
+										required
+										SelectProps={{
+											MenuProps: {
+												className: classes.menu
+											}
+										}}
+										helperText="Please select your slack channel"
+										margin="normal"
 									>
 										{this.state.channels.map(channel => (
-											<option key={channel.id} value={channel.id}>
+											<MenuItem key={channel.id} value={channel.id}>
 												{channel.name}
-											</option>
+											</MenuItem>
 										))}
-									</select>
+									</TextField>
 								</div>
 							) : null}
 						</section>
@@ -449,4 +480,4 @@ class EditReport extends Component {
 	};
 }
 
-export default EditReport;
+export default withStyles(styles)(EditReport);
