@@ -54,15 +54,6 @@ class CreateTeam extends Component {
 
 					<Button onClick={() => this.props.clearError()}>x</Button>
 				</Dialog>
-				{/* {this.props.error.length > 0 && (
-				<div className="errorModal">
-					<Card className="errorCard onboardingCard" raised={true}>
-						<button onClick={this.props.clearError}>x</button>
-						<h4>Oops . . .</h4>
-						<div>{this.props.error}</div>
-					</Card>
-				</div>
-			)} */}
 				<div className="create-team-buttons">
 					<Fab
 						onClick={this.props.toggleAllOff}

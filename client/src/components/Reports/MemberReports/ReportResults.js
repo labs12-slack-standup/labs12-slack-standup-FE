@@ -134,7 +134,6 @@ class ReportResults extends Component {
 
 	componentDidMount() {
 		const userId = jwt_decode(localStorage.getItem('token')).subject;
-		console.log('userid', userId);
 		axiosWithAuth()
 			.get(`${baseURL}/responses/${this.props.match.params.reportId}`)
 			.then(res => {
@@ -158,7 +157,6 @@ class ReportResults extends Component {
 					filteredResponse: filtered,
 					responders
 				});
-				console.log('responses', this.state.responses);
 			})
 			.catch(err => console.log(err));
 	}

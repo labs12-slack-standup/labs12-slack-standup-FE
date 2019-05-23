@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 
 // this component handles the response inputs for individual questions
 // when a user is filling in a report
+// parent component = MemberResponseForm.js
 
 const ReportInput = props => {
 	return (

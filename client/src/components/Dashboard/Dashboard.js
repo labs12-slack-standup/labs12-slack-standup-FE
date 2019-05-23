@@ -1,14 +1,16 @@
-import './dashboard.css';
 import React, { Component } from 'react';
-import jwt_decode from 'jwt-decode';
-import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
+import jwt_decode from 'jwt-decode';
+
+// component imports
+import Team from './Team';
 import InviteUser from './InviteUser';
-import { Spinner, Intent } from '@blueprintjs/core';
-import Typography from '@material-ui/core/Typography';
-import { Card } from '@material-ui/core';
 import Slack from '../Slack/Slack';
 
+// style imports
+import { Spinner, Intent } from '@blueprintjs/core';
+import { Card, Typography } from '@material-ui/core';
+import './dashboard.css';
 export class Dashboard extends Component {
 	state = {
 		users: [],

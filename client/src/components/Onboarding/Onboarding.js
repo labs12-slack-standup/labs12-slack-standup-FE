@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import './onboarding.css';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
+
+// component imports
 import CreateTeam from './CreateTeam';
 import LandingPage from './LandingPage';
 import JoinTeam from './JoinTeam';
-import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
+// style imports
+import './onboarding.css';
 class Onboarding extends Component {
 	constructor(props) {
 		super(props);
@@ -64,7 +67,6 @@ class Onboarding extends Component {
 			email: this.state.emails,
 			joinCode: joinCode
 		};
-		console.log('mailObject', mailObject);
 
 		try {
 			const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
@@ -82,7 +84,6 @@ class Onboarding extends Component {
 			//redirect back to dashboard after team creation
 			this.props.history.push('/dashboard');
 		} catch (error) {
-			console.log(error);
 			this.setState({
 				error:
 					'There was an issue sending the emails, please be sure to enter valid email addresses. Alternatively, you can pass the join code to your teammates manually.',
@@ -95,7 +96,6 @@ class Onboarding extends Component {
 	// Sets the user's teamId to match the manager's
 	// Also gives user new token
 	submitHandler = async e => {
-		console.log(this.state.joinCode);
 		try {
 			const newToken = await axiosWithAuth().get(
 				`${baseURL}/users/joinCode/${this.state.joinCode}`
@@ -103,7 +103,6 @@ class Onboarding extends Component {
 			localStorage.setItem('token', newToken.data.updatedToken);
 			this.props.history.push('/dashboard');
 		} catch (err) {
-			console.log(err);
 			this.setState({
 				error: 'There was an issue joining this team. Check your join code',
 				errorModal: true
