@@ -242,7 +242,7 @@ class CreateReport extends Component {
 								</FormControl>
 							</section>
 							<section>
-								{this.state.slackChannelId ? (
+								{this.state.channels.length > 0 ? (
 									<div>
 										<p>Slack Channel</p>
 										<TextField

@@ -224,7 +224,7 @@ class EditReport extends Component {
 									value={this.state.reportName}
 								/>
 							</FormControl>
-							{this.state.slackChannelId ? (
+							{this.state.channels.length > 0 ? (
 								<div>
 									<p>Slack Channel</p>
 									<TextField
