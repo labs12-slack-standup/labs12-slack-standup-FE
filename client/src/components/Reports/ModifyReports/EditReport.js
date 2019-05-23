@@ -22,7 +22,7 @@ class EditReport extends Component {
 		// Main Report State
 		reportName: '',
 		schedule: [],
-		scheduleTime: new Date('2000-01-01T18:00:00'),
+		scheduleTime: '',
 		timePickDate: new Date('2000-01-01T18:00:00'),
 		message: '',
 		questions: [],
@@ -59,6 +59,7 @@ class EditReport extends Component {
 					reportName,
 					schedule,
 					scheduleTime,
+					timePickDate: new Date(`2000-01-01T${scheduleTime}`),
 					message,
 					questions,
 					slackChannelId
@@ -177,6 +178,8 @@ class EditReport extends Component {
 	};
 
 	render() {
+		console.log(`2000-01-01T${this.state.scheduleTime}`);
+		console.log(new Date(`2000-01-01T${this.state.scheduleTime}`));
 		return (
 			<div className="create-report">
 				<Fab onClick={() => this.props.history.goBack()} color="default">
@@ -269,7 +272,6 @@ class EditReport extends Component {
 							<p>Time</p>
 							<section>
 								<TimePicker
-									// label="Schedule Time"
 									name="scheduleTime"
 									value={this.state.timePickDate}
 									minutesStep={30}

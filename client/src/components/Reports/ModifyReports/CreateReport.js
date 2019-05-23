@@ -21,11 +21,12 @@ import { getMinutes } from 'date-fns/esm';
 class CreateReport extends Component {
 	state = {
 		// Main Report State
-		reportName: '',
+		reportName: 'Daily Standup',
 		schedule: [],
 		scheduleTime: '8:0',
 		timePickDate: new Date('2000-01-01T08:00:00'),
-		message: '',
+		message: 'Please fill out your report by the end of the day!',
+		errorMessage: '',
 		questions: [],
 		slackChannelId: null,
 		// Temporary State
@@ -123,6 +124,21 @@ class CreateReport extends Component {
 
 	addReport = e => {
 		e.preventDefault();
+
+		if (this.state.reportName.length < 1) {
+			this.setState({
+				errorMessage: 'Please enter your report name in the respective field'
+			});
+			return this.state.message;
+		}
+
+		if (this.state.schedule.length < 1) {
+			this.setState({
+				errorMessage: 'Please choose at least one day two send out your report'
+			});
+			return this.state.message;
+		}
+
 		let slackChannelName;
 		this.state.channels.forEach(channel => {
 			if (channel.id === this.state.slackChannelId)
@@ -316,6 +332,7 @@ class CreateReport extends Component {
 						style={{ display: 'block', marginTop: '30px' }}
 						variant="contained"
 						color="primary"
+						type="submit"
 						onClick={this.addReport}
 						disabled={this.state.questions.length === 0 ? true : false}
 					>

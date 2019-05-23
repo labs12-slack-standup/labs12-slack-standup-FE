@@ -9,7 +9,6 @@ import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import jwt_decode from 'jwt-decode';
 import './ReportResults.css';
 
-
 class ReportResults extends Component {
 	state = {
 		responses: [],
@@ -88,8 +87,8 @@ class ReportResults extends Component {
 											.replace(',', '')}
 									</h3>
 									{batch.responses.map(response => (
-										<Card>
-											<div key={response.userId} className="response-container">
+										<Card key={response.userId}>
+											<div className="response-container">
 												<img
 													className="response-container-image"
 													src={response.profilePic}
@@ -125,7 +124,7 @@ class ReportResults extends Component {
 
 	componentDidMount() {
 		const userId = jwt_decode(localStorage.getItem('token')).subject;
-		console.log('userid', userId);
+
 		axiosWithAuth()
 			.get(`${baseURL}/responses/${this.props.match.params.reportId}`)
 			.then(res => {
@@ -166,7 +165,7 @@ class ReportResults extends Component {
 			.catch(err => {
 				console.log(err);
 			});
-	}
+	};
 
 	updateWithUserResponse = res => {
 		this.setState({ responses: res.data, completed: true });

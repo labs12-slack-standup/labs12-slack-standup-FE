@@ -7,7 +7,6 @@ import parseISO from 'date-fns/parseISO';
 
 const DayPickerComp = props => (
 	<div className="report-results-date-picker">
-		{console.log('clickedDate', props.clickedDate)}
 		<DayPickerSingleDateController
 			numberOfMonths={1}
 			noBorder={true}
