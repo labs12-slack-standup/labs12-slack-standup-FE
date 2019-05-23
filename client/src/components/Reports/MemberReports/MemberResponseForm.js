@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import ReportInput from './ReportInput';
-import Button from '@material-ui/core/Button';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
+
+import ReportInput from './ReportInput';
+
+// style imports
+import Button from '@material-ui/core/Button';
 import './MemberResponseForm.css';
 
 class MemberResponseForm extends Component {

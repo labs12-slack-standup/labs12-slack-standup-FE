@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
 import jwt_decode from 'jwt-decode';
 
+import { Button } from '@material-ui/core';
 import './dashboard.css';
 
 const User = props => {

@@ -1,14 +1,16 @@
-import './dashboard.css';
 import React, { Component } from 'react';
-import jwt_decode from 'jwt-decode';
-import Team from './Team';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
+import jwt_decode from 'jwt-decode';
+
+// component imports
+import Team from './Team';
 import InviteUser from './InviteUser';
-import { Spinner, Intent } from '@blueprintjs/core';
-import Typography from '@material-ui/core/Typography';
-import { Card } from '@material-ui/core';
 import Slack from '../Slack/Slack';
 
+// style imports
+import { Spinner, Intent } from '@blueprintjs/core';
+import { Card, Typography } from '@material-ui/core';
+import './dashboard.css';
 export class Dashboard extends Component {
 	state = {
 		users: [],
@@ -16,11 +18,39 @@ export class Dashboard extends Component {
 		joinCode: '',
 		isLoading: true,
 		message: '',
-		active: true
+		active: true,
+		modal: false
 	};
+	render() {
+		if (this.state.isLoading) {
+			return <Spinner intent={Intent.PRIMARY} />;
+		}
+		return (
+			<Card raised={true} className="teamDashboard">
+				<header className="teamDashboard-header">
+					<Typography variant="h3">Your Team</Typography>
+				</header>
+				<Team
+					className="teamContainer"
+					users={this.state.users}
+					updateUser={this.updateUser}
+					activateUser={this.activateUser}
+					deactivateUser={this.deactivateUser}
+				/>
+				<InviteUser
+					changeHandler={this.changeHandler}
+					addUser={this.addUser}
+					message={this.state.message}
+					clearMessage={this.clearMessage}
+					modal={this.state.modal}
+				/>
+				<Slack />
+			</Card>
+		);
+	}
 
 	componentDidMount() {
-		//get user's joinCode from token and setState accordingly. Necessary to invite new team members.
+		// get user's joinCode from token and setState accordingly. Necessary to invite new team members.
 		const joinCode = jwt_decode(localStorage.getItem('token')).joinCode;
 
 		this.setState({
@@ -105,18 +135,18 @@ export class Dashboard extends Component {
 		//sendgrid endpoint on our back end
 		const endpoint = `${baseURL}/email`;
 
-		//figure out how to display res in UI so admin knows email has been sent successfully
 		axiosWithAuth()
 			.post(endpoint, mailObject)
 			.then(res => {
 				console.log(res);
-				this.setState({ message: 'Email sent!' });
+				this.setState({ message: 'Email sent!', modal: true });
 			})
 			.catch(err => {
 				console.log(err);
 				this.setState({
 					message:
-						'There was an issue sending the email, please email your new team member manually.'
+						'There was an issue sending the email, please email your new team member manually.',
+					modal: true
 				});
 			});
 	};
@@ -125,35 +155,8 @@ export class Dashboard extends Component {
 		this.setState({ newMemberEmail: e.target.value });
 	};
 	clearMessage = () => {
-		this.setState({ message: '' });
+		this.setState({ message: '', modal: false });
 	};
-
-	render() {
-		if (this.state.isLoading) {
-			return <Spinner intent={Intent.PRIMARY} />;
-		}
-		return (
-			<Card raised={true} className="teamDashboard">
-				<header className="teamDashboard-header">
-					<Typography variant="h3">Your Team</Typography>
-				</header>
-				<Team
-					className="teamContainer"
-					users={this.state.users}
-					updateUser={this.updateUser}
-					activateUser={this.activateUser}
-					deactivateUser={this.deactivateUser}
-				/>
-				<InviteUser
-					changeHandler={this.changeHandler}
-					addUser={this.addUser}
-					message={this.state.message}
-					clearMessage={this.clearMessage}
-				/>
-				<Slack />
-			</Card>
-		);
-	}
 }
 
 export default Dashboard;

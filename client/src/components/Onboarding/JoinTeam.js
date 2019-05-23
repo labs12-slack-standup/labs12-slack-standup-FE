@@ -7,11 +7,18 @@ import {
 	InputLabel,
 	FormControl,
 	Fab,
-	Icon
+	Icon,
+	Dialog,
+	DialogTitle,
+	Slide
 } from '@material-ui/core';
 import blue from '@material-ui/core/colors/blue';
 
 import './onboarding.css';
+
+function Transition(props) {
+	return <Slide direction="up" {...props} />;
+}
 
 const JoinTeam = props => {
 	return (
@@ -61,15 +68,17 @@ const JoinTeam = props => {
 					Create Team
 				</Button>
 			</div>
-			{props.error.length > 0 && (
-				<div className="errorModal">
-					<Card raised={true} className="errorJoinCard onboardingCard">
-						<button onClick={props.clearError}>X</button>
-						<h3>Oops...</h3>
-						<div>{props.error}</div>
-					</Card>
-				</div>
-			)}
+			<Dialog
+				open={props.errorModal}
+				TransitionComponent={Transition}
+				keepMounted
+				onClose={props.clearError}
+				aria-labelledby="alert-dialog-slide-title"
+				aria-describedby="alert-dialog-slide-description"
+			>
+				<DialogTitle id="alert-dialog-slide-title">{props.error}</DialogTitle>
+				<Button onClick={() => props.clearError()}>x</Button>
+			</Dialog>
 		</div>
 	);
 };

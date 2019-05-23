@@ -1,8 +1,9 @@
-import './account.css';
+import './profile.css';
 import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
-import { Collapse } from '@blueprintjs/core';
 
+// style imports
+import { Collapse } from '@blueprintjs/core';
 import {
 	Card,
 	Button,
@@ -12,134 +13,21 @@ import {
 	FormControl
 } from '@material-ui/core';
 
-class Account extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			accountInfo: [],
-			users: [],
-			newName: '',
-			newPic: '',
-			achivedReports: [],
-			openAchivedReports: false,
-			openEditUser: false,
-			showJoinCode: false,
-			openInactiveUsers: false
-		};
-	}
+// this is the whole profile page (dashboard/profile)
+// admin and memeber views are different
 
-	componentDidMount() {
-		const endpoint = `${baseURL}/users/byuser`;
-		axiosWithAuth()
-			.get(endpoint)
-			.then(res =>
-				this.setState({
-					accountInfo: res.data.user
-				})
-			)
-			.catch(err => console.log(err));
-
-		axiosWithAuth()
-			.get(`${baseURL}/users/team`)
-			.then(res => {
-				this.setState({ users: res.data.users });
-			})
-			.catch(err => console.log(err));
-	}
-	viewAchivedReports = () => {
-		const endpoint = `${baseURL}/reports`;
-		axiosWithAuth()
-			.get(endpoint)
-			.then(res =>
-				this.setState({
-					achivedReports: res.data.reports,
-					openAchivedReports: !this.state.openAchivedReports
-				})
-			)
-			.catch(err => console.log(err));
+class Profile extends Component {
+	state = {
+		profileInfo: [],
+		users: [],
+		newName: '',
+		newPic: '',
+		achivedReports: [],
+		openAchivedReports: false,
+		openEditUser: false,
+		showJoinCode: false,
+		openInactiveUsers: false
 	};
-	reactivateReport = id => {
-		const editedReport = {
-			active: true
-		};
-
-		console.log(editedReport);
-		const endpoint = `${baseURL}/reports/${id}`;
-		axiosWithAuth()
-			.put(endpoint, editedReport)
-			.then(res => console.log(res))
-			.catch(err => console.log(err));
-		this.props.history.push('/dashboard');
-	};
-
-	updateUser = e => {
-		e.preventDefault();
-		const endpoint = `${baseURL}/users/`;
-		const editedUser = {};
-		if (this.state.newName) {
-			editedUser.fullName = this.state.newName;
-			this.setState({
-				accountInfo: {
-					...this.state.accountInfo,
-					fullName: editedUser.fullName
-				}
-			});
-		}
-		if (this.state.newPic) {
-			editedUser.profilePic = this.state.newPic;
-			this.setState({
-				accountInfo: {
-					...this.state.accountInfo,
-					profilePic: editedUser.profilePic
-				}
-			});
-		}
-		console.log(editedUser);
-		axiosWithAuth()
-			.put(endpoint, editedUser)
-			.then(res => {
-				console.log(res);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-	};
-
-	changeHandler = e => {
-		this.setState({ [e.target.name]: e.target.value });
-	};
-	openUserEdit = () => {
-		this.setState({ openEditUser: !this.state.openEditUser });
-	};
-	showJoinCode = () => {
-		this.setState({ showJoinCode: !this.state.showJoinCode });
-	};
-
-	viewInactiveUsers = () => {
-		this.setState({ openInactiveUsers: !this.state.openInactiveUsers });
-	};
-
-	activateUser = id => {
-		const endpoint = `${baseURL}/users/${id}`;
-		const editedUser = {
-			active: true
-		};
-		//create an array with everyone but the user the function's been called on
-		const newUsers = this.state.users.filter(user => user.id !== id);
-
-		axiosWithAuth()
-			.put(endpoint, editedUser)
-			.then(res => {
-				newUsers.push(res.data.editedUser);
-				this.setState({
-					users: newUsers
-				});
-			})
-			.catch(err => {
-				console.log(err);
-			});
-	};
-
 	render() {
 		const inactiveReports = this.state.achivedReports.filter(
 			report => !report.active
@@ -151,12 +39,12 @@ class Account extends Component {
 				<Card raised={true} className="top-user-card">
 					<div className="userCard-content">
 						<div className="profileCard-content">
-							<h3>{this.state.accountInfo.fullName}</h3>
+							<h3>{this.state.profileInfo.fullName}</h3>
 							<TextField
 								InputLabelProps={{ shrink: true }}
 								className="email-field"
 								label="Email"
-								placeholder={this.state.accountInfo.email}
+								placeholder={this.state.profileInfo.email}
 								margin="normal"
 								variant="outlined"
 								color="primary"
@@ -216,14 +104,17 @@ class Account extends Component {
 							</div>
 						</div>
 						<img
-							src={this.state.accountInfo.profilePic}
+							src={this.state.profileInfo.profilePic}
 							alt="a headshot, preferably"
 						/>
 					</div>
 				</Card>
-				{this.state.accountInfo.roles === 'admin' ? (
+
+				{/* ADMIN VIEW STARTS HERE */}
+
+				{this.state.profileInfo.roles === 'admin' ? (
 					<Card raised={true} className="top-user-card">
-						<div className="accountForms">
+						<div className="profileForms">
 							<h3>Admin Controls</h3>
 							<div className="admin-controls">
 								<div className="join-code">
@@ -240,7 +131,7 @@ class Account extends Component {
 										<TextField
 											style={{ maxWidth: '105px' }}
 											label="Join Code"
-											value={this.state.accountInfo.joinCode}
+											value={this.state.profileInfo.joinCode}
 											margin="normal"
 											variant="outlined"
 											disabled
@@ -253,7 +144,7 @@ class Account extends Component {
 										variant="outlined"
 										color="primary"
 										className={
-											this.state.accountInfo.roles === 'admin'
+											this.state.profileInfo.roles === 'admin'
 												? 'activateButton'
 												: 'display-button'
 										}
@@ -280,7 +171,7 @@ class Account extends Component {
 															<Button
 																variant="outlined"
 																className={
-																	this.state.accountInfo.roles === 'admin'
+																	this.state.profileInfo.roles === 'admin'
 																		? 'activateButton'
 																		: 'display-button'
 																}
@@ -302,7 +193,7 @@ class Account extends Component {
 									<Button
 										style={{ margin: '10px 0' }}
 										className={
-											this.state.accountInfo.roles === 'admin'
+											this.state.profileInfo.roles === 'admin'
 												? 'activateButton'
 												: 'display-button'
 										}
@@ -345,6 +236,118 @@ class Account extends Component {
 			</div>
 		);
 	}
+
+	componentDidMount() {
+		const endpoint = `${baseURL}/users/byuser`;
+		axiosWithAuth()
+			.get(endpoint)
+			.then(res =>
+				this.setState({
+					profileInfo: res.data.user
+				})
+			)
+			.catch(err => console.log(err));
+
+		axiosWithAuth()
+			.get(`${baseURL}/users/team`)
+			.then(res => {
+				this.setState({ users: res.data.users });
+			})
+			.catch(err => console.log(err));
+	}
+	viewAchivedReports = () => {
+		const endpoint = `${baseURL}/reports`;
+		axiosWithAuth()
+			.get(endpoint)
+			.then(res =>
+				this.setState({
+					achivedReports: res.data.reports,
+					openAchivedReports: !this.state.openAchivedReports
+				})
+			)
+			.catch(err => console.log(err));
+	};
+	reactivateReport = id => {
+		const editedReport = {
+			active: true
+		};
+
+		console.log(editedReport);
+		const endpoint = `${baseURL}/reports/${id}`;
+		axiosWithAuth()
+			.put(endpoint, editedReport)
+			.then(res => console.log(res))
+			.catch(err => console.log(err));
+		this.props.history.push('/dashboard');
+	};
+
+	updateUser = e => {
+		e.preventDefault();
+		const endpoint = `${baseURL}/users/`;
+		const editedUser = {};
+		if (this.state.newName) {
+			editedUser.fullName = this.state.newName;
+			this.setState({
+				profileInfo: {
+					...this.state.profileInfo,
+					fullName: editedUser.fullName
+				}
+			});
+		}
+		if (this.state.newPic) {
+			editedUser.profilePic = this.state.newPic;
+			this.setState({
+				profileInfo: {
+					...this.state.profileInfo,
+					profilePic: editedUser.profilePic
+				}
+			});
+		}
+		console.log(editedUser);
+		axiosWithAuth()
+			.put(endpoint, editedUser)
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	};
+
+	changeHandler = e => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
+	openUserEdit = () => {
+		this.setState({ openEditUser: !this.state.openEditUser });
+	};
+	showJoinCode = () => {
+		this.setState({ showJoinCode: !this.state.showJoinCode });
+	};
+
+	viewInactiveUsers = () => {
+		this.setState({ openInactiveUsers: !this.state.openInactiveUsers });
+	};
+
+	activateUser = id => {
+		const endpoint = `${baseURL}/users/${id}`;
+		const editedUser = {
+			active: true
+		};
+		//create an array with everyone but the user the function's been called on
+		const newUsers = this.state.users.filter(user => user.id !== id);
+
+		axiosWithAuth()
+			.put(endpoint, editedUser)
+			.then(res => {
+				newUsers.push(res.data.editedUser);
+				this.setState({
+					users: newUsers
+				});
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	};
 }
 
-export default Account;
+export default Profile;

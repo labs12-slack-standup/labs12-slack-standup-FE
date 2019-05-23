@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+// style imports
 import { Card, Fab } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
-
 import './reports.css';
+
+// this component displays a single report as a card on /dashboard
+// parent component = Reports.js
 
 const SingleReport = props => {
 	const week = [
@@ -16,6 +20,7 @@ const SingleReport = props => {
 		'Sunday'
 	];
 
+	// time refactor for api call
 	const time = props.report.scheduleTime.split(':');
 	let timeStr = `${time[0]}:${time[1]}am`;
 	if (time[0] > 12) {
@@ -23,7 +28,7 @@ const SingleReport = props => {
 	}
 
 	return (
-		<Card raised={true} className="reportsCard" style={{ margin: '10px' }}>
+		<Card raised={true} className="reportsCard">
 			<div className="single-report-header">
 				<Link
 					to={`/dashboard/reports/${props.report.id}`}
@@ -31,12 +36,17 @@ const SingleReport = props => {
 				>
 					<h1 className="reports-card-title">{props.report.reportName}</h1>
 				</Link>
-				<div className={props.role !== 'admin' ? 'display-link' : 'single-report-buttons'}>
+				<div className="single-report-buttons">
 					<Link
 						to={`/dashboard/reports/${props.report.id}/edit`}
 						className={props.role !== 'admin' ? 'disabled-link' : ''}
 					>
-						<Fab color="default" size="small" aria-label="Edit">
+						<Fab
+							color="default"
+							size="small"
+							aria-label="Edit"
+							className={props.role !== 'admin' ? 'disabled-link' : ''}
+						>
 							<Icon>edit_icon</Icon>
 						</Fab>
 					</Link>
@@ -45,6 +55,7 @@ const SingleReport = props => {
 						size="small"
 						aria-label="Delete"
 						onClick={() => props.archiveReport(props.report.id)}
+						className={props.role !== 'admin' ? 'disabled-link' : ''}
 					>
 						<Icon>delete_icon</Icon>
 					</Fab>
@@ -68,7 +79,7 @@ const SingleReport = props => {
 										props.report.schedule.includes(day) ? 'selected' : ''
 									}`}
 								>
-									 {/* if M/W/F, only show first letter, otherwise first 2 */}
+									{/* if M/W/F, only show first letter, otherwise first 2 */}
 									{idx === 0 || idx === 2 || idx === 4
 										? day.charAt(0)
 										: day.charAt(0) + day.charAt(1)}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const NewUserRoute = ({ component: Component, ...rest }) => {
 	return (
 		<Route
 			{...rest}
@@ -12,9 +12,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 					return <Redirect to="/login" />;
 				}
 				const decoded = jwt_decode(token);
-				
-				if (!decoded.teamId) {
-					return <Redirect to="/onboarding" />;
+				if (decoded.teamId) {
+					return <Redirect to="/dashboard" />;
 				}
 				return <Component {...props} />;
 			}}
@@ -22,4 +21,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 	);
 };
 
-export default PrivateRoute;
+export default NewUserRoute;

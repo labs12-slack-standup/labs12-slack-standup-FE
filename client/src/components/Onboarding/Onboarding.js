@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import './onboarding.css';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
+
+// component imports
 import CreateTeam from './CreateTeam';
 import LandingPage from './LandingPage';
 import JoinTeam from './JoinTeam';
-import jwt_decode from 'jwt-decode';
-import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
+// style imports
+import './onboarding.css';
 class Onboarding extends Component {
 	constructor(props) {
 		super(props);
@@ -16,7 +18,8 @@ class Onboarding extends Component {
 			singleEmail: '',
 			emails: [],
 			teamId: null,
-			error: ''
+			error: '',
+			errorModal: false
 		};
 	}
 
@@ -33,11 +36,13 @@ class Onboarding extends Component {
 		this.setState({ createToggle: false });
 		this.setState({ joinToggle: false });
 	};
-	// change handlers
+
+	// change handler
 	changeHandler = e => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
+	// called when a user clicks 'create team' button in CreateTeam.js
 	createTeam = async emails => {
 		const teamId = length => {
 			return Math.round(
@@ -62,7 +67,6 @@ class Onboarding extends Component {
 			email: this.state.emails,
 			joinCode: joinCode
 		};
-		console.log('mailObject', mailObject);
 
 		try {
 			const updated = await axiosWithAuth().put(`${baseURL}/users/`, {
@@ -80,21 +84,18 @@ class Onboarding extends Component {
 			//redirect back to dashboard after team creation
 			this.props.history.push('/dashboard');
 		} catch (error) {
-			console.log(error);
 			this.setState({
 				error:
-					'There was an issue with the emails, please be sure to separate each email with a comma. Alternatively, you can pass the join code to your teammates manually.'
+					'There was an issue sending the emails, please be sure to enter valid email addresses. Alternatively, you can pass the join code to your teammates manually.',
+				errorModal: true
 			});
 		}
-		// took this out because it was trying to update after the push to dashboard, but not sure why it was here in the first place so I haven't deleted it -- eek
-		// this.setState({ teamId: randId });
 	};
 
 	// On submit to join a team by join code
 	// Sets the user's teamId to match the manager's
 	// Also gives user new token
 	submitHandler = async e => {
-		console.log(this.state.joinCode);
 		try {
 			const newToken = await axiosWithAuth().get(
 				`${baseURL}/users/joinCode/${this.state.joinCode}`
@@ -102,25 +103,24 @@ class Onboarding extends Component {
 			localStorage.setItem('token', newToken.data.updatedToken);
 			this.props.history.push('/dashboard');
 		} catch (err) {
-			console.log(err);
 			this.setState({
-				error: 'There was an issue joining this team. Check your join code'
+				error: 'There was an issue joining this team. Check your join code',
+				errorModal: true
 			});
 		}
 	};
+
+	// If there was an error at any point while onboarding, exiting the error message will remove the error from state
 	clearError = () => {
-		this.setState({ error: '' });
-	};
-	// splits email string into array by commas and removes spaces
-	// separateEmails = () => {
-	// 	const teamEmails = this.state.singleEmail.replace(/\s+/g, '').split(',');
-	// 	this.setState({ emails: teamEmails });
-	// };
-	changeEmail = email => {
-		this.setState({ emails: email });
-		//this.separateEmails();
+		this.setState({ error: '', errorModal: false });
 	};
 
+	// Adds emails to state (in an array) from CreateTeam
+	changeEmail = email => {
+		this.setState({ emails: email });
+	};
+
+	// change handlers for email inputs
 	handleAddChip = () => {
 		this.setState({ emails: [...this.state.emails, this.state.singleEmail] });
 	};
@@ -130,11 +130,6 @@ class Onboarding extends Component {
 	};
 
 	render() {
-		const token = jwt_decode(localStorage.getItem('token'));
-		if (token.teamId) {
-			this.props.history.push('/dashboard');
-		}
-
 		// Landing Page - all booleans false
 		return !this.state.joinToggle && !this.state.createToggle ? (
 			<LandingPage
@@ -152,6 +147,7 @@ class Onboarding extends Component {
 				changeEmail={this.changeEmail}
 				error={this.state.error}
 				clearError={this.clearError}
+				errorModal={this.state.errorModal}
 				handleAddChip={this.handleAddChip}
 				handleChipChange={this.handleChipChange}
 			/>
@@ -163,6 +159,7 @@ class Onboarding extends Component {
 				changeHandler={this.changeHandler}
 				submitHandler={this.submitHandler}
 				error={this.state.error}
+				errorModal={this.state.errorModal}
 				clearError={this.clearError}
 			/>
 		);

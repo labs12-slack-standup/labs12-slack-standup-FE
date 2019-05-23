@@ -1,11 +1,15 @@
-import './view.css';
 import React, { Component } from 'react';
-import Dashboard from '../Dashboard/Dashboard';
-import ReportsDash from '../Dashboard/ReportsDash';
+import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
 import jwt_decode from 'jwt-decode';
 
-import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
+import Dashboard from '../Dashboard/Dashboard';
+import ReportsDash from '../Dashboard/ReportsDash';
 
+// style imports
+import './view.css';
+import { Card } from '@blueprintjs/core';
+
+// this is the container for ALL of '/dashboard'
 class View extends Component {
 	state = {
 		roles: 'member',
@@ -24,10 +28,11 @@ class View extends Component {
 				})
 			)
 			.catch(err => {
-				console.log(err.response.data)
+				console.log(err.response.data);
 			});
 	}
 	render() {
+		// If user's account is inactive, they cannot see the dashboard
 		return this.state.active ? (
 			<div className="view">
 				<Dashboard className="usersDash" role={this.state.roles} />
@@ -38,10 +43,10 @@ class View extends Component {
 				/>
 			</div>
 		) : (
-			<div>
-				Looks like your account has been deactivated. If you this this is an
+			<Card style={{ textAlign: 'center' }}>
+				Looks like your account has been deactivated. If you believe this is an
 				error, please contact your manager.
-			</div>
+			</Card>
 		);
 	}
 }

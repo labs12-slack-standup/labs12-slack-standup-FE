@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import DatePicker from '../../DatePicker/DatePicker';
-import { Card, Elevation } from '@blueprintjs/core';
-import { Fab, Icon } from '@material-ui/core';
-
-import MemberResponseForm from './MemberResponseForm';
-import Responders from '../../Responders/Responders';
 import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import jwt_decode from 'jwt-decode';
+
+// component imports
+import MemberResponseForm from './MemberResponseForm';
+import Responders from '../../Responders/Responders';
+import DatePicker from '../../DatePicker/DatePicker';
+
+// style imports
+import { Card, Elevation } from '@blueprintjs/core';
+import { Fab, Icon } from '@material-ui/core';
 import './ReportResults.css';
+
+// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
 
 class ReportResults extends Component {
 	state = {
@@ -46,7 +51,11 @@ class ReportResults extends Component {
 							<h3>Thank you for filling out this report!</h3>
 						</Card>
 					) : (
-						<Card interactive={false} elevation={Elevation.TWO}>
+						<Card
+							className="response-card"
+							interactive={false}
+							elevation={Elevation.TWO}
+						>
 							<MemberResponseForm
 								{...this.props}
 								updateWithUserResponse={this.updateWithUserResponse}
@@ -124,7 +133,6 @@ class ReportResults extends Component {
 
 	componentDidMount() {
 		const userId = jwt_decode(localStorage.getItem('token')).subject;
-
 		axiosWithAuth()
 			.get(`${baseURL}/responses/${this.props.match.params.reportId}`)
 			.then(res => {
