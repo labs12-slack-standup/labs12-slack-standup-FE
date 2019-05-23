@@ -69,6 +69,10 @@ class CreateReport extends Component {
 		});
 	};
 
+	componentDidMount() {
+		this.fetchSlackChannels();
+	}
+
 	fetchSlackChannels = () => {
 		const endpoint = `${baseURL}/slack/channels`;
 		axiosWithAuth()

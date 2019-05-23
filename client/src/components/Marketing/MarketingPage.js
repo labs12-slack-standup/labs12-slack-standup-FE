@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import { ArrowUpward } from '@material-ui/icons';
 import { scroller, animateScroll } from 'react-scroll';
 import Typography from '@material-ui/core/Typography';
-
+import Fab from '@material-ui/core/Fab';
 
 // images
 import undrawCollab from '../../images/undraw_collab_8oes.svg';
@@ -36,9 +36,19 @@ class MarketingPage extends Component {
 					</BodyText>
 					<HeaderButtons>
 						<Link to='/login'>
-						<Button variant="outlined" style={{backgroundColor: '#ffffff'}}>Get Started</Button>
+							<Fab variant="extended"
+								color="primary"
+								aria-label="Add"
+								style={{
+									borderRadius: '35px',
+									fontSize: '18px',
+									height: '70px',
+									width: '170px'
+								}}
+							>
+								Get Started
+							</Fab>
 						</Link>
-						{/* <Button variant="outlined" style={{backgroundColor: '#ffffff', marginLeft:'10px'} onClick={() => this.scrollTo()}>Learn More</Button> */}
 					</HeaderButtons>
 				</Header>
 
@@ -71,8 +81,19 @@ class MarketingPage extends Component {
 					<Typography variant='h3'>Get Started!</Typography>
 					<BodyText>Let Stand-Em-Ups optimize your team's valuable time</BodyText>
 					<Link to='/login'>
-						<Button variant="outlined" style={{backgroundColor: '#ffffff', marginRight:'20px'}}>Get Started</Button>
-						</Link>				
+						<Fab variant="extended"
+							color="primary"
+							aria-label="Add"
+							style={{
+								borderRadius: '35px',
+								fontSize: '18px',
+								height: '70px',
+								width: '170px'
+							}}
+						>
+							Get Started
+						</Fab>
+					</Link>		
 				</GetStartedSection>
 				<MarketingFooter>
 					<Link to='/' style={{color: '#FFFFFF', fontSize: '1.4rem'}}>Home</Link>
@@ -114,6 +135,7 @@ const HeaderButtons = styled.div`
 
 const BodyText = styled.p`
 	font-size: 1.2rem;
+	line-height: 1.4;
 	@media(max-width: 500px) {
 		text-align: center;
 	}
@@ -168,7 +190,7 @@ const MarketingImg = styled.img`
 `;
 
 const GetStartedSection = styled.div`
-	height: 200px;
+	height: 250px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
