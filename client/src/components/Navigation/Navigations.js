@@ -22,7 +22,9 @@ const styles = {
 	logoLink: {
 		borderRight: '1px solid #FFF'
 	},
-	logLink: {},
+	appBar: {
+		backgroundColor: '#5475EE'
+	},
 	navLinks: {
 		display: 'flex'
 	}
@@ -46,7 +48,7 @@ class Navigation extends React.Component {
 		const { classes } = this.props;
 
 		return (
-			<AppBar position="static">
+			<AppBar position="static" className={classes.appBar}>
 				<Toolbar>
 					<NavLink
 						// if user is logged in, icon takes them to dashboard, otherwise go to marketing page
@@ -55,7 +57,7 @@ class Navigation extends React.Component {
 					>
 						<Avatar
 							className={classes.menuButton}
-							src={require('./rocket-small.png')}
+							src={require('./rocket-logo.png')}
 						/>
 					</NavLink>
 					<div className="nav-links">

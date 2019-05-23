@@ -2,7 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // style imports
-import { Card, Fab, Dialog, DialogTitle, Slide, Button } from '@material-ui/core';
+import {
+	Card,
+	Fab,
+	Dialog,
+	DialogTitle,
+	Slide,
+	Button
+} from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import './reports.css';
 
@@ -43,13 +50,13 @@ const SingleReport = props => {
 				<div className="single-report-buttons">
 					<Link
 						to={`/dashboard/reports/${props.report.id}/edit`}
-						className={props.role !== 'admin' ? 'disabled-link' : ''}
+						id={props.role !== 'admin' ? 'display-link' : ''}
 					>
 						<Fab
 							color="default"
 							size="small"
 							aria-label="Edit"
-							className={props.role !== 'admin' ? 'disabled-link' : ''}
+							id={props.role !== 'admin' ? 'disabled-link' : ''}
 						>
 							<Icon>edit_icon</Icon>
 						</Fab>
@@ -58,8 +65,9 @@ const SingleReport = props => {
 						color="secondary"
 						size="small"
 						aria-label="Delete"
+						// onClick={() => props.archiveReport(props.report.id)}
 						onClick={() => props.handleArchive()}
-						className={props.role !== 'admin' ? 'disabled-link' : ''}
+						id={props.role !== 'admin' ? 'display-link' : ''}
 					>
 						<Icon>delete_icon</Icon>
 					</Fab>
@@ -75,7 +83,9 @@ const SingleReport = props => {
 							{"Are you sure you'd like to archive this report?"}
 						</DialogTitle>
 
-						<Button onClick={() => props.archiveReport(props.report.id)}>Yes</Button>
+						<Button onClick={() => props.archiveReport(props.report.id)}>
+							Yes
+						</Button>
 						<Button onClick={() => props.handleArchive()}>No</Button>
 					</Dialog>
 				</div>
@@ -108,9 +118,11 @@ const SingleReport = props => {
 					</div>
 					<div className="reports-card-flex whitespace">
 						<div className="reports-card-flex-icon">
-							<Icon>alarm</Icon>
+							<Icon style={{ color: '#5475EE' }}>alarm</Icon>
 						</div>
-						<div className="reports-card-time">{timeStr}</div>
+						<div className="reports-card-time" style={{ color: '#000' }}>
+							{timeStr}
+						</div>
 					</div>
 				</Link>
 			</div>

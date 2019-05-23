@@ -18,7 +18,7 @@ function Transition(props) {
 const InviteUser = props => {
 	return (
 		<div className="inviteUserBox">
-			<h3>Invite a new user to your team:</h3>
+			<h3>Invite a new team member</h3>
 			<form onSubmit={props.addUser} className="inviteUser">
 				<TextField
 					id="outlined-email-input"

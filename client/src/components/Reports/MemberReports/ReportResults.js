@@ -95,32 +95,31 @@ class ReportResults extends Component {
 											.toLocaleDateString('en-US', options)
 											.replace(',', '')}
 									</h3>
-									{batch.responses.map((response, idx) => (
-										<Card
-											key={idx}
-											interactive={false}
-											elevation={Elevation.TWO}
-											className="response-container"
-										>
-											<img
-												className="response-container-image"
-												src={response.profilePic}
-												alt={response.fullName}
-											/>
-											<div className="response-container-main">
-												<h3 className="response-container-main-name">
-													{response.fullName}
-												</h3>
-												{response.questions.map(({ question, answer, id }) => (
-													<div key={id}>
-														<h6 className="response-container-main-question">
-															{question}
-														</h6>
-														<p className="response-container-main-answer">
-															{answer}
-														</p>
-													</div>
-												))}
+									{batch.responses.map(response => (
+										<Card key={response.userId}>
+											<div className="response-container">
+												<img
+													className="response-container-image"
+													src={response.profilePic}
+													alt={response.fullName}
+												/>
+												<div className="response-container-main">
+													<h3 className="response-container-main-name">
+														{response.fullName}
+													</h3>
+													{response.questions.map(
+														({ question, answer, id }) => (
+															<div key={id}>
+																<h6 className="response-container-main-question">
+																	{question}
+																</h6>
+																<p className="response-container-main-answer">
+																	{answer}
+																</p>
+															</div>
+														)
+													)}
+												</div>
 											</div>
 										</Card>
 									))}
