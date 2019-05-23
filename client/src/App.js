@@ -12,7 +12,7 @@ import View from './components/View/View';
 import ReportsDash from './components/Dashboard/ReportsDash';
 
 // Profile Page
-import Profile from './components/Account/Account';
+import Profile from './components/Profile/Profile';
 
 // Marketing Page
 import MarketingPage from './components/Marketing/MarketingPage';

@@ -40,7 +40,7 @@ class View extends Component {
 			</div>
 		) : (
 			<Card style={{ textAlign: 'center' }}>
-				Looks like your account has been deactivated. If you believe this this
+				Looks like your account has been deactivated. If you believe this
 				is an error, please contact your manager.
 			</Card>
 		);

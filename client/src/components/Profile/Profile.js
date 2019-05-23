@@ -1,6 +1,5 @@
-import './account.css';
+import './profile.css';
 import React, { Component } from 'react';
-import User from '../Dashboard/User';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 import { Collapse } from '@blueprintjs/core';
 
@@ -13,11 +12,11 @@ import {
 	FormControl
 } from '@material-ui/core';
 
-class Account extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			accountInfo: [],
+class Profile extends Component {
+	
+		
+		state = {
+			profileInfo: [],
 			users: [],
 			newName: '',
 			newPic: '',
@@ -27,7 +26,7 @@ class Account extends Component {
 			showJoinCode: false,
 			openInactiveUsers: false
 		};
-	}
+	
 
 	componentDidMount() {
 		const endpoint = `${baseURL}/users/byuser`;
@@ -35,7 +34,7 @@ class Account extends Component {
 			.get(endpoint)
 			.then(res =>
 				this.setState({
-					accountInfo: res.data.user
+					profileInfo: res.data.user
 				})
 			)
 			.catch(err => console.log(err));
@@ -80,8 +79,8 @@ class Account extends Component {
 		if (this.state.newName) {
 			editedUser.fullName = this.state.newName;
 			this.setState({
-				accountInfo: {
-					...this.state.accountInfo,
+				profileInfo: {
+					...this.state.profileInfo,
 					fullName: editedUser.fullName
 				}
 			});
@@ -89,8 +88,8 @@ class Account extends Component {
 		if (this.state.newPic) {
 			editedUser.profilePic = this.state.newPic;
 			this.setState({
-				accountInfo: {
-					...this.state.accountInfo,
+				profileInfo: {
+					...this.state.profileInfo,
 					profilePic: editedUser.profilePic
 				}
 			});
@@ -152,12 +151,12 @@ class Account extends Component {
 				<Card raised={true} className="top-user-card">
 					<div className="userCard-content">
 						<div className="profileCard-content">
-							<h3>{this.state.accountInfo.fullName}</h3>
+							<h3>{this.state.profileInfo.fullName}</h3>
 							<TextField
 								InputLabelProps={{ shrink: true }}
 								className="email-field"
 								label="Email"
-								placeholder={this.state.accountInfo.email}
+								placeholder={this.state.profileInfo.email}
 								margin="normal"
 								variant="outlined"
 								color="primary"
@@ -217,14 +216,14 @@ class Account extends Component {
 							</div>
 						</div>
 						<img
-							src={this.state.accountInfo.profilePic}
+							src={this.state.profileInfo.profilePic}
 							alt="a headshot, preferably"
 						/>
 					</div>
 				</Card>
-				{this.state.accountInfo.roles === 'admin' ? (
+				{this.state.profileInfo.roles === 'admin' ? (
 					<Card raised={true} className="top-user-card">
-						<div className="accountForms">
+						<div className="profileForms">
 							<h3>Admin Controls</h3>
 							<div className="admin-controls">
 								<div className="join-code">
@@ -241,7 +240,7 @@ class Account extends Component {
 										<TextField
 											style={{ maxWidth: '105px' }}
 											label="Join Code"
-											value={this.state.accountInfo.joinCode}
+											value={this.state.profileInfo.joinCode}
 											margin="normal"
 											variant="outlined"
 											disabled
@@ -254,7 +253,7 @@ class Account extends Component {
 										variant="outlined"
 										color="primary"
 										className={
-											this.state.accountInfo.roles === 'admin'
+											this.state.profileInfo.roles === 'admin'
 												? 'activateButton'
 												: 'display-button'
 										}
@@ -281,7 +280,7 @@ class Account extends Component {
 															<Button
 																variant="outlined"
 																className={
-																	this.state.accountInfo.roles === 'admin'
+																	this.state.profileInfo.roles === 'admin'
 																		? 'activateButton'
 																		: 'display-button'
 																}
@@ -303,7 +302,7 @@ class Account extends Component {
 									<Button
 										style={{ margin: '10px 0' }}
 										className={
-											this.state.accountInfo.roles === 'admin'
+											this.state.profileInfo.roles === 'admin'
 												? 'activateButton'
 												: 'display-button'
 										}
@@ -348,4 +347,4 @@ class Account extends Component {
 	}
 }
 
-export default Account;
+export default Profile;
