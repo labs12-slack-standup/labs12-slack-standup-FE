@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth';
 import { Link } from 'react-router-dom';
 
-import Fab from '@material-ui/core/Fab';
+import {
+	Fab,
+	Typography,
+	Button,
+	Dialog,
+	DialogTitle,
+	Slide,
+	Icon
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
 
 import Slack from '../Slack/Slack';
 import SingleReport from './SingleReport';
@@ -23,9 +26,9 @@ function Transition(props) {
 
 class Reports extends Component {
 	state = {
-			slackModal: false,
-			archiveModal: false,
-		};
+		slackModal: false,
+		archiveModal: false
+	};
 
 	slackAuthCheck = e => {
 		e.preventDefault();
@@ -53,18 +56,17 @@ class Reports extends Component {
 	handleClose = () => {
 		this.setState({
 			slackModal: false
-		})
-	}
+		});
+	};
 
 	handleArchive = () => {
 		this.setState({
 			archiveModal: !this.state.archiveModal
-		})
-	}
+		});
+	};
 
 	render() {
 		//const { stepsEnabled, steps, initialStep } = this.state;
-
 		const activeReports = this.props.reports.filter(report => report.active);
 
 		return (
@@ -72,15 +74,26 @@ class Reports extends Component {
 				<header className="reports-header">
 					<Typography variant="h3">Your Reports</Typography>
 					<div className="reports-header-buttons">
-						<Link to="/dashboard/reports/new">
+						<Link
+							style={
+								this.props.role !== 'admin'
+									? { cursor: 'initial' }
+									: { cursor: 'pointer' }
+							}
+							to={
+								this.props.role !== 'admin'
+									? '/dashboard'
+									: '/dashboard/reports/new'
+							}
+						>
 							<Fab
 								color="primary"
 								aria-label="Add"
 								size="large"
-								className={this.props.role !== 'admin' ? 'disabled-link' : null}
+								disabled={this.props.role !== 'admin' ? true : false}
 								onClick={this.slackAuthCheck}
 							>
-								<AddIcon />
+								{this.props.role !== 'admin' ? <Icon>lock</Icon> : <AddIcon />}
 							</Fab>
 						</Link>
 					</div>
@@ -97,13 +110,12 @@ class Reports extends Component {
 							<Button onClick={() => this.handleClose()}>x</Button>
 						</DialogTitle>
 						<Slack />
-						
+
 						<Button
 							onClick={() => this.props.history.push('/dashboard/reports/new')}
 						>
 							Skip
 						</Button>
-						
 					</Dialog>
 				</header>
 				<div>
