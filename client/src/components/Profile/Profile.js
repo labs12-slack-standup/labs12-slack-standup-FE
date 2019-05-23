@@ -30,11 +30,8 @@ class Profile extends Component {
 		openInactiveUsers: false
 	};
 	render() {
-		const inactiveReports = this.state.archivedReports.filter(
-			report => !report.active
-		);
-
 		const inactiveUsers = this.state.users.filter(user => !user.active);
+		
 		return (
 			<div className="userCard">
 				<Card raised={true} className="top-user-card">
@@ -208,10 +205,10 @@ class Profile extends Component {
 									</Button>
 									<div>
 										<Collapse isOpen={this.state.openArchivedReports}>
-											{inactiveReports.length < 1 ? (
+											{this.state.archivedReports.length < 1 ? (
 												<p>No archived Reports</p>
 											) : (
-												inactiveReports.map((report, idx) => (
+												this.state.archivedReports.map((report, idx) => (
 													<Card key={idx}>
 														<div key={idx} className="inactive-reports-content">
 															<h4 className="report-title">
@@ -263,11 +260,14 @@ class Profile extends Component {
 		const endpoint = `${baseURL}/reports`;
 		axiosWithAuth()
 			.get(endpoint)
-			.then(res =>
+			.then(res => {
+				const filteredReports = res.data.reports.filter(report => !report.active)
 				this.setState({
-					archivedReports: res.data.reports,
+					archivedReports: filteredReports,
 					openArchivedReports: !this.state.openArchivedReports
 				})
+
+			}
 			)
 			.catch(err => console.log(err));
 	};
