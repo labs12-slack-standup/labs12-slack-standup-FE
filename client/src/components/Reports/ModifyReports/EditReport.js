@@ -21,7 +21,6 @@ import { getMinutes } from 'date-fns/esm';
 // this edits reports - admin only
 // Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
 
-
 class EditReport extends Component {
 	state = {
 		// Main Report State

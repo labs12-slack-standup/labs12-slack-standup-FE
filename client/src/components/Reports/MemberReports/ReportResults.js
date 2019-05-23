@@ -12,6 +12,8 @@ import { Card, Elevation } from '@blueprintjs/core';
 import { Fab, Icon } from '@material-ui/core';
 import './ReportResults.css';
 
+// Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
+
 class ReportResults extends Component {
 	state = {
 		responses: [],
@@ -49,7 +51,11 @@ class ReportResults extends Component {
 							<h3>Thank you for filling out this report!</h3>
 						</Card>
 					) : (
-						<Card className="response-card" interactive={false} elevation={Elevation.TWO}>
+						<Card
+							className="response-card"
+							interactive={false}
+							elevation={Elevation.TWO}
+						>
 							<MemberResponseForm
 								{...this.props}
 								updateWithUserResponse={this.updateWithUserResponse}
@@ -90,30 +96,31 @@ class ReportResults extends Component {
 											.replace(',', '')}
 									</h3>
 									{batch.responses.map(response => (
-										<Card interactive={false} elevation={Elevation.TWO}className="response-container">
-												<img
-													className="response-container-image"
-													src={response.profilePic}
-													alt={response.fullName}
-												/>
-												<div className="response-container-main">
-													<h3 className="response-container-main-name">
-														{response.fullName}
-													</h3>
-													{response.questions.map(
-														({ question, answer, id }) => (
-															<div key={id}>
-																<h6 className="response-container-main-question">
-																	{question}
-																</h6>
-																<p className="response-container-main-answer">
-																	{answer}
-																</p>
-															</div>
-														)
-													)}
-												</div>
-											
+										<Card
+											interactive={false}
+											elevation={Elevation.TWO}
+											className="response-container"
+										>
+											<img
+												className="response-container-image"
+												src={response.profilePic}
+												alt={response.fullName}
+											/>
+											<div className="response-container-main">
+												<h3 className="response-container-main-name">
+													{response.fullName}
+												</h3>
+												{response.questions.map(({ question, answer, id }) => (
+													<div key={id}>
+														<h6 className="response-container-main-question">
+															{question}
+														</h6>
+														<p className="response-container-main-answer">
+															{answer}
+														</p>
+													</div>
+												))}
+											</div>
 										</Card>
 									))}
 								</div>

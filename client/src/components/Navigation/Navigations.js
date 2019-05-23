@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './navigation.css';
 
+// style imports
+import './navigation.css';
 import { AppBar, Toolbar, Button, Icon, Avatar } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -28,7 +29,6 @@ const styles = {
 };
 
 class Navigation extends React.Component {
-	// Add modal here?
 	handleLogout = e => {
 		e.preventDefault();
 		localStorage.removeItem('firebaseui::rememberedAccounts');
@@ -49,7 +49,7 @@ class Navigation extends React.Component {
 			<AppBar position="static">
 				<Toolbar>
 					<NavLink
-					// if user is logged in, icon takes them to dashboard, otherwise go to marketing page
+						// if user is logged in, icon takes them to dashboard, otherwise go to marketing page
 						to={loggedIn ? '/dashboard' : '/'}
 						className={classes.logoLink}
 					>
