@@ -65,6 +65,14 @@ class Reports extends Component {
 			});
 	};
 
+	handleClose = () => {
+
+
+		this.setState({
+			slackModal: false
+		})
+	}
+
 	render() {
 		//const { stepsEnabled, steps, initialStep } = this.state;
 
@@ -97,9 +105,10 @@ class Reports extends Component {
 					>
 						<DialogTitle id="alert-dialog-slide-title">
 							{'Want to add your Slack team to this report?'}
+							<Button onClick={() => this.handleClose()}>x</Button>
 						</DialogTitle>
 						<Slack />
-						<DialogTitle id="alert-dialog-slide-title">{'Nah?'}</DialogTitle>
+						
 						<Button
 							onClick={() => this.props.history.push('/dashboard/reports/new')}
 						>

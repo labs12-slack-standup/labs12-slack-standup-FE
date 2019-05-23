@@ -1,5 +1,6 @@
 import './profile.css';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { axiosWithAuth, baseURL } from '../../config/axiosWithAuth.js';
 
 // style imports
@@ -216,6 +217,7 @@ class Profile extends Component {
 															<h4 className="report-title">
 																{report.reportName}
 															</h4>
+
 															<Button
 																variant="outlined"
 																onClick={() => this.reactivateReport(report.id)}
@@ -278,6 +280,7 @@ class Profile extends Component {
 			.put(endpoint, editedReport)
 			.then(res => console.log(res))
 			.catch(err => console.log(err));
+		// this does not rerender dashboard - report does not show up without a refresh. Sorry!
 		this.props.history.push('/dashboard');
 	};
 
