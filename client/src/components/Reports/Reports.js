@@ -67,7 +67,6 @@ class Reports extends Component {
 
 	render() {
 		//const { stepsEnabled, steps, initialStep } = this.state;
-
 		const activeReports = this.props.reports.filter(report => report.active);
 
 		return (
@@ -76,6 +75,11 @@ class Reports extends Component {
 					<Typography variant="h3">Your Reports</Typography>
 					<div className="reports-header-buttons">
 						<Link
+							style={
+								this.props.role !== 'admin'
+									? { cursor: 'initial' }
+									: { cursor: 'pointer' }
+							}
 							to={
 								this.props.role !== 'admin'
 									? '/dashboard'
