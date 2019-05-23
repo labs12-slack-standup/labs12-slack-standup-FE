@@ -5,7 +5,7 @@ import { axiosWithAuth, baseURL } from '../../../config/axiosWithAuth';
 import { getHours } from 'date-fns';
 import { getMinutes } from 'date-fns/esm';
 
-import Slack from '../../Slack/Slack';
+// import Slack from '../../Slack/Slack';
 
 // style imports
 import {
