@@ -2,12 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // style imports
-import { Card, Fab } from '@material-ui/core';
+import {
+	Card,
+	Fab,
+	Dialog,
+	DialogTitle,
+	Slide,
+	Button
+} from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import './reports.css';
 
 // this component displays a single report as a card on /dashboard
 // parent component = Reports.js
+
+function Transition(props) {
+	return <Slide direction="up" {...props} />;
+}
 
 const SingleReport = props => {
 	const week = [
@@ -54,11 +65,29 @@ const SingleReport = props => {
 						color="secondary"
 						size="small"
 						aria-label="Delete"
-						onClick={() => props.archiveReport(props.report.id)}
+						// onClick={() => props.archiveReport(props.report.id)}
+						onClick={() => props.handleArchive()}
 						id={props.role !== 'admin' ? 'display-link' : ''}
 					>
 						<Icon>delete_icon</Icon>
 					</Fab>
+					<Dialog
+						open={props.archiveModal}
+						TransitionComponent={Transition}
+						keepMounted
+						onClose={props.clearError}
+						aria-labelledby="alert-dialog-slide-title"
+						aria-describedby="alert-dialog-slide-description"
+					>
+						<DialogTitle id="alert-dialog-slide-title">
+							{"Are you sure you'd like to archive this report?"}
+						</DialogTitle>
+
+						<Button onClick={() => props.archiveReport(props.report.id)}>
+							Yes
+						</Button>
+						<Button onClick={() => props.handleArchive()}>No</Button>
+					</Dialog>
 				</div>
 			</div>
 			<div className="single-report-content">
