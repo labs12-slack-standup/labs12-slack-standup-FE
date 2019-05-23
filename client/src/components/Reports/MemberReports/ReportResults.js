@@ -95,8 +95,9 @@ class ReportResults extends Component {
 											.toLocaleDateString('en-US', options)
 											.replace(',', '')}
 									</h3>
-									{batch.responses.map(response => (
+									{batch.responses.map((response, idx) => (
 										<Card
+											key={idx}
 											interactive={false}
 											elevation={Elevation.TWO}
 											className="response-container"

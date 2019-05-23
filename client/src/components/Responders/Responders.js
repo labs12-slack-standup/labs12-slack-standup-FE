@@ -8,8 +8,9 @@ import React from 'react';
 
 const ResponseTeamList = props => (
 	<div className="responders">
-		{props.responders.map(responder => (
+		{props.responders.map((responder, idx) => (
 			<img
+				key={idx}
 				src={responder.profilePic}
 				alt={responder.fullName}
 				onClick={() => {
