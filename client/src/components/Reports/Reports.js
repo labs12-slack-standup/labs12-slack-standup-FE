@@ -42,20 +42,14 @@ class Reports extends Component {
 		this.setState(() => ({ stepsEnabled: false }));
 	};
 
+	// report creation button calls this function, which triggers modal by setting state in the catch block if slack isn't authorized
 	slackAuthCheck = e => {
 		e.preventDefault();
 		const endpoint = `${baseURL}/slack/channels`;
 		axiosWithAuth()
 			.get(endpoint)
 			.then(res => {
-				if (res.status !== 200) {
-					console.log('56');
-					this.setState({
-						slackModal: true
-					});
-				} else {
-					this.props.history.push('dashboard/reports/new');
-				}
+				this.props.history.push('/dashboard/reports/new');
 			})
 			.catch(err => {
 				this.setState({
@@ -105,7 +99,6 @@ class Reports extends Component {
 						>
 							Skip
 						</Button>
-						
 					</Dialog>
 				</header>
 				<div>
