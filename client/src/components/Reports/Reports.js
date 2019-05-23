@@ -25,6 +25,7 @@ class Reports extends Component {
 		this.state = {
 			slackModal: false,
 			stepsEnabled: true,
+			archiveModal: false,
 			initialStep: 0,
 			steps: [
 				{
@@ -66,10 +67,14 @@ class Reports extends Component {
 	};
 
 	handleClose = () => {
-
-
 		this.setState({
 			slackModal: false
+		})
+	}
+
+	handleArchive = () => {
+		this.setState({
+			archiveModal: !this.state.archiveModal
 		})
 	}
 
@@ -125,6 +130,8 @@ class Reports extends Component {
 							key={report.id}
 							report={report}
 							archiveReport={this.props.archiveReport}
+							archiveModal={this.state.archiveModal}
+							handleArchive={this.handleArchive}
 						/>
 					))}
 				</div>
