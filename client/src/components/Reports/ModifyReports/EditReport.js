@@ -178,8 +178,6 @@ class EditReport extends Component {
 	};
 
 	render() {
-		console.log(`2000-01-01T${this.state.scheduleTime}`);
-		console.log(new Date(`2000-01-01T${this.state.scheduleTime}`));
 		return (
 			<div className="create-report">
 				<Fab onClick={() => this.props.history.goBack()} color="default">
