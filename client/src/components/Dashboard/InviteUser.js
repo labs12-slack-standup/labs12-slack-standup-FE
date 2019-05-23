@@ -1,9 +1,19 @@
 import React from 'react';
-import { TextField, Button, Card, Icon } from '@material-ui/core';
+import {
+	TextField,
+	Button,
+	Dialog,
+	DialogTitle,
+	Slide
+} from '@material-ui/core';
 
 import './dashboard.css';
 
 // component to invite user to team (only admin access - BE preventions also)
+
+function Transition(props) {
+	return <Slide direction="up" {...props} />;
+}
 
 const InviteUser = props => {
 	return (
@@ -25,7 +35,7 @@ const InviteUser = props => {
 					Invite
 				</Button>
 			</form>
-			{props.message.includes('issue') && (
+			{/* {props.message.includes('issue') && (
 				<div className="errorModal">
 					<Card raised={true} className="errorCard onboardingCard">
 						<div className="errorCard-content">
@@ -39,19 +49,19 @@ const InviteUser = props => {
 						</div>
 					</Card>
 				</div>
-			)}
-			{props.message.includes('sent') && (
-				<div className="errorModal">
-					<Card raised={true} className="errorCard onboardingCard">
-						<div className="errorCard-content email-success">
-							<h3>{props.message}</h3>
-							<Button onClick={props.clearMessage}>
-								<Icon>cancel</Icon>
-							</Button>
-						</div>
-					</Card>
-				</div>
-			)}
+			)} */}
+			<Dialog
+				open={props.modal}
+				TransitionComponent={Transition}
+				keepMounted
+				onClose={props.clearMessage}
+				aria-labelledby="alert-dialog-slide-title"
+				aria-describedby="alert-dialog-slide-description"
+			>
+				<DialogTitle id="alert-dialog-slide-title">{props.message}</DialogTitle>
+
+				<Button onClick={() => props.clearMessage()}>x</Button>
+			</Dialog>
 		</div>
 	);
 };

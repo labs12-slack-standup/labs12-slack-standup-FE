@@ -16,11 +16,12 @@ export class Dashboard extends Component {
 		joinCode: '',
 		isLoading: true,
 		message: '',
-		active: true
+		active: true,
+		modal: false
 	};
 
 	componentDidMount() {
-		//get user's joinCode from token and setState accordingly. Necessary to invite new team members.
+		// get user's joinCode from token and setState accordingly. Necessary to invite new team members.
 		const joinCode = jwt_decode(localStorage.getItem('token')).joinCode;
 
 		this.setState({
@@ -105,18 +106,18 @@ export class Dashboard extends Component {
 		//sendgrid endpoint on our back end
 		const endpoint = `${baseURL}/email`;
 
-		//figure out how to display res in UI so admin knows email has been sent successfully
 		axiosWithAuth()
 			.post(endpoint, mailObject)
 			.then(res => {
 				console.log(res);
-				this.setState({ message: 'Email sent!' });
+				this.setState({ message: 'Email sent!', modal: true });
 			})
 			.catch(err => {
 				console.log(err);
 				this.setState({
 					message:
-						'There was an issue sending the email, please email your new team member manually.'
+						'There was an issue sending the email, please email your new team member manually.',
+					modal: true
 				});
 			});
 	};
@@ -125,7 +126,7 @@ export class Dashboard extends Component {
 		this.setState({ newMemberEmail: e.target.value });
 	};
 	clearMessage = () => {
-		this.setState({ message: '' });
+		this.setState({ message: '', modal: false });
 	};
 
 	render() {
@@ -149,6 +150,7 @@ export class Dashboard extends Component {
 					addUser={this.addUser}
 					message={this.state.message}
 					clearMessage={this.clearMessage}
+					modal={this.state.modal}
 				/>
 				<Slack />
 			</Card>
