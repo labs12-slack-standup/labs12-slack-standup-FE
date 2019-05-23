@@ -14,9 +14,11 @@ import {
 	InputLabel,
 	FormControl,
 	Fab,
-	Icon
+	Icon,
+	TextField,
+	MenuItem,
+	withStyles
 } from '@material-ui/core';
-import { HTMLSelect } from '@blueprintjs/core';
 import AddIcon from '@material-ui/icons/Add';
 import { TimePicker } from 'material-ui-pickers';
 
@@ -24,6 +26,21 @@ import './Report.css';
 
 // this component does what it says - admin can create a new report
 // Parent component = ReportsDash.js in '/components/Dashboard/ReportsDash'
+
+const styles = theme => ({
+	container: {
+		display: 'flex',
+		flexWrap: 'wrap'
+	},
+	textField: {
+		marginLeft: 0,
+		marginRight: theme.spacing.unit,
+		width: 200
+	},
+	menu: {
+		width: 200
+	}
+});
 
 class CreateReport extends Component {
 	state = {
@@ -50,7 +67,6 @@ class CreateReport extends Component {
 			'Sunday'
 		]
 	};
-
 
 	changeHandler = e => {
 		this.setState({
@@ -183,6 +199,8 @@ class CreateReport extends Component {
 	};
 
 	render() {
+		const { classes } = this.props;
+
 		return (
 			<div className="create-report">
 				<Fab onClick={() => this.props.history.goBack()} color="default">
@@ -225,23 +243,31 @@ class CreateReport extends Component {
 							</section>
 							<section>
 								{this.state.channels.length > 0 ? (
-									<>
-										<HTMLSelect
-											className="slack-dropdown"
+									<div>
+										<p>Slack Channel</p>
+										<TextField
+											id="select-currency"
+											select
+											label="Select"
 											name="slackChannelId"
+											className={classes.textField}
+											value={this.state.slackChannelId}
 											onChange={this.changeHandler}
-											label="Slack Channel for Distribution"
+											SelectProps={{
+												MenuProps: {
+													className: classes.menu
+												}
+											}}
+											helperText="Please select your slack channel"
+											margin="normal"
 										>
-											<option>
-												Choose a Slack Channel for distribution...
-											</option>
 											{this.state.channels.map(channel => (
-												<option key={channel.id} value={channel.id}>
+												<MenuItem key={channel.id} value={channel.id}>
 													{channel.name}
-												</option>
+												</MenuItem>
 											))}
-										</HTMLSelect>{' '}
-									</>
+										</TextField>
+									</div>
 								) : null}
 							</section>
 						</section>
@@ -347,7 +373,6 @@ class CreateReport extends Component {
 			</div>
 		);
 	}
-
 }
 
-export default CreateReport;
+export default withStyles(styles)(CreateReport);
