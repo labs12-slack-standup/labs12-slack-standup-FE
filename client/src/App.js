@@ -61,7 +61,7 @@ function App() {
 			{/* Slack Connection */}
 			<Route exact path="/slack" component={Slack} />
 			<Route exact path="/slack/auth" component={SlackRedirect} />
-
+			
 			{/* Footer */}
 			<Route path="/" component={Footer} />
 		</div>

@@ -5,6 +5,7 @@ class Team extends Component {
 	state = {
 		openInactiveUsers: false
 	};
+
 	viewInactiveUsers = () => {
 		this.setState({ openInactiveUsers: !this.state.openInactiveUsers });
 	};
@@ -19,8 +20,11 @@ class Team extends Component {
 						<User
 							user={user}
 							key={user.id}
+							anchorEl={this.props.anchorEl}
 							activateUser={this.props.activateUser}
 							deactivateUser={this.props.deactivateUser}
+							handleClickMenu={this.props.handleClickMenu}
+							handleCloseMenu={this.props.handleCloseMenu}
 						/>
 					))}
 				</div>

@@ -22,18 +22,15 @@ class Profile extends Component {
 		users: [],
 		newName: '',
 		newPic: '',
-		achivedReports: [],
-		openAchivedReports: false,
+		archivedReports: [],
+		openArchivedReports: false,
 		openEditUser: false,
 		showJoinCode: false,
 		openInactiveUsers: false
 	};
 	render() {
-		const inactiveReports = this.state.achivedReports.filter(
-			report => !report.active
-		);
-
 		const inactiveUsers = this.state.users.filter(user => !user.active);
+
 		return (
 			<div className="userCard">
 				<Card raised={true} className="top-user-card">
@@ -199,26 +196,29 @@ class Profile extends Component {
 										}
 										variant="outlined"
 										color="primary"
-										onClick={this.viewAchivedReports}
+										onClick={this.viewarchivedReports}
 									>
-										{this.state.openAchivedReports === false
+										{this.state.openArchivedReports === false
 											? 'View Archived Reports'
 											: 'Hide Archived Reports'}
 									</Button>
 									<div>
-										<Collapse isOpen={this.state.openAchivedReports}>
-											{inactiveReports.length < 1 ? (
+										<Collapse isOpen={this.state.openArchivedReports}>
+											{this.state.archivedReports.length < 1 ? (
 												<p>No archived Reports</p>
 											) : (
-												inactiveReports.map((report, idx) => (
+												this.state.archivedReports.map((report, idx) => (
 													<Card key={idx}>
 														<div key={idx} className="inactive-reports-content">
 															<h4 className="report-title">
 																{report.reportName}
 															</h4>
+
 															<Button
 																variant="outlined"
-																onClick={() => this.reactivateReport(report.id)}
+																onClick={() =>
+																	this.reactivateReport(report.id, idx)
+																}
 															>
 																Activate
 															</Button>
@@ -255,30 +255,38 @@ class Profile extends Component {
 			})
 			.catch(err => console.log(err));
 	}
-	viewAchivedReports = () => {
+	viewarchivedReports = () => {
 		const endpoint = `${baseURL}/reports`;
 		axiosWithAuth()
 			.get(endpoint)
-			.then(res =>
+			.then(res => {
+				const filteredReports = res.data.reports.filter(report => !report.active)
 				this.setState({
-					achivedReports: res.data.reports,
-					openAchivedReports: !this.state.openAchivedReports
+					archivedReports: filteredReports,
+					openArchivedReports: !this.state.openArchivedReports
 				})
+
+			}
 			)
 			.catch(err => console.log(err));
 	};
+
 	reactivateReport = id => {
 		const editedReport = {
 			active: true
 		};
-
+		const newArchivedReports = this.state.archivedReports.filter(
+			report => report.id !== id
+		);
 		console.log(editedReport);
 		const endpoint = `${baseURL}/reports/${id}`;
 		axiosWithAuth()
 			.put(endpoint, editedReport)
 			.then(res => console.log(res))
 			.catch(err => console.log(err));
-		this.props.history.push('/dashboard');
+		this.setState({ archivedReports: newArchivedReports });
+		// this does not rerender dashboard - report does not show up without a refresh. Sorry!
+		// this.props.history.push('/dashboard');
 	};
 
 	updateUser = e => {
