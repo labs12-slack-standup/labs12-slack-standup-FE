@@ -63,12 +63,12 @@ class Navigation extends React.Component {
 					<div className="nav-links">
 						<div>
 							<NavLink to="/dashboard">
-								{/* disabled prop here highlights which tab user is currently on */}
+								{/* style here highlights which tab user is currently on */}
 								<Button
-									disabled={
+									style={
 										this.props.history.location.pathname === '/dashboard'
-											? false
-											: true
+											? { color: 'white' }
+											: { color: '#B0C4DE' }
 									}
 									className={classes.grow}
 								>
@@ -77,13 +77,12 @@ class Navigation extends React.Component {
 							</NavLink>
 							<NavLink to="/dashboard/profile">
 								<Button
-									disabled={
+									style={
 										this.props.history.location.pathname ===
 										'/dashboard/profile'
-											? false
-											: true
+											? { color: 'white' }
+											: { color: '#B0C4DE' }
 									}
-									className={classes.grow}
 								>
 									<Icon>account_circle</Icon>
 								</Button>
