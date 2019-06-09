@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import {axiosWithAuth, baseURL} from 'axios'
 
 // styling imports
 import Button from '@material-ui/core/Button';
@@ -25,6 +26,11 @@ class MarketingPage extends Component {
 	scrollToTop() {
 		animateScroll.scrollToTop();
 	}
+
+	componentDidMount() {
+		axiosWithAuth.get(`${baseURL}/users`).then(res=> console.log('Heroku, wake up!')).catch(error => console.log(error))
+	}
+	
 	render() {
 		return (
 			<MarketingContainer>
