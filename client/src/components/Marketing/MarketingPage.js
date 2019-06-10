@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {axiosWithAuth, baseURL} from 'axios'
+import { baseURL} from 'axios'
+import axios from 'axios'
 
 // styling imports
 import Button from '@material-ui/core/Button';
@@ -16,6 +17,10 @@ import undrawStatus from '../../images/undraw_status_update_jjgk.svg';
 import undrawDeveloper from '../../images/undraw_developer_activity_bv83.svg';
 
 class MarketingPage extends Component {
+	componentDidMount() {
+		axios.get(`https://master-slack-standup.herokuapp.com/`).then(res=> console.log(res)).catch(error => console.log(error))
+	}
+
 	scrollTo() {
 		scroller.scrollTo('MarketingSection', {
 			duration: 800,
@@ -27,9 +32,6 @@ class MarketingPage extends Component {
 		animateScroll.scrollToTop();
 	}
 
-	componentDidMount() {
-		axiosWithAuth().get(`${baseURL}/users`).then(res=> console.log('Heroku, wake up!')).catch(error => console.log(error))
-	}
 	
 	render() {
 		return (
