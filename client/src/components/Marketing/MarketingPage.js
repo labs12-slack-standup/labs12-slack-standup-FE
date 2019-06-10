@@ -28,7 +28,7 @@ class MarketingPage extends Component {
 	}
 
 	componentDidMount() {
-		axiosWithAuth.get(`${baseURL}/users`).then(res=> console.log('Heroku, wake up!')).catch(error => console.log(error))
+		axiosWithAuth().get(`${baseURL}/users`).then(res=> console.log('Heroku, wake up!')).catch(error => console.log(error))
 	}
 	
 	render() {
