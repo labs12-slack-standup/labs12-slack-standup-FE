@@ -23,7 +23,11 @@ class Firebase extends Component {
 			signInSuccessUrl: '/onboarding',
 			signInOptions: [
 				firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-				firebase.auth.GithubAuthProvider.PROVIDER_ID
+				firebase.auth.GithubAuthProvider.PROVIDER_ID,
+				{
+					provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+					requireDisplayName: false
+				  },
 			],
 			callbacks: {
 				signInSuccessWithAuthResult: ({ user }) => {
